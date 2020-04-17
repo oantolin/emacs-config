@@ -58,11 +58,15 @@
        (buffer-substring (region-beginning) (region-end))))))
 
 (defun completing-read-in-region (start end collection &optional predicate)
-  "Prompt for completion of region in the minibuffer.
+  "Prompt for completion of region in the minibuffer if non-unique.
 Use as a value for `completion-in-region-function'."
-  (let ((completion
-         (completing-read "Completion: " collection predicate t
-                          (buffer-substring-no-properties start end))))
+  (let* ((initial (buffer-substring-no-properties start end))
+         (all (completion-all-completions initial collection predicate
+                                          (length initial)))
+         (completion (if (and (consp all) (atom (cdr all)))
+                         (car all)
+                       (completing-read "Completion: "
+                                        collection predicate t initial))))
     (delete-region start end)
     (insert completion)))
 
