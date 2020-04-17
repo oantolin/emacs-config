@@ -79,7 +79,9 @@
                LaTeX-narrow-to-environment
                TeX-narrow-to-group
                narrow-to-page
-               set-goal-column))
+               set-goal-column
+               scroll-left
+               scroll-right))
   (put cmd 'disabled nil))
 (put 'suspend-frame 'disabled t)
 
@@ -781,3 +783,4 @@ the Sage kernel, useful to shut it down, for example."
     (bury-buffer
      (process-buffer
       (start-process "sage-notebook" "*sage*" "sage" "--notebook=jupyter")))))
+(put 'scroll-left 'disabled nil)
