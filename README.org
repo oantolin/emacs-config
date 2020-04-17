@@ -1,0 +1,56 @@
+* Welcome!
+
+This is my personal Emacs configuration. I tend to prefer learning how
+to use built-in packages for any given task. If I get a small itch to
+scratch, I'll typically write my own tiny package for it. For itches
+too big to handle on my own I do go shopping for external package.
+
+There is also code I wind up writing with no itch of my own to
+scratch: I like reading [[https://reddit.com/r/emacs][r/emacs]] and writing little functions for
+people there. The functions I like and think I might use someday
+become tiny packages here. Writing small snippets for other people is
+probably my favorite way of learning Emacs, because it takes me down
+paths I don't think I would explore on my own.
+
+* Completion
+
+In the past I've been a [[https://github.com/emacs-helm/helm][Helm]] and an [[https://github.com/abo-abo/swiper][Ivy & Counsel]] user. These packages
+are fantastic and chock-full of functionality, I highly recommend them!
+
+But I've been on a built-in-ism kick for the last few months so I
+started using the built-in Icomplete. And I wrote two packages to make
+it more comfortable: [[https://github.com/oantolin/icomplete-vertical][icomplete-vertical]] to show candidates vertically
+and [[https://github.com/oantolin/orderless][orderless]] to do out-of-order regexp matching. I'm pretty happy
+with the combination. (Both actually started as packages I wrote for
+people on r/emacs and now I use them all the time!)
+
+* Themes
+
+For many years I kept trying Emacs themes and always went back to the
+default theme. I don't understand why people don't like the default
+theme, to me it is clearly better than almost all others. :)
+
+I finally found themes I like better than the default: Protesilaos
+Stavrou's [[https://gitlab.com/protesilaos/modus-themes][modus themes]]!
+
+* What's missing from this repo?
+
+I separated the personal part of my configuration to publish this. The
+personal part doesn't cover that much: email addresses and signatures,
+org capture templates, org agenda configuration, and the org-publish
+configuration for my academic website, basically. In particular most
+my org mode configuration is in this public part.
+
+* Some packages I've bundled separately
+
+I intend to publish the most reusable parts of my configuration as
+separate packages. So far that is:
+
+- [[https://github.com/oantolin/icomplete-vertical][icomplete-vertical]]
+- [[https://github.com/oantolin/orderless][orderless]]
+- [[https://github.com/oantolin/math-delimiters][math-delimiters]]
+- [[https://github.com/oantolin/placeholder][placeholder]]
+
+Since icomplete-vertical is now on MELPA, I install it from there. The
+other three packages are still included in this repo, besides having
+their own repo (with READMEs!).
