@@ -316,8 +316,8 @@
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
-  (completion-styles '(orderless partial-completion))
-  (completion-pcm-complete-word-inserts-delimiters t)
+  (completion-styles '(orderless))
+  (completion-category-defaults nil)
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
