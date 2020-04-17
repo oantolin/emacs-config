@@ -63,11 +63,14 @@ Use as a value for `completion-in-region-function'."
   (let* ((initial (buffer-substring-no-properties start end))
          (all (completion-all-completions initial collection predicate
                                           (length initial)))
-         (completion (if (and (consp all) (atom (cdr all)))
-                         (car all)
-                       (completing-read "Completion: "
-                                        collection predicate t initial))))
-    (delete-region start end)
-    (insert completion)))
+         (completion (cond
+                      ((atom all) nil)
+                      ((and (consp all) (atom (cdr all))) (car all))
+                      (t (completing-read "Completion: "
+                                          collection predicate t initial)))))
+    (if (null completion)
+        (message "No completions")
+      (delete-region start end)
+      (insert completion))))
 
 (provide 'minibuffer-extras)
