@@ -60,20 +60,20 @@
 (defun completing-read-in-region (start end collection &optional predicate)
   "Prompt for completion of region in the minibuffer if non-unique.
 Use as a value for `completion-in-region-function'."
-  (let* ((initial (buffer-substring-no-properties start end))
-         (all (completion-all-completions initial collection predicate
-                                          (length initial)))
-         (completion (cond
-                      ((atom all) nil)
-                      ((and (consp all) (atom (cdr all))) (car all))
-                      (t (let ((completion-in-region-function
-                                #'completion--in-region))
-                           (completing-read
-                            "Completion: " collection predicate t initial))))))
-    (if (null completion)
-        (progn (message "No completion") nil)
-      (delete-region start end)
-      (insert completion)
-      t)))
+  (if (minibufferp)
+      (completion--in-region start end collection predicate)
+    (let* ((initial (buffer-substring-no-properties start end))
+           (all (completion-all-completions initial collection predicate
+                                            (length initial)))
+           (completion (cond
+                        ((atom all) nil)
+                        ((and (consp all) (atom (cdr all))) (car all))
+                        (t (completing-read
+                            "Completion: " collection predicate t initial)))))
+      (if (null completion)
+          (progn (message "No completion") nil)
+        (delete-region start end)
+        (insert completion)
+        t))))
 
 (provide 'minibuffer-extras)
