@@ -3,7 +3,7 @@
 This is my personal Emacs configuration. I tend to prefer learning how
 to use built-in packages for any given task. If I get a small itch to
 scratch, I'll typically write my own tiny package for it. For itches
-too big to handle on my own I do go shopping for external package.
+too big to handle on my own I do go shopping for external packages.
 
 There is also code I wind up writing with no itch of my own to
 scratch: I like reading [[https://reddit.com/r/emacs][r/emacs]] and writing little functions for
