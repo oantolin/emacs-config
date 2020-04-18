@@ -312,8 +312,6 @@
   :custom
   (completion-in-region-function #'completing-read-in-region))
 
-(use-package orderless :demand t)
-
 (use-package minibuffer
   :custom
   (completion-auto-help nil)
@@ -345,6 +343,12 @@
   (icomplete-show-matches-on-no-input t)
   (icomplete-prospects-height 5)
   (icomplete-separator " ⋮ "))
+
+(use-package orderless
+  :demand t
+  :after icomplete
+  :bind (:map icomplete-minibuffer-map
+              ("C-M-," . orderless-temporarily-change-separator)))
 
 (use-package icomplete-vertical
   :ensure t

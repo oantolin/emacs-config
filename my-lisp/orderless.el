@@ -114,4 +114,24 @@ This function is part of the `orderless' completion style."
             completion-styles-alist
             :test #'equal)
 
+(defvar orderless-old-regexp-separator nil
+  "Stores the old value of `orderless-regexp-separator'.")
+
+(defun orderless--restore-regexp-separator ()
+  "Restore old value of `orderless-regexp-separator'."
+  (when orderless-old-regexp-separator
+    (setq orderless-regexp-separator orderless-old-regexp-separator
+          orderless-old-regexp-separator nil))
+  (remove-hook 'minibuffer-exit-hook #'orderless--restore-regexp-separator))
+
+(defun orderless-temporarily-change-separator (separator)
+  "Use SEPARATOR to split the input for the current completion session."
+  (interactive
+   (list (let ((enable-recursive-minibuffers t))
+           (read-string "Orderless regexp separator: "))))
+  (unless orderless-old-regexp-separator
+    (setq orderless-old-regexp-separator orderless-regexp-separator))
+  (setq orderless-regexp-separator separator)
+  (add-to-list 'minibuffer-exit-hook #'orderless--restore-regexp-separator))
+
 (provide 'orderless)
