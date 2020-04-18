@@ -278,14 +278,13 @@
   :bind
   (:map toggle-map
         ("m" . math-delimiters-toggle))
-  :commands
-  (no-dollars math-delimiters-insert))
+  :commands no-dollars math-delimiters-insert)
 
 (use-package block-undo)
 
 (use-package help-extras
   :bind ("C-h M" . describe-keymap)
-  :commands (cotd))
+  :commands cotd)
 
 (use-package various-toggles
   :bind
@@ -308,11 +307,14 @@
         ("M-i" . insert-minibuffer-contents)
         ("C-w" . exit-minibuffer-save-contents)
         ("C-S-y" . insert-region-in-minibuffer))
-  :commands completing-read-in-region
+  :commands completing-read-in-region completing-insert-from-history
   :custom
   (completion-in-region-function #'completing-read-in-region))
 
 (use-package minibuffer
+  :bind (:map minibuffer-local-map
+              ("M-s")
+              ("M-r" . completing-insert-from-history))
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
@@ -336,7 +338,8 @@
               ("C-n" . icomplete-forward-completions)
 	      ("<up>" . icomplete-backward-completions)
 	      ("C-p" . icomplete-backward-completions)
-              ("TAB" . icomplete-force-complete))
+              ("<tab>" . icomplete-force-complete)
+              ("<S-return>" . exit-minibuffer))
   :hook
   (icomplete-minibuffer-setup . visual-line-mode)
   :custom
@@ -551,10 +554,7 @@
 
 (use-package eshell-extras
   :commands
-  fix-eshell-keys
-  eshell/in-term
-  eshell/for-each
-  interactive-cd)
+  fix-eshell-keys eshell/in-term eshell/for-each interactive-cd)
 
 (use-package eshell
   :bind ("C-!" . eshell)
@@ -563,14 +563,22 @@
 
 (use-package shell
   :bind (:map shell-mode-map
-              ("C-c d" . interactive-cd)))
+              ("C-c d" . interactive-cd)
+              ("M-r" . completing-insert-from-history)))
 
 (use-package term
   :bind
   (:map term-mode-map
-        ("C-c d" . interactive-cd))
+        ("C-c d" . interactive-cd)
+        ("M-r" . completing-insert-from-history)
+        ("M-s"))
   (:map term-raw-map
-        ("C-c d" . interactive-cd)))
+        ("C-c d" . interactive-cd)
+        ("M-r" . completing-insert-from-history)))
+
+(use-package comint
+  :bind (:map comint-mode-map
+              ("M-r" . completing-insert-from-history)))
 
 (use-package magit
   :ensure t
@@ -745,7 +753,9 @@
   :ensure t
   :defer t
   :custom
-  (inferior-lisp-program "sbcl"))
+  (inferior-lisp-program "sbcl")
+  :bind (:map sly-mrepl-mode-map
+              ("M-r" . completing-insert-from-history)))
 
 (use-package clojure-mode :ensure t :defer t)
 

@@ -29,9 +29,12 @@
              ("<home>" . eshell-bol)
              ("C-c d" . interactive-cd)
              ("M-q" . quit-window)
+             ("M-r" . completing-insert-from-history)
              ("M-s"))
-  ; The M-s keybinding is in a different place in newer versions
+  ; The M-r & M-s keybindings is in a different place in newer versions
   (when (boundp 'eshell-hist-mode-map)
-    (unbind-key "M-s" eshell-hist-mode-map)))
+    (bind-keys :map eshell-hist-mode-map
+               ("M-r" . completing-insert-from-history)
+               ("M-s"))))
 
 (provide 'eshell-extras)

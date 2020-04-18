@@ -60,20 +60,40 @@
 (defun completing-read-in-region (start end collection &optional predicate)
   "Prompt for completion of region in the minibuffer if non-unique.
 Use as a value for `completion-in-region-function'."
+  (let* ((initial (buffer-substring-no-properties start end))
+         (all (completion-all-completions initial collection predicate
+                                          (length initial)))
+         (completion (cond
+                      ((atom all) nil)
+                      ((and (consp all) (atom (cdr all))) (car all))
+                      (t (completing-read
+                          "Completion: " collection predicate t initial)))))
+    (if (null completion)
+        (progn (message "No completion") nil)
+      (delete-region start end)
+      (insert completion)
+      t)))
+
+(defun relevant-history ()
+  "Get history relevant for current buffer."
   (if (minibufferp)
-      (completion--in-region start end collection predicate)
-    (let* ((initial (buffer-substring-no-properties start end))
-           (all (completion-all-completions initial collection predicate
-                                            (length initial)))
-           (completion (cond
-                        ((atom all) nil)
-                        ((and (consp all) (atom (cdr all))) (car all))
-                        (t (completing-read
-                            "Completion: " collection predicate t initial)))))
-      (if (null completion)
-          (progn (message "No completion") nil)
-        (delete-region start end)
-        (insert completion)
-        t))))
+      (minibuffer-history-value)
+    (cl-loop
+     for (mode ring) in '((eshell-mode eshell-history-ring)
+                          (comint-mode comint-input-ring)
+                          (term-mode   term-input-ring))
+     when (and (boundp ring) (derived-mode-p mode))
+     return (ring-elements (symbol-value ring)))))
+
+(defun completing-insert-from-history ()
+  "Insert an item from history, selected with completion."
+  (interactive)
+  (let ((item (let ((enable-recursive-minibuffers t))
+                (completing-read "Item: " (relevant-history) nil t))))
+    (when (minibufferp)
+      (delete-minibuffer-contents))
+    (when item
+      (let ((inhibit-read-only t))
+        (insert item)))))
 
 (provide 'minibuffer-extras)
