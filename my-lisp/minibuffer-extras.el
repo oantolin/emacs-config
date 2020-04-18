@@ -35,7 +35,7 @@
   (when (bound-and-true-p icomplete-mode)
     (icomplete-force-complete))
   (let ((contents (minibuffer-contents)))
-    (with-current-buffer (window-buffer (minibuffer-selected-window))
+    (with-minibuffer-selected-window
       (when (use-region-p)
         (delete-region (region-beginning) (region-end)))
       (insert contents)))
@@ -53,7 +53,7 @@
   "Insert the active region in the minibuffer."
   (interactive)
   (insert
-   (with-current-buffer (window-buffer (minibuffer-selected-window))
+   (with-minibuffer-selected-window
      (when (use-region-p)
        (buffer-substring (region-beginning) (region-end))))))
 
