@@ -2,7 +2,7 @@
 
 ;;; customize thinks it knows better than me
 
-(setq custom-file "~/.emacs.d/garbage.el")
+(setq custom-file null-device)
 
 ;;; GUI
 
@@ -422,7 +422,8 @@
 (use-package goto-addr
   :hook
   (text-mode . goto-address-mode)
-  (prog-mode . goto-address-prog-mode))
+  (prog-mode . goto-address-prog-mode)
+  (eshell-mode . goto-address-mode))
 
 (use-package elec-pair :init (electric-pair-mode))
 
