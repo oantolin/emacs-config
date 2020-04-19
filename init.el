@@ -693,6 +693,7 @@
   :custom
   (gnus-ignored-newsgroups
    "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+  ;; all-user-mail-addresses-regexp is defined in email-config
   (gnus-ignored-from-addresses all-user-mail-addresses-regexp))
 
 (use-package bbdb
@@ -715,6 +716,7 @@
   :custom
   (message-signature nil)
   (message-from-style 'angles)
+  ;; all-user-mail-addresses-regexp is defined in email-config
   (message-alternative-emails all-user-mail-addresses-regexp)
   :hook
   (message-mode . turn-off-auto-fill)
