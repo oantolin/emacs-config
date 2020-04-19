@@ -298,6 +298,10 @@
         ("s" . toggle-window-split)
         ("t" . transpose-windows)))
 
+(use-package completing-history
+  :demand t
+  :config (completing-history-setup-keybinding))
+
 (use-package minibuffer-extras
   :bind
   (:map minibuffer-local-filename-completion-map
@@ -307,14 +311,11 @@
         ("M-i" . insert-minibuffer-contents)
         ("C-w" . exit-minibuffer-save-contents)
         ("C-S-y" . insert-region-in-minibuffer))
-  :commands completing-read-in-region completing-insert-from-history
+  :commands completing-read-in-region
   :custom
   (completion-in-region-function #'completing-read-in-region))
 
 (use-package minibuffer
-  :bind (:map minibuffer-local-map
-              ("M-s")
-              ("M-r" . completing-insert-from-history))
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
@@ -554,31 +555,29 @@
 
 (use-package eshell-extras
   :commands
-  fix-eshell-keys eshell/in-term eshell/for-each interactive-cd)
+  eshell/in-term eshell/for-each interactive-cd)
 
 (use-package eshell
-  :bind ("C-!" . eshell)
-  :config (setenv "PAGER" "cat")
-  :hook (eshell-mode . fix-eshell-keys))
+  :bind
+  ("C-!" . eshell)
+  :config (setenv "PAGER" "cat"))
+
+(use-package esh-mode
+  :bind (:map eshell-mode-map
+              ("<home>" . eshell-bol)
+              ("C-c d" . interactive-cd)
+              ("M-q" . quit-window)))
 
 (use-package shell
   :bind (:map shell-mode-map
-              ("C-c d" . interactive-cd)
-              ("M-r" . completing-insert-from-history)))
+              ("C-c d" . interactive-cd)))
 
 (use-package term
   :bind
   (:map term-mode-map
-        ("C-c d" . interactive-cd)
-        ("M-r" . completing-insert-from-history)
-        ("M-s"))
+        ("C-c d" . interactive-cd))
   (:map term-raw-map
-        ("C-c d" . interactive-cd)
-        ("M-r" . completing-insert-from-history)))
-
-(use-package comint
-  :bind (:map comint-mode-map
-              ("M-r" . completing-insert-from-history)))
+        ("C-c d" . interactive-cd)))
 
 (use-package magit
   :ensure t
@@ -753,9 +752,7 @@
   :ensure t
   :defer t
   :custom
-  (inferior-lisp-program "sbcl")
-  :bind (:map sly-mrepl-mode-map
-              ("M-r" . completing-insert-from-history)))
+  (inferior-lisp-program "sbcl"))
 
 (use-package clojure-mode :ensure t :defer t)
 

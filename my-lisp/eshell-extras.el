@@ -24,17 +24,4 @@
   (term-mode)
   (term-char-mode))
 
-(defun fix-eshell-keys ()
-  (bind-keys :map eshell-mode-map
-             ("<home>" . eshell-bol)
-             ("C-c d" . interactive-cd)
-             ("M-q" . quit-window)
-             ("M-r" . completing-insert-from-history)
-             ("M-s"))
-  ; The M-r & M-s keybindings is in a different place in newer versions
-  (when (boundp 'eshell-hist-mode-map)
-    (bind-keys :map eshell-hist-mode-map
-               ("M-r" . completing-insert-from-history)
-               ("M-s"))))
-
 (provide 'eshell-extras)

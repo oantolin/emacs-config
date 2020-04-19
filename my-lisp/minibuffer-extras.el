@@ -74,26 +74,4 @@ Use as a value for `completion-in-region-function'."
       (insert completion)
       t)))
 
-(defun relevant-history ()
-  "Get history relevant for current buffer."
-  (if (minibufferp)
-      (minibuffer-history-value)
-    (cl-loop
-     for (mode ring) in '((eshell-mode eshell-history-ring)
-                          (comint-mode comint-input-ring)
-                          (term-mode   term-input-ring))
-     when (and (boundp ring) (derived-mode-p mode))
-     return (ring-elements (symbol-value ring)))))
-
-(defun completing-insert-from-history ()
-  "Insert an item from history, selected with completion."
-  (interactive)
-  (let ((item (let ((enable-recursive-minibuffers t))
-                (completing-read "Item: " (relevant-history) nil t))))
-    (when (minibufferp)
-      (delete-minibuffer-contents))
-    (when item
-      (let ((inhibit-read-only t))
-        (insert item)))))
-
 (provide 'minibuffer-extras)
