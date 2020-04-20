@@ -32,21 +32,16 @@
 (defun insert-minibuffer-contents ()
   "Insert minibuffer contents in previously selected buffer and exit."
   (interactive)
-  (when (bound-and-true-p icomplete-mode)
-    (icomplete-force-complete))
-  (let ((contents (minibuffer-contents)))
-    (with-minibuffer-selected-window
-      (when (use-region-p)
-        (delete-region (region-beginning) (region-end)))
-      (insert contents)))
+  (with-minibuffer-selected-window
+   (when (use-region-p)
+     (delete-region (region-beginning) (region-end)))
+   (insert (car completion-all-sorted-completions)))
   (abort-recursive-edit))
 
 (defun exit-minibuffer-save-contents ()
   "Exit minibuffer saving contents on the kill-ring."
   (interactive)
-  (when (bound-and-true-p icomplete-mode)
-    (icomplete-force-complete))
-  (kill-new (minibuffer-contents))
+  (kill-new (car completion-all-sorted-completions))
   (abort-recursive-edit))
 
 (defun insert-region-in-minibuffer ()
