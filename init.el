@@ -393,8 +393,8 @@
   (unbind-key "C-c ." dot-mode-map)
   :bind
   (:map dot-mode-map
-        ("C-x C-." . dot-mode-override)
-        ("C-x C-M-." . dot-mode-copy-to-last-kbd-macro)))
+        ("C->" . dot-mode-override)
+        ("C-x C-." . dot-mode-copy-to-last-kbd-macro)))
 
 (use-package beginend
   :ensure t
