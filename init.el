@@ -749,11 +749,15 @@
   :custom
   (python-shell-interpreter "python3"))
 
-(use-package sly
+(use-package slime
   :ensure t
   :defer t
   :custom
-  (inferior-lisp-program "sbcl"))
+  (slime-lisp-implementations '((sbcl ("sbcl" "--no-inform")))))
+
+(use-package slime-repl
+  :after slime
+  :bind (:map slime-repl-mode-map ("DEL")))
 
 (use-package clojure-mode :ensure t :defer t)
 
