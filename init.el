@@ -15,14 +15,12 @@
  '(ring-bell-function #'ignore))
 
 (when (string= (system-name) "penguin") ; Chromebook
-  (custom-set-faces '(default ((t :family "Cousine" :height 110))))
+  (set-face-attribute 'default nil :height 110)
   (define-key key-translation-map (kbd "<next>") (kbd "<M-down>"))
   (define-key key-translation-map (kbd "<prior>") (kbd "<M-up>")))
 
 (custom-set-faces
- `(variable-pitch
-   ((t :family "DejaVu Serif"
-       ,@(when (string= (system-name) "penguin") '(:height 1.11)))))
+ `(variable-pitch ((t :family "DejaVu Serif")))
  '(Info-quoted ((t (:inherit fixed-pitch))))
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
