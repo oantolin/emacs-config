@@ -207,21 +207,20 @@
 
 (use-package modus-operandi-theme
   :ensure t
+  :defer t
   :custom
   (modus-operandi-theme-slanted-constructs t)
-  (modus-operandi-theme-bold-constructs t)
-  :config
-  (when (display-graphic-p)
-    (enable-theme 'modus-operandi)))
+  (modus-operandi-theme-bold-constructs t))
 
 (use-package modus-vivendi-theme
   :ensure t
+  :defer t
   :custom
   (modus-vivendi-theme-slanted-constructs t)
-  (modus-vivendi-theme-bold-constructs t)
-  :config
-  (unless (display-graphic-p)
-    (enable-theme 'modus-vivendi)))
+  (modus-vivendi-theme-bold-constructs t))
+
+(load-theme 'modus-operandi t (not (display-graphic-p)))
+(load-theme 'modus-vivendi t (display-graphic-p))
 
 (use-package imenu
   :bind ("C-c i" . imenu)
@@ -333,13 +332,14 @@
 
 (use-package icomplete
   :demand t
-  :config (icomplete-mode)
+  :config
+  (icomplete-mode)
   :bind (:map icomplete-minibuffer-map
               ("<down>" . icomplete-forward-completions)
               ("C-n" . icomplete-forward-completions)
 	      ("<up>" . icomplete-backward-completions)
 	      ("C-p" . icomplete-backward-completions)
-              ("<tab>" . icomplete-force-complete)
+              ("<tab>" . minibuffer-force-complete)
               ("<S-return>" . exit-minibuffer))
   :hook
   (icomplete-minibuffer-setup . visual-line-mode)

@@ -15,7 +15,9 @@
 (defun completing-history--items-for-buffer ()
   "Get history relevant for current buffer."
   (if (minibufferp)
-      (minibuffer-history-value)
+      (if (version< emacs-version "27")
+          (symbol-value minibuffer-history-variable)
+        (minibuffer-history-value))
     (cl-loop
      for (mode . ring) in completing-history-input-rings
      when (and (boundp ring) (derived-mode-p mode))
@@ -34,9 +36,10 @@
         (insert item)))))
 
 (defcustom completing-history-keymaps
-  '((minibuffer . minibuffer-local-map)
-    (esh-mode . eshell-mode-map)
-    (em-hist . eshell-hist-mode-map)
+  `((minibuffer . minibuffer-local-map)
+    ,(if (version< emacs-version "27")
+         '(esh-mode . eshell-mode-map)
+       '(em-hist . eshell-hist-mode-map))
     (shell . shell-mode-map)
     (term . term-mode-map)
     (term . term-raw-map)
@@ -60,11 +63,13 @@
   "Free M-s and bind M-r to do hsitory completion in various modes."
   (cl-loop   
    for (feature . keymap) in completing-history-keymaps
+   for body = `((define-key ,keymap (kbd ,completing-history-binding)
+                  #'completing-history-insert-item)
+                ,@(when completing-history-unbind-M-s
+                    `((define-key ,keymap (kbd "M-s") nil))))
    do (eval-after-load feature
-        `(when (boundp ',keymap)
-           (define-key ,keymap (kbd ,completing-history-binding)
-             #'completing-history-insert-item)
-           ,@(when completing-history-unbind-M-s
-               `((define-key ,keymap (kbd "M-s") nil)))))))
+        (if (and (version< emacs-version "27") (eq feature 'esh-mode))
+            `(add-hook 'eshell-mode-hook (lambda () ,@body))
+          `(progn ,@body)))))
 
 (provide 'completing-history)
