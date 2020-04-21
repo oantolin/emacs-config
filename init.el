@@ -339,19 +339,19 @@
 	      ("C-p" . icomplete-backward-completions)
               ("<tab>" . icomplete-force-complete)
               ("<S-return>" . exit-minibuffer))
+  :hook
+  (icomplete-minibuffer-setup . visual-line-mode)
+  :custom
+  (icomplete-show-matches-on-no-input t)
+  (icomplete-prospects-height 5)
+  (icomplete-separator " ⋮ ")
   :config
   (unless (fboundp 'icomplete-force-complete)
     (defun icomplete-force-complete ()
       "Complete the icomplete minibuffer."
       (interactive)
       ;; We're not at all interested in cycling here (bug#34077).
-      (minibuffer-force-complete nil nil 'dont-cycle)))
-  :hook
-  (icomplete-minibuffer-setup . visual-line-mode)
-  :custom
-  (icomplete-show-matches-on-no-input t)
-  (icomplete-prospects-height 5)
-  (icomplete-separator " ⋮ "))
+      (minibuffer-force-complete nil nil 'dont-cycle))))
 
 (use-package orderless
   :demand t
