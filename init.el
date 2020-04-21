@@ -283,6 +283,9 @@
   :bind ("C-h M" . describe-keymap)
   :commands cotd)
 
+(use-package epithet
+  :bind ("C-x B" . epithet-rename-buffer))
+
 (use-package various-toggles
   :bind
   (:map toggle-map
