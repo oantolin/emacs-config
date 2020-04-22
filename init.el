@@ -351,6 +351,7 @@
   (icomplete-show-matches-on-no-input t)
   (icomplete-prospects-height 5)
   (icomplete-separator " ⋮ ")
+  (icomplete-hide-common-prefix nil)
   :config
   (advice-add 'icomplete-vertical-minibuffer-teardown
               :after #'visual-line-mode)
