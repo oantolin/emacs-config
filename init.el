@@ -352,6 +352,8 @@
   (icomplete-prospects-height 5)
   (icomplete-separator " ⋮ ")
   :config
+  (advice-add 'icomplete-vertical-minibuffer-teardown
+              :after #'visual-line-mode)
   (unless (fboundp 'icomplete-force-complete)
     (defun icomplete-force-complete ()
       "Complete the icomplete minibuffer."
