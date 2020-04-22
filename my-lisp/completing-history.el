@@ -60,7 +60,7 @@
   :group 'completing-history)
 
 (defun completing-history-setup-keybinding ()
-  "Free M-s and bind M-r to do hsitory completion in various modes."
+  "Free M-s and bind M-r to do history completion in various modes."
   (cl-loop   
    for (feature . keymap) in completing-history-keymaps
    for body = `((define-key ,keymap (kbd ,completing-history-binding)
