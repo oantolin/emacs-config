@@ -316,6 +316,9 @@
   (completion-in-region-function #'completing-read-in-region))
 
 (use-package minibuffer
+  :bind (:map minibuffer-local-completion-map
+              ("S-SPC" . minibuffer-complete-word)
+              ("SPC") ("?"))
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
