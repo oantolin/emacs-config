@@ -363,6 +363,7 @@
       (minibuffer-force-complete nil nil 'dont-cycle))))
 
 (use-package orderless
+  :ensure t
   :demand t
   :after icomplete
   :bind (:map icomplete-minibuffer-map
