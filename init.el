@@ -343,8 +343,9 @@
               ("C-n" . icomplete-forward-completions)
 	      ("<up>" . icomplete-backward-completions)
 	      ("C-p" . icomplete-backward-completions)
-              ("<tab>" . icomplete-force-complete)
-              ("<C-return>" . exit-minibuffer))
+              ("TAB" . icomplete-force-complete)
+              ("C-M-i" . minibuffer-complete)
+              ("M-RET" . exit-minibuffer))
   :hook
   (icomplete-minibuffer-setup . visual-line-mode)
   :custom
