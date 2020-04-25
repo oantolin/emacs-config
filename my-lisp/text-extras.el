@@ -112,7 +112,8 @@ By default align all matches, with universal prefix align only first match."
   "Make a completion table that maintains the entries in the given order."
   (lambda (string pred action)
     (if (eq action 'metadata)
-        '(metadata (cycle-sort-function . identity))
+        '(metadata (display-sort-function . identity)
+                   (cycle-sort-function . identity))
       (complete-with-action action completions string pred))))
 
 (defun completing-yank ()
