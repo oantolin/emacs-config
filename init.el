@@ -365,10 +365,10 @@
 
 (use-package orderless
   :ensure t
-  :demand t
-  :after icomplete
-  :bind (:map icomplete-minibuffer-map
-              ("C-M-," . orderless-temporarily-change-separator)))
+  :defer t
+  :custom
+  (orderless-component-matching-styles
+   '(orderless-regexp orderless-prefixes orderless-initialism)))
 
 (use-package icomplete-vertical
   :ensure t
