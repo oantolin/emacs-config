@@ -14,14 +14,17 @@
 
 (defun completing-history--items-for-buffer ()
   "Get history relevant for current buffer."
-  (if (minibufferp)
-      (if (version< emacs-version "27")
-          (symbol-value minibuffer-history-variable)
-        (minibuffer-history-value))
-    (cl-loop
-     for (mode . ring) in completing-history-input-rings
-     when (and (boundp ring) (derived-mode-p mode))
-     return (ring-elements (symbol-value ring)))))
+  (cond
+   ((eq last-command 'repeat-complex-command)
+    (mapcar #'prin1-to-string command-history))
+   ((minibufferp)
+    (if (version< emacs-version "27")
+        (symbol-value minibuffer-history-variable)
+      (minibuffer-history-value)))
+   (t (cl-loop
+       for (mode . ring) in completing-history-input-rings
+       when (and (boundp ring) (derived-mode-p mode))
+       return (ring-elements (symbol-value ring))))))
 
 (defun completing-history-insert-item ()
   "Insert an item from history, selected with completion."
