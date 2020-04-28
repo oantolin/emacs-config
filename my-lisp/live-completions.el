@@ -14,7 +14,7 @@
   (if live-completions-mode
       (add-hook 'minibuffer-setup-hook #'live-completions-setup)
     (remove-hook 'minibuffer-setup-hook #'live-completions-setup)
-    (dolist ((buffer (buffer-list)))
+    (dolist (buffer (buffer-list))
       (when (minibufferp buffer)
         (with-current-buffer buffer
           (setq after-change-functions
