@@ -335,9 +335,9 @@
   (resize-mini-windows t))
 
 (use-package icomplete
+  :disabled
   :demand t
-  :config
-  (icomplete-mode)
+  :config (icomplete-mode)
   :bind (:map icomplete-minibuffer-map
               ("<down>" . icomplete-forward-completions)
               ("C-n" . icomplete-forward-completions)
@@ -371,9 +371,13 @@
    '(orderless-regexp orderless-prefixes orderless-initialism)))
 
 (use-package icomplete-vertical
+  :disabled
   :ensure t
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle)))
+
+(use-package live-completions
+  :config (live-completions-mode))
 
 (use-package gobble-whitespace
   :config (global-gobble-whitespace-mode))
