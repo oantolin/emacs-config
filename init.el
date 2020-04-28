@@ -308,8 +308,8 @@
         ("<C-backspace>" . up-directory)
         ("C-c C-d" . cd-bookmark))
   (:map minibuffer-local-map
-        ("M-i" . insert-minibuffer-contents)
-        ("C-w" . exit-minibuffer-save-contents)
+        ("M-m i" . insert-minibuffer-contents)
+        ("M-m w" . exit-minibuffer-save-contents)
         ("C-S-y" . insert-region-in-minibuffer))
   :commands completing-read-in-region
   :custom
@@ -318,7 +318,10 @@
 (use-package minibuffer
   :bind (:map minibuffer-local-completion-map
               ("S-SPC" . minibuffer-complete-word)
-              ("SPC") ("?"))
+              ("SPC") ("?")
+              ("<backtab>" . minibuffer-complete)
+              ("TAB" . minibuffer-force-complete)
+              ("M-RET" . minibuffer-force-complete-and-exit))
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
@@ -361,7 +364,8 @@
       "Complete the icomplete minibuffer."
       (interactive)
       ;; We're not at all interested in cycling here (bug#34077).
-      (minibuffer-force-complete nil nil 'dont-cycle))))
+      (minibuffer-force-
+       complete nil nil 'dont-cycle))))
 
 (use-package orderless
   :ensure t
