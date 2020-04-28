@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 (defun live-completions--update (&optional _start _end _length)
-  (while-no-input (save-match-data (minibuffer-completion-help))))
+  (save-match-data (while-no-input (minibuffer-completion-help))))
 
 (defun live-completions--setup ()
   (make-local-variable 'after-change-functions)
@@ -18,6 +18,6 @@
       (when (minibufferp buffer)
         (with-current-buffer buffer
           (setq after-change-functions
-                (remove #'update-completions after-change-functions)))))))
+                (remove #'live-completions--update after-change-functions)))))))
 
 (provide 'live-completions)
