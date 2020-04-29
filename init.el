@@ -383,6 +383,10 @@
 (use-package live-completions
   :config (live-completions-mode))
 
+(use-package avy-completion
+  :bind (:map minibuffer-local-completion-map
+              ("C-'" . avy-completion)))
+
 (use-package gobble-whitespace
   :config (global-gobble-whitespace-mode))
 
