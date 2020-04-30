@@ -4,42 +4,27 @@
   (when minibuffer-completion-table
     (save-match-data (while-no-input (minibuffer-completion-help)))))
 
-(defconst live-completions--atomic-change-commmands
-  '(choose-completion
-    minibuffer-complete
-    minibuffer-complete-and-exit
-    minibuffer-force-complete
-    minibuffer-force-complete-and-exit)
-  "List of commands whose changes should be atomic.")
+(defconst live-completions--postpone-update
+  '(minibuffer-complete
+    minibuffer-force-complete)
+  "List of commands during which updating completions is postponed.")
 
-(defun live-completions--atomic-changes (fn &rest args)
+(defconst live-completions--cancel-update
+  '(choose-completion
+    minibuffer-complete-and-exit
+    minibuffer-force-complete-and-exit)
+  "List of commands for which updating completions is canceled.")
+
+(defun live-completions--postpone-update (fn &rest args)
   (combine-after-change-calls (apply fn args)))
+
+(defun live-completions--cancel-update (fn &rest args)
+  (let ((inhibit-modification-hooks t)) (apply fn args)))
 
 (defun live-completions--setup ()
   (live-completions--update)
   (make-local-variable 'after-change-functions)
-  (add-to-list 'after-change-functions #'live-completions--update)
-  (dolist (cmd live-completions--atomic-change-commmands)
-    (advice-add cmd :around #'live-completions--atomic-changes)))
-
-(define-minor-mode live-completions-mode
-  "Live updating of the *Completions* buffer."
-  :global t
-  (if live-completions-mode
-      (progn
-        (add-hook 'minibuffer-setup-hook #'live-completions--setup)
-        (advice-add 'completion--insert-strings :after
-                    #'live-completions--delete-first-line))
-    (remove-hook 'minibuffer-setup-hook #'live-completions--setup)
-    (advice-remove 'completion--insert-strings
-                   #'live-completions--delete-first-line)
-    (dolist (cmd live-completions--atomic-change-commmands)
-      (advice-remove cmd #'live-completions--atomic-changes))
-    (dolist (buffer (buffer-list))
-      (when (minibufferp buffer)
-        (setf (buffer-local-value 'after-change-functions buffer)
-              (remove #'live-completions--update
-                      (buffer-local-value 'after-change-functions buffer)))))))
+  (add-to-list 'after-change-functions #'live-completions--update))
 
 (defvar live-completions-horizontal-separator "\n")
 
@@ -68,6 +53,31 @@ Used to remove the message at the top of the *Completions* buffer."
   (delete-region (- (point) (length live-completions-horizontal-separator))
                  (point))
   (insert "\n"))
+
+(define-minor-mode live-completions-mode
+  "Live updating of the *Completions* buffer."
+  :global t
+  (if live-completions-mode
+      (progn
+        (add-hook 'minibuffer-setup-hook #'live-completions--setup)
+        (advice-add 'completion--insert-strings :after
+                    #'live-completions--delete-first-line)
+        (dolist (cmd live-completions--postpone-update)
+          (advice-add cmd :around #'live-completions--postpone-update))
+        (dolist (cmd live-completions--cancel-update)
+          (advice-add cmd :around #'live-completions--cancel-update)))
+    (remove-hook 'minibuffer-setup-hook #'live-completions--setup)
+    (advice-remove 'completion--insert-strings
+                   #'live-completions--delete-first-line)
+    (dolist (cmd live-completions--postpone-update)
+      (advice-remove cmd #'live-completions--postpone-update))
+    (dolist (cmd live-completions--cancel-update)
+      (advice-remove cmd #'live-completions--cancel-update))
+    (dolist (buffer (buffer-list))
+      (when (minibufferp buffer)
+        (setf (buffer-local-value 'after-change-functions buffer)
+              (remove #'live-completions--update
+                      (buffer-local-value 'after-change-functions buffer)))))))
 
 (defun live-completions-toggle-columns ()
   "Toggle between single and multi column completion views."
