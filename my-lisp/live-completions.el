@@ -1,32 +1,95 @@
 ;;; -*- lexical-binding: t; -*-
 
+(defgroup live-completions nil
+  "Live updating of the *Completions* buffer."
+  :group 'completion)
+
+(defcustom live-completions-horizontal-separator "\n"
+  "Candidate separator for live-completions in single-column mode.
+The separator should contain at least one newline."
+  :type 'string
+  :group 'live-completions)
+
+(defun live-completions-set-columns (columns)
+  "Set how many COLUMNS of candidates are displayed.
+
+Called from Lisp code COLUMNS should be one of the symbols
+`single', `multiple' or `toggle'. 
+
+When called interactively without prefix argument, toggle between
+single and multiple columns.  Called with a numerical prefix of 1,
+set single column mode, any other prefix argument sets multiple
+columns."
+  (interactive
+   (list (pcase current-prefix-arg
+           ('nil 'toggle)
+           (1 'single)
+           (_ 'multiple))))
+  (pcase columns
+    ('single
+     (advice-add 'completion--insert-strings :around
+                 #'live-completions--single-column))
+    ('multiple
+     (advice-remove 'completion--insert-strings
+                    #'live-completions--single-column))
+    ('toggle
+     (live-completions-set-columns
+      (if (advice-member-p #'live-completions--single-column
+                           'completion--insert-strings)
+          'multiple
+        'single))))
+  (when (and (bound-and-true-p live-completions-mode)
+             (not (eq columns 'toggle)))
+    (live-completions--update)))
+
+(defcustom live-completions-columns 'single
+  "How many columns of candidates live-completions displays.
+
+To change the value from Lisp code use
+`live-completions-set-columns'."
+  :type '(choice
+          (const :tag "Single column" single)
+          (const :tag "Multiple columns" multiple))
+  :set (lambda (_ columns)
+         (live-completions-set-columns columns))
+  :group 'live-completions)
+
+(defface live-completions-forceable-candidate
+  '((default :weight bold)
+    (((class color) (min-colors 88) (background dark)) :background "PaleGreen4")
+    (((class color) (min-colors 88) (background light)) :background "PaleGreen")
+    (t :foreground "blue"))
+  "Face for candidate that force-completion would select."
+  :group 'live-completions)
+
 (defun live-completions--update (&optional _start _end _length)
   (when minibuffer-completion-table
     (save-match-data (while-no-input (minibuffer-completion-help)))))
 
+(defun live-completions--highlight-forceable (completions &optional _common)
+  (let ((first (car (member (car (completion-all-sorted-completions))
+                            completions))))
+    (when first
+      (font-lock-prepend-text-property
+       0 (length first)
+       'face 'live-completions-forceable-candidate
+       first))))
+
 (defconst live-completions--postpone-update
   '(minibuffer-complete
-    minibuffer-force-complete)
-  "List of commands during which updating completions is postponed.")
-
-(defconst live-completions--cancel-update
-  '(choose-completion
+    minibuffer-force-complete
+    choose-completion
     minibuffer-complete-and-exit
     minibuffer-force-complete-and-exit)
-  "List of commands for which updating completions is canceled.")
+  "List of commands during which updating completions is postponed.")
 
 (defun live-completions--postpone-update (fn &rest args)
   (combine-after-change-calls (apply fn args)))
-
-(defun live-completions--cancel-update (fn &rest args)
-  (let ((inhibit-modification-hooks t)) (apply fn args)))
 
 (defun live-completions--setup ()
   (live-completions--update)
   (make-local-variable 'after-change-functions)
   (add-to-list 'after-change-functions #'live-completions--update))
-
-(defvar live-completions-horizontal-separator "\n")
 
 (defun live-completions--delete-first-line (&rest _)
   "Delete first line in current buffer.
@@ -35,9 +98,8 @@ Used to remove the message at the top of the *Completions* buffer."
   (delete-region (point) (1+ (line-end-position)))
   (insert (propertize "@" 'invisible t)))
 
-(defun live-completions--single-column (strings)
+(defun live-completions--single-column (_oldfun strings)
   "Insert completion candidates into current buffer in a single column."
-  (live-completions--delete-first-line)
   (dolist (str strings)
     (if (not (consp str))
         (put-text-property (point) (progn (insert str) (point))
@@ -59,35 +121,25 @@ Used to remove the message at the top of the *Completions* buffer."
   :global t
   (if live-completions-mode
       (progn
+        (when (bound-and-true-p icomplete-mode) (icomplete-mode -1))
         (add-hook 'minibuffer-setup-hook #'live-completions--setup)
-        (advice-add 'completion--insert-strings :after
+        (advice-add 'display-completion-list :before
+                    #'live-completions--highlight-forceable)
+        (advice-add 'completion--insert-strings :before
                     #'live-completions--delete-first-line)
         (dolist (cmd live-completions--postpone-update)
-          (advice-add cmd :around #'live-completions--postpone-update))
-        (dolist (cmd live-completions--cancel-update)
-          (advice-add cmd :around #'live-completions--cancel-update)))
+          (advice-add cmd :around #'live-completions--postpone-update)))
     (remove-hook 'minibuffer-setup-hook #'live-completions--setup)
+    (advice-remove 'display-completion-list
+                   #'live-completions--highlight-forceable)
     (advice-remove 'completion--insert-strings
                    #'live-completions--delete-first-line)
     (dolist (cmd live-completions--postpone-update)
       (advice-remove cmd #'live-completions--postpone-update))
-    (dolist (cmd live-completions--cancel-update)
-      (advice-remove cmd #'live-completions--cancel-update))
     (dolist (buffer (buffer-list))
       (when (minibufferp buffer)
         (setf (buffer-local-value 'after-change-functions buffer)
               (remove #'live-completions--update
                       (buffer-local-value 'after-change-functions buffer)))))))
-
-(defun live-completions-toggle-columns ()
-  "Toggle between single and multi column completion views."
-  (interactive)
-  (if (advice-member-p #'live-completions--single-column
-                       'completion--insert-strings)
-      (advice-remove 'completion--insert-strings
-                     #'live-completions--single-column)
-    (advice-add 'completion--insert-strings :override
-                #'live-completions--single-column))
-  (live-completions--update))
 
 (provide 'live-completions)
