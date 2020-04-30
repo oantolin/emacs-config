@@ -319,6 +319,8 @@
   :bind (:map minibuffer-local-completion-map
               ("S-SPC" . minibuffer-complete-word)
               ("<tab>" . minibuffer-force-complete)
+              ("M-RET" . exit-minibuffer)
+              ("C-j" . minibuffer-force-complete-and-exit)
               ("SPC") ("?"))
   :hook
   (completion-list-mode . force-truncate-lines)
