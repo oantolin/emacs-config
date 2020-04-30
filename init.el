@@ -316,18 +316,19 @@
   (completion-in-region-function #'completing-read-in-region))
 
 (use-package minibuffer
-  :bind (:map minibuffer-local-completion-map
-              ("S-SPC" . minibuffer-complete-word)
-              ("<tab>" . minibuffer-force-complete)
-              ("M-RET" . exit-minibuffer)
-              ("C-j" . minibuffer-force-complete-and-exit)
-              ("SPC") ("?"))
+  :bind
+  (:map minibuffer-local-completion-map
+        ("S-SPC" . minibuffer-complete-word)
+        ("<tab>" . minibuffer-force-complete)
+        ("M-RET" . exit-minibuffer)
+        ("SPC") ("?"))
+  (:map minibuffer-local-must-match-map
+        ("C-j" . minibuffer-force-complete-and-exit))
   :hook
   (completion-list-mode . force-truncate-lines)
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
-  (completion-show-inline-help nil)
   (completion-styles '(orderless))
   (completion-category-defaults nil)
   (read-file-name-completion-ignore-case t)
