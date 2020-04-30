@@ -36,4 +36,34 @@
               (remove #'live-completions--update
                       (buffer-local-value after-change-functions buffer)))))))
 
+(defvar live-completions-horizontal-separator "\n")
+
+(defun live-completions--single-column (strings)
+  "Insert completion candidates into current buffer in a single column."
+  (dolist (str strings)
+    (if (not (consp str))
+        (put-text-property (point) (progn (insert str) (point))
+                           'mouse-face 'highlight)
+      (put-text-property (point) (progn (insert (car str)) (point))
+                         'mouse-face 'highlight)
+      (let ((beg (point))
+            (end (progn (insert (cadr str)) (point))))
+        (put-text-property beg end 'mouse-face nil)
+        (font-lock-prepend-text-property beg end 'face
+                                         'completions-annotations)))
+    (insert live-completions-horizontal-separator))
+  (delete-region (- (point) (length live-completions-horizontal-separator))
+                 (point)))
+
+(defun live-completions-toggle-columns ()
+  "Toggle between single and multi column completion views."
+  (interactive)
+  (if (advice-member-p #'live-completions--single-column
+                       'completion--insert-strings)
+      (advice-remove 'completion--insert-strings
+                     #'live-completions--single-column)
+    (advice-add 'completion--insert-strings :override
+                #'live-completions--single-column))
+  (live-completions--update))
+
 (provide 'live-completions)
