@@ -318,10 +318,10 @@
 (use-package minibuffer
   :bind (:map minibuffer-local-completion-map
               ("S-SPC" . minibuffer-complete-word)
-              ("SPC") ("?")
-              ("<backtab>" . minibuffer-complete)
-              ("TAB" . minibuffer-force-complete)
-              ("M-RET" . minibuffer-force-complete-and-exit))
+              ("<tab>" . minibuffer-force-complete)
+              ("SPC") ("?"))
+  :hook
+  (completion-list-mode . force-truncate-lines)
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
@@ -330,6 +330,7 @@
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
+  (completion-cycle-threshold t)
   (completions-format 'vertical)
   (enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode t)
