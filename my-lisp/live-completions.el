@@ -26,8 +26,13 @@
   "Live updating of the *Completions* buffer."
   :global t
   (if live-completions-mode
-      (add-hook 'minibuffer-setup-hook #'live-completions--setup)
+      (progn
+        (add-hook 'minibuffer-setup-hook #'live-completions--setup)
+        (advice-add 'completion--insert-strings :after
+                    #'live-completions--delete-first-line))
     (remove-hook 'minibuffer-setup-hook #'live-completions--setup)
+    (advice-remove 'completion--insert-strings
+                   #'live-completions--delete-first-line)
     (dolist (cmd live-completions--atomic-change-commmands)
       (advice-remove cmd #'live-completions--atomic-changes))
     (dolist (buffer (buffer-list))
@@ -38,8 +43,16 @@
 
 (defvar live-completions-horizontal-separator "\n")
 
+(defun live-completions--delete-first-line (&rest _)
+  "Delete first line in current buffer.
+Used to remove the message at the top of the *Completions* buffer."
+  (goto-char (point-min))
+  (delete-region (point) (1+ (line-end-position)))
+  (insert (propertize "@" 'invisible t)))
+
 (defun live-completions--single-column (strings)
   "Insert completion candidates into current buffer in a single column."
+  (live-completions--delete-first-line)
   (dolist (str strings)
     (if (not (consp str))
         (put-text-property (point) (progn (insert str) (point))
