@@ -387,7 +387,7 @@
 (use-package live-completions
   :demand t
   :bind (:map minibuffer-local-completion-map
-              ("C-v" . live-completions-toggle-columns))
+              ("C-v" . live-completions-set-columns))
   :config (live-completions-mode))
 
 (use-package avy-completion
