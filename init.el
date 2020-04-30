@@ -327,12 +327,12 @@
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
+  (completion-show-inline-help nil)
   (completion-styles '(orderless))
   (completion-category-defaults nil)
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
-  (completion-cycle-threshold t)
   (completions-format 'vertical)
   (enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode t)

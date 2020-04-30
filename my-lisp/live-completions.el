@@ -13,7 +13,7 @@
   "List of commands whose changes should be atomic.")
 
 (defun live-completions--atomic-changes (fn &rest args)
-  (let ((inhibit-modification-hooks t)) (apply fn args)))
+  (combine-after-change-calls (apply fn args)))
 
 (defun live-completions--setup ()
   (live-completions--update)
