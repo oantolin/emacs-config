@@ -123,8 +123,10 @@ By default align all matches, with universal prefix align only first match."
     (let ((inhibit-read-only t))
       (delete-region (point) (mark t))))
   (icomplete-vertical-do (:separator 'solid-line :height 15)
-    (insert-for-yank
-     (completing-read "Yank: " (ordered-completion-table kill-ring) nil t))))
+    (let ((live-completions-horizontal-separator
+           (concat "\n" (make-string (- (window-width) 2) ?—) "\n")))
+     (insert-for-yank
+     (completing-read "Yank: " (ordered-completion-table kill-ring) nil t)))))
 
 (defun goto-matching-line ()
   "Go to matching line selected with completion."
