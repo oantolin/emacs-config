@@ -32,9 +32,9 @@
       (advice-remove cmd #'live-completions--atomic-changes))
     (dolist (buffer (buffer-list))
       (when (minibufferp buffer)
-        (setf (buffer-local-value after-change-functions buffer)
+        (setf (buffer-local-value 'after-change-functions buffer)
               (remove #'live-completions--update
-                      (buffer-local-value after-change-functions buffer)))))))
+                      (buffer-local-value 'after-change-functions buffer)))))))
 
 (defvar live-completions-horizontal-separator "\n")
 
