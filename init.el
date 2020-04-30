@@ -310,7 +310,7 @@
   (:map minibuffer-local-map
         ("M-m i" . insert-minibuffer-contents)
         ("M-m w" . exit-minibuffer-save-contents)
-        ("C-S-y" . insert-region-in-minibuffer))
+        ("M-m r" . insert-region-in-minibuffer))
   :commands completing-read-in-region
   :custom
   (completion-in-region-function #'completing-read-in-region))
@@ -384,6 +384,9 @@
               ("C-v" . icomplete-vertical-toggle)))
 
 (use-package live-completions
+  :demand t
+  :bind (:map minibuffer-local-completion-map
+              ("C-v" . live-completions-toggle-columns))
   :config (live-completions-mode))
 
 (use-package avy-completion
