@@ -53,7 +53,8 @@
                                          'completions-annotations)))
     (insert live-completions-horizontal-separator))
   (delete-region (- (point) (length live-completions-horizontal-separator))
-                 (point)))
+                 (point))
+  (insert "\n"))
 
 (defun live-completions-toggle-columns ()
   "Toggle between single and multi column completion views."
