@@ -80,11 +80,17 @@ To change the value from Lisp code use
     minibuffer-force-complete
     choose-completion
     minibuffer-complete-and-exit
-    minibuffer-force-complete-and-exit)
+    minibuffer-force-complete-and-exit
+    undo
+    yank)
   "List of commands during which updating completions is postponed.")
 
 (defun live-completions--postpone-update (fn &rest args)
-  (combine-after-change-calls (apply fn args)))
+  (if (minibufferp)
+      (combine-after-change-calls
+        (let ((minibuffer-message-timeout 0))
+          (apply fn args)))
+    (apply fn args)))
 
 (defun live-completions--setup ()
   (live-completions--update)
