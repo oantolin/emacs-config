@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'avy)
+(require 'cl-lib)
+
 (defun avy-completion--candidate (pt)
   "Return the completion candidate at PT."
   (goto-char pt)
