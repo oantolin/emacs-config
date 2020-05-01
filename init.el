@@ -395,7 +395,8 @@
           (zero-or-more
            (or ,@(cl-loop for i from 1 below (length literal)
                           collect `(seq ,(substring literal 1 i)
-                                        (not ,(aref literal i))))))
+                                        (or (not ,(aref literal i))
+                                            string-end)))))
           string-end)))))
   :custom
   (orderless-component-matching-styles
