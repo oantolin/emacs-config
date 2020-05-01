@@ -376,15 +376,15 @@
   :load-path "~/my-elisp-packages/orderless/"
   :defer t
   :config
-  (defun suffix-dispatcher (pattern _i _t)
+  (defun prefix-dispatcher (pattern _i _t)
     (unless (string= pattern "")
-      (let ((matcher (cdr (assq (aref pattern (1- (length pattern)))
+      (let ((matcher (cdr (assq (aref pattern 0)
                                 '((?= . orderless-literal)
                                   (?~ . orderless-flex)
                                   (?. . orderless-initialism)
                                   (?, . orderless-prefixes))))))
         (when matcher
-          (cons matcher (substring pattern 0 -1))))))
+          (cons matcher (substring pattern 1))))))
   (defun not-containing (literal _i _t)
     (when (string-prefix-p "!" literal)
       (cons
@@ -400,7 +400,7 @@
   :custom
   (orderless-component-matching-styles
    '(orderless-regexp
-     :component-dispatchers not-containing suffix-dispatcher)))
+     :component-dispatchers not-containing prefix-dispatcher)))
 
 (use-package icomplete-vertical
   :disabled
