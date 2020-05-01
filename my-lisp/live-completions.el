@@ -89,11 +89,10 @@ To change the value from Lisp code use
   "List of commands during which updating completions is postponed.")
 
 (defun live-completions--postpone-update (fn &rest args)
-  (if (minibufferp)
-      (combine-after-change-calls
-        (let ((minibuffer-message-timeout 0))
-          (apply fn args)))
-    (apply fn args)))
+  (combine-after-change-calls
+    (let ((minibuffer-message-timeout 0)
+          (completion-show-inline-help nil))
+      (apply fn args))))
 
 (defun live-completions--setup ()
   (live-completions--update)
