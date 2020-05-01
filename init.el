@@ -368,15 +368,38 @@
       "Complete the icomplete minibuffer."
       (interactive)
       ;; We're not at all interested in cycling here (bug#34077).
-      (minibuffer-force-
-       complete nil nil 'dont-cycle))))
+      (minibuffer-force-complete nil nil 'dont-cycle))))
 
 (use-package orderless
-  :ensure t
+  ;; :ensure t
+  :load-path "~/my-elisp-packages/orderless/"
   :defer t
+  :config
+  (defun suffix-dispatcher (pattern _i _t)
+    (unless (string= pattern "")
+      (let ((matcher (cdr (assq (aref pattern (1- (length pattern)))
+                                '((?= . orderless-literal)
+                                  (?~ . orderless-flex)
+                                  (?. . orderless-initialism)
+                                  (?, . orderless-prefixes))))))
+        (when matcher
+          (cons matcher (substring pattern 0 -1))))))
+  (defun not-containing (literal _i _t)
+    (when (string-prefix-p "!" literal)
+      (cons
+       'orderless-regexp
+       (rx-to-string
+        `(seq
+          (group string-start)
+          (zero-or-more
+           (or ,@(cl-loop for i from 1 below (length literal)
+                          collect `(seq ,(substring literal 1 i)
+                                        (not ,(aref literal i))))))
+          string-end)))))
   :custom
   (orderless-component-matching-styles
-   '(orderless-regexp orderless-prefixes orderless-initialism)))
+   '(orderless-regexp
+     :component-dispatchers not-containing suffix-dispatcher)))
 
 (use-package icomplete-vertical
   :disabled
