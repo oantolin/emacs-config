@@ -68,9 +68,10 @@ To change the value from Lisp code use
   "Is live-completions updating paused?")
 
 (defun live-completions--update (&optional _start _end _length)
-  (when (and (not live-completions--paused-p)
-             minibuffer-completion-table)
-    (save-match-data (while-no-input (minibuffer-completion-help)))))
+  (while-no-input
+    (when (and (not live-completions--paused-p)
+               minibuffer-completion-table)
+      (save-match-data (minibuffer-completion-help)))))
 
 (defun live-completions--highlight-forceable (completions &optional _common)
   (let ((first (car (member (car (completion-all-sorted-completions))
@@ -97,7 +98,7 @@ To change the value from Lisp code use
   (live-completions--update))
 
 (defun live-completions--setup ()
-  (live-completions--update)
+  (run-with-idle-timer 0.01 nil #'live-completions--update)
   (make-local-variable 'after-change-functions)
   (add-to-list 'after-change-functions #'live-completions--update))
 
