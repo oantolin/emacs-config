@@ -321,6 +321,7 @@
         ("S-SPC" . minibuffer-complete-word)
         ("<tab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
+        ("C-j" . minibuffer-force-complete-and-exit)
         ("SPC") ("?"))
   (:map minibuffer-local-must-match-map
         ("C-j" . minibuffer-force-complete-and-exit))
