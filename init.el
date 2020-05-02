@@ -372,19 +372,15 @@
       (minibuffer-force-complete nil nil 'dont-cycle))))
 
 (use-package orderless
-  ;; :ensure t
-  :load-path "~/my-elisp-packages/orderless/"
+  :ensure t
   :defer t
   :config
-  (defun prefix-dispatcher (pattern _i _t)
-    (unless (string= pattern "")
-      (let ((matcher (cdr (assq (aref pattern 0) ; use symbol constituents!
-                                '((?= . orderless-literal)
-                                  (?~ . orderless-flex)
-                                  (?. . orderless-initialism)
-                                  (?- . orderless-prefixes))))))
-        (when matcher
-          (cons matcher (substring pattern 1))))))
+  (defun flex-if-star (pattern _i _t)
+    (when (string-prefix-p "*" pattern)
+      (cons 'orderless-flex (substring pattern 1))))
+  (defun literal-if-equals (pattern _i _t)
+    (when (string-prefix-p "=" pattern)
+      (cons 'orderless-literal (substring pattern 1))))
   (defun not-containing (literal _i _t)
     (when (string-prefix-p "!" literal)
       (cons
@@ -399,8 +395,10 @@
                                             string-end)))))
           string-end)))))
   :custom
-  (orderless-component-matching-styles
-   '(orderless-regexp :dispatchers not-containing prefix-dispatcher)))
+  (orderless-matching-styles
+   '(orderless-regexp orderless-initialism orderless-prefixes))
+  (orderless-style-dispatchers
+   '(not-containing flex-if-star literal-if-equals)))
 
 (use-package icomplete-vertical
   :disabled
