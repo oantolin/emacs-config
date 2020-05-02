@@ -64,14 +64,8 @@ To change the value from Lisp code use
   "Face for candidate that force-completion would select."
   :group 'live-completions)
 
-(defvar live-completions--paused-p nil
-  "Is live-completions updating paused?")
-
 (defun live-completions--update (&optional _start _end _length)
-  (while-no-input
-    (when (and (not live-completions--paused-p)
-               minibuffer-completion-table)
-      (save-match-data (minibuffer-completion-help)))))
+  (while-no-input (save-match-data (minibuffer-completion-help))))
 
 (defun live-completions--highlight-forceable (completions &optional _common)
   (let ((first (car (member (car (completion-all-sorted-completions))
@@ -81,21 +75,6 @@ To change the value from Lisp code use
        0 (length first)
        'face 'live-completions-forceable-candidate
        first))))
-
-(defconst live-completions--pause-update
-  '(minibuffer-complete
-    minibuffer-force-complete
-    choose-completion
-    minibuffer-complete-and-exit
-    minibuffer-force-complete-and-exit
-    undo
-    yank)
-  "List of commands during which updating completions is paused.")
-
-(defun live-completions--pause-update (fn &rest args)
-  (let ((live-completions--paused-p t))
-    (apply fn args))
-  (live-completions--update))
 
 (defun live-completions--setup ()
   (run-with-idle-timer 0.01 nil #'live-completions--update)
@@ -136,16 +115,12 @@ Used to remove the message at the top of the *Completions* buffer."
         (advice-add 'display-completion-list :before
                     #'live-completions--highlight-forceable)
         (advice-add 'completion--insert-strings :before
-                    #'live-completions--delete-first-line)
-        (dolist (cmd live-completions--pause-update)
-          (advice-add cmd :around #'live-completions--pause-update)))
+                    #'live-completions--delete-first-line))
     (remove-hook 'minibuffer-setup-hook #'live-completions--setup)
     (advice-remove 'display-completion-list
                    #'live-completions--highlight-forceable)
     (advice-remove 'completion--insert-strings
                    #'live-completions--delete-first-line)
-    (dolist (cmd live-completions--pause-update)
-      (advice-remove cmd #'live-completions--pause-update))
     (dolist (buffer (buffer-list))
       (when (minibufferp buffer)
         (remove-hook 'post-command-hook #'live-completions--update t)))))
