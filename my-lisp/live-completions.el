@@ -64,14 +64,15 @@ To change the value from Lisp code use
   :group 'live-completions)
 
 (defun live-completions--update ()
-  (while-no-input
-    (when minibuffer-completion-table
-      (condition-case nil
-          (save-excursion
-            (goto-char (point-max))
-            (let ((minibuffer-message-timeout 0))
-              (minibuffer-completion-help)))
-        (quit (abort-recursive-edit))))))
+  (let ((while-no-input-ignore-events '(selection-request)))
+    (while-no-input
+      (when minibuffer-completion-table
+        (condition-case nil
+            (save-excursion
+              (goto-char (point-max))
+              (let ((minibuffer-message-timeout 2))
+                (minibuffer-completion-help)))
+          (quit (abort-recursive-edit)))))))
 
 (defun live-completions--highlight-forceable (completions &optional _common)
   (let ((first (car (member (car (completion-all-sorted-completions))
