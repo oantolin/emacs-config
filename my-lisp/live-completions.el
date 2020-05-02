@@ -99,8 +99,7 @@ To change the value from Lisp code use
 
 (defun live-completions--setup ()
   (run-with-idle-timer 0.01 nil #'live-completions--update)
-  (make-local-variable 'after-change-functions)
-  (add-to-list 'after-change-functions #'live-completions--update))
+  (add-hook 'post-command-hook #'live-completions--update nil t))
 
 (defun live-completions--delete-first-line (&rest _)
   "Delete first line in current buffer.
@@ -149,8 +148,6 @@ Used to remove the message at the top of the *Completions* buffer."
       (advice-remove cmd #'live-completions--pause-update))
     (dolist (buffer (buffer-list))
       (when (minibufferp buffer)
-        (setf (buffer-local-value 'after-change-functions buffer)
-              (remove #'live-completions--update
-                      (buffer-local-value 'after-change-functions buffer)))))))
+        (remove-hook 'post-command-hook #'live-completions--update t)))))
 
 (provide 'live-completions)
