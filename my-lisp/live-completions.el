@@ -63,8 +63,15 @@ To change the value from Lisp code use
   "Face for candidate that force-completion would select."
   :group 'live-completions)
 
-(defun live-completions--update (&optional _start _end _length)
-  (while-no-input (save-match-data (minibuffer-completion-help))))
+(defun live-completions--update ()
+  (while-no-input
+    (when minibuffer-completion-table
+      (condition-case nil
+          (save-excursion
+            (goto-char (point-max))
+            (let ((minibuffer-message-timeout 0))
+              (minibuffer-completion-help)))
+        (quit (abort-recursive-edit))))))
 
 (defun live-completions--highlight-forceable (completions &optional _common)
   (let ((first (car (member (car (completion-all-sorted-completions))
@@ -76,10 +83,8 @@ To change the value from Lisp code use
        first))))
 
 (defun live-completions--setup ()
-  (run-with-timer 0.001 nil
-   (lambda ()
-     (live-completions--update)
-     (add-hook 'post-command-hook #'live-completions--update nil t))))
+  (sit-for 0.01)
+  (add-hook 'post-command-hook #'live-completions--update nil t))
 
 (defun live-completions--hide-first-line (&rest _)
   "Make first line invisible in current buffer.
