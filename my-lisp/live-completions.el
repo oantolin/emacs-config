@@ -46,7 +46,6 @@ columns."
 
 (defcustom live-completions-columns 'single
   "How many columns of candidates live-completions displays.
-
 To change the value from Lisp code use
 `live-completions-set-columns'."
   :type '(choice
@@ -80,12 +79,12 @@ To change the value from Lisp code use
   (run-with-idle-timer 0.01 nil #'live-completions--update)
   (add-hook 'post-command-hook #'live-completions--update nil t))
 
-(defun live-completions--delete-first-line (&rest _)
-  "Delete first line in current buffer.
-Used to remove the message at the top of the *Completions* buffer."
-  (goto-char (point-min))
-  (delete-region (point) (1+ (line-end-position)))
-  (insert (propertize "@" 'invisible t)))
+(defun live-completions--hide-first-line (&rest _)
+  "Make first line invisible in current buffer.
+Used to hide the message at the top of the *Completions* buffer."
+  (save-excursion
+    (goto-char (point-min))
+    (put-text-property (point) (1+ (line-end-position)) 'invisible t)))
 
 (defun live-completions--single-column (_oldfun strings)
   "Insert completion candidates into current buffer in a single column."
@@ -115,12 +114,12 @@ Used to remove the message at the top of the *Completions* buffer."
         (advice-add 'display-completion-list :before
                     #'live-completions--highlight-forceable)
         (advice-add 'completion--insert-strings :before
-                    #'live-completions--delete-first-line))
+                    #'live-completions--hide-first-line))
     (remove-hook 'minibuffer-setup-hook #'live-completions--setup)
     (advice-remove 'display-completion-list
                    #'live-completions--highlight-forceable)
     (advice-remove 'completion--insert-strings
-                   #'live-completions--delete-first-line)
+                   #'live-completions--hide-first-line)
     (dolist (buffer (buffer-list))
       (when (minibufferp buffer)
         (remove-hook 'post-command-hook #'live-completions--update t)))))
