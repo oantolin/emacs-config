@@ -30,7 +30,7 @@ columns."
   (pcase columns
     ('single
      (advice-add 'completion--insert-strings :around
-                 #'live-completions--single-column))
+                 #'live-completions--single-column '((depth . 1))))
     ('multiple
      (advice-remove 'completion--insert-strings
                     #'live-completions--single-column))
@@ -76,8 +76,10 @@ To change the value from Lisp code use
        first))))
 
 (defun live-completions--setup ()
-  (run-with-idle-timer 0.01 nil #'live-completions--update)
-  (add-hook 'post-command-hook #'live-completions--update nil t))
+  (run-with-timer 0.001 nil
+   (lambda ()
+     (live-completions--update)
+     (add-hook 'post-command-hook #'live-completions--update nil t))))
 
 (defun live-completions--hide-first-line (&rest _)
   "Make first line invisible in current buffer.
