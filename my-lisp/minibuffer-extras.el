@@ -77,4 +77,29 @@ Use as a value for `completion-in-region-function'."
         (insert completion)
         t))))
 
+(defun restrict-to-matches ()
+  "Restrict to current completion matches."
+  (interactive)
+  (let* ((input (minibuffer-contents))
+         (pt (- (point) (minibuffer-prompt-end)))
+         (bounds (completion-boundaries (substring input 0 pt)
+                                        minibuffer-completion-table
+                                        minibuffer-completion-predicate
+                                        (substring input pt)))
+         (prefix (substring input 0 (car bounds)))
+         (all (completion-all-completions
+                input
+                minibuffer-completion-table
+                minibuffer-completion-predicate
+                pt)))
+    (when (last all) (setcdr (last all) nil))
+    (setq all (mapcar (lambda (cand) (concat prefix cand)) all))
+    (when (or (eq minibuffer-completion-table
+                  #'help--symbol-completion-table)
+              (and (consp minibuffer-completion-table)
+                   (symbolp (car minibuffer-completion-table))))
+      (setq all (mapcar #'intern all)))
+    (setq minibuffer-completion-table all)
+    (delete-minibuffer-contents)))
+
 (provide 'minibuffer-extras)
