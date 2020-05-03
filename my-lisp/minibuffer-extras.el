@@ -4,7 +4,9 @@
 (defun up-directory (arg)
   "Move up a directory (delete backwards to /)."
   (interactive "p")
-  (zap-up-to-char (- arg) ?/))
+  (condition-case nil
+      (zap-up-to-char (- arg) ?/)
+    (t (delete-minibuffer-contents))))
 
 (autoload 'bookmark-maybe-load-default-file "bookmark")
 (defvar bookmark-alist)
