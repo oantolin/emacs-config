@@ -70,7 +70,7 @@ To change the value from Lisp code use
         (condition-case nil
             (save-excursion
               (goto-char (point-max))
-              (let ((minibuffer-message-timeout 2))
+              (let ((minibuffer-message-timeout 0))
                 (minibuffer-completion-help)))
           (quit (abort-recursive-edit)))))))
 
