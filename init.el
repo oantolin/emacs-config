@@ -318,7 +318,6 @@
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
-        ("S-SPC" . minibuffer-complete-word)
         ("<tab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("C-j" . minibuffer-force-complete-and-exit)
