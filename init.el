@@ -302,19 +302,6 @@
   :demand t
   :config (completing-history-setup-keybinding))
 
-(use-package minibuffer-extras
-  :bind
-  (:map minibuffer-local-filename-completion-map
-        ("<C-backspace>" . up-directory)
-        ("C-c C-d" . cd-bookmark))
-  (:map minibuffer-local-map
-        ("M-m i" . insert-minibuffer-contents)
-        ("M-m w" . exit-minibuffer-save-contents)
-        ("M-m r" . insert-region-in-minibuffer))
-  :commands completing-read-in-region
-  :custom
-  (completion-in-region-function #'completing-read-in-region))
-
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
@@ -329,7 +316,7 @@
   :custom
   (completion-auto-help nil)
   (completion-show-help nil)
-  (completion-styles '(orderless))
+  (completion-styles '(regexp))
   (completion-category-defaults nil)
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
@@ -340,6 +327,21 @@
   (minibuffer-electric-default-mode t)
   (minibuffer-eldef-shorten-default t)
   (resize-mini-windows t))
+
+(use-package minibuffer-extras
+  :bind
+  (:map minibuffer-local-filename-completion-map
+        ("<C-backspace>" . up-directory)
+        ("C-c C-d" . cd-bookmark))
+  (:map minibuffer-local-map
+        ("M-m i" . insert-minibuffer-contents)
+        ("M-m w" . exit-minibuffer-save-contents)
+        ("M-m r" . insert-region-in-minibuffer))
+  (:map minibuffer-local-completion-map
+        ("SPC" . restrict-to-matches))
+  :commands completing-read-in-region
+  :custom
+  (completion-in-region-function #'completing-read-in-region))
 
 (use-package icomplete
   :disabled
@@ -370,7 +372,44 @@
       ;; We're not at all interested in cycling here (bug#34077).
       (minibuffer-force-complete nil nil 'dont-cycle))))
 
+(use-package regexp-style
+  :demand t
+  :config
+  (use-package em-glob :commands eshell-glob-regexp)
+  (defun my-regexp-converter (pattern)
+    (cond
+     (minibuffer-completing-file-name
+      (let ((startp (string-prefix-p "`" pattern))
+            (endp (string-suffix-p "'" pattern)))
+        (concat
+         (substring (eshell-glob-regexp
+                     (substring (replace-regexp-in-string " " "*" pattern)
+                                (if startp 1 0)
+                                (if endp -1 nil)))
+                    (if startp 0 2) -2)
+         (if endp "\\(?:\\'\\|/\\)"))))
+     ((string-prefix-p "=" pattern) (regexp-quote (substring pattern 1)))
+     ((string-suffix-p "=" pattern) (regexp-quote (substring pattern 0 -1)))
+     ((or completion-in-region-mode-predicate
+          (let ((prompt (minibuffer-prompt)))
+            (and prompt (string-match-p
+                         "M-x\\|Describe \\(?:function\\|variable\\)"
+                         prompt))))
+      (cond
+       ((string-match-p "-" pattern)
+        (mapconcat (lambda (str)
+                     (concat "\\(\\(?:\\`\\|-\\)" (regexp-quote str) "\\)"))
+                   (split-string pattern "-" t) ".*"))
+       ((atom minibuffer-completion-table)
+        (mapconcat
+         (lambda (ch) (concat "\\(\\<" (regexp-quote (string ch)) "\\)"))
+         pattern ".*"))
+       (t pattern)))
+     (t pattern)))
+  :custom (regexp-style-converter #'my-regexp-converter))
+
 (use-package orderless
+  :disabled
   :ensure t
   :defer t
   :config
@@ -410,8 +449,11 @@
   (defun glob-for-files (pattern _i _t)
     (when minibuffer-completing-file-name
       (cons 'orderless-regexp
-            ;; remove the initial and terminal anchors
-            (substring (eshell-glob-regexp pattern) 2 -2))))
+            (let ((startp (string-prefix-p "`" pattern))
+                  (endp (string-suffix-p "'" pattern)))
+              (substring (eshell-glob-regexp
+                          (substring pattern (if startp 1 0) (if endp -1 nil)))
+                         (if startp 0 2) (if endp nil -2))))))
   :custom
   (orderless-matching-styles 'orderless-literal)
   (orderless-style-dispatchers '(regexp-if-equals
