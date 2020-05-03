@@ -377,9 +377,12 @@
   (defun flex-if-star (pattern _i _t)
     (when (string-prefix-p "*" pattern)
       (cons 'orderless-flex (substring pattern 1))))
-  (defun literal-if-equals (pattern _i _t)
-    (when (string-prefix-p "=" pattern)
-      (cons 'orderless-literal (substring pattern 1))))
+  (defun regexp-if-equals (pattern _i _t)
+    (cond
+     ((string-prefix-p "=" pattern)
+      (cons 'orderless-regexp (substring pattern 1)))
+     ((string-suffix-p "=" pattern)
+      (cons 'orderless-regexp (substring pattern 0 -1)))))
   (defun not-containing (literal _i _t)
     (when (string-prefix-p "!" literal)
       (cons
@@ -393,14 +396,32 @@
                                         (or (not ,(aref literal i))
                                             string-end)))))
           string-end)))))
+  (defun first-for-symbol (pattern index _t)
+    (when (and (zerop index)
+               (or (eq minibuffer-completion-table
+                       #'help--symbol-completion-table)
+                   completion-in-region-mode-predicate
+                   (let ((prompt (minibuffer-prompt)))
+                     (and prompt (string-match-p "M-x" prompt)))))
+      (if (string-match-p "^[[:alnum:]]*$" pattern)
+          'orderless-initialism
+        'orderless-prefixes)))
+  (use-package em-glob :commands eshell-glob-regexp)
+  (defun glob-for-files (pattern _i _t)
+    (when minibuffer-completing-file-name
+      (cons 'orderless-regexp
+            ;; remove the initial and terminal anchors
+            (substring (eshell-glob-regexp pattern) 2 -2))))
   :custom
-  (orderless-matching-styles
-   '(orderless-regexp orderless-initialism orderless-prefixes))
-  (orderless-style-dispatchers
-   '(not-containing flex-if-star literal-if-equals)))
+  (orderless-matching-styles 'orderless-literal)
+  (orderless-style-dispatchers '(regexp-if-equals
+                                 first-for-symbol
+                                 glob-for-files
+                                 not-containing
+                                 flex-if-star)))
 
 (use-package icomplete-vertical
-  :disabled
+  ;; :disabled
   :ensure t
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle)))
