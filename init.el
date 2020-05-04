@@ -284,6 +284,7 @@
   :commands cotd)
 
 (use-package epithet
+  :load-path "~/my-elisp-packages/epithet"
   :bind ("C-x B" . epithet-rename-buffer))
 
 (use-package various-toggles
