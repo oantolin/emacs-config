@@ -51,7 +51,4 @@ separate packages. So far that is:
 - [[https://github.com/oantolin/math-delimiters][math-delimiters]]
 - [[https://github.com/oantolin/placeholder][placeholder]]
 - [[https://github.com/oantolin/epithet][epithet]]
-
-Since icomplete-vertical and orderless are now on MELPA, I install
-them from there. The other three packages are still included in this
-repo, besides having their own repo (with READMEs!).
+- [[https://github.com/oantolin/restricto][restricto]]

@@ -259,6 +259,7 @@
   :commands force-truncate-lines)
 
 (use-package placeholder
+  :load-path "~/my-elisp-packages/placeholder"
   :bind
   ("M-_" . placeholder-insert)
   ("C-S-n" . placeholder-forward)
@@ -272,6 +273,7 @@
         ("<M-return>" . isearch-save-and-exit)))
 
 (use-package math-delimiters
+  :load-path "~/my-elisp-packages/math-delimiters"
   :bind
   (:map toggle-map
         ("m" . math-delimiters-toggle))
