@@ -390,11 +390,6 @@
         (concat
          (my-regexp-converter (substring pattern 0 -1))
          (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
-       ((string-fix-p "." pattern)
-        (mapconcat
-         (lambda (ch) (rx bow (group (literal (string ch)))))
-         (remfix "." pattern)
-         ".*"))
        ((string-fix-p "\\" pattern) (regexp-quote (remfix "\\" pattern)))
        ((string-fix-p "=" pattern) (remfix "=" pattern))
        ((string-prefix-p "!" pattern)
@@ -412,10 +407,6 @@
          (lambda (ch) (rx (group (literal (string ch)))))
          (substring pattern 1 -1)
          ".*"))
-       (minibuffer-completing-file-name
-        (substring
-         (eshell-glob-regexp (replace-regexp-in-string " " "*" pattern))
-         2 -2))
        ((string-match-p "-" pattern)
         (concat
          "\\(?:\\`\\|-\\)"
@@ -423,6 +414,15 @@
                      (lambda (str) (rx ?- (group (literal str))))
                      (split-string pattern "-" t) ".*")
                     1)))
+       (minibuffer-completing-file-name
+        (substring
+         (eshell-glob-regexp (replace-regexp-in-string " " "*" pattern))
+         2 -2))
+       ((string-fix-p "." pattern)
+        (mapconcat
+         (lambda (ch) (rx bow (group (literal (string ch)))))
+         (remfix "." pattern)
+         ".*"))
        (t pattern))))
   :custom (regexp-style-converter #'my-regexp-converter))
 
