@@ -377,10 +377,11 @@
   :demand t
   :config
   (use-package em-glob :commands eshell-glob-regexp)
-  (cl-flet
-      ((string-fix-p (u v) (or (string-prefix-p u v) (string-suffix-p u v)))
-       (remfix (u v) (let ((pre (string-prefix-p u v)))
-                       (substring v (if pre 1 0) (if pre nil -1)))))
+  (cl-flet ((string-fix-p (u v)
+              (or (string-prefix-p u v) (string-suffix-p u v)))
+            (remfix (u v)
+              (let ((pre (string-prefix-p u v)))
+                (substring v (if pre 1 0) (if pre nil -1)))))
     (defun my-regexp-converter (pattern)
       (cond
        ((string-prefix-p "`" pattern)
@@ -391,8 +392,8 @@
          (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
        ((string-fix-p "." pattern)
         (mapconcat
-         (lambda (ch) (concat "\\<\\(" (regex-quote (string ch)) "\\)"))
-         (remfix-p "." pattern)
+         (lambda (ch) (concat "\\<\\(" (regexp-quote (string ch)) "\\)"))
+         (remfix "." pattern)
          ".*"))
        ((string-fix-p "\\" pattern) (regexp-quote (remfix "\\" pattern)))
        ((string-fix-p "=" pattern) (remfix "=" pattern))
