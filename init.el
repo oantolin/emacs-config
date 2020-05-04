@@ -493,14 +493,17 @@
                                  flex-if-star)))
 
 (use-package icomplete-vertical
+  ;; :ensure t
   :disabled
-  :ensure t
+  :demand t
+  :load-path "~/my-elisp-packages/icomplete-vertical"
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle))
   :config (icomplete-vertical-mode))
 
 (use-package live-completions
   :demand t
+  :load-path "~/my-elisp-packages/live-completions"
   :bind (:map minibuffer-local-completion-map
               ("C-v" . live-completions-set-columns))
   :config (live-completions-mode))
