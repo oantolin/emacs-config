@@ -336,13 +336,19 @@
   (:map minibuffer-local-map
         ("M-m i" . insert-minibuffer-contents)
         ("M-m w" . exit-minibuffer-save-contents)
-        ("M-m r" . insert-region-in-minibuffer))
-  (:map minibuffer-local-completion-map
-        ("SPC" . restrict-to-matches)
-        ("S-SPC" . unrestrict-to-matches))
+        ("M-m r" . insert-region-in-minibuffer)
+        ("M-m s" . schedule-for-next-minibuffer))
   :commands completing-read-in-region
   :custom
   (completion-in-region-function #'completing-read-in-region))
+
+(use-package restricto
+  :demand t
+  :load-path "~/my-elisp-packages/restricto"
+  :bind (:map minibuffer-local-completion-map
+              ("SPC" . restricto-narrow)
+              ("S-SPC" . restricto-widen))
+  :config (restricto-mode))
 
 (use-package icomplete
   :disabled
