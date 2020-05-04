@@ -58,6 +58,21 @@
          (buffer-substring (region-beginning) (region-end))
        (user-error "No active region")))))
 
+(defvar scheduled-minibuffer-insertion nil)
+
+(defun insert-scheduled-minibuffer-text ()
+  (when scheduled-minibuffer-insertion
+    (insert scheduled-minibuffer-insertion)
+    (setq scheduled-minibuffer-insertion nil)))
+
+(add-hook 'minibuffer-setup-hook #'insert-scheduled-minibuffer-text)
+
+(defun schedule-for-next-minibuffer ()
+  "Schedule insertion minibuffer contents at next minibuffer prompt."
+  (interactive)
+  (setq scheduled-minibuffer-insertion (minibuffer-contents))
+  (abort-recursive-edit))
+
 (defun completing-read-in-region (start end collection &optional predicate)
   "Prompt for completion of region in the minibuffer if non-unique.
 Use as a value for `completion-in-region-function'."
@@ -78,39 +93,5 @@ Use as a value for `completion-in-region-function'."
         (delete-region start end)
         (insert completion)
         t))))
-
-(defvar minibuffer-completion-table-stack nil)
-
-(defun clear-minibuffer-completion-table-stack ()
-  (setq minibuffer-completion-table-stack nil))
-
-(add-hook 'minibuffer-setup-hook #'clear-minibuffer-completion-table-stack)
-
-(defun unrestrict-to-matches ()
-  "Cancel last restriction to current completion candidates."
-  (interactive)
-  (when minibuffer-completion-table-stack
-    (setq minibuffer-completion-table
-          (pop minibuffer-completion-table-stack))
-    (delete-minibuffer-contents)))
-
-(defun restrict-to-matches ()
-  "Restrict to current completion candidates."
-  (interactive)
-  (let ((all (completion-all-sorted-completions)))
-    (when all
-      (push minibuffer-completion-table
-            minibuffer-completion-table-stack)
-      (setcdr (last all) nil)
-      (when ;; are we completing symbols?
-          (or (eq minibuffer-completion-table
-                  #'help--symbol-completion-table)
-              (and (sequencep minibuffer-completion-table)
-                   (symbolp (elt minibuffer-completion-table 0))))
-        (setq all (mapcar #'intern all)))
-      (if (null (cdr all))
-          (minibuffer-complete)
-        (setq minibuffer-completion-table all)
-        (delete-minibuffer-contents)))))
 
 (provide 'minibuffer-extras)
