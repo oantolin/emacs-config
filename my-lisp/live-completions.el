@@ -88,11 +88,11 @@ To change the value from Lisp code use
   (add-hook 'post-command-hook #'live-completions--update nil t))
 
 (defun live-completions--hide-first-line (&rest _)
-  "Make first line invisible in current buffer.
-Used to hide the message at the top of the *Completions* buffer."
-  (save-excursion
-    (goto-char (point-min))
-    (put-text-property (point) (1+ (line-end-position)) 'invisible t)))
+  "Make first line invisible in *Completions* buffer."
+  (when (string= (buffer-name) "*Completions*")
+    (save-excursion
+      (goto-char (point-min))
+      (put-text-property (point) (1+ (line-end-position)) 'invisible t))))
 
 (defun live-completions--single-column (_oldfun strings)
   "Insert completion candidates into current buffer in a single column."
