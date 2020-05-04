@@ -386,18 +386,20 @@
        ((string-prefix-p "`" pattern)
         (concat "\\`" (my-regexp-converter (substring pattern 1))))
        ((string-suffix-p "'" pattern)
-        (concat (my-regexp-converter (substring pattern 0 -1))
-                (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
+        (concat
+         (my-regexp-converter (substring pattern 0 -1))
+         (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
        ((string-fix-p "." pattern)
         (mapconcat
-         (lambda (ch) (concat "\\<" (regex-quote (string ch))))
+         (lambda (ch) (concat "\\<\\(" (regex-quote (string ch)) "\\)"))
          (remfix-p "." pattern)
          ".*"))
        ((string-fix-p "\\" pattern) (regexp-quote (remfix "\\" pattern)))
        ((string-fix-p "=" pattern) (remfix "=" pattern))
        ((string-match-p "^{.*}$" pattern)
-        (mapconcat (lambda (ch) (regexp-quote (string ch)))
-                   (substring pattern 1 -1) ".*"))
+        (mapconcat
+         (lambda (ch) (concat "\\(" (regexp-quote (string ch)) "\\)"))
+         (substring pattern 1 -1) ".*"))
        (minibuffer-completing-file-name
         (substring
          (eshell-glob-regexp (replace-regexp-in-string " " "*" pattern))
