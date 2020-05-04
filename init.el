@@ -406,7 +406,7 @@
         (concat
          "\\(?:\\`\\|-\\)"
          (substring (mapconcat
-                     (lambda (str) (concat "-" (regexp-quote str) "\\)"))
+                     (lambda (str) (concat "-\\(" (regexp-quote str) "\\)"))
                      (split-string pattern "-" t) ".*")
                     1)))
        (t pattern))))
