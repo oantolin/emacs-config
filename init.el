@@ -338,7 +338,8 @@
         ("M-m w" . exit-minibuffer-save-contents)
         ("M-m r" . insert-region-in-minibuffer))
   (:map minibuffer-local-completion-map
-        ("SPC" . restrict-to-matches))
+        ("SPC" . restrict-to-matches)
+        ("S-SPC" . unrestrict-to-matches))
   :commands completing-read-in-region
   :custom
   (completion-in-region-function #'completing-read-in-region))
@@ -376,36 +377,39 @@
   :demand t
   :config
   (use-package em-glob :commands eshell-glob-regexp)
-  (defun my-regexp-converter (pattern)
-    (cond
-     (minibuffer-completing-file-name
-      (let ((startp (string-prefix-p "`" pattern))
-            (endp (string-suffix-p "'" pattern)))
-        (concat
-         (substring (eshell-glob-regexp
-                     (substring (replace-regexp-in-string " " "*" pattern)
-                                (if startp 1 0)
-                                (if endp -1 nil)))
-                    (if startp 0 2) -2)
-         (if endp "\\(?:\\'\\|/\\)"))))
-     ((string-prefix-p "=" pattern) (regexp-quote (substring pattern 1)))
-     ((string-suffix-p "=" pattern) (regexp-quote (substring pattern 0 -1)))
-     ((or completion-in-region-mode-predicate
-          (let ((prompt (minibuffer-prompt)))
-            (and prompt (string-match-p
-                         "M-x\\|Describe \\(?:function\\|variable\\)"
-                         prompt))))
+  (cl-flet
+      ((string-fix-p (u v) (or (string-prefix-p u v) (string-suffix-p u v)))
+       (remfix (u v) (let ((pre (string-prefix-p u v)))
+                       (substring v (if pre 1 0) (if pre nil -1)))))
+    (defun my-regexp-converter (pattern)
       (cond
-       ((string-match-p "-" pattern)
-        (mapconcat (lambda (str)
-                     (concat "\\(\\(?:\\`\\|-\\)" (regexp-quote str) "\\)"))
-                   (split-string pattern "-" t) ".*"))
-       ((atom minibuffer-completion-table)
+       ((string-prefix-p "`" pattern)
+        (concat "\\`" (my-regexp-converter (substring pattern 1))))
+       ((string-suffix-p "'" pattern)
+        (concat (my-regexp-converter (substring pattern 0 -1))
+                (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
+       ((string-fix-p "." pattern)
         (mapconcat
-         (lambda (ch) (concat "\\(\\<" (regexp-quote (string ch)) "\\)"))
-         pattern ".*"))
-       (t pattern)))
-     (t pattern)))
+         (lambda (ch) (concat "\\<" (regex-quote (string ch))))
+         (remfix-p "." pattern)
+         ".*"))
+       ((string-fix-p "\\" pattern) (regexp-quote (remfix "\\" pattern)))
+       ((string-fix-p "=" pattern) (remfix "=" pattern))
+       ((string-match-p "^{.*}$" pattern)
+        (mapconcat (lambda (ch) (regexp-quote (string ch)))
+                   (substring pattern 1 -1) ".*"))
+       (minibuffer-completing-file-name
+        (substring
+         (eshell-glob-regexp (replace-regexp-in-string " " "*" pattern))
+         2 -2))
+       ((string-match-p "-" pattern)
+        (concat
+         "\\(?:\\`\\|-\\)"
+         (substring (mapconcat
+                     (lambda (str) (concat "-" (regexp-quote str) "\\)"))
+                     (split-string pattern "-" t) ".*")
+                    1)))
+       (t pattern))))
   :custom (regexp-style-converter #'my-regexp-converter))
 
 (use-package orderless
@@ -448,12 +452,15 @@
   (use-package em-glob :commands eshell-glob-regexp)
   (defun glob-for-files (pattern _i _t)
     (when minibuffer-completing-file-name
-      (cons 'orderless-regexp
-            (let ((startp (string-prefix-p "`" pattern))
-                  (endp (string-suffix-p "'" pattern)))
-              (substring (eshell-glob-regexp
-                          (substring pattern (if startp 1 0) (if endp -1 nil)))
-                         (if startp 0 2) (if endp nil -2))))))
+      (cons
+       'orderless-regexp
+       (let ((startp (string-prefix-p "`" pattern))
+             (endp (string-suffix-p "'" pattern)))
+         (substring (eshell-glob-regexp
+                     (substring (replace-regexp-in-string " " "*" pattern)
+                                (if startp 1 0)
+                                (if endp -1 nil)))
+                    (if startp 0 2) (if endp nil -2))))))
   :custom
   (orderless-matching-styles 'orderless-literal)
   (orderless-style-dispatchers '(regexp-if-equals
@@ -463,10 +470,11 @@
                                  flex-if-star)))
 
 (use-package icomplete-vertical
-  ;; :disabled
+  :disabled
   :ensure t
   :bind (:map icomplete-minibuffer-map
-              ("C-v" . icomplete-vertical-toggle)))
+              ("C-v" . icomplete-vertical-toggle))
+  :config (icomplete-vertical-mode))
 
 (use-package live-completions
   :demand t
