@@ -79,16 +79,34 @@ Use as a value for `completion-in-region-function'."
         (insert completion)
         t))))
 
+(defvar minibuffer-completion-table-stack nil)
+
+(defun clear-minibuffer-completion-table-stack ()
+  (setq minibuffer-completion-table-stack nil))
+
+(add-hook 'minibuffer-setup-hook #'clear-minibuffer-completion-table-stack)
+
+(defun unrestrict-to-matches ()
+  "Cancel last restriction to current completion candidates."
+  (interactive)
+  (when minibuffer-completion-table-stack
+    (setq minibuffer-completion-table
+          (pop minibuffer-completion-table-stack))
+    (delete-minibuffer-contents)))
+
 (defun restrict-to-matches ()
   "Restrict to current completion candidates."
   (interactive)
-  (let ((all completion-all-sorted-completions))
+  (let ((all (completion-all-sorted-completions)))
     (when all
+      (push minibuffer-completion-table
+            minibuffer-completion-table-stack)
       (setcdr (last all) nil)
-      (when (or (eq minibuffer-completion-table
-                    #'help--symbol-completion-table)
-                (and (consp minibuffer-completion-table)
-                     (symbolp (car minibuffer-completion-table))))
+      (when ;; are we completing symbols?
+          (or (eq minibuffer-completion-table
+                  #'help--symbol-completion-table)
+              (and (sequencep minibuffer-completion-table)
+                   (symbolp (elt minibuffer-completion-table 0))))
         (setq all (mapcar #'intern all)))
       (if (null (cdr all))
           (minibuffer-complete)
