@@ -397,6 +397,16 @@
          ".*"))
        ((string-fix-p "\\" pattern) (regexp-quote (remfix "\\" pattern)))
        ((string-fix-p "=" pattern) (remfix "=" pattern))
+       ((string-prefix-p "!" pattern)
+        (rx-to-string
+         `(seq
+           (group string-start)
+           (zero-or-more
+            (or ,@(cl-loop for i from 1 below (length pattern)
+                           collect `(seq ,(substring pattern 1 i)
+                                         (or (not ,(aref pattern i))
+                                             string-end)))))
+           string-end)))
        ((string-match-p "^{.*}$" pattern)
         (mapconcat
          (lambda (ch) (concat "\\(" (regexp-quote (string ch)) "\\)"))
