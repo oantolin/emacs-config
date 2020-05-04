@@ -392,7 +392,7 @@
          (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
        ((string-fix-p "." pattern)
         (mapconcat
-         (lambda (ch) (concat "\\<\\(" (regexp-quote (string ch)) "\\)"))
+         (lambda (ch) (rx bow (group (literal (string ch)))))
          (remfix "." pattern)
          ".*"))
        ((string-fix-p "\\" pattern) (regexp-quote (remfix "\\" pattern)))
@@ -409,8 +409,9 @@
            string-end)))
        ((string-match-p "^{.*}$" pattern)
         (mapconcat
-         (lambda (ch) (concat "\\(" (regexp-quote (string ch)) "\\)"))
-         (substring pattern 1 -1) ".*"))
+         (lambda (ch) (rx (group (literal (string ch)))))
+         (substring pattern 1 -1)
+         ".*"))
        (minibuffer-completing-file-name
         (substring
          (eshell-glob-regexp (replace-regexp-in-string " " "*" pattern))
@@ -419,7 +420,7 @@
         (concat
          "\\(?:\\`\\|-\\)"
          (substring (mapconcat
-                     (lambda (str) (concat "-\\(" (regexp-quote str) "\\)"))
+                     (lambda (str) (rx ?- (group (literal str))))
                      (split-string pattern "-" t) ".*")
                     1)))
        (t pattern))))
