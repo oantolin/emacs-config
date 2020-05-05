@@ -566,11 +566,11 @@
 
 (use-package ace-link
   :ensure t
-  :config
-  (ace-link-setup-default)
-  (setq avy-styles-alist nil))
+  :config (ace-link-setup-default)
+  :custom (avy-styles-alist nil))
 
 (use-package goto-addr
+  :bind ("C-c o" . ace-link-addr)
   :hook
   (text-mode . goto-address-mode)
   (prog-mode . goto-address-prog-mode)
@@ -840,7 +840,10 @@
 (use-package email-config) ; private package
 
 (use-package gnus
-  :bind ("C-c g" . gnus)
+  :bind
+  ("C-c g" . gnus)
+  (:map gnus-summary-mode-map (kbd "C-c o") . ace-link-gnus)
+  (:map gnus-article-mode-map (kbd "C-c o") . ace-link-gnus)
   :config
   :custom
   (gnus-ignored-newsgroups
