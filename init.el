@@ -842,8 +842,8 @@
 (use-package gnus
   :bind
   ("C-c g" . gnus)
-  (:map gnus-summary-mode-map (kbd "C-c o") . ace-link-gnus)
-  (:map gnus-article-mode-map (kbd "C-c o") . ace-link-gnus)
+  (:map gnus-summary-mode-map ("C-c o" . ace-link-gnus))
+  (:map gnus-article-mode-map ("C-c o" . ace-link-gnus))
   :config
   :custom
   (gnus-ignored-newsgroups
