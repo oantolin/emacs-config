@@ -404,7 +404,7 @@
        ((string-prefix-p "!" pattern)
         (rx-to-string
          `(seq
-           (group string-start)
+           (group string-start)         ; highlight nothing!
            (zero-or-more
             (or ,@(cl-loop for i from 1 below (length pattern)
                            collect `(seq ,(substring pattern 1 i)
@@ -415,8 +415,8 @@
         (mapconcat
          (lambda (ch) (rx (group (literal (string ch)))))
          (substring pattern 1 -1)
-         ".*"))
-       ((string-match-p "-" pattern)
+         ".*?"))
+       ((string-match-p "-." pattern)
         (concat
          "\\(?:\\`\\|-\\)"
          (substring (mapconcat
@@ -424,14 +424,14 @@
                      (split-string pattern "-" t) ".*")
                     1)))
        (minibuffer-completing-file-name
-        (substring
-         (eshell-glob-regexp (replace-regexp-in-string " " "*" pattern))
-         2 -2))
+        (mapconcat (lambda (str) (rx (group (regexp str))))
+                   (split-string (substring (eshell-glob-regexp pattern) 2 -2))
+         ".*?"))
        ((string-fix-p "." pattern)
         (mapconcat
          (lambda (ch) (rx bow (group (literal (string ch)))))
          (remfix "." pattern)
-         ".*"))
+         ".*?"))
        (t pattern))))
   :custom (regexp-style-converter #'my-regexp-converter))
 
