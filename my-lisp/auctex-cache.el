@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
+(defvar LaTeX-global-class-files)
 (setq LaTeX-global-class-files
   '("prosper" "europecv" "facsimile" "isodoc" "uebungsblatt" "amsbook"
     "amsproc" "amsart" "amsdtx" "amsldoc" "labbook" "ppr-prv"
@@ -35,6 +36,7 @@
     "akktecdoc" "akklecture" "akkscript" "skeyval-testclass"
     "europroc" "movie"))
 
+(defvar TeX-global-input-files)
 (setq TeX-global-input-files
   '(("PPRazure") ("PPRmancini") ("PPRfyma") ("PPRframes")
     ("PPRthomasd") ("PPRalcatel") ("PPRdefault") ("PPRautumn")

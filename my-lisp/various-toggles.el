@@ -6,6 +6,8 @@
   (auto-fill-mode 'toggle)
   (visual-line-mode 'toggle))
 
+(defvar ispell-current-dictionary)
+
 (with-eval-after-load 'ispell
   (defun toggle-ispell-lang ()
     "Toggle ispell dictionary between English and Spanish."

@@ -8,7 +8,8 @@
     (?x . LaTeX-mode)
     (?f . fundamental-mode))
   "List of major modes for temporary buffers and their hotkeys."
-  :type '(alist :key-type character :value-type symbol))
+  :type '(alist :key-type character :value-type symbol)
+  :group 'tmp-buffer)
 
 (defun tmp-buffer (spec)
   "Open temporary buffer in specified major mode."

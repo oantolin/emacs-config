@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
+(declare-function org-edit-src-code 'org-src)
+(declare-function org-edit-src-exit 'org-src)
+(declare-function TeX-narrow-to-group 'tex)
+(declare-function LaTeX-narrow-to-environment 'latex)
+
 (defun narrow-or-widen-dwim (p)
   "Widen if buffer is narrowed, narrow-dwim otherwise.
 Dwim means: region, org-src-block, org-subtree, or defun,
@@ -11,7 +16,7 @@ already narrowed."
   (interactive "P")
   (declare (interactive-only))
   (cond ((and (buffer-narrowed-p) (not p)) (widen))
-	((and (boundp 'org-src-mode) org-src-mode (not p))
+	((and (bound-and-true-p org-src-mode) (not p))
 	 (org-edit-src-exit))
 	((region-active-p)
          (narrow-to-region (region-beginning) (region-end)))
