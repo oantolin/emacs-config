@@ -107,15 +107,6 @@ By default align all matches, with universal prefix align only first match."
   (goto-char (point-min))
   (forward-line (random (count-lines (point-min) (point-max)))))
 
-;; From Stefan Monier (https://emacs.stackexchange.com/a/8177/2221)
-(defun ordered-completion-table (completions)
-  "Make a completion table that maintains the entries in the given order."
-  (lambda (string pred action)
-    (if (eq action 'metadata)
-        '(metadata (display-sort-function . identity)
-                   (cycle-sort-function . identity))
-      (complete-with-action action completions string pred))))
-
 (defun completing-yank ()
   "Insert item from kill-ring, selected with completion."
   (interactive)
@@ -123,10 +114,10 @@ By default align all matches, with universal prefix align only first match."
     (let ((inhibit-read-only t))
       (delete-region (point) (mark t))))
   (live-completions-do
-      (:columns 'single
+      (:columns 'single :sort 'nil
        :separator (concat "\n" (make-string (1- (window-width)) ?—) "\n"))
     (insert-for-yank
-     (completing-read "Yank: " (ordered-completion-table kill-ring) nil t))))
+     (completing-read "Yank: " kill-ring nil t))))
 
 (defun goto-matching-line ()
   "Go to matching line selected with completion."
@@ -141,9 +132,8 @@ By default align all matches, with universal prefix align only first match."
     (goto-char
      (cdr
       (assoc
-       (live-completions-do (:columns 'single)
-         (completing-read
-          "Goto line: " (ordered-completion-table lines) nil t))
+       (live-completions-do (:columns 'single :sort 'nil)
+         (completing-read "Goto line: " lines nil t))
        lines)))))
 
 (defun pipe-region (start end command)
