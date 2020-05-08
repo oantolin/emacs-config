@@ -31,23 +31,25 @@
 (eval-when-compile (require 'subr-x))
 
 ;; bind this in minibuffer-local-map
-(defun insert-minibuffer-contents ()
-  "Insert minibuffer contents in previously selected buffer and exit."
-  (interactive)
+(defun insert-minibuffer-contents (arg)
+  "Insert minibuffer contents in previously selected buffer and exit.
+With a prefix ARG do not exit minibuffer"
+  (interactive "P")
   (minibuffer-force-complete)
   (let ((contents (minibuffer-contents)))
     (with-minibuffer-selected-window
       (when (use-region-p)
         (delete-region (region-beginning) (region-end)))
       (insert contents)))
-  (abort-recursive-edit))
+  (unless arg (abort-recursive-edit)))
 
-(defun exit-minibuffer-save-contents ()
-  "Exit minibuffer saving contents on the kill-ring."
+(defun exit-minibuffer-save-contents (arg)
+  "Exit minibuffer saving contents on the kill-ring.
+With prefix ARG do not exit minibuffer."
   (interactive)
   (minibuffer-force-complete)
   (kill-new (minibuffer-contents))
-  (abort-recursive-edit))
+  (unless arg (abort-recursive-edit)))
 
 (defun insert-region-in-minibuffer ()
   "Insert the active region in the minibuffer."
@@ -70,6 +72,7 @@
 (defun schedule-for-next-minibuffer ()
   "Schedule insertion minibuffer contents at next minibuffer prompt."
   (interactive)
+  (minibuffer-force-complete)
   (setq scheduled-minibuffer-insertion (minibuffer-contents))
   (abort-recursive-edit))
 
