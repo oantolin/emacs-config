@@ -401,13 +401,10 @@ If EVENT, use EVENT’s position to determine the starting position."
          (lambda (ch) (rx (group (literal (string ch)))))
          (substring pattern 1 -1)
          ".*?"))
-       ((string-match-p ".-\\|-." pattern)
-        (concat
-         "\\(?:\\`\\|-\\)"
-         (substring (mapconcat
-                     (lambda (str) (rx ?- (group (literal str))))
-                     (split-string pattern "-" t) ".*")
-                    1)))
+       ((string-match-p ".[/-]\\|[/-]." pattern)
+        (mapconcat
+         (lambda (str) (rx  (group (literal str))))
+         (split-string pattern "\\>" t) ".*"))
        (minibuffer-completing-file-name
         (mapconcat (lambda (str) (rx (group (regexp str))))
                    (split-string (substring (eshell-glob-regexp pattern) 2 -2))
