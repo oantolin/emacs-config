@@ -349,10 +349,13 @@ If EVENT, use EVENT’s position to determine the starting position."
         ("<C-backspace>" . up-directory)
         ("C-c C-d" . cd-bookmark))
   (:map minibuffer-local-map
-        ("M-m i" . insert-minibuffer-contents)
-        ("M-m w" . exit-minibuffer-save-contents)
-        ("M-m r" . insert-region-in-minibuffer)
-        ("M-m s" . schedule-for-next-minibuffer))
+        :prefix "M-m"
+        :prefix-map minibuffer-ops-map
+        :prefix-docstring "Keymap for common minibuffer operations" 
+        ("i" . insert-minibuffer-contents)
+        ("w" . exit-minibuffer-save-contents)
+        ("r" . insert-region-in-minibuffer)
+        ("s" . schedule-for-next-minibuffer))
   :commands completing-read-in-region
   :custom
   (completion-in-region-function #'completing-read-in-region))
