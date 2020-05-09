@@ -322,7 +322,8 @@ If EVENT, use EVENT’s position to determine the starting position."
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
-        ("<tab>" . minibuffer-force-complete)
+        ("TAB" . minibuffer-force-complete)
+        ("<backtab>" . minibuffer-complete)
         ("M-RET" . exit-minibuffer)
         ("C-j" . minibuffer-force-complete-and-exit)
         ("SPC") ("?"))
@@ -428,7 +429,7 @@ If EVENT, use EVENT’s position to determine the starting position."
 
 (use-package avy-completion
   :bind (:map minibuffer-local-completion-map
-              ("C-'" . avy-completion)))
+              ("M-'" . avy-completion)))
 
 (use-package gobble-whitespace
   :config (global-gobble-whitespace-mode))
@@ -480,7 +481,7 @@ If EVENT, use EVENT’s position to determine the starting position."
    ("M-i" . avy-goto-char-timer)
    ([remap goto-line] . avy-goto-line))
   (:map isearch-mode-map
-        ("C-'" . avy-isearch)))
+        ("M-'" . avy-isearch)))
 
 (use-package ace-link
   :ensure t
