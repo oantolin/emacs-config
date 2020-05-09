@@ -47,7 +47,7 @@
     (term . term-mode-map)
     (term . term-raw-map)
     (comint . comint-mode-map)
-    (sly . sly-mrepl-mode-map))
+    (slime-repl . slime-repl-mode-map))
   "Alist of (mode . keymap) pairs where M-r should insert history items."
   :type '(list (cons symbol symbol))
   :group 'completing-history)
