@@ -405,7 +405,8 @@ If EVENT, use EVENT’s position to determine the starting position."
         (mapconcat
          (lambda (str) (rx  (group (literal str))))
          (split-string pattern "\\>" t) ".*"))
-       (minibuffer-completing-file-name
+       ((or minibuffer-completing-file-name
+            (eq major-mode 'eshell-mode))
         (mapconcat (lambda (str) (rx (group (regexp str))))
                    (split-string (substring (eshell-glob-regexp pattern) 2 -2))
          ".*?"))
