@@ -25,20 +25,6 @@
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
 
-(let ((light 'modus-operandi) (dark 'modus-vivendi))
-  (defun toggle-my-theme ()
-    "Toggle between a light and dark theme."
-    (interactive)
-    (let* ((lightp (memq light custom-enabled-themes))
-           (this (if lightp light dark))
-           (that (if lightp dark light)))
-      (disable-theme this)
-      (enable-theme that))
-    (when (bound-and-true-p icomplete-vertical-mode)
-      (icomplete-vertical-mode))
-    (when (eq major-mode 'org-mode)
-      (org-mode-restart))))
-
 ;;; package.el & use-package setup
 
 (custom-set-variables
@@ -293,7 +279,8 @@
   :bind
   (:map toggle-map
         ("w" . toggle-wrapping)
-        ("l" . toggle-ispell-lang)))
+        ("l" . toggle-ispell-lang)
+        ("b" . toggle-my-theme)))
 
 (use-package window-extras
   :bind
