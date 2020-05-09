@@ -626,8 +626,7 @@ If EVENT, use EVENT’s position to determine the starting position."
   eshell/in-term eshell/for-each interactive-cd)
 
 (use-package eshell
-  :bind
-  ("C-!" . eshell)
+  :bind ("C-!" . eshell)
   :config (setenv "PAGER" "cat"))
 
 (use-package esh-mode
@@ -635,6 +634,10 @@ If EVENT, use EVENT’s position to determine the starting position."
               ("<home>" . eshell-bol)
               ("C-c d" . interactive-cd)
               ("M-q" . quit-window)))
+
+(use-package em-hist
+  :defer t
+  :custom (eshell-hist-ignoredups t))
 
 (use-package shell
   :bind (:map shell-mode-map

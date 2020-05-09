@@ -1,0 +1,2 @@
+alias xx for-each open-externally $*
+alias ff for-each find-file $*

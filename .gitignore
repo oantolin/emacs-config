@@ -11,7 +11,7 @@ tramp
 /network-security.data
 /session.*
 /garbage.el
-/eshell/
+/eshell/*
 !/eshell/alias
 /games/
 /speed-type/
