@@ -325,8 +325,6 @@ If EVENT, use EVENT’s position to determine the starting position."
         ("<tab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("C-j" . minibuffer-force-complete-and-exit)
-        ("<down>" . switch-to-completions)
-        ("<right>" . switch-to-completions)
         ("SPC") ("?"))
   (:map minibuffer-local-must-match-map
         ("C-j" . minibuffer-force-complete-and-exit))
