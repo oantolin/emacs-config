@@ -43,8 +43,11 @@
  '(use-package-enable-imenu-support t))
 
 (eval-when-compile (require 'use-package))
-(use-package gcmh :ensure t :config (gcmh-mode))
+
 (use-package diminish :ensure t)
+
+(use-package gcmh :ensure t :diminish :config (gcmh-mode))
+
 (use-package bind-key
   :bind ("C-h y" . describe-personal-keybindings))
 
