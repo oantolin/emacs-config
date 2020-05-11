@@ -32,6 +32,7 @@
 (use-package orderless
   :ensure t
   :defer t
+  :bind (:map minibuffer-local-completion-map ("SPC"))
   :config
   (defun flex-if-star (pattern _i _t)
     (when (string-prefix-p "*" pattern)
