@@ -267,7 +267,9 @@
   :bind
   (:map toggle-map
         ("m" . math-delimiters-toggle))
-  :commands no-dollars math-delimiters-insert)
+  :commands
+  math-delimters-no-dollars
+  math-delimiters-insert)
 
 (use-package block-undo)
 
