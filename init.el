@@ -554,7 +554,7 @@ If EVENT, use EVENT’s position to determine the starting position."
     (modify-syntax-entry ?\\ "'" LaTeX-mode-syntax-table))
   (dolist (p `((,(executable-find "SumatraPDF") "SumatraPDF")
                (,(executable-find "zathura") "Zathura")
-               (,(featurep 'pdf-tools) "PDF Tools")))
+               (t "PDF Tools")))
     (when (car p)
       (setcdr (assq 'output-pdf TeX-view-program-selection)
               (cdr p)))))
