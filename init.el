@@ -266,7 +266,7 @@
   (:map toggle-map
         ("m" . math-delimiters-toggle))
   :commands
-  math-delimters-no-dollars
+  math-delimiters-no-dollars
   math-delimiters-insert)
 
 (use-package block-undo)
