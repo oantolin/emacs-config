@@ -371,9 +371,9 @@ If EVENT, use EVENT’s position to determine the starting position."
                 (substring v (if pre 1 0) (if pre nil -1)))))
     (defun my-regexp-converter (pattern)
       (cond
-       ((string-prefix-p "`" pattern)
+       ((string-match-p "^[`^]" pattern)
         (concat "\\`" (my-regexp-converter (substring pattern 1))))
-       ((string-suffix-p "'" pattern)
+       ((string-match-p "[$']$" pattern)
         (concat
          (my-regexp-converter (substring pattern 0 -1))
          (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
