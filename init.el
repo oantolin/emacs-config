@@ -552,12 +552,8 @@ If EVENT, use EVENT’s position to determine the starting position."
         (buffer-substring beg (point)))))
   (defun fix-LaTeX-minor-annoyances ()
     (modify-syntax-entry ?\\ "'" LaTeX-mode-syntax-table))
-  (dolist (p `((,(executable-find "SumatraPDF") "SumatraPDF")
-               (,(executable-find "zathura") "Zathura")
-               (t "PDF Tools")))
-    (when (car p)
-      (setcdr (assq 'output-pdf TeX-view-program-selection)
-              (cdr p)))))
+  (setcdr (assq 'output-pdf TeX-view-program-selection)
+          '("PDF Tools")))
 
 (use-package cdlatex
   :ensure t
