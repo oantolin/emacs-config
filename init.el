@@ -363,7 +363,6 @@ If EVENT, use EVENT’s position to determine the starting position."
 (use-package regexpect
   :demand t
   :config
-  (use-package em-glob :commands eshell-glob-regexp)
   (cl-flet ((string-fix-p (u v)
               (or (string-prefix-p u v) (string-suffix-p u v)))
             (remfix (u v)
@@ -401,7 +400,7 @@ If EVENT, use EVENT’s position to determine the starting position."
        ((or minibuffer-completing-file-name
             (eq major-mode 'eshell-mode))
         (mapconcat (lambda (str) (rx (group (regexp str))))
-                   (split-string (substring (eshell-glob-regexp pattern) 2 -2))
+                   (split-string (substring (wildcard-to-regexp pattern) 2 -2))
          ".*?"))
        ((string-fix-p "." pattern)
         (mapconcat
