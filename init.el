@@ -525,9 +525,16 @@ If EVENT, use EVENT’s position to determine the starting position."
 
 (use-package latex
   :ensure auctex
-  :bind (:map LaTeX-mode-map
-              ("$" . math-delimiters-insert)
-              ("C-'" . TeX-font))
+  :bind
+  (:map LaTeX-mode-map
+        ("$" . math-delimiters-insert)
+        ("C-'" . TeX-font)
+        ([remap next-error])
+        ([remap previous-error])
+        ("M-g M-n" . TeX-next-error)
+        ("M-g M-p" . TeX-previous-error)
+        ("M-n" . next-error)
+        ("M-p" . previous-error))
   :custom
   (TeX-save-query nil)
   (TeX-source-correlate-mode t)
