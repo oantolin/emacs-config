@@ -4,19 +4,22 @@
   "Exit search at the beginning of the current match."
   (interactive)
   (isearch-exit)
-  (goto-char (min (point) isearch-other-end)))
+  (when isearch-forward (goto-char isearch-other-end)))
 
-(defun isearch-save-and-exit ()
-  "Exit search and save text from initial location to beginning of
-current match in the kill ring."
+(defun isearch-exit-at-end ()
+  "Exit search at the end of the current match."
   (interactive)
-  (isearch-exit-at-start)
-  (kill-ring-save (mark) (point)))
+  (isearch-exit)
+  (unless isearch-forward (goto-char isearch-other-end)))
 
-(defun isearch-kill-and-exit ()
-  "Exit search and kill from initial location to beginning of current match."
+(defun isearch-delete-wrong ()
+  "Revert to previous successful search."
   (interactive)
-  (isearch-exit-at-start)
-  (kill-region (mark) (point)))
+  (if (string= isearch-string "")
+      (ding)
+    (isearch-pop-state)
+    (while (or (not isearch-success) isearch-error)
+      (isearch-pop-state)))
+  (isearch-update))
 
 (provide 'isearch-extras)

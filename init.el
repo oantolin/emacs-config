@@ -255,9 +255,10 @@
 (use-package isearch-extras
   :bind
   (:map isearch-mode-map
-        ("<S-return>" . isearch-exit-at-start)
-        ("<C-return>" . isearch-kill-and-exit)
-        ("<M-return>" . isearch-save-and-exit)))
+        ([remap isearch-exit] . isearch-exit-at-start)
+        ("M-RET" . isearch-exit-at-end)
+        ([remap isearch-abort] . isearch-cancel)
+        ([remap isearch-delete-char] . isearch-delete-wrong)))
 
 (use-package math-delimiters
   :load-path "~/my-elisp-packages/math-delimiters"
