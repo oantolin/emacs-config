@@ -70,7 +70,7 @@ With prefix ARG do not exit minibuffer."
 (add-hook 'minibuffer-setup-hook #'insert-scheduled-minibuffer-text)
 
 (defun schedule-for-next-minibuffer ()
-  "Schedule insertion minibuffer contents at next minibuffer prompt."
+  "Schedule insertion of first completion at next minibuffer prompt."
   (interactive)
   (minibuffer-force-complete)
   (setq scheduled-minibuffer-insertion (minibuffer-contents))
