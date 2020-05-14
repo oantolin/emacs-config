@@ -321,8 +321,6 @@ If EVENT, use EVENT’s position to determine the starting position."
   (:map minibuffer-local-must-match-map
         ("C-j" . minibuffer-force-complete-and-exit))
   :custom
-  (completion-auto-help nil)
-  (completion-show-help nil)
   (completion-styles '(regexpect))
   (completion-category-defaults nil)
   (read-file-name-completion-ignore-case t)
