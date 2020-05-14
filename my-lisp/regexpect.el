@@ -10,15 +10,18 @@
   :group 'regexpect)
 
 (defun regexpect--internal (string table &optional pred)
-  (condition-case nil
-      (save-match-data
-        (let* ((limit (car (completion-boundaries string table pred "")))
-               (prefix (substring string 0 limit))
-               (pattern (substring string limit))
-               (regexp (funcall regexpect-converter pattern))
-               (completion-regexp-list (list regexp)))
-          (list (all-completions prefix table pred) regexp prefix)))
-    (invalid-regexp nil)))
+  (save-match-data
+    (let* ((limit (car (completion-boundaries string table pred "")))
+           (prefix (substring string 0 limit))
+           (pattern (substring string limit))
+           (regexp (funcall regexpect-converter pattern))
+           (completion-regexp-list (list regexp)))
+      (list
+       (condition-case nil
+           (all-completions prefix table pred)
+         (invalid-regexp nil))
+       regexp
+       prefix))))
 
 (defun regexpect-all-completions (string table pred _point)
   "Convert STRING to a regexp and find entries TABLE matching it all.
