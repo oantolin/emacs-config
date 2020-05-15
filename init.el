@@ -252,7 +252,10 @@
   ("C-S-n" . placeholder-forward)
   ("C-S-p" . placeholder-backward))
 
-(use-package isearch-extras
+(use-package isearch-extras 
+  :custom
+  (search-whitespace-regexp ".*?")
+  (isearch-allow-scroll t)
   :bind
   (:map isearch-mode-map
         ("<S-return>" . isearch-exit-at-end)
