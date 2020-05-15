@@ -320,6 +320,7 @@ If EVENT, use EVENT’s position to determine the starting position."
         ("TAB" . minibuffer-force-complete)
         ("<backtab>" . minibuffer-complete)
         ("M-RET" . exit-minibuffer)
+        ("C-?" . minibuffer-completion-help)
         ("SPC") ("?"))
   :custom
   (completion-styles '(regexpect))
@@ -339,6 +340,9 @@ If EVENT, use EVENT’s position to determine the starting position."
   (:map minibuffer-local-filename-completion-map
         ("<C-backspace>" . up-directory)
         ("C-c C-d" . cd-bookmark))
+  (:map minibuffer-local-completion-map
+        ("<down>" . switch-to-completions)
+        ("<right>" . right-char-or-completions))
   (:map minibuffer-local-map
         :prefix "M-m"
         :prefix-map minibuffer-actions-map

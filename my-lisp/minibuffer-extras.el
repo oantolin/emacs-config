@@ -1,5 +1,14 @@
 ;;; -*- lexical-binding: t; -*-
 
+;;; switching to completions
+
+(defun right-char-or-completions ()
+  "Move to right if possible, otherwise switch to completions buffer."
+  (interactive)
+  (if (= (point) (point-max))
+      (switch-to-completions)
+    (right-char)))
+
 ;;; tools for navigating the file system in the minibuffer
 ;;; bind in minibuffer-local-filename-map
 
