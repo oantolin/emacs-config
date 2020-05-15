@@ -2,14 +2,15 @@
 
 (defun isearch-exit-at-start ()
   "Exit search at the beginning of the current match."
-  (interactive)
-  (isearch-exit)
-  (when isearch-forward (goto-char isearch-other-end)))
+  (unless (or isearch-mode-end-hook-quit
+              (not isearch-forward))
+    (goto-char isearch-other-end)))
 
 (defun isearch-exit-at-end ()
   "Exit search at the end of the current match."
   (interactive)
-  (isearch-exit)
+  (let ((isearch-other-end (point)))
+    (isearch-exit))
   (unless isearch-forward (goto-char isearch-other-end)))
 
 (defun isearch-delete-wrong ()
