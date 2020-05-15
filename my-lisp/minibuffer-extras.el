@@ -80,6 +80,7 @@ refer to the first completion."
 
 (defun insert-scheduled-minibuffer-text ()
   (when scheduled-minibuffer-insertion
+    (delete-minibuffer-contents)
     (insert scheduled-minibuffer-insertion)
     (setq scheduled-minibuffer-insertion nil)))
 
