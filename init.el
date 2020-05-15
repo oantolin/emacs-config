@@ -340,7 +340,7 @@ If EVENT, use EVENT’s position to determine the starting position."
         ("C-c C-d" . cd-bookmark))
   (:map minibuffer-local-map
         :prefix "M-m"
-        :prefix-map minibuffer-ops-map
+        :prefix-map minibuffer-actions-map
         :prefix-docstring "Keymap for common minibuffer operations" 
         ("i" . insert-minibuffer-contents)
         ("w" . exit-minibuffer-save-contents)

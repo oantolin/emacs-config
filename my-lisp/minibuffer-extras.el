@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
-;; bind these in minibuffer-local-filename-map
+;;; tools for navigating the file system in the minibuffer
+;;; bind in minibuffer-local-filename-map
+
 (defun up-directory (arg)
   "Move up a directory (delete backwards to /)."
   (interactive "p")
@@ -28,28 +30,39 @@
     (delete-region (minibuffer-prompt-end) (point-max)))
   (insert (cdr (assoc bm (cdb--bookmarked-directories)))))
 
-(eval-when-compile (require 'subr-x))
+;;; acting on the first completion
+;;; bind in minibuffer-local-completion-map
 
-;; bind this in minibuffer-local-map
-(defun insert-minibuffer-contents (arg)
-  "Insert minibuffer contents in previously selected buffer and exit.
-With a prefix ARG do not exit minibuffer"
-  (interactive "P")
-  (minibuffer-force-complete)
-  (let ((contents (minibuffer-contents)))
-    (with-minibuffer-selected-window
-      (when (use-region-p)
-        (delete-region (region-beginning) (region-end)))
-      (insert contents)))
-  (unless arg (abort-recursive-edit)))
+(defmacro define-completion-action (name docstring &rest body)
+  "Define a command that acts on the first minibuffer completion.
+The defined command will exit the minibuffer unless provided with
+a prefix argument. The BODY can use the variable `completion' to
+refer to the first completion."
+  (declare (indent defun))
+  (let ((old (make-symbol "old"))
+        (arg (make-symbol "arg")))
+    `(defun ,name (,arg)
+       ,(concat docstring "\nWith prefix ARG do not exit minibuffer.")
+       (interactive "P")
+       (let ((,old (minibuffer-contents)))
+         (minibuffer-force-complete nil nil t)
+         (let ((completion (minibuffer-contents)))
+           ,@body)
+         (if (null ,arg)
+             (abort-recursive-edit)
+           (delete-minibuffer-contents)
+           (insert ,old))))))
 
-(defun exit-minibuffer-save-contents (arg)
-  "Exit minibuffer saving contents on the kill-ring.
-With prefix ARG do not exit minibuffer."
-  (interactive)
-  (minibuffer-force-complete)
-  (kill-new (minibuffer-contents))
-  (unless arg (abort-recursive-edit)))
+(define-completion-action insert-minibuffer-contents
+  "Insert minibuffer contents in previously selected buffer and exit."
+  (with-minibuffer-selected-window
+    (when (use-region-p)
+      (delete-region (region-beginning) (region-end)))
+    (insert completion)))
+
+(define-completion-action exit-minibuffer-save-contents
+  "Exit minibuffer saving contents on the kill-ring."
+  (kill-new completion))
 
 (defun insert-region-in-minibuffer ()
   "Insert the active region in the minibuffer."
@@ -61,6 +74,9 @@ With prefix ARG do not exit minibuffer."
        (user-error "No active region")))))
 
 (defvar scheduled-minibuffer-insertion nil)
+(define-completion-action schedule-for-next-minibuffer
+  "Schedule insertion of first completion at next minibuffer prompt."
+  (setq scheduled-minibuffer-insertion completion))
 
 (defun insert-scheduled-minibuffer-text ()
   (when scheduled-minibuffer-insertion
@@ -69,12 +85,8 @@ With prefix ARG do not exit minibuffer."
 
 (add-hook 'minibuffer-setup-hook #'insert-scheduled-minibuffer-text)
 
-(defun schedule-for-next-minibuffer ()
-  "Schedule insertion of first completion at next minibuffer prompt."
-  (interactive)
-  (minibuffer-force-complete)
-  (setq scheduled-minibuffer-insertion (minibuffer-contents))
-  (abort-recursive-edit))
+;;; use minibuffer for in-buffer completion
+;;; set as completion-in-region-function
 
 (defun completing-read-in-region (start end collection &optional predicate)
   "Prompt for completion of region in the minibuffer if non-unique.
