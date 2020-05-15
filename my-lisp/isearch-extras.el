@@ -3,6 +3,7 @@
 (defun isearch-exit-at-start ()
   "Exit search at the beginning of the current match."
   (unless (or isearch-mode-end-hook-quit
+              isearch-suspended
               (not isearch-forward))
     (goto-char isearch-other-end)))
 
