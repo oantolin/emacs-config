@@ -39,65 +39,6 @@
     (delete-region (minibuffer-prompt-end) (point-max)))
   (insert (cdr (assoc bm (cdb--bookmarked-directories)))))
 
-;;; acting on the first completion
-;;; bind in minibuffer-local-completion-map
-
-(defmacro define-completion-action (name after docstring &rest body)
-  "Define a command that acts on the first minibuffer completion.
-If AFTER is `:exit', the defined command will exit the minibuffer
-unless provided with a prefix argument. If AFTER is `:continue',
-the reverse is true. The BODY can use the variable `completion'
-to refer to the first completion."
-  (declare (indent defun))
-  (let ((old (make-symbol "old"))
-        (arg (make-symbol "arg")))
-    `(defun ,name (,arg)
-       ,(concat docstring
-                (format "\nWith prefix ARG%s exit minibuffer."
-                        (if (eq after :exit) " do not" "")))
-       (interactive "P")
-       (let ((,old (minibuffer-contents)))
-         (minibuffer-force-complete nil nil t)
-         (let ((completion (minibuffer-contents)))
-           ,@body)
-         (if ,(if (eq after :exit) `(null ,arg) arg)
-             (abort-recursive-edit)
-           (delete-minibuffer-contents)
-           (insert ,old))))))
-
-(define-completion-action insert-minibuffer-contents :exit
-  "Insert minibuffer contents in previously selected buffer and exit."
-  (with-minibuffer-selected-window
-    (when (use-region-p)
-      (delete-region (region-beginning) (region-end)))
-    (insert completion)))
-
-(define-completion-action exit-minibuffer-save-contents :exit
-  "Exit minibuffer saving contents on the kill-ring."
-  (kill-new completion))
-
-(defun insert-region-in-minibuffer ()
-  "Insert the active region in the minibuffer."
-  (interactive)
-  (insert
-   (with-minibuffer-selected-window
-     (if (use-region-p)
-         (buffer-substring (region-beginning) (region-end))
-       (user-error "No active region")))))
-
-(defvar scheduled-minibuffer-insertion nil)
-(define-completion-action schedule-for-next-minibuffer :continue
-  "Schedule insertion of first completion at next minibuffer prompt."
-  (setq scheduled-minibuffer-insertion completion))
-
-(defun insert-scheduled-minibuffer-text ()
-  (when scheduled-minibuffer-insertion
-    (delete-minibuffer-contents)
-    (insert scheduled-minibuffer-insertion)
-    (setq scheduled-minibuffer-insertion nil)))
-
-(add-hook 'minibuffer-setup-hook #'insert-scheduled-minibuffer-text)
-
 ;;; use minibuffer for in-buffer completion
 ;;; set as completion-in-region-function
 

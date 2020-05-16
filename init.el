@@ -343,17 +343,17 @@ If EVENT, use EVENT’s position to determine the starting position."
   (:map minibuffer-local-completion-map
         ("<down>" . switch-to-completions)
         ("<right>" . right-char-or-completions))
-  (:map minibuffer-local-map
-        :prefix "M-m"
-        :prefix-map minibuffer-actions-map
-        :prefix-docstring "Keymap for common minibuffer operations" 
-        ("i" . insert-minibuffer-contents)
-        ("w" . exit-minibuffer-save-contents)
-        ("r" . insert-region-in-minibuffer)
-        ("s" . schedule-for-next-minibuffer))
   :commands completing-read-in-region
   :custom
   (completion-in-region-function #'completing-read-in-region))
+
+(use-package embark
+  :load-path "~/my-elisp-packages/embark"
+  :bind
+  (:map minibuffer-local-completion-map
+        ("C-;" . embark-act))
+  (:map completion-list-mode-map
+        ("C-;" . embark-act)))
 
 (use-package restricto
   :demand t
