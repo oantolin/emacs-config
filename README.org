@@ -24,6 +24,9 @@ and [[https://github.com/oantolin/orderless][orderless]] to do out-of-order rege
 with the combination. (Both actually started as packages I wrote for
 people on r/emacs and now I use them all the time!)
 
+*Update*: I'm restless! I'm now using three other packages I wrote:
+[[https://github.com/oantolin/live-completions][live-completions]], [[https://github.com/oantolin/emacs-config/blob/master/my-lisp/regexpect.el][regexpect]] and [[https://github.com/oantolin/embark][embark]]. :P
+
 * Themes
 
 For many years I kept trying Emacs themes and always went back to the
@@ -52,3 +55,5 @@ separate packages. So far that is:
 - [[https://github.com/oantolin/placeholder][placeholder]]
 - [[https://github.com/oantolin/epithet][epithet]]
 - [[https://github.com/oantolin/restricto][restricto]]
+- [[https://github.com/oantolin/embark][embark]]
+- [[https://github.com/oantolin/live-completions][live-completions]]
