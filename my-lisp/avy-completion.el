@@ -49,9 +49,10 @@
                                         (?w . avy-action-save)
                                         (?m . avy-action-goto))))
               (avy-process
-               (cl-loop initially (goto-char (point-min))
-                        do (next-completion 1) until (eobp)
-                        collect (cons (point) wnd))))))
+               (save-excursion
+                 (cl-loop initially (goto-char (point-min))
+                          do (next-completion 1) until (eobp)
+                          collect (cons (point) wnd)))))))
       (user-error "No *Completions* windows"))))
 
 (provide 'avy-completion)

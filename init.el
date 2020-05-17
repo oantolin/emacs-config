@@ -351,9 +351,9 @@ If EVENT, use EVENT’s position to determine the starting position."
   :load-path "~/my-elisp-packages/embark"
   :bind
   (:map minibuffer-local-completion-map
-        ("C-;" . embark-act))
+        ("M-;" . embark-act))
   (:map completion-list-mode-map
-        ("C-;" . embark-act)))
+        ("M-;" . embark-act)))
 
 (use-package restricto
   :demand t
@@ -422,8 +422,11 @@ If EVENT, use EVENT’s position to determine the starting position."
   :config (live-completions-mode))
 
 (use-package avy-completion
-  :bind (:map minibuffer-local-completion-map
-              ("M-'" . avy-completion)))
+  :bind
+  (:map minibuffer-local-completion-map
+        ("M-'" . avy-completion))
+  (:map completion-list-mode-map
+        ("M-'" . avy-completion)))
 
 (use-package gobble-whitespace
   :config (global-gobble-whitespace-mode))
