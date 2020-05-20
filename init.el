@@ -618,7 +618,8 @@ If EVENT, use EVENT’s position to determine the starting position."
 
 (use-package dired
   :bind (:map dired-mode-map
-              ("e" . dired-open-externally))
+              ("e" . dired-toggle-read-only)
+              ("E" . dired-open-externally))
   :custom
   (dired-dwim-target t)
   :hook
