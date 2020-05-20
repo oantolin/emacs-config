@@ -395,21 +395,21 @@ If EVENT, use EVENT’s position to determine the starting position."
            string-end)))
        ((string-match-p "^{.*}$" pattern)
         (mapconcat
-         (lambda (ch) (rx (group (literal (string ch)))))
+         (lambda (ch) (format "\\<\\(%c\\)" ch))
          (substring pattern 1 -1)
          ".*?"))
-       ((string-match-p ".[/-]\\|[/-]." pattern)
+       ((string-match-p ".-\\|-." pattern)
         (mapconcat
-         (lambda (str) (rx  (group (literal str))))
+         (lambda (str) (format "\\(%s\\)" (regexp-quote str)))
          (split-string pattern "\\>" t) ".*"))
        ((or minibuffer-completing-file-name
             (eq major-mode 'eshell-mode))
-        (mapconcat (lambda (str) (rx (group (regexp str))))
+        (mapconcat (lambda (str) (format "\\(%s\\)" str))
                    (split-string (substring (eshell-glob-regexp pattern) 2 -2))
          ".*?"))
        ((string-fix-p "." pattern)
         (mapconcat
-         (lambda (ch) (rx bow (group (literal (string ch)))))
+         (lambda (ch) (format "\\<\\(%c\\)" ch))
          (remfix "." pattern)
          ".*?"))
        (t pattern))))
@@ -514,8 +514,6 @@ If EVENT, use EVENT’s position to determine the starting position."
 (use-package occur
   :defer t
   :hook (occur-mode . force-truncate-lines))
-
-(use-package package-lint :ensure t :defer t)
 
 (use-package restart-emacs :ensure t :defer t)
 
