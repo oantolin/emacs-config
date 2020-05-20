@@ -9,7 +9,7 @@
               ("C-n" . icomplete-forward-completions)
 	      ("<up>" . icomplete-backward-completions)
 	      ("C-p" . icomplete-backward-completions)
-              ("TAB" . icomplete-force-complete)
+              ("TAB" . minibuffer-force-complete)
               ("C-M-i" . minibuffer-complete)
               ("M-RET" . exit-minibuffer))
   :hook
@@ -21,13 +21,15 @@
   (icomplete-hide-common-prefix nil)
   :config
   (advice-add 'icomplete-vertical-minibuffer-teardown
-              :after #'visual-line-mode)
-  (unless (fboundp 'icomplete-force-complete)
-    (defun icomplete-force-complete ()
-      "Complete the icomplete minibuffer."
-      (interactive)
-      ;; We're not at all interested in cycling here (bug#34077).
-      (minibuffer-force-complete nil nil 'dont-cycle))))
+              :after #'visual-line-mode))
+
+(use-package icomplete-vertical
+  :ensure t
+  :demand t
+  ;; :load-path "~/my-elisp-packages/icomplete-vertical"
+  :bind (:map icomplete-minibuffer-map
+              ("C-v" . icomplete-vertical-toggle))
+  :config (icomplete-vertical-mode))
 
 (use-package orderless
   :ensure t
@@ -85,11 +87,3 @@
                                  glob-for-files
                                  not-containing
                                  flex-if-star)))
-
-(use-package icomplete-vertical
-  ;; :ensure t
-  :demand t
-  :load-path "~/my-elisp-packages/icomplete-vertical"
-  :bind (:map icomplete-minibuffer-map
-              ("C-v" . icomplete-vertical-toggle))
-  :config (icomplete-vertical-mode))
