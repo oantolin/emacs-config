@@ -862,14 +862,6 @@ If EVENT, use EVENT’s position to determine the starting position."
     (term-mode)
     (term-char-mode)))
 
-(use-package haskell-mode
-  :ensure t
-  :defer t
-  :hook
-  capitalized-words-mode
-  turn-on-haskell-indentation
-  interactive-haskell-mode)
-
 (when (executable-find "sage")
   (defun sage-notebook ()
     "Start a Sage notebook. This makes a buffer to communicate with
