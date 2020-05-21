@@ -352,7 +352,8 @@ If EVENT, use EVENT’s position to determine the starting position."
   :load-path "~/my-elisp-packages/embark"
   :bind
   (:map minibuffer-local-completion-map
-        ("M-;" . embark-act))
+        ("M-;" . embark-act)
+        ("M-." . embark-exit-and-act))
   (:map completion-list-mode-map
         ("M-;" . embark-act)))
 
