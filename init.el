@@ -384,14 +384,14 @@ If EVENT, use EVENT’s position to determine the starting position."
          (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
        ((string-fix-p "=" pattern) (regexp-quote (remfix "=" pattern)))
        ((string-fix-p ";" pattern) (remfix ";" pattern))
-       ((string-prefix-p "!" pattern)
+       ((string-match-p "^!." pattern)
         (rx-to-string
          `(seq
            (group string-start)         ; highlight nothing!
            (zero-or-more
             (or ,@(cl-loop for i from 1 below (length pattern)
                            collect `(seq ,(substring pattern 1 i)
-                                         (or (not ,(aref pattern i))
+                                         (or (not (any ,(aref pattern i)))
                                              string-end)))))
            string-end)))
        ((string-match-p "^{.*}$" pattern)
