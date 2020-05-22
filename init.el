@@ -353,9 +353,11 @@ If EVENT, use EVENT’s position to determine the starting position."
   :bind
   (:map minibuffer-local-completion-map
         ("M-;" . embark-act)
-        ("M-." . embark-exit-and-act))
+        ("M-." . embark-exit-and-act)
+        ("C-o" . embark-occur))
   (:map completion-list-mode-map
-        ("M-;" . embark-act)))
+        ("M-;" . embark-act)
+        (";" . embark-act)))
 
 (use-package restricto
   :demand t
