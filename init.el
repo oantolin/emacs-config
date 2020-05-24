@@ -318,14 +318,16 @@ If EVENT, use EVENT’s position to determine the starting position."
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
-        ("TAB" . minibuffer-force-complete)
-        ("<backtab>" . minibuffer-complete)
+        ("TAB" . minibuffer-complete)
+        ("<backtab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("C-?" . minibuffer-completion-help)
         ("SPC") ("?"))
   :custom
   (completion-styles '(regexpect))
   (completion-category-defaults nil)
+  (completion-auto-help nil)
+  (completion-cycle-threshold 5)
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
@@ -341,12 +343,22 @@ If EVENT, use EVENT’s position to determine the starting position."
   (:map minibuffer-local-filename-completion-map
         ("<C-backspace>" . up-directory)
         ("C-c C-d" . cd-bookmark))
-  (:map minibuffer-local-completion-map
-        ("<down>" . switch-to-completions)
-        ("<right>" . right-char-or-completions))
+  ;; (:map minibuffer-local-completion-map
+  ;;       ("<down>" . switch-to-completions)
+  ;;       ("<right>" . right-char-or-completions))
   :commands completing-read-in-region
   :custom
   (completion-in-region-function #'completing-read-in-region))
+
+(use-package grille
+  :bind (:map minibuffer-local-completion-map
+              ("M-q" . grille)
+              ("C-?" . grille)
+              ("<right>" . grille-switch-to)
+              ("<down>" . grille-switch-to))
+  :commands grille-completing-read
+  :custom
+  (completing-read-function #'grille-completing-read))
 
 (use-package embark
   :load-path "~/my-elisp-packages/embark"
@@ -417,13 +429,6 @@ If EVENT, use EVENT’s position to determine the starting position."
          ".*?"))
        (t pattern))))
   :custom (regexpect-converter #'my-regexp-converter))
-
-(use-package live-completions
-  :demand t
-  :load-path "~/my-elisp-packages/live-completions"
-  :bind (:map minibuffer-local-completion-map
-              ("C-v" . live-completions-set-columns))
-  :config (live-completions-mode))
 
 (use-package avy-completion
   :bind

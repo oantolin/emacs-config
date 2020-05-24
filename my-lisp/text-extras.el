@@ -113,11 +113,11 @@ By default align all matches, with universal prefix align only first match."
   (when (eq last-command 'yank)
     (let ((inhibit-read-only t))
       (delete-region (point) (mark t))))
-  (live-completions-do
-      (:columns 'single :sort 'nil
-       :separator (concat "\n" (make-string (1- (window-width)) ?—) "\n"))
+  ;; (live-completions-do
+  ;;     (:columns 'single :sort 'nil
+  ;;      :separator (concat "\n" (make-string (1- (window-width)) ?—) "\n"))
     (insert-for-yank
-     (completing-read "Yank: " kill-ring nil t))))
+     (completing-read "Yank: " kill-ring nil t)))
 
 (defun goto-matching-line ()
   "Go to matching line selected with completion."
@@ -132,8 +132,8 @@ By default align all matches, with universal prefix align only first match."
     (goto-char
      (cdr
       (assoc
-       (live-completions-do (:columns 'single :sort 'nil)
-         (completing-read "Goto line: " lines nil t))
+       ;; (live-completions-do (:columns 'single :sort 'nil)
+         (completing-read "Goto line: " lines nil t)
        lines)))))
 
 (defun pipe-region (start end command)
