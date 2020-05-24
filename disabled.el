@@ -1,6 +1,18 @@
 ;;; Packages that I am not currently using, but whose configuration I
 ;;; still sometimes want to load
 
+(use-package grille
+  :bind (:map minibuffer-local-completion-map
+              ("M-q" . grille)
+              ("C-?" . grille)))
+
+(use-package live-completions
+  :demand t
+  :load-path "~/my-elisp-packages/live-completions"
+  :bind (:map minibuffer-local-completion-map
+              ("C-v" . live-completions-set-columns))
+  :config (live-completions-mode))
+
 (use-package icomplete
   :demand t
   :config (icomplete-mode)
@@ -32,8 +44,9 @@
   :config (icomplete-vertical-mode))
 
 (use-package orderless
-  :ensure t
-  :defer t
+  ;; :ensure t
+  :load-path "~/my-elisp-packages/orderless"
+  :demand t
   :bind (:map minibuffer-local-completion-map ("SPC"))
   :config
   (defun flex-if-star (pattern _i _t)
