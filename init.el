@@ -398,7 +398,7 @@ If EVENT, use EVENT’s position to determine the starting position."
            string-end)))
        ((string-match-p "^{.*}$" pattern)
         (mapconcat
-         (lambda (ch) (format "\\<\\(%c\\)" ch))
+         (lambda (ch) (format "\\(%c\\)" ch))
          (substring pattern 1 -1)
          ".*?"))
        ((string-match-p ".-\\|-." pattern)
