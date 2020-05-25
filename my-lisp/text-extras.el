@@ -113,11 +113,12 @@ By default align all matches, with universal prefix align only first match."
   (when (eq last-command 'yank)
     (let ((inhibit-read-only t))
       (delete-region (point) (mark t))))
-  ;; (live-completions-do
-  ;;     (:columns 'single :sort 'nil
-  ;;      :separator (concat "\n" (make-string (1- (window-width)) ?—) "\n"))
-    (insert-for-yank
-     (completing-read "Yank: " kill-ring nil t)))
+  (insert-for-yank
+   (let* ((sep (concat "\n" (make-string (1- (window-width)) ?—)))
+          (yank (completing-read "Yank: "
+                 (mapcar (lambda (str) (concat str sep)) kill-ring)
+                 nil t)))
+     (substring yank 0 (- (length sep))))))
 
 (defun goto-matching-line ()
   "Go to matching line selected with completion."
