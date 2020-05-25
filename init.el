@@ -350,15 +350,10 @@ If EVENT, use EVENT’s position to determine the starting position."
   :custom
   (completion-in-region-function #'completing-read-in-region))
 
-(use-package grille
-  :bind (:map minibuffer-local-completion-map
-              ("M-q" . grille)
-              ("C-?" . grille)
-              ("<right>" . grille-switch-to)
-              ("<down>" . grille-switch-to))
-  :commands grille-completing-read
-  :custom
-  (completing-read-function #'grille-completing-read))
+(use-package avy-grille
+  :bind
+  (:map minibuffer-local-completion-map
+        ("M-'" . avy-grille)))
 
 (use-package embark
   :load-path "~/my-elisp-packages/embark"
@@ -366,10 +361,38 @@ If EVENT, use EVENT’s position to determine the starting position."
   (:map minibuffer-local-completion-map
         ("M-;" . embark-act)
         ("M-." . embark-exit-and-act)
-        ("C-o" . embark-occur))
+        ("C-o" . embark-occur)
+        ("M-e" . embark-export))
   (:map completion-list-mode-map
         ("M-;" . embark-act)
-        (";" . embark-act)))
+        (";" . embark-act))
+  :commands embark--cache-info)
+
+(use-package grille
+  :bind
+  (:map minibuffer-local-completion-map
+        ("M-q" . grille)
+        ("<right>" . grille-switch-to)
+        ("<down>" . grille-switch-to))
+  (:map grille-mode-map
+        (";" . embark-act)
+        ("M-'" . avy-grille)
+        ("'" . avy-grille))
+  :commands grille-completing-read
+  :custom
+  (completing-read-function #'grille-completing-read)
+  :hook
+  (grille-mode
+   . (lambda ()
+       (let ((mini (active-minibuffer-window)))
+         (when mini
+           (with-selected-window mini
+             (embark--cache-info "*Grille*")))
+         (add-hook 'tabulated-list-revert-hook
+                   (lambda ()
+                     (setq default-directory
+                           (with-selected-window mini
+                             (embark--default-directory)))))))))
 
 (use-package restricto
   :demand t
@@ -429,13 +452,6 @@ If EVENT, use EVENT’s position to determine the starting position."
          ".*?"))
        (t pattern))))
   :custom (regexpect-converter #'my-regexp-converter))
-
-(use-package avy-completion
-  :bind
-  (:map minibuffer-local-completion-map
-        ("M-'" . avy-completion))
-  (:map completion-list-mode-map
-        ("M-'" . avy-completion)))
 
 (use-package gobble-whitespace
   :config (global-gobble-whitespace-mode))
