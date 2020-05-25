@@ -36,21 +36,6 @@ theme, to me it is clearly better than almost all others. :)
 I finally found themes I like better than the default: Protesilaos
 Stavrou's [[https://gitlab.com/protesilaos/modus-themes][modus themes]]!
 
-* Completion
-
-In the past I've been a [[https://github.com/emacs-helm/helm][Helm]] and an [[https://github.com/abo-abo/swiper][Ivy & Counsel]] user. These packages
-are fantastic and chock-full of functionality, I highly recommend them!
-
-But I've been on a built-in-ism kick for the last few months so I
-started using the built-in Icomplete. And I wrote two packages to make
-it more comfortable: [[https://github.com/oantolin/icomplete-vertical][icomplete-vertical]] to show candidates vertically
-and [[https://github.com/oantolin/orderless][orderless]] to do out-of-order regexp matching. I'm pretty happy
-with the combination. (Both actually started as packages I wrote for
-people on r/emacs and now I use them all the time!)
-
-*Update*: I'm restless! I'm now using three other packages I wrote:
-[[https://github.com/oantolin/live-completions][live-completions]], [[https://github.com/oantolin/emacs-config/blob/master/my-lisp/regexpect.el][regexpect]] and [[https://github.com/oantolin/embark][embark]]. :P
-
 * What's missing from this repo?
 
 I separated the personal part of my configuration to publish this. The
