@@ -298,6 +298,7 @@
         ("t" . transpose-windows)))
 
 (use-package completing-history
+  :load-path "~/my-elisp-packages/completing-history"
   :demand t
   :config (completing-history-setup-keybinding))
 
