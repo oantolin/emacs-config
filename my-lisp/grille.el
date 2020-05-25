@@ -124,7 +124,7 @@
     (add-hook 'after-change-functions #'grille--revert nil t)))
 
 (defun grille-completing-read (&rest args)
-  (run-with-idle-timer 0.01 nil #'grille)
+  (run-with-idle-timer 0.05 nil #'grille)
   (apply #'completing-read-default args))
 
 (defun grille-switch-to ()
