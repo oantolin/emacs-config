@@ -100,3 +100,17 @@
                                  glob-for-files
                                  not-containing
                                  flex-if-star)))
+
+(use-package simple ; defines completion-list-mode
+  :bind
+  (:map completion-list-mode-map
+        ("TAB" . insert-completion))
+  :config
+  (defun insert-completion (&optional event)
+  "Insert current completion into the minibuffer.
+If EVENT, use EVENT’s position to determine the starting position."
+  (interactive (list last-nonmenu-event))
+  (let ((completion-no-auto-exit t))
+    (choose-completion event)))
+  :hook
+  (completion-list-mode . force-truncate-lines))
