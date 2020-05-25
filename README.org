@@ -12,6 +12,30 @@ become tiny packages here. Writing small snippets for other people is
 probably my favorite way of learning Emacs, because it takes me down
 paths I don't think I would explore on my own.
 
+* Some packages I've bundled separately
+
+I intend to publish the most reusable parts of my configuration as
+separate packages. So far that is:
+
+- [[https://github.com/oantolin/icomplete-vertical][icomplete-vertical]]
+- [[https://github.com/oantolin/orderless][orderless]]
+- [[https://github.com/oantolin/math-delimiters][math-delimiters]]
+- [[https://github.com/oantolin/placeholder][placeholder]]
+- [[https://github.com/oantolin/epithet][epithet]]
+- [[https://github.com/oantolin/restricto][restricto]]
+- [[https://github.com/oantolin/embark][embark]]
+- [[https://github.com/oantolin/live-completions][live-completions]]
+- [[https://github.com/oantolin/completing-history][completing-history]]
+
+* Themes
+
+For many years I kept trying Emacs themes and always went back to the
+default theme. I don't understand why people don't like the default
+theme, to me it is clearly better than almost all others. :)
+
+I finally found themes I like better than the default: Protesilaos
+Stavrou's [[https://gitlab.com/protesilaos/modus-themes][modus themes]]!
+
 * Completion
 
 In the past I've been a [[https://github.com/emacs-helm/helm][Helm]] and an [[https://github.com/abo-abo/swiper][Ivy & Counsel]] user. These packages
@@ -27,15 +51,6 @@ people on r/emacs and now I use them all the time!)
 *Update*: I'm restless! I'm now using three other packages I wrote:
 [[https://github.com/oantolin/live-completions][live-completions]], [[https://github.com/oantolin/emacs-config/blob/master/my-lisp/regexpect.el][regexpect]] and [[https://github.com/oantolin/embark][embark]]. :P
 
-* Themes
-
-For many years I kept trying Emacs themes and always went back to the
-default theme. I don't understand why people don't like the default
-theme, to me it is clearly better than almost all others. :)
-
-I finally found themes I like better than the default: Protesilaos
-Stavrou's [[https://gitlab.com/protesilaos/modus-themes][modus themes]]!
-
 * What's missing from this repo?
 
 I separated the personal part of my configuration to publish this. The
@@ -44,16 +59,3 @@ org capture templates, org agenda configuration, and the org-publish
 configuration for my academic website, basically. In particular most
 my org mode configuration is in this public part.
 
-* Some packages I've bundled separately
-
-I intend to publish the most reusable parts of my configuration as
-separate packages. So far that is:
-
-- [[https://github.com/oantolin/icomplete-vertical][icomplete-vertical]]
-- [[https://github.com/oantolin/orderless][orderless]]
-- [[https://github.com/oantolin/math-delimiters][math-delimiters]]
-- [[https://github.com/oantolin/placeholder][placeholder]]
-- [[https://github.com/oantolin/epithet][epithet]]
-- [[https://github.com/oantolin/restricto][restricto]]
-- [[https://github.com/oantolin/embark][embark]]
-- [[https://github.com/oantolin/live-completions][live-completions]]
