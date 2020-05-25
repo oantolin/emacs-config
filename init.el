@@ -345,6 +345,7 @@
 (use-package embark
   :load-path "~/my-elisp-packages/embark"
   :bind
+  ("C-c e" . embark-act)
   (:map minibuffer-local-completion-map
         ("M-;" . embark-act)
         ("M-." . embark-exit-and-act)
