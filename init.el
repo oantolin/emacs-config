@@ -138,7 +138,7 @@
  :prefix-docstring "Keymap for file operations"
  ("c" . copy-file)
  ("d" . delete-file)
- ("x" . open-externally)
+ ("x" . embark-open-externally)
  ("r" . rename-file)
  ("m" . make-directory)
  ("D" . delete-directory)
@@ -353,7 +353,9 @@
   (:map completion-list-mode-map
         ("M-;" . embark-act)
         (";" . embark-act))
-  :commands embark--cache-info)
+  :commands
+  embark--cache-info
+  embark-open-externally)
 
 (use-package grille
   :bind
@@ -457,10 +459,6 @@
         ("l" . narrow-to-sexp) ; alias for Org mode
         ("r" . narrow-to-region)
         ("." . narrow-to-point)))
-
-(use-package open-externally
-  :bind ("C-c x" . open-externally)
-  :commands dired-open-externally)
 
 (use-package dot-mode
   :ensure t
@@ -633,7 +631,14 @@
   (dired-dwim-target t)
   :hook
   (dired-mode . force-truncate-lines)
-  (dired-mode . dired-hide-details-mode))
+  (dired-mode . dired-hide-details-mode)
+  :config
+  (defun dired-open-externally (&optional arg)
+    "Open marked or current file in operating system's default application."
+    (interactive "P")
+    (dired-map-over-marks
+     (embark-open-externally (dired-get-filename))
+     arg)))
 
 (use-package eshell-extras
   :commands
