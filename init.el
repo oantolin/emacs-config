@@ -401,17 +401,21 @@
               (or (string-prefix-p u v) (string-suffix-p u v)))
             (remfix (u v)
               (let ((pre (string-prefix-p u v)))
-                (substring v (if pre 1 0) (if pre nil -1)))))
+                (substring v (if pre 1 0) (if pre nil -1))))
+            (rx-seq (fmt seq)
+              (mapconcat
+               (if (stringp fmt) (lambda (x) (format fmt x)) fmt)
+               seq ".?*"))
+            (format-unless (fmt pat)
+              (lambda (x)
+                (if (string-match-p pat x) x (format fmt x)))))
     (defun my-regexp-converter (pattern)
       (cond
-       ((string-match-p "^[`^]" pattern)
-        (concat "\\`" (my-regexp-converter (substring pattern 1))))
-       ((string-match-p "[$']$" pattern)
-        (concat
-         (my-regexp-converter (substring pattern 0 -1))
-         (if minibuffer-completing-file-name "\\(?:\\'\\|/\\)" "\\'")))
+       ((string-match-p " " pattern)
+        (rx-seq (format-unless "\\(%s\\)" "\\\\(")
+                (mapcar #'my-regexp-converter (split-string pattern))))
        ((string-fix-p "=" pattern) (regexp-quote (remfix "=" pattern)))
-       ((string-fix-p ";" pattern) (remfix ";" pattern))
+       ((string-fix-p "," pattern) (remfix "," pattern))
        ((string-match-p "^!." pattern)
         (rx-to-string
          `(seq
@@ -423,24 +427,14 @@
                                              string-end)))))
            string-end)))
        ((string-match-p "^{.*}$" pattern)
-        (mapconcat
-         (lambda (ch) (format "\\(%c\\)" ch))
-         (substring pattern 1 -1)
-         ".*?"))
-       ((string-match-p ".-\\|-." pattern)
-        (mapconcat
-         (lambda (str) (format "\\(%s\\)" (regexp-quote str)))
-         (split-string pattern "\\>" t) ".*"))
-       ((or minibuffer-completing-file-name
-            (eq major-mode 'eshell-mode))
-        (mapconcat (lambda (str) (format "\\(%s\\)" str))
-                   (split-string (substring (eshell-glob-regexp pattern) 2 -2))
-         ".*?"))
+        (rx-seq "\\(%c\\)" (substring pattern 1 -1)))
+       ((and minibuffer-completing-file-name
+             (string-match-p "[-.]" pattern))
+        (rx-seq "\\<\\(%s\\)" (split-string pattern "[-.]" t)))
+       ((string-match-p "[/-]" pattern)
+        (rx-seq "\\<\\(%s\\)" (split-string pattern "[/-]" t)))
        ((string-fix-p "." pattern)
-        (mapconcat
-         (lambda (ch) (format "\\<\\(%c\\)" ch))
-         (remfix "." pattern)
-         ".*?"))
+        (rx-seq "\\<\\(%c\\)" (remfix "." pattern)))
        (t pattern))))
   :custom (regexpect-converter #'my-regexp-converter))
 
