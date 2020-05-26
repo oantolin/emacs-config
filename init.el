@@ -364,7 +364,7 @@
   :bind
   (:map minibuffer-local-completion-map
         ("M-q" . grille)
-        ("<right>" . grille-switch-to)
+        ("<right>" . grille-forward-char-or-switch-to)
         ("<down>" . grille-switch-to))
   (:map grille-mode-map
         (";" . embark-act)

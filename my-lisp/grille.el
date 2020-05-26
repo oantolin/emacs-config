@@ -135,4 +135,11 @@
                            (get-buffer-window "*Grille*" 0)))))
     (when window (select-window window))))
 
+(defun grille-forward-char-or-switch-to (&optional N)
+  "Move forward if possible, else switch to completions."
+  (interactive "P")
+  (if (and (eobp) (not N))
+      (grille-switch-to)
+    (forward-char (prefix-numeric-value N))))
+
 (provide 'grille)
