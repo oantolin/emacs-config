@@ -351,7 +351,7 @@
   ("C-c e" . embark-act)
   (:map minibuffer-local-completion-map
         (";" . embark-act)
-        ("." . embark-exit-and-act)
+        (":" . embark-exit-and-act)
         ("C-o" . embark-occur)
         ("M-e" . embark-export))
   (:map completion-list-mode-map
