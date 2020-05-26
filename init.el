@@ -644,17 +644,17 @@
 
 (use-package eshell-extras
   :commands
-  eshell/in-term eshell/for-each interactive-cd)
+  eshell/in-term
+  eshell/for-each
+  interactive-cd
+  fix-eshell-keys)
 
 (use-package eshell
   :bind ("C-!" . eshell)
   :config (setenv "PAGER" "cat"))
 
 (use-package esh-mode
-  :bind (:map eshell-mode-map
-              ("<home>" . eshell-bol)
-              ("C-c d" . interactive-cd)
-              ("M-q" . quit-window)))
+  :hook (eshell-mode . fix-eshell-keys))
 
 (use-package em-hist
   :defer t
