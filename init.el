@@ -343,19 +343,18 @@
 (use-package avy-grille
   :bind
   (:map minibuffer-local-completion-map
-        ("M-'" . avy-grille)))
+        ("'" . avy-grille)))
 
 (use-package embark
   :load-path "~/my-elisp-packages/embark"
   :bind
   ("C-c e" . embark-act)
   (:map minibuffer-local-completion-map
-        ("M-;" . embark-act)
-        ("M-." . embark-exit-and-act)
+        (";" . embark-act)
+        ("." . embark-exit-and-act)
         ("C-o" . embark-occur)
         ("M-e" . embark-export))
   (:map completion-list-mode-map
-        ("M-;" . embark-act)
         (";" . embark-act))
   :commands
   embark--cache-info
@@ -369,7 +368,6 @@
         ("<down>" . grille-switch-to))
   (:map grille-mode-map
         (";" . embark-act)
-        ("M-'" . avy-grille)
         ("'" . avy-grille))
   :commands grille-completing-read
   :custom
