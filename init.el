@@ -26,6 +26,9 @@
 
 ;;; package.el & use-package setup
 
+(when (version< emacs-version "26.3")
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+
 (custom-set-variables
  '(package-archives
    '(("melpa" . "https://melpa.org/packages/")
