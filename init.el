@@ -147,12 +147,19 @@
  ("D" . delete-directory)
  ("/" . cd)
  ("." . pwd)
- ("b" . byte-recompile-file)
- ("B" . byte-recompile-directory)
- ("e" . ediff)
- ("E" . ediff-directories)
- ("g" . ediff-current-file)
- ("C-e" . ediff-buffers))
+ ("=" . ediff)
+ ("b" . byte-compile-file)
+ ("B" . byte-recompile-directory))
+
+(bind-keys
+ :prefix "C-c f e"
+ :prefix-map ediff-ops-map
+ :prefix-docstring "Keymap for launching ediff"
+ ("f" . ediff-files)
+ ("3" . ediff-files3)
+ ("d" . ediff-directories)
+ ("c" . ediff-current-file)
+ ("b" . ediff-buffers))
 
 (bind-keys
  :prefix "C-x p"
