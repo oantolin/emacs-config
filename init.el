@@ -343,7 +343,8 @@
 (use-package avy-grille
   :bind
   (:map minibuffer-local-completion-map
-        ("'" . avy-grille)))
+        ("'" . avy-grille-choose)
+        ("\"" . avy-grille-embark-act)))
 
 (use-package embark
   :load-path "~/my-elisp-packages/embark"

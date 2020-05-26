@@ -17,17 +17,14 @@
   (goto-char pt)
   (embark-act))
 
-(defun avy-grille ()
+(defun avy-grille-command (action dispatch-alist)
   "Jump to a completion candidate."
-  (interactive)
   (let ((wnd (get-buffer-window "*Grille*" 0)))
     (if wnd
         (with-current-buffer "*Grille*"
           (avy-with avy-completion
-            (let ((avy-action #'avy-action-choose)
-                  (avy-dispatch-alist '((?c . avy-action-complete)
-                                        (?x . avy-action-embark-act)
-                                        (?m . avy-action-goto))))
+            (let ((avy-action action)
+                  (avy-dispatch-alist dispatch-alist))
               (avy-process
                (save-excursion
                  (goto-char (point-min))
@@ -38,5 +35,21 @@
                      (forward-button 1 t))
                    (nreverse btns)))))))
       (user-error "No *Grille* windows"))))
+
+(defun avy-grille-choose ()
+  "Choose a completion candidate."
+  (interactive)
+  (avy-grille-command #'avy-action-choose
+                      '((?c . avy-action-complete)
+                        (?x . avy-action-embark-act)
+                        (?m . avy-action-goto))))
+
+(defun avy-grille-embark-act ()
+  "Act on a completion candidate."
+  (interactive)
+  (avy-grille-command #'avy-action-embark-act
+                      '((?c . avy-action-complete)
+                        (?x . avy-action-choose)
+                        (?m . avy-action-goto))))
 
 (provide 'avy-grille)
