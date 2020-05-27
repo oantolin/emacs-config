@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 (require 'avy)
+(require 'grille)
 
 (defun avy-action-complete (pt)
   "Enter completion candidate at PT into the minibuffer."
@@ -19,9 +20,10 @@
 
 (defun avy-grille-command (action dispatch-alist)
   "Jump to a completion candidate."
-  (let ((wnd (get-buffer-window "*Grille*" 0)))
+  (let ((wnd (or (get-buffer-window "*Grille*" 0)
+                 (get-buffer-window "*Embark Occur*" 0))))
     (if wnd
-        (with-current-buffer "*Grille*"
+        (with-current-buffer (window-buffer wnd)
           (avy-with avy-completion
             (let ((avy-action action)
                   (avy-dispatch-alist dispatch-alist))
@@ -34,7 +36,7 @@
                      (push (cons (point) wnd) btns)
                      (forward-button 1 t))
                    (nreverse btns)))))))
-      (user-error "No *Grille* windows"))))
+      (user-error "No *Grille* or *Embark Occur* windows"))))
 
 (defun avy-grille-choose ()
   "Choose a completion candidate."

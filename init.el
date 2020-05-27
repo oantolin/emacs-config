@@ -361,37 +361,24 @@
         (";" . embark-act)
         (":" . embark-exit-and-act)
         ("C-o" . embark-occur)
-        ("M-e" . embark-export))
+        ("M-e" . embark-export)
+        ("<down>" . embark-occur-switch-to)
+        ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
-  :commands
-  embark--cache-info
-  embark-open-externally)
-
-(use-package grille
-  :bind
-  (:map minibuffer-local-completion-map
-        ("M-q" . grille)
-        ("<right>" . grille-forward-char-or-switch-to)
-        ("<down>" . grille-switch-to))
-  (:map grille-mode-map
-        (";" . embark-act)
-        ("'" . avy-grille))
-  :commands grille-completing-read
+  :commands embark-open-externally
   :custom
-  (completing-read-function #'grille-completing-read)
-  :hook
-  (grille-mode
-   . (lambda ()
-       (let ((mini (active-minibuffer-window)))
-         (when mini
-           (with-selected-window mini
-             (embark--cache-info "*Grille*")))
-         (add-hook 'tabulated-list-revert-hook
-                   (lambda ()
-                     (setq default-directory
-                           (with-selected-window mini
-                             (embark--default-directory)))))))))
+  (embark-occur-initial-view-alist '((t . grid)))
+  :config
+  (setq completing-read-function
+        (defun embark-completing-read (&rest args)
+          (let ((timer (run-with-idle-timer 0.2 nil #'embark-occur)))
+            (add-hook 'minibuffer-exit-hook
+                      (lambda () (cancel-timer timer))))
+          (apply #'completing-read-default args)))
+  (defun embark-occur-switch-to ()
+    (interactive)
+    (switch-to-buffer "*Embark Occur*")))
 
 (use-package restricto
   :demand t

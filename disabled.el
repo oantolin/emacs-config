@@ -2,9 +2,31 @@
 ;;; still sometimes want to load
 
 (use-package grille
-  :bind (:map minibuffer-local-completion-map
-              ("M-q" . grille)
-              ("C-?" . grille)))
+  :bind
+  (:map minibuffer-local-completion-map
+        ("M-q" . grille)
+        ("<right>" . grille-forward-char-or-switch-to)
+        ("<down>" . grille-switch-to))
+  (:map grille-mode-map
+        (";" . embark-act)
+        ("'" . avy-grille))
+  :commands grille-completing-read
+  :custom
+  (completing-read-function #'grille-completing-read)
+  :hook
+  (grille-mode
+   . (lambda ()
+       (let ((buffer (current-buffer))
+             (mini (active-minibuffer-window)))
+         (when mini
+           (with-selected-window mini
+             (embark--cache-info buffer)))
+         (add-hook 'tabulated-list-revert-hook
+                   (lambda ()
+                     (setq default-directory
+                           (with-selected-window mini
+                             (embark--default-directory))))
+                   nil t)))))
 
 (use-package live-completions
   :demand t
