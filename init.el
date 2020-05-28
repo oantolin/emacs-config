@@ -354,6 +354,7 @@
         ("\"" . avy-grille-embark-act)))
 
 (use-package embark
+  :demand t
   :load-path "~/my-elisp-packages/embark"
   :bind
   ("C-c e" . embark-act)
@@ -363,6 +364,7 @@
         ("C-o" . embark-occur)
         ("M-e" . embark-export)
         ("<down>" . embark-occur-switch-to)
+        ("<right>" . embark-occur-forward-char-or-switch-to)
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
@@ -372,13 +374,20 @@
   :config
   (setq completing-read-function
         (defun embark-completing-read (&rest args)
-          (let ((timer (run-with-idle-timer 0.2 nil #'embark-occur)))
-            (add-hook 'minibuffer-exit-hook
-                      (lambda () (cancel-timer timer))))
+          "A completing read function that shows candidates with embark-occur."
+          (run-with-idle-timer 0.3 nil
+           (lambda () (when (minibufferp) (embark-occur))))
           (apply #'completing-read-default args)))
   (defun embark-occur-switch-to ()
+    "Switch to the Embark Occur buffer."
     (interactive)
-    (switch-to-buffer "*Embark Occur*")))
+    (switch-to-buffer "*Embark Occur*"))
+  (defun embark-occur-forward-char-or-switch-to ()
+    "Move forward one char if possible, else switch to Embark Occur buffer."
+    (interactive)
+    (if (eobp)
+        (switch-to-buffer "*Embark Occur*")
+      (forward-char))))
 
 (use-package restricto
   :demand t
