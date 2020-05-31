@@ -115,6 +115,7 @@ By default align all matches, with universal prefix align only first match."
       (delete-region (point) (mark t))))
   (insert-for-yank
    (let* ((sep (concat "\n" (make-string (1- (window-width)) ?—)))
+          (embark-occur-initial-view-alist '((t . list)))
           (yank (completing-read "Yank: "
                  (mapcar (lambda (str) (concat str sep)) kill-ring)
                  nil t)))
@@ -129,11 +130,11 @@ By default align all matches, with universal prefix align only first match."
            (cl-loop for start = (point) until (eobp)
                     do (forward-line)
                     collect (cons (buffer-substring start (1- (point)))
-                                  start)))))
+                                  start))))
+        (embark-occur-initial-view-alist '((t . list))))
     (goto-char
      (cdr
       (assoc
-       ;; (live-completions-do (:columns 'single :sort 'nil)
          (completing-read "Goto line: " lines nil t)
        lines)))))
 
