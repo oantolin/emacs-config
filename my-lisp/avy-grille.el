@@ -21,7 +21,7 @@
 (defun avy-grille-command (action dispatch-alist)
   "Jump to a completion candidate."
   (let ((wnd (or (get-buffer-window "*Grille*" 0)
-                 (get-buffer-window "*Embark Occur*" 0))))
+                 (get-buffer-window "*Embark Live Occur*" 0))))
     (if wnd
         (with-current-buffer (window-buffer wnd)
           (avy-with avy-completion
@@ -36,7 +36,7 @@
                      (push (cons (point) wnd) btns)
                      (forward-button 1 t))
                    (nreverse btns)))))))
-      (user-error "No *Grille* or *Embark Occur* windows"))))
+      (user-error "No *Grille* or *Embark Live Occur* windows"))))
 
 (defun avy-grille-choose ()
   "Choose a completion candidate."

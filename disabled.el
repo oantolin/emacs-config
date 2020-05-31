@@ -1,6 +1,12 @@
 ;;; Packages that I am not currently using, but whose configuration I
 ;;; still sometimes want to load
 
+(use-package avy-grille
+  :bind
+  (:map minibuffer-local-completion-map
+        ("'" . avy-grille-choose)
+        ("\"" . avy-grille-embark-act)))
+
 (use-package grille
   :bind
   (:map minibuffer-local-completion-map

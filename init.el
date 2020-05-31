@@ -347,11 +347,11 @@
   :custom
   (completion-in-region-function #'completing-read-in-region))
 
-(use-package avy-grille
+(use-package avy-embark-occur
   :bind
   (:map minibuffer-local-completion-map
-        ("'" . avy-grille-choose)
-        ("\"" . avy-grille-embark-act)))
+        ("'" . avy-embark-occur-select)
+        ("\"" . avy-embark-occur-act)))
 
 (use-package embark
   :demand t
@@ -363,31 +363,25 @@
         (":" . embark-exit-and-act)
         ("C-o" . embark-occur)
         ("M-e" . embark-export)
-        ("<down>" . embark-occur-switch-to)
-        ("<right>" . embark-occur-forward-char-or-switch-to)
+        ("<down>" . embark-switch-to-live-occur)
+        ("<right>" . embark-forward-char-or-switch-to-live-occur)
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
-  :commands embark-open-externally
+  (:map embark-occur-mode-map
+        ("a") ; don't like my own default :)
+        (";" . embark-act)
+        ("'" . avy-embark-occur-select)
+        ("\"" . avy-embark-occur-act))
   :custom
   (embark-occur-initial-view-alist '((t . grid)))
+  (embark-occur-minibuffer-completion t)
+  (completing-read-function 'embark-completing-read)
   :config
-  (setq completing-read-function
-        (defun embark-completing-read (&rest args)
-          "A completing read function that shows candidates with embark-occur."
-          (run-with-idle-timer 0.3 nil
-           (lambda () (when (minibufferp) (embark-occur))))
-          (apply #'completing-read-default args)))
-  (defun embark-occur-switch-to ()
-    "Switch to the Embark Occur buffer."
-    (interactive)
-    (switch-to-buffer "*Embark Occur*"))
-  (defun embark-occur-forward-char-or-switch-to ()
+  (defun embark-forward-char-or-switch-to-live-occur ()
     "Move forward one char if possible, else switch to Embark Occur buffer."
     (interactive)
-    (if (eobp)
-        (switch-to-buffer "*Embark Occur*")
-      (forward-char))))
+    (if (eobp) (embark-switch-to-live-occur) (forward-char))))
 
 (use-package restricto
   :demand t
