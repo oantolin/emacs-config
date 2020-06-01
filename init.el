@@ -327,7 +327,7 @@
         ("C-?" . minibuffer-completion-help)
         ("SPC") ("?"))
   :custom
-  (completion-styles '(regexpect))
+  (completion-styles '(orderless))
   (completion-category-defaults nil)
   (completion-auto-help nil)
   (completion-cycle-threshold 5)
@@ -346,58 +346,12 @@
   (:map minibuffer-local-filename-completion-map
         ("<C-backspace>" . up-directory)
         ("C-c C-d" . cd-bookmark))
-  ;; (:map minibuffer-local-completion-map
-  ;;       ("<down>" . switch-to-completions)
-  ;;       ("<right>" . right-char-or-completions))
   :commands completing-read-in-region
   :custom
   (completion-in-region-function #'completing-read-in-region))
 
-(use-package avy-embark-occur
-  :bind
-  (:map minibuffer-local-completion-map
-        ("'" . avy-embark-occur-select)
-        ("\"" . avy-embark-occur-act)))
-
-(use-package embark
-  :demand t
-  :load-path "~/my-elisp-packages/embark"
-  :bind
-  ("C-c e" . embark-act)
-  (:map minibuffer-local-completion-map
-        (";" . embark-act)
-        (":" . embark-exit-and-act)
-        ("C-o" . embark-occur)
-        ("M-e" . embark-export)
-        ("<down>" . embark-switch-to-live-occur)
-        ("<right>" . embark-forward-char-or-switch-to-live-occur)
-        ("M-q" . embark-occur-toggle-view))
-  (:map completion-list-mode-map
-        (";" . embark-act))
-  (:map embark-occur-mode-map
-        ("a") ; don't like my own default :)
-        (";" . embark-act)
-        ("'" . avy-embark-occur-select)
-        ("\"" . avy-embark-occur-act))
-  :custom
-  (embark-occur-initial-view-alist '((t . grid)))
-  (embark-occur-minibuffer-completion t)
-  (completing-read-function 'embark-completing-read)
-  :config
-  (defun embark-forward-char-or-switch-to-live-occur ()
-    "Move forward one char if possible, else switch to Embark Occur buffer."
-    (interactive)
-    (if (eobp) (embark-switch-to-live-occur) (forward-char))))
-
-(use-package restricto
-  :demand t
-  :load-path "~/my-elisp-packages/restricto"
-  :bind (:map minibuffer-local-completion-map
-              ("SPC" . restricto-narrow)
-              ("S-SPC" . restricto-widen))
-  :config (restricto-mode))
-
-(use-package regexpect
+(use-package orderless
+  :load-path "~/my-elisp-packages/orderless"
   :demand t
   :config
   (use-package em-glob :commands eshell-glob-regexp)
@@ -440,7 +394,43 @@
        ((string-fix-p "." pattern)
         (rx-seq "\\<\\(%c\\)" (remfix "." pattern)))
        (t pattern))))
-  :custom (regexpect-converter #'my-regexp-converter))
+  :custom (orderless-matching-styles #'my-regexp-converter))
+
+(use-package avy-embark-occur
+  :bind
+  (:map minibuffer-local-completion-map
+        ("'" . avy-embark-occur-select)
+        ("\"" . avy-embark-occur-act)))
+
+(use-package embark
+  :demand t
+  :load-path "~/my-elisp-packages/embark"
+  :bind
+  ("C-c e" . embark-act)
+  (:map minibuffer-local-completion-map
+        (";" . embark-act)
+        (":" . embark-exit-and-act)
+        ("C-o" . embark-occur)
+        ("M-e" . embark-export)
+        ("<down>" . embark-switch-to-live-occur)
+        ("<right>" . embark-forward-char-or-switch-to-live-occur)
+        ("M-q" . embark-occur-toggle-view))
+  (:map completion-list-mode-map
+        (";" . embark-act))
+  (:map embark-occur-mode-map
+        ("a") ; don't like my own default :)
+        (";" . embark-act)
+        ("'" . avy-embark-occur-select)
+        ("\"" . avy-embark-occur-act))
+  :custom
+  (embark-occur-initial-view-alist '((t . grid)))
+  (embark-occur-minibuffer-completion t)
+  (completing-read-function 'embark-completing-read)
+  :config
+  (defun embark-forward-char-or-switch-to-live-occur ()
+    "Move forward one char if possible, else switch to Embark Occur buffer."
+    (interactive)
+    (if (eobp) (embark-switch-to-live-occur) (forward-char))))
 
 (use-package gobble-whitespace
   :config (global-gobble-whitespace-mode))

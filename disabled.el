@@ -71,7 +71,7 @@
               ("C-v" . icomplete-vertical-toggle))
   :config (icomplete-vertical-mode))
 
-(use-package orderless
+(use-package orderless                  ; old configuration
   ;; :ensure t
   :load-path "~/my-elisp-packages/orderless"
   :demand t
@@ -142,3 +142,56 @@ If EVENT, use EVENT’s position to determine the starting position."
     (choose-completion event)))
   :hook
   (completion-list-mode . force-truncate-lines))
+
+(use-package restricto
+  :demand t
+  :load-path "~/my-elisp-packages/restricto"
+  :bind (:map minibuffer-local-completion-map
+              ("SPC" . restricto-narrow)
+              ("S-SPC" . restricto-widen))
+  :config (restricto-mode))
+
+(use-package regexpect
+  :demand t
+  :config
+  (use-package em-glob :commands eshell-glob-regexp)
+  (cl-flet ((string-fix-p (u v)
+              (or (string-prefix-p u v) (string-suffix-p u v)))
+            (remfix (u v)
+              (let ((pre (string-prefix-p u v)))
+                (substring v (if pre 1 0) (if pre nil -1))))
+            (rx-seq (fmt seq)
+              (mapconcat
+               (if (stringp fmt) (lambda (x) (format fmt x)) fmt)
+               seq ".?*"))
+            (format-unless (fmt pat)
+              (lambda (x)
+                (if (string-match-p pat x) x (format fmt x)))))
+    (defun my-regexp-converter (pattern)
+      (cond
+       ((string-match-p " " pattern)
+        (rx-seq (format-unless "\\(%s\\)" "\\\\(")
+                (mapcar #'my-regexp-converter (split-string pattern))))
+       ((string-fix-p "=" pattern) (regexp-quote (remfix "=" pattern)))
+       ((string-fix-p "," pattern) (remfix "," pattern))
+       ((string-match-p "^!." pattern)
+        (rx-to-string
+         `(seq
+           (group string-start)         ; highlight nothing!
+           (zero-or-more
+            (or ,@(cl-loop for i from 1 below (length pattern)
+                           collect `(seq ,(substring pattern 1 i)
+                                         (or (not (any ,(aref pattern i)))
+                                             string-end)))))
+           string-end)))
+       ((string-match-p "^{.*}$" pattern)
+        (rx-seq "\\(%c\\)" (substring pattern 1 -1)))
+       ((and minibuffer-completing-file-name
+             (string-match-p "[-.]" pattern))
+        (rx-seq "\\<\\(%s\\)" (split-string pattern "[-.]" t)))
+       ((string-match-p "[/-]" pattern)
+        (rx-seq "\\<\\(%s\\)" (split-string pattern "[/-]" t)))
+       ((string-fix-p "." pattern)
+        (rx-seq "\\<\\(%c\\)" (remfix "." pattern)))
+       (t pattern))))
+  :custom (regexpect-converter #'my-regexp-converter))
