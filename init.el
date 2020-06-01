@@ -354,7 +354,6 @@
   :load-path "~/my-elisp-packages/orderless"
   :demand t
   :config
-  (use-package em-glob :commands eshell-glob-regexp)
   (cl-flet ((string-fix-p (u v)
               (or (string-prefix-p u v) (string-suffix-p u v)))
             (remfix (u v)
