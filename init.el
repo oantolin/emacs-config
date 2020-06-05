@@ -398,7 +398,7 @@
 (use-package avy-embark-occur
   :bind
   (:map minibuffer-local-completion-map
-        ("'" . avy-embark-occur-select)
+        ("'" . avy-embark-occur-choose)
         ("\"" . avy-embark-occur-act)))
 
 (use-package embark
@@ -408,8 +408,8 @@
   ("C-c e" . embark-act)
   ("C-c E" . embark-occur)
   (:map minibuffer-local-completion-map
-        (";" . embark-act)
-        (":" . embark-exit-and-act)
+        (";" . embark-act-noexit)
+        (":" . embark-act)
         ("C-o" . embark-occur)
         ("M-e" . embark-export)
         ("<down>" . embark-switch-to-live-occur)
@@ -418,9 +418,9 @@
   (:map completion-list-mode-map
         (";" . embark-act))
   (:map embark-occur-mode-map
-        ("a") ; don't like my own default :)
+        ("a") ; I don't like my own default :)
         (";" . embark-act)
-        ("'" . avy-embark-occur-select)
+        ("'" . avy-embark-occur-choose)
         ("\"" . avy-embark-occur-act))
   :custom
   (embark-occur-initial-view-alist '((t . grid)))
