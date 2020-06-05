@@ -430,7 +430,13 @@
   (defun embark-forward-char-or-switch-to-live-occur ()
     "Move forward one char if possible, else switch to Embark Occur buffer."
     (interactive)
-    (if (eobp) (embark-switch-to-live-occur) (forward-char))))
+    (if (eobp) (embark-switch-to-live-occur) (forward-char)))
+  (advice-add 'tabulated-list-revert :after
+              (defun resize-embark-live-occur-window (&rest _)
+                (when (and (eq major-mode 'embark-occur-mode)
+                           (string-match-p "Live" (buffer-name)))
+                  (fit-window-to-buffer (get-buffer-window)
+                                        (floor (frame-height) 2) 1)))))
 
 (use-package gobble-whitespace
   :config (global-gobble-whitespace-mode))
