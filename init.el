@@ -614,7 +614,8 @@
   :defer t
   :custom
   (pdf-annot-minor-mode-map-prefix "a")
-  (pdf-annot-list-format '((page . 3) (type . 7) (contents . 200))))
+  (pdf-annot-list-format '((page . 3) (type . 7) (contents . 200)))
+  (pdf-annot-activate-created-annotations t))
 
 (use-package pdf-loader
   :init (pdf-loader-install))
