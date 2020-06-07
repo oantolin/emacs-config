@@ -413,6 +413,7 @@
         (";" . embark-act-noexit)
         (":" . embark-act)
         ("C-o" . embark-occur)
+        ("C-l" . embark-live-occur) ; only here for crm, really
         ("M-e" . embark-export)
         ("<down>" . embark-switch-to-live-occur)
         ("<right>" . embark-forward-char-or-switch-to-live-occur)
