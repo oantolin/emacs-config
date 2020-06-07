@@ -278,7 +278,8 @@
         ([remap isearch-abort] . isearch-cancel)
         ([remap isearch-delete-char] . isearch-delete-wrong))
   :hook
-  (isearch-mode-end . isearch-exit-at-start))
+  (isearch-mode-end . isearch-exit-at-start)
+  (isearch-mode . isearch-yank-region))
 
 (use-package math-delimiters
   :load-path "~/my-elisp-packages/math-delimiters"

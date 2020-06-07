@@ -24,4 +24,12 @@
       (isearch-pop-state)))
   (isearch-update))
 
+(defun isearch-yank-region ()
+  "If the region is active add it to the isearch search string."
+  (when (use-region-p)
+    (isearch-yank-string
+     (buffer-substring-no-properties
+      (region-beginning) (region-end)))
+    (deactivate-mark)))
+
 (provide 'isearch-extras)
