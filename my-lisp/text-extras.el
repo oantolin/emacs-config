@@ -114,12 +114,14 @@ By default align all matches, with universal prefix align only first match."
     (let ((inhibit-read-only t))
       (delete-region (point) (mark t))))
   (insert-for-yank
-   (let* ((sep (concat "\n" (make-string (1- (window-width)) ?—)))
-          (embark-occur-initial-view-alist '((t . list)))
-          (yank (completing-read "Yank: "
-                 (mapcar (lambda (str) (concat str sep)) kill-ring)
-                 nil t)))
-     (substring yank 0 (- (length sep))))))
+   (let* ((sep (propertize
+                (concat "\n" (make-string (1- (window-width)) ?—))
+                'face 'shadow))
+          (embark-occur-initial-view-alist '((t . list))))
+     (completing-read "Yank: "
+      (mapcar (lambda (str) (propertize str 'display (concat str sep)))
+              kill-ring)
+      nil t))))
 
 (defun goto-matching-line ()
   "Go to matching line selected with completion."
