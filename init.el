@@ -114,8 +114,6 @@
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
  ("C-x K" . kill-buffer)
- ("C-x C-d" . dired)
- ("C-x d" . list-directory)
  ([remap list-buffers] . electric-buffer-list)
  ([remap upcase-word] . upcase-dwim)
  ([remap downcase-word] . downcase-dwim)
@@ -406,8 +404,9 @@
   :demand t
   :load-path "~/my-elisp-packages/embark"
   :bind
-  ("C-c e" . embark-act)
-  ("C-c E" . embark-occur)
+  ("C-;" . embark-act)
+  ("C-c e" . embark-occur)
+  ("C-c x" . embark-export)
   (:map minibuffer-local-completion-map
         (";" . embark-act-noexit)
         (":" . embark-act)
