@@ -23,10 +23,9 @@
           (dolist (km tmp-buffer-mode-alist)
             (princ (format " %c\t%s\n" (car km) (cdr km))))))
     (let ((mode (cdr (assoc spec tmp-buffer-mode-alist))))
-      (if mode
-          (let ((buf (generate-new-buffer "*tmp*")))
-            (with-current-buffer buf (funcall mode))
-            (pop-to-buffer buf))
-        (user-error "Unknown mode for temporary buffer.")))))
+      (if (not mode)
+          (user-error "Unknown mode for temporary buffer.")
+        (pop-to-buffer (generate-new-buffer "*tmp*"))
+        (funcall mode)))))
 
 (provide 'tmp-buffer)
