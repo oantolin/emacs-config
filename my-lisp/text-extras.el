@@ -135,10 +135,7 @@ By default align all matches, with universal prefix align only first match."
                                   start))))
         (embark-occur-initial-view-alist '((t . list))))
     (goto-char
-     (cdr
-      (assoc
-         (completing-read "Goto line: " lines nil t)
-       lines)))))
+     (cdr (assoc (completing-read "Goto line: " lines nil t) lines)))))
 
 (defun pipe-region (start end command)
   "Pipe region through shell command. If the mark is inactive,
