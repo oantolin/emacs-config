@@ -69,6 +69,8 @@
     (add-to-list 'exec-path home-bin)))
 
 (dolist (cmd '(narrow-to-region
+               upcase-region
+               downcase-region
                dired-find-alternate-file
                LaTeX-narrow-to-environment
                TeX-narrow-to-group
