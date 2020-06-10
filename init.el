@@ -407,7 +407,7 @@
   :load-path "~/my-elisp-packages/embark"
   :bind
   ("C-;" . embark-act)
-  ("C-c e" . embark-occur)
+  ("C-c o" . embark-occur)
   ("C-c x" . embark-export)
   (:map minibuffer-local-completion-map
         (";" . embark-act-noexit)
@@ -495,7 +495,7 @@
   :custom (avy-styles-alist nil))
 
 (use-package goto-addr
-  :bind ("C-c o" . ace-link-addr)
+  :bind ("C-c u" . ace-link-addr)
   :hook
   (text-mode . goto-address-mode)
   (prog-mode . goto-address-prog-mode)
