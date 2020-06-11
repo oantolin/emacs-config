@@ -427,6 +427,10 @@
         (";" . embark-act)
         ("'" . avy-embark-occur-choose)
         ("\"" . avy-embark-occur-act))
+  (:map embark-package-map
+        ("g" . package-refresh-contents)
+        ("a" . package-autoremove)
+        ("t" . try))
   :custom
   (embark-occur-initial-view-alist '((t . grid)))
   (embark-occur-minibuffer-completion t)
