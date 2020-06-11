@@ -891,4 +891,3 @@ the Sage kernel, useful to shut it down, for example."
     (bury-buffer
      (process-buffer
       (start-process "sage-notebook" "*sage*" "sage" "--notebook=jupyter")))))
-(put 'scroll-left 'disabled nil)
