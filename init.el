@@ -410,7 +410,7 @@
   ("C-c o" . embark-occur)
   ("C-c x" . embark-export)
   (:map minibuffer-local-map
-        ("C->" . embark-become))
+        (">" . embark-become))
   (:map minibuffer-local-completion-map
         (";" . embark-act-noexit)
         (":" . embark-act)
