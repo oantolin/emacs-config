@@ -4,7 +4,8 @@
   "Exit search at the beginning of the current match."
   (unless (or isearch-mode-end-hook-quit
               (bound-and-true-p isearch-suspended)
-              (not isearch-forward))
+              (not isearch-forward)
+              (not isearch-other-end))
     (goto-char isearch-other-end)))
 
 (defun isearch-exit-at-end ()
