@@ -17,11 +17,8 @@
 (defun isearch-delete-wrong ()
   "Revert to previous successful search."
   (interactive)
-  (if (string= isearch-string "")
-      (ding)
-    (isearch-pop-state)
-    (while (or (not isearch-success) isearch-error)
-      (isearch-pop-state)))
+  (while (or (not isearch-success) isearch-error)
+    (isearch-pop-state))
   (isearch-update))
 
 (defun isearch-yank-region ()

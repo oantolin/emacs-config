@@ -276,7 +276,7 @@
   (:map isearch-mode-map
         ("<S-return>" . isearch-exit-at-end)
         ([remap isearch-abort] . isearch-cancel)
-        ([remap isearch-delete-char] . isearch-delete-wrong))
+        ("<C-backspace>" . isearch-delete-wrong))
   :hook
   (isearch-mode-end . isearch-exit-at-start)
   (isearch-mode . isearch-yank-region))
