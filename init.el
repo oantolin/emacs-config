@@ -732,7 +732,7 @@
     (add-to-list 'ispell-skip-region-alist reg))
   (add-to-list 'ispell-tex-skip-alists '(("\\$" . "\\$"))))
 
-(use-package try :ensure t :bind ("C-x p t" . try))
+(use-package try :ensure t :defer t)
 
 ;;; email packages
 
