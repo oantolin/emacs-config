@@ -1,6 +1,12 @@
 ;;; Packages or keybindings that I am not currently using, but whose
 ;;; configuration I still sometimes want to load
 
+(use-package gcmh
+  :ensure t
+  :demand t
+  :diminish
+  :config (gcmh-mode))
+
 (bind-keys
  :prefix "C-c f"
  :prefix-map file-ops-map

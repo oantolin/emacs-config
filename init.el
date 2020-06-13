@@ -48,12 +48,6 @@
 
 (use-package diminish :ensure t)
 
-(use-package gcmh
-  :ensure t
-  :demand t
-  :diminish
-  :config (gcmh-mode))
-
 (use-package bind-key
   :bind ("C-h y" . describe-personal-keybindings))
 
