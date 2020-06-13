@@ -1,5 +1,44 @@
-;;; Packages that I am not currently using, but whose configuration I
-;;; still sometimes want to load
+;;; Packages or keybindings that I am not currently using, but whose
+;;; configuration I still sometimes want to load
+
+(bind-keys
+ :prefix "C-c f"
+ :prefix-map file-ops-map
+ :prefix-docstring "Keymap for file operations"
+ ("c" . copy-file)
+ ("d" . delete-file)
+ ("x" . embark-open-externally)
+ ("r" . rename-file)
+ ("m" . make-directory)
+ ("D" . delete-directory)
+ ("/" . cd)
+ ("." . pwd)
+ ("=" . ediff)
+ ("b" . byte-compile-file)
+ ("B" . byte-recompile-directory))
+
+(bind-keys
+ :prefix "C-c f e"
+ :prefix-map ediff-ops-map
+ :prefix-docstring "Keymap for launching ediff"
+ ("f" . ediff-files)
+ ("3" . ediff-files3)
+ ("d" . ediff-directories)
+ ("c" . ediff-current-file)
+ ("b" . ediff-buffers))
+
+(bind-keys
+ :prefix "C-x p"
+ :prefix-map pkg-ops-map
+ :prefix-docstring "Keymap for package operations"
+ ("l" . list-packages)
+ ("n" . package-list-packages-no-fetch)
+ ("i" . package-install)
+ ("d" . package-delete)
+ ("a" . package-autoremove)
+ ("g" . package-refresh-contents)
+ ("r" . package-reinstall)
+ ("h" . describe-package))
 
 (use-package avy-grille
   :bind

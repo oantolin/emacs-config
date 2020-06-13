@@ -115,7 +115,7 @@
  ("C-x C-p" . proced)
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
- ("C-x K" . kill-buffer)
+ ("C-x p" . list-packages)
  ([remap list-buffers] . electric-buffer-list)
  ([remap upcase-word] . upcase-dwim)
  ([remap downcase-word] . downcase-dwim)
@@ -140,45 +140,6 @@
 (when (string= (system-name)  "penguin")
   ;; Alt+backspace sends <delete> on the Chromebook...
   (bind-key "<delete>" #'backward-kill-word))
-
-(bind-keys
- :prefix "C-c f"
- :prefix-map file-ops-map
- :prefix-docstring "Keymap for file operations"
- ("c" . copy-file)
- ("d" . delete-file)
- ("x" . embark-open-externally)
- ("r" . rename-file)
- ("m" . make-directory)
- ("D" . delete-directory)
- ("/" . cd)
- ("." . pwd)
- ("=" . ediff)
- ("b" . byte-compile-file)
- ("B" . byte-recompile-directory))
-
-(bind-keys
- :prefix "C-c f e"
- :prefix-map ediff-ops-map
- :prefix-docstring "Keymap for launching ediff"
- ("f" . ediff-files)
- ("3" . ediff-files3)
- ("d" . ediff-directories)
- ("c" . ediff-current-file)
- ("b" . ediff-buffers))
-
-(bind-keys
- :prefix "C-x p"
- :prefix-map pkg-ops-map
- :prefix-docstring "Keymap for package operations"
- ("l" . list-packages)
- ("n" . package-list-packages-no-fetch)
- ("i" . package-install)
- ("d" . package-delete)
- ("a" . package-autoremove)
- ("g" . package-refresh-contents)
- ("r" . package-reinstall)
- ("h" . describe-package))
 
 (bind-keys
  :prefix "C-c t"
