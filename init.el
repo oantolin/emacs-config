@@ -11,7 +11,8 @@
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
  '(tool-bar-mode nil)
- '(scroll-bar-mode nil))
+ '(scroll-bar-mode nil)
+ '(use-dialog-box nil))
 
 (when (string= (system-name) "penguin") ; Chromebook
   (set-face-attribute 'default nil :height 110)
