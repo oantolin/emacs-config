@@ -485,7 +485,9 @@
   :defer t
   :hook (occur-mode . force-truncate-lines))
 
-(use-package restart-emacs :ensure t :defer t)
+(use-package restart-emacs
+  :ensure t
+  :bind ("C-x M-c" . restart-emacs))
 
 (use-package shr
   :defer t
