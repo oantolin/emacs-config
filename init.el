@@ -319,7 +319,7 @@
             (rx-seq (fmt seq)
               (mapconcat
                (if (stringp fmt) (lambda (x) (format fmt x)) fmt)
-               seq ".?*"))
+               seq ".*?"))
             (format-unless (fmt pat)
               (lambda (x)
                 (if (string-match-p pat x) x (format fmt x)))))
