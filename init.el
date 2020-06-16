@@ -403,6 +403,11 @@
                   (fit-window-to-buffer (get-buffer-window)
                                         (floor (frame-height) 2) 1)))))
 
+(use-package explain-pause-mode
+  :load-path "~/my-elisp-packages/explain-pause-mode"
+  :diminish
+  :config (explain-pause-mode))
+
 (use-package gobble-whitespace
   :config (global-gobble-whitespace-mode))
 
