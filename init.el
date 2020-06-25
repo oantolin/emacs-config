@@ -744,6 +744,7 @@
 (use-package gnus
   :bind
   ("C-c g" . gnus)
+  ([remap compose-mail] . gnus-msg-mail)
   (:map gnus-summary-mode-map ("C-c o" . ace-link-gnus))
   (:map gnus-article-mode-map ("C-c o" . ace-link-gnus))
   :config
@@ -751,7 +752,9 @@
   (gnus-ignored-newsgroups
    "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
   ;; all-user-mail-addresses-regexp is defined in email-config
-  (gnus-ignored-from-addresses all-user-mail-addresses-regexp))
+  (gnus-ignored-from-addresses all-user-mail-addresses-regexp)
+  (gnus-message-archive-method '(nnimap "gmail"))
+  (gnus-message-archive-group "[Gmail]/Sent Mail"))
 
 (use-package bbdb
   :ensure t
