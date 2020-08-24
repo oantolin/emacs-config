@@ -8,9 +8,7 @@
            (this (if lightp light dark))
            (that (if lightp dark light)))
       (disable-theme this)
-      (enable-theme that))
-    (when (eq major-mode 'org-mode)
-      (org-mode-restart))))
+      (enable-theme that))))
 
 (defun toggle-wrapping ()
   "Toggle both auto fill and visual line modes."
