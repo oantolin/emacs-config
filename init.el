@@ -470,8 +470,10 @@
 (use-package paren :init (show-paren-mode))
 
 (use-package text-mode
-  :defer t
+  :hook 
+  (text-mode . turn-on-visual-line-mode)
   :config
+  (remove-hook 'text-mode-hook 'turn-on-auto-fill)
   (modify-syntax-entry ?\" "\"" text-mode-syntax-table))
 
 (use-package eldoc :defer t :diminish)
@@ -643,9 +645,6 @@
 
 (use-package markdown-mode
   :ensure t
-  :hook 
-  (markdown-mode . turn-off-auto-fill)
-  (markdown-mode . turn-on-visual-line-mode)
   :config
   (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table))
 
