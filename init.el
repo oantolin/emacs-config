@@ -426,8 +426,9 @@
 (use-package dot-mode
   :ensure t
   :diminish
-  :init (global-dot-mode)
+  :demand t
   :config
+  (global-dot-mode)
   (defvar dot-mode-map (assoc 'dot-mode minor-mode-map-alist))
   (unbind-key "C-M-." dot-mode-map)
   (unbind-key "C-c ." dot-mode-map)
