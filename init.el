@@ -439,7 +439,6 @@
 
 (use-package beginend
   :ensure t
-  :demand t
   :diminish beginend-global-mode
   :config
   (dolist (mode beginend-modes) (diminish (cdr mode)))
