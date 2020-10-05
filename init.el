@@ -20,7 +20,9 @@
   (define-key key-translation-map (kbd "<prior>") (kbd "<M-up>")))
 
 (custom-set-faces
- '(default ((((type w32)) :family "Consolas")))
+ '(default ((((type w32)) :family "Consolas"))))
+
+(custom-set-faces
  `(variable-pitch ((t :family "DejaVu Serif")))
  '(Info-quoted ((t :inherit fixed-pitch)))
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
