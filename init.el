@@ -20,8 +20,9 @@
   (define-key key-translation-map (kbd "<prior>") (kbd "<M-up>")))
 
 (custom-set-faces
+ '(default ((((type w32)) :family "Consolas")))
  `(variable-pitch ((t :family "DejaVu Serif")))
- '(Info-quoted ((t (:inherit fixed-pitch))))
+ '(Info-quoted ((t :inherit fixed-pitch)))
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
 
@@ -54,6 +55,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
 (add-to-list 'load-path "~/.private/")
+
+(cd "~/") ; only needed on Windows 
 
 ;;; misc
 
