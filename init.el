@@ -64,7 +64,8 @@
 
 (let ((home-bin (expand-file-name "bin" (getenv "HOME")))
       (path (getenv "PATH")))
-  (unless (string-prefix-p home-bin path)
+  (unless (or (string-prefix-p home-bin path)
+              (not (file-exists-p home-bin)))
     (setenv "PATH" (concat home-bin ":" path))
     (add-to-list 'exec-path home-bin)))
 
