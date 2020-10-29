@@ -23,7 +23,8 @@
  '(default ((((type w32)) :family "Consolas"))))
 
 (custom-set-faces
- `(variable-pitch ((t :family "DejaVu Serif")))
+ `(variable-pitch ((((type w32)) :family "Georgia")
+                   (t :family "DejaVu Serif")))
  '(Info-quoted ((t :inherit fixed-pitch)))
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
