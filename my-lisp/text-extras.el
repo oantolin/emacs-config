@@ -183,4 +183,11 @@ times."
   "Force line truncation. For use in hooks."
   (setq truncate-lines t))
 
+(defun dabbrev-next (arg)
+  "Insert the next ARG words from where previous expansion was found."
+  (interactive "p")
+  (dotimes (_ arg)
+    (insert " ")
+    (dabbrev-expand 1)))
+
 (provide 'misc-text)
