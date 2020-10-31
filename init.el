@@ -365,8 +365,8 @@
 (use-package avy-embark-occur
   :bind
   (:map minibuffer-local-completion-map
-        ("'" . avy-embark-occur-choose)
-        ("\"" . avy-embark-occur-act)))
+        ("C-'" . avy-embark-occur-choose)
+        ("C-\"" . avy-embark-occur-act)))
 
 (use-package embark
   :demand t
@@ -376,10 +376,10 @@
   ("C-c o" . embark-occur)
   ("C-c x" . embark-export)
   (:map minibuffer-local-map
-        (">" . embark-become))
+        ("C->" . embark-become))
   (:map minibuffer-local-completion-map
-        (";" . embark-act-noexit)
-        (":" . embark-act)
+        ("C-;" . embark-act-noexit)
+        ("C-:" . embark-act)
         ("C-o" . embark-occur)
         ("C-l" . embark-live-occur) ; only here for crm, really
         ("M-e" . embark-export)
@@ -391,8 +391,8 @@
   (:map embark-occur-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
-        ("'" . avy-embark-occur-choose)
-        ("\"" . avy-embark-occur-act))
+        ("C-'" . avy-embark-occur-choose)
+        ("C-\"" . avy-embark-occur-act))
   (:map embark-package-map
         ("g" . package-refresh-contents)
         ("a" . package-autoremove)
