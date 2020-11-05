@@ -413,9 +413,6 @@
                   (fit-window-to-buffer (get-buffer-window)
                                         (floor (frame-height) 2) 1)))))
 
-(use-package gobble-whitespace
-  :config (global-gobble-whitespace-mode))
-
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
 
