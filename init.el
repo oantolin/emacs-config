@@ -131,10 +131,8 @@
  ("M-R" . raise-sexp)
  ("M-E" . mark-end-of-sentence)
  ("M-T" . transpose-sentences)
+ ("C-c w" . browse-url-at-point)
  ("C-x M-t" . transpose-paragraphs)
- ("C-S-s" . forward-same-syntax)
- ("M-p" . previous-error)
- ("M-n" . next-error)
  ([remap apropos-command] . apropos)
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
@@ -462,13 +460,6 @@
   :ensure t
   :config (ace-link-setup-default)
   :custom (avy-styles-alist nil))
-
-(use-package goto-addr
-  :bind ("C-c u" . ace-link-addr)
-  :hook
-  (text-mode . goto-address-mode)
-  (prog-mode . goto-address-prog-mode)
-  (eshell-mode . goto-address-mode))
 
 (use-package elec-pair :init (electric-pair-mode))
 
