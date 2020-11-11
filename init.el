@@ -460,13 +460,6 @@
   :config (ace-link-setup-default)
   :custom (avy-styles-alist nil))
 
-(use-package goto-addr
-  :bind ("C-c u" . ace-link-addr)
-  :hook
-  (text-mode . goto-address-mode)
-  (prog-mode . goto-address-prog-mode)
-  (eshell-mode . goto-address-mode))
-
 (use-package elec-pair :init (electric-pair-mode))
 
 (use-package paren :init (show-paren-mode))
