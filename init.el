@@ -59,7 +59,9 @@
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
 (add-to-list 'load-path "~/.private/")
 
-(cd "~/") ; only needed on Windows 
+(when (eq system-type 'windows-nt)
+  (cd "~/")
+  (setenv "LANG" "en_US"))
 
 ;;; misc
 
@@ -721,6 +723,8 @@
 (use-package ispell
   :defer t
   :config
+  (add-to-list 'ispell-dicts-name2locale-equivs-alist
+               '("español" "es_MX"))
   (defconst ispell-org-skip-alists
     '(("\\\\\\[" . "\\\\\\]")
       ("\\\\(" . "\\\\)")
