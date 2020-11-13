@@ -395,12 +395,22 @@
   (:map embark-package-map
         ("g" . package-refresh-contents)
         ("a" . package-autoremove)
+        ("u" . update-all-packages)
         ("t" . try))
   :custom
   (embark-occur-initial-view-alist '((t . grid)))
   (embark-occur-minibuffer-completion t)
   (completing-read-function 'embark-completing-read)
   :config
+  (defun update-all-packages ()
+    "Update all packages."
+    (interactive)
+    (save-window-excursion
+      (package-list-packages)
+      (package-menu-mark-upgrades)
+      (condition-case nil
+          (package-menu-execute)
+        (user-error nil))))
   (defun embark-forward-char-or-switch-to-live-occur ()
     "Move forward one char if possible, else switch to Embark Occur buffer."
     (interactive)
