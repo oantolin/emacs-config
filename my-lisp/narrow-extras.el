@@ -42,4 +42,4 @@ already narrowed."
    (save-excursion (up-list -1 t t) (point))
    (save-excursion (up-list +1 t t) (point))))
 
-(provide 'narrow-dwim)
+(provide 'narrow-extras)
