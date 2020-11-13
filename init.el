@@ -395,7 +395,8 @@
   (:map embark-package-map
         ("g" . package-refresh-contents)
         ("a" . package-autoremove)
-        ("u" . update-all-packages)
+        ("U" . update-all-packages)
+        ("I" . embark-insert)
         ("t" . try))
   :custom
   (embark-occur-initial-view-alist '((t . grid)))
