@@ -718,7 +718,21 @@
     (customize-set-variable 'org-latex-pdf-process '("latexmk -pdf %f")))
   (modify-syntax-entry ?< "_" org-mode-syntax-table)
   (modify-syntax-entry ?> "_" org-mode-syntax-table)
-  (bind-keys :map narrow-map ("s" . narrow-to-sexp) ("b") ("e")))
+  (bind-keys :map narrow-map ("s" . narrow-to-sexp) ("b") ("e"))
+  (org-link-set-parameters
+   "org-title"
+   :store (defun store-org-title-link ()
+            "Store a link to the org file visited in the current buffer.
+Use the #+TITLE as the link description. The link is only stored
+if `org-store-link' is called from the #+TITLE line."
+            (when (and (derived-mode-p 'org-mode)
+                       (save-excursion
+                         (beginning-of-line)
+                         (looking-at "#\\+TITLE:")))
+              (org-link-store-props
+               :type "file"
+               :link (concat "file:" (buffer-file-name))
+               :description (cadar (org-collect-keywords '("TITLE"))))))))
 
 (use-package org-config :after org) ; private package
 
