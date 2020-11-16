@@ -17,7 +17,9 @@
 (when (string= (system-name) "penguin") ; Chromebook
   (set-face-attribute 'default nil :height 110)
   (define-key key-translation-map (kbd "<next>") (kbd "<M-down>"))
-  (define-key key-translation-map (kbd "<prior>") (kbd "<M-up>")))
+  (define-key key-translation-map (kbd "<S-next>") (kbd "<S-M-down>"))
+  (define-key key-translation-map (kbd "<prior>") (kbd "<M-up>"))
+  (define-key key-translation-map (kbd "<S-prior>") (kbd "<S-M-up>")))
 
 (custom-set-faces
  '(default ((((type w32)) :family "Consolas"))))
