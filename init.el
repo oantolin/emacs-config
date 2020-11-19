@@ -227,6 +227,8 @@
   ("C-S-r" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
   ("M-'" . dabbrev-next)
+  ("C-`" . store-register-dwim)
+  ("M-`" . use-register-dwim)
   :commands force-truncate-lines)
 
 (use-package placeholder
