@@ -400,6 +400,7 @@
   (:map embark-package-map
         ("g" . package-refresh-contents)
         ("a" . package-autoremove)
+        ("U" . package-update-all)
         ("I" . embark-insert)
         ("t" . try))
   :custom
@@ -407,6 +408,18 @@
   (embark-occur-minibuffer-completion t)
   (completing-read-function 'embark-completing-read)
   :config
+  (defun package-update-all (&optional no-fetch)
+    "Upgrade all packages.
+When optional argument NO-FETCH is non-nil (interactively with
+prefix argument), do not fetch packages."
+    (interactive "P")
+    (save-window-excursion
+      (package-list-packages no-fetch)
+      (package-menu-mark-upgrades)
+      (condition-case nil (package-menu-execute) (user-error))))
+  (defun embark-ignore-target (&rest _) (ignore (embark-target)))
+  (dolist (fn '(package-autoremove package-refresh-contents package-update-all))
+    (advice-add fn :before #'embark-ignore-target))
   (defun embark-forward-char-or-switch-to-live-occur ()
     "Move forward one char if possible, else switch to Embark Occur buffer."
     (interactive)
