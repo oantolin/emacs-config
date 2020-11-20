@@ -12,7 +12,8 @@
  '(menu-bar-mode nil)
  '(tool-bar-mode nil)
  '(scroll-bar-mode nil)
- '(use-dialog-box nil))
+ '(use-dialog-box nil)
+ '(visible-bell t))
 
 (when (string= (system-name) "penguin") ; Chromebook
   (set-face-attribute 'default nil :height 110)
