@@ -414,7 +414,8 @@ When optional argument NO-FETCH is non-nil (interactively with
 prefix argument), do not fetch packages."
     (interactive "P")
     (save-window-excursion
-      (package-list-packages no-fetch)
+      (let (package-menu-async)
+        (package-list-packages no-fetch))
       (package-menu-mark-upgrades)
       (condition-case nil (package-menu-execute) (user-error))))
   (defun embark-ignore-target (&rest _) (ignore (embark-target)))
