@@ -681,6 +681,7 @@ prefix argument), do not fetch packages."
         ("C-x n b" . org-narrow-to-block)  
         ("C-x n e" . org-narrow-to-element))
   :custom
+  (org-ellipsis "▸")
   (org-refile-use-outline-path 'file)
   (org-goto-interface 'outline-path-completion)
   (org-outline-path-complete-in-steps nil)
