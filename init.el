@@ -670,7 +670,8 @@ prefix argument), do not fetch packages."
   :bind
   (("C-c c" . org-capture)
    ("C-c a" . org-agenda)
-   ("C-c s" . org-store-link))
+   ("C-c s" . org-store-link)
+   ("C-c C" . org-clock-goto))
   (:map org-mode-map
         ("C-c o" . ace-link-org)
         ("$" . math-delimiters-insert)
