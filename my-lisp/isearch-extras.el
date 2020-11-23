@@ -23,7 +23,10 @@
   (isearch-update))
 
 (defun isearch-yank-region ()
-  "If the region is active add it to the isearch search string."
+  "If the region is active add it to the isearch search string.
+Either bind this to a key in `isearch-mode-map' or add it to
+`isearch-mode-hook'."
+  (interactive)
   (when (use-region-p)
     (isearch-yank-string
      (buffer-substring-no-properties

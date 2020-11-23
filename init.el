@@ -247,10 +247,10 @@
   (:map isearch-mode-map
         ("<S-return>" . isearch-exit-at-end)
         ([remap isearch-abort] . isearch-cancel)
-        ("<C-backspace>" . isearch-delete-wrong))
+        ("<C-backspace>" . isearch-delete-wrong)
+        ("C-M-w" . isearch-yank-region))
   :hook
-  (isearch-mode-end . isearch-exit-at-start)
-  (isearch-mode . isearch-yank-region))
+  (isearch-mode-end . isearch-exit-at-start))
 
 (use-package math-delimiters
   :load-path "~/my-elisp-packages/math-delimiters"
