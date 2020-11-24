@@ -480,7 +480,9 @@ prefix argument), do not fetch packages."
 
 (use-package ace-link
   :ensure t
-  :config (ace-link-setup-default))
+  :config
+  (ace-link-setup-default)
+  (setq avy-styles-alist nil))
 
 (use-package elec-pair :init (electric-pair-mode))
 
