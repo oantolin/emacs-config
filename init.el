@@ -438,8 +438,6 @@ prefix argument), do not fetch packages."
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
 
-(use-package eval-region-advice)
-
 (use-package narrow-extras
   :bind
   (:map ctl-x-map
