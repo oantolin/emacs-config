@@ -249,10 +249,10 @@
   (:map isearch-mode-map
         ("<S-return>" . isearch-exit-at-end)
         ([remap isearch-abort] . isearch-cancel)
-        ("<C-backspace>" . isearch-delete-wrong))
+        ("<C-backspace>" . isearch-delete-wrong)
+        ("C-M-w" . isearch-yank-region))
   :hook
-  (isearch-mode-end . isearch-exit-at-start)
-  (isearch-mode . isearch-yank-region))
+  (isearch-mode-end . isearch-exit-at-start))
 
 (use-package math-delimiters
   :load-path "~/my-elisp-packages/math-delimiters"
@@ -482,7 +482,9 @@ prefix argument), do not fetch packages."
 
 (use-package ace-link
   :ensure t
-  :config (ace-link-setup-default))
+  :config
+  (ace-link-setup-default)
+  (setq avy-styles-alist nil))
 
 (use-package elec-pair :init (electric-pair-mode))
 
@@ -672,7 +674,8 @@ prefix argument), do not fetch packages."
   :bind
   (("C-c c" . org-capture)
    ("C-c a" . org-agenda)
-   ("C-c s" . org-store-link))
+   ("C-c s" . org-store-link)
+   ("C-c C" . org-clock-goto))
   (:map org-mode-map
         ("C-c o" . ace-link-org)
         ("$" . math-delimiters-insert)
