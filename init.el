@@ -54,6 +54,12 @@
 
 (eval-when-compile (require 'use-package))
 
+(use-package gcmh
+  :ensure t
+  :custom
+  (gcmh-high-cons-threshold 80000000)
+  (gcmh-idle-delay 5))
+
 (use-package diminish :ensure t)
 
 (use-package bind-key
