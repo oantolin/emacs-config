@@ -409,7 +409,7 @@
   :custom
   (embark-occur-initial-view-alist '((t . grid)))
   (embark-occur-minibuffer-completion t)
-  ;; (completing-read-function 'embark-completing-read)
+  (completing-read-function 'embark-completing-read)
   :config
   (defun package-update-all (&optional no-fetch)
     "Upgrade all packages.
