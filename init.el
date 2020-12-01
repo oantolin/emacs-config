@@ -272,7 +272,6 @@
 (use-package block-undo)
 
 (use-package help-extras
-  :when (version< emacs-version "28")
   :bind ("C-h M" . describe-keymap)
   :commands cotd)
 
