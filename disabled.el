@@ -122,11 +122,11 @@
         ("TAB" . insert-completion))
   :config
   (defun insert-completion (&optional event)
-  "Insert current completion into the minibuffer.
+    "Insert current completion into the minibuffer.
 If EVENT, use EVENT’s position to determine the starting position."
-  (interactive (list last-nonmenu-event))
-  (let ((completion-no-auto-exit t))
-    (choose-completion event)))
+    (interactive (list last-nonmenu-event))
+    (let ((completion-no-auto-exit t))
+      (choose-completion event)))
   :hook
   (completion-list-mode . force-truncate-lines))
 
