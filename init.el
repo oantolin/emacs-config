@@ -54,13 +54,15 @@
 
 (eval-when-compile (require 'use-package))
 
+(use-package diminish :ensure t)
+
 (use-package gcmh
   :ensure t
+  :diminish
   :custom
   (gcmh-high-cons-threshold 80000000)
-  (gcmh-idle-delay 5))
-
-(use-package diminish :ensure t)
+  (gcmh-idle-delay 5)
+  :config (gcmh-mode))
 
 (use-package bind-key
   :bind ("C-h y" . describe-personal-keybindings))
