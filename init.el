@@ -382,6 +382,35 @@
         ("C-'" . avy-embark-occur-choose)
         ("C-\"" . avy-embark-occur-act)))
 
+(use-package icomplete
+  :demand t
+  :config (icomplete-mode)
+  :bind (:map icomplete-minibuffer-map
+              ("<down>" . icomplete-forward-completions)
+              ("C-n" . icomplete-forward-completions)
+	      ("<up>" . icomplete-backward-completions)
+	      ("C-p" . icomplete-backward-completions)
+              ("TAB" . minibuffer-force-complete)
+              ("C-M-i" . minibuffer-complete)
+              ("M-RET" . exit-minibuffer))
+  :hook
+  (icomplete-minibuffer-setup . visual-line-mode)
+  :custom
+  (icomplete-show-matches-on-no-input t)
+  (icomplete-prospects-height 5)
+  (icomplete-separator " ⋮ ")
+  (icomplete-hide-common-prefix nil)
+  :config
+  (advice-add 'icomplete-vertical-minibuffer-teardown
+              :after #'visual-line-mode))
+
+(use-package icomplete-vertical
+  :demand t
+  :load-path "~/my-elisp-packages/icomplete-vertical"
+  :bind (:map icomplete-minibuffer-map
+              ("C-v" . icomplete-vertical-toggle))
+  :config (icomplete-vertical-mode))
+
 (use-package embark
   :demand t
   :load-path "~/my-elisp-packages/embark"
@@ -397,9 +426,10 @@
         ("C-o" . embark-occur)
         ("C-l" . embark-live-occur) ; only here for crm, really
         ("M-e" . embark-export)
-        ("<down>" . embark-switch-to-live-occur)
-        ("<right>" . embark-forward-char-or-switch-to-live-occur)
-        ("M-q" . embark-occur-toggle-view))
+        ;; ("<down>" . embark-switch-to-live-occur)
+        ;; ("<right>" . embark-forward-char-or-switch-to-live-occur)
+        ;; ("M-q" . embark-occur-toggle-view)
+        )
   (:map completion-list-mode-map
         (";" . embark-act))
   (:map embark-occur-mode-map
@@ -416,7 +446,7 @@
   :custom
   (embark-occur-initial-view-alist '((t . grid)))
   (embark-occur-minibuffer-completion t)
-  (completing-read-function 'embark-completing-read)
+  ;; (completing-read-function 'embark-completing-read)
   :config
   (defun package-update-all (&optional no-fetch)
     "Upgrade all packages.
@@ -431,10 +461,10 @@ prefix argument), do not fetch packages."
   (defun embark-ignore-target (&rest _) (ignore (embark-target)))
   (dolist (fn '(package-autoremove package-refresh-contents package-update-all))
     (advice-add fn :before #'embark-ignore-target))
-  (defun embark-forward-char-or-switch-to-live-occur ()
-    "Move forward one char if possible, else switch to Embark Occur buffer."
-    (interactive)
-    (if (eobp) (embark-switch-to-live-occur) (forward-char)))
+  ;; (defun embark-forward-char-or-switch-to-live-occur ()
+  ;;   "Move forward one char if possible, else switch to Embark Occur buffer."
+  ;;   (interactive)
+  ;;   (if (eobp) (embark-switch-to-live-occur) (forward-char)))
   (advice-add 'tabulated-list-revert :after
               (defun resize-embark-live-occur-window (&rest _)
                 (when (and (eq major-mode 'embark-occur-mode)
