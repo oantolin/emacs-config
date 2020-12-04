@@ -326,10 +326,7 @@
   :bind
   (:map minibuffer-local-filename-completion-map
         ("<C-backspace>" . up-directory)
-        ("C-c C-d" . cd-bookmark))
-  :commands completing-read-in-region
-  :custom
-  (completion-in-region-function #'completing-read-in-region))
+        ("C-c C-d" . cd-bookmark)))
 
 (use-package orderless
   :load-path "~/my-elisp-packages/orderless"
@@ -483,7 +480,9 @@ prefix argument), do not fetch packages."
 
 (use-package consult
   :load-path "~/my-elisp-packages/consult"
-  :defer t)
+  :commands consult-completion-in-region
+  :custom 
+  (completion-in-region-function #'consult-completion-in-region))
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
