@@ -472,6 +472,14 @@ prefix argument), do not fetch packages."
                   (fit-window-to-buffer (get-buffer-window)
                                         (floor (frame-height) 2) 1)))))
 
+(use-package marginalia
+  :load-path "~/my-elisp-packages/marginalia"
+  :config (marginalia-mode))
+
+(use-package consult
+  :load-path "~/my-elisp-packages/consult"
+  :defer t)
+
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
 
