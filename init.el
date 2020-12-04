@@ -302,20 +302,16 @@
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
-        ("TAB" . minibuffer-complete)
-        ("<backtab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
-        ("C-?" . minibuffer-completion-help)
+        ("M-?" . minibuffer-completion-help)
         ("SPC") ("?"))
   :custom
   (completion-styles '(orderless))
   (completion-category-defaults nil)
   (completion-auto-help nil)
-  (completion-cycle-threshold 5)
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
-  (completions-format 'vertical)
   (enable-recursive-minibuffers t)
   (minibuffer-depth-indicate-mode t)
   (minibuffer-electric-default-mode t)
@@ -430,6 +426,9 @@
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
+  (:map embark-meta-map
+        ("C-?" . embark-keymap-help)
+        ("C-h"))
   (:map embark-occur-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
