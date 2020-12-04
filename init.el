@@ -475,11 +475,14 @@ prefix argument), do not fetch packages."
   :load-path "~/my-elisp-packages/marginalia"
   :config
   (marginalia-mode)
-  (setf (alist-get 'command marginalia-annotate-alist)
+  (setf (alist-get 'command marginalia-annotator-alist)
         #'marginalia-annotate-command-full))
 
 (use-package consult
   :load-path "~/my-elisp-packages/consult"
+  :bind
+  ("C-M-y" . consult-yank-replace)
+  ("M-g M-s" . consult-line)
   :commands consult-completion-in-region
   :custom 
   (completion-in-region-function #'consult-completion-in-region))
