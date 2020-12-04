@@ -474,7 +474,10 @@ prefix argument), do not fetch packages."
 
 (use-package marginalia
   :load-path "~/my-elisp-packages/marginalia"
-  :config (marginalia-mode))
+  :config
+  (marginalia-mode)
+  (setf (alist-get 'command marginalia-annotate-alist)
+        #'marginalia-annotate-command-full))
 
 (use-package consult
   :load-path "~/my-elisp-packages/consult"
