@@ -107,36 +107,6 @@ By default align all matches, with universal prefix align only first match."
   (goto-char (point-min))
   (forward-line (random (count-lines (point-min) (point-max)))))
 
-(defun completing-yank ()
-  "Insert item from kill-ring, selected with completion."
-  (interactive)
-  (when (eq last-command 'yank)
-    (let ((inhibit-read-only t))
-      (delete-region (point) (mark t))))
-  (insert-for-yank
-   (let* ((sep (propertize
-                (concat "\n" (make-string (1- (window-width)) ?—))
-                'face 'shadow))
-          (embark-occur-initial-view-alist '((t . list))))
-     (completing-read "Yank: "
-      (mapcar (lambda (str) (propertize str 'display (concat str sep)))
-              kill-ring)
-      nil t))))
-
-(defun goto-matching-line ()
-  "Go to matching line selected with completion."
-  (interactive)
-  (let ((lines
-         (save-excursion
-           (goto-char (point-min))
-           (cl-loop for start = (point) until (eobp)
-                    do (forward-line)
-                    collect (cons (buffer-substring start (1- (point)))
-                                  start))))
-        (embark-occur-initial-view-alist '((t . list))))
-    (goto-char
-     (cdr (assoc (completing-read "Goto line: " lines nil t) lines)))))
-
 (defun pipe-region (start end command)
   "Pipe region through shell command. If the mark is inactive,
 pipe whole buffer."
