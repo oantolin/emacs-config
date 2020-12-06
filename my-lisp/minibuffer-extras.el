@@ -63,4 +63,10 @@ Use as a value for `completion-in-region-function'."
         (insert completion)
         t))))
 
+(defun minibuffer-try-complete-and-exit ()
+    (interactive)
+    (minibuffer-force-complete)
+    (setq-local deactivate-mark nil)
+    (throw 'exit nil))
+
 (provide 'minibuffer-extras)
