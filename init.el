@@ -464,13 +464,10 @@ prefix argument), do not fetch packages."
 
 (use-package marginalia
   :load-path "~/my-elisp-packages/marginalia"
+  :custom
+  (marginalia-annotators 'marginalia-annotators-heavy)
   :config
-  (marginalia-mode)
-  (cl-loop for (category . annotator)
-           in '((command . marginalia-annotate-command-full)
-                (buffer . marginalia-annotate-buffer)
-                (file . marginalia-annotate-file))
-           do (setf (alist-get category marginalia-annotators) annotator)))
+  (marginalia-mode))
 
 (use-package consult
   :load-path "~/my-elisp-packages/consult"
