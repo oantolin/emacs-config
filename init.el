@@ -293,6 +293,7 @@
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
+        ("TAB" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("M-?" . minibuffer-completion-help)
         ("SPC") ("?"))
@@ -367,7 +368,7 @@
         ("C-\"" . avy-embark-occur-act)))
 
 (use-package icomplete
-  :disabled t
+  ;; :disabled t
   :demand t
   :config (icomplete-mode)
   :bind (:map icomplete-minibuffer-map
@@ -390,7 +391,7 @@
               :after #'visual-line-mode))
 
 (use-package icomplete-vertical
-  :disabled t
+  ;; :disabled t
   :demand t
   :load-path "~/my-elisp-packages/icomplete-vertical"
   :bind (:map icomplete-minibuffer-map
@@ -435,8 +436,9 @@
   (embark-occur-initial-view-alist '((t . grid)))
   (embark-occur-minibuffer-completion t)
   (embark-annotator-alist '((t . embark-annotation-function-metadatum)))
-  (completing-read-function 'embark-completing-read)
+  ;; (completing-read-function 'embark-completing-read)
   :config
+  (setf (alist-get 'variable embark-keymap-alist) 'embark-symbol-map)
   (defun package-update-all (&optional no-fetch)
     "Upgrade all packages.
 When optional argument NO-FETCH is non-nil (interactively with
@@ -465,8 +467,11 @@ prefix argument), do not fetch packages."
   :load-path "~/my-elisp-packages/marginalia"
   :config
   (marginalia-mode)
-  (setf (alist-get 'command marginalia-annotator-alist)
-        #'marginalia-annotate-command-full))
+  (cl-loop for (category . annotator)
+           in '((command . marginalia-annotate-command-full)
+                (buffer . marginalia-annotate-buffer)
+                (file . marginalia-annotate-file))
+           do (setf (alist-get category marginalia-annotators) annotator)))
 
 (use-package consult
   :load-path "~/my-elisp-packages/consult"
