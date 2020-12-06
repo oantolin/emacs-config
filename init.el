@@ -376,7 +376,6 @@
               ("C-n" . icomplete-forward-completions)
 	      ("<up>" . icomplete-backward-completions)
 	      ("C-p" . icomplete-backward-completions)
-              ("TAB" . minibuffer-force-complete)
               ("C-M-i" . minibuffer-complete)
               ("M-RET" . exit-minibuffer))
   :hook
