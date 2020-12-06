@@ -188,7 +188,7 @@
   (modus-themes-slanted-constructs t)
   (modus-themes-bold-constructs t)
   (modus-themes-scale-headings t)
-  :config
+  :init
   (load-theme 'modus-operandi t (not (display-graphic-p)))
   (load-theme 'modus-vivendi t (display-graphic-p)))
 
