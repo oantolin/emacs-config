@@ -164,8 +164,7 @@
  ("t" . toggle-truncate-lines)
  ("s" . whitespace-mode)
  ("v" . variable-pitch-mode)
- ("o" . org-toggle-link-display)
- ("b" . toggle-my-theme))
+ ("o" . org-toggle-link-display))
 
 (bind-keys
  :prefix "C-c l"
@@ -181,24 +180,17 @@
 
 ;;; packages
 
-(use-package modus-operandi-theme
+(use-package modus-themes
   :ensure t
-  :defer t
+  :bind
+  ("C-c t b" . modus-themes-toggle)
   :custom
-  (modus-operandi-theme-slanted-constructs t)
-  (modus-operandi-theme-bold-constructs t)
-  (modus-operandi-theme-scale-headings t))
-
-(use-package modus-vivendi-theme
-  :ensure t
-  :defer t
-  :custom
-  (modus-vivendi-theme-slanted-constructs t)
-  (modus-vivendi-theme-bold-constructs t)
-  (modus-vivendi-theme-scale-headings t))
-
-(load-theme 'modus-operandi t (not (display-graphic-p)))
-(load-theme 'modus-vivendi t (display-graphic-p))
+  (modus-themes-slanted-constructs t)
+  (modus-themes-bold-constructs t)
+  (modus-themes-scale-headings t)
+  :config
+  (load-theme 'modus-operandi t (not (display-graphic-p)))
+  (load-theme 'modus-vivendi t (display-graphic-p)))
 
 (use-package imenu
   :bind ("C-c i" . imenu)
@@ -285,8 +277,7 @@
   :bind
   (:map toggle-map
         ("w" . toggle-wrapping)
-        ("l" . toggle-ispell-lang)
-        ("b" . toggle-my-theme)))
+        ("l" . toggle-ispell-lang)))
 
 (use-package window-extras
   :bind

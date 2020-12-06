@@ -1,15 +1,5 @@
 ;;; -*- lexical-binding: t; -*-
 
-(let ((light 'modus-operandi) (dark 'modus-vivendi))
-  (defun toggle-my-theme ()
-    "Toggle between a light and dark theme."
-    (interactive)
-    (let* ((lightp (memq light custom-enabled-themes))
-           (this (if lightp light dark))
-           (that (if lightp dark light)))
-      (disable-theme this)
-      (enable-theme that))))
-
 (defun toggle-wrapping ()
   "Toggle both auto fill and visual line modes."
   (interactive)
