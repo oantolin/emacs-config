@@ -461,10 +461,12 @@ prefix argument), do not fetch packages."
 
 (use-package marginalia
   :load-path "~/my-elisp-packages/marginalia"
-  :custom
-  (marginalia-annotators 'marginalia-annotators-heavy)
+  :bind
+  (:map minibuffer-local-completion-map
+        ("C-M-a" . marginalia-cycle-annotators))
   :config
-  (marginalia-mode))
+  (marginalia-mode)
+  (marginalia-cycle-annotators))
 
 (use-package consult
   :load-path "~/my-elisp-packages/consult"
