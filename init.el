@@ -428,7 +428,9 @@
         ("I" . embark-insert)
         ("t" . try))
   :custom
-  (embark-occur-initial-view-alist '((t . grid)))
+  (embark-occur-initial-view-alist '((line . list)
+                                     (kill-ring . list)
+                                     (t . grid)))
   (embark-occur-minibuffer-completion t)
   (embark-annotator-alist '((t . embark-annotation-function-metadatum)))
   (completing-read-function 'embark-completing-read)
@@ -464,6 +466,12 @@ prefix argument), do not fetch packages."
   :bind
   (:map toggle-map
         ("a" . marginalia-cycle-annotators))
+  :custom
+  (marginalia-command-categories
+   '((consult-line . line)
+     (consult-yank . kill-ring)
+     (consult-yank-pop . kill-ring)
+     (consult-yank-replace . kill-ring)))
   :config
   (marginalia-mode)
   (marginalia-cycle-annotators))
