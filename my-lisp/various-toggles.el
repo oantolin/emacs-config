@@ -8,16 +8,16 @@
 
 (defvar ispell-current-dictionary)
 
-(with-eval-after-load 'ispell
-  (defun toggle-ispell-lang ()
-    "Toggle ispell dictionary between English and Spanish."
-    (interactive)
-    (ispell-change-dictionary
-     (pcase ispell-current-dictionary
-       ('nil
-        (if (string= (system-name) "penguin") "español" "english"))
-       ("english" "español")
-       ("español" "english")))))
+(defun toggle-ispell-lang ()
+  "Toggle ispell dictionary between English and Spanish."
+  (interactive)
+  (require 'ispell)
+  (ispell-change-dictionary
+   (pcase ispell-current-dictionary
+     ('nil
+      (if (string= (system-name) "penguin") "español" "english"))
+     ("english" "español")
+     ("español" "english"))))
 
 (defun toggle-completion-ui ()
   "Toggle between embark and icomplete for completion."
