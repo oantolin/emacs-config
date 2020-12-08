@@ -366,9 +366,8 @@
         ("C-\"" . avy-embark-occur-act)))
 
 (use-package icomplete
-  ;; :disabled t
   :demand t
-  :config (icomplete-mode)
+  ;; :config (icomplete-mode)
   :bind (:map icomplete-minibuffer-map
               ("<down>" . icomplete-forward-completions)
               ("C-n" . icomplete-forward-completions)
@@ -388,7 +387,6 @@
               :after #'visual-line-mode))
 
 (use-package icomplete-vertical
-  ;; :disabled t
   :demand t
   :load-path "~/my-elisp-packages/icomplete-vertical"
   :bind (:map icomplete-minibuffer-map
@@ -433,7 +431,7 @@
   (embark-occur-initial-view-alist '((t . grid)))
   (embark-occur-minibuffer-completion t)
   (embark-annotator-alist '((t . embark-annotation-function-metadatum)))
-  ;; (completing-read-function 'embark-completing-read)
+  (completing-read-function 'embark-completing-read)
   :config
   (setf (alist-get 'variable embark-keymap-alist) 'embark-symbol-map)
   (defun package-update-all (&optional no-fetch)
@@ -464,8 +462,8 @@ prefix argument), do not fetch packages."
   :load-path "~/my-elisp-packages/marginalia"
   :demand t
   :bind
-  (:map minibuffer-local-completion-map
-        ("C-M-a" . marginalia-cycle-annotators))
+  (:map toggle-map
+        ("a" . marginalia-cycle-annotators))
   :config
   (marginalia-mode)
   (marginalia-cycle-annotators))
