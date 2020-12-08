@@ -462,6 +462,7 @@ prefix argument), do not fetch packages."
 
 (use-package marginalia
   :load-path "~/my-elisp-packages/marginalia"
+  :demand t
   :bind
   (:map minibuffer-local-completion-map
         ("C-M-a" . marginalia-cycle-annotators))
