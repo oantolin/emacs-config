@@ -274,7 +274,8 @@
   :bind
   (:map toggle-map
         ("w" . toggle-wrapping)
-        ("l" . toggle-ispell-lang)))
+        ("l" . toggle-ispell-lang)
+        ("SPC" . toggle-completion-ui)))
 
 (use-package window-extras
   :bind
