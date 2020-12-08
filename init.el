@@ -466,12 +466,6 @@ prefix argument), do not fetch packages."
   :bind
   (:map toggle-map
         ("a" . marginalia-cycle-annotators))
-  :custom
-  (marginalia-command-categories
-   '((consult-line . line)
-     (consult-yank . kill-ring)
-     (consult-yank-pop . kill-ring)
-     (consult-yank-replace . kill-ring)))
   :config
   (marginalia-mode)
   (marginalia-cycle-annotators))
