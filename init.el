@@ -303,10 +303,11 @@
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
   (enable-recursive-minibuffers t)
-  (minibuffer-depth-indicate-mode t)
-  (minibuffer-electric-default-mode t)
+  (resize-mini-windows t)
   (minibuffer-eldef-shorten-default t)
-  (resize-mini-windows t))
+  :init
+  (minibuffer-depth-indicate-mode)
+  (minibuffer-electric-default-mode))
 
 (use-package minibuffer-extras
   :bind
