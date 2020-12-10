@@ -285,7 +285,7 @@
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
-        ("TAB" . minibuffer-force-complete)
+        ("<backtab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("M-?" . minibuffer-completion-help)
         ("SPC") ("?"))
@@ -293,6 +293,7 @@
   (completion-styles '(orderless))
   (completion-category-defaults nil)
   (completion-auto-help nil)
+  (completion-cycle-threshold 5)
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
@@ -301,7 +302,13 @@
   (minibuffer-eldef-shorten-default t)
   :init
   (minibuffer-depth-indicate-mode)
-  (minibuffer-electric-default-mode))
+  (minibuffer-electric-default-mode)
+  :hook
+  (minibuffer-setup . use-default-completion-in-region)
+  :config
+  (defun use-default-completion-in-region ()
+    (unless (string= "Eval: " (minibuffer-prompt))
+      (setq-local completion-in-region-function #'completion--in-region))))
 
 (use-package minibuffer-extras
   :bind
