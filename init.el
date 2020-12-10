@@ -277,11 +277,6 @@
         ("s" . toggle-window-split)
         ("t" . transpose-windows)))
 
-(use-package completing-history
-  :load-path "~/my-elisp-packages/completing-history"
-  :demand t
-  :config (completing-history-setup-keybinding))
-
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
@@ -476,12 +471,20 @@ prefix argument), do not fetch packages."
   :load-path "~/my-elisp-packages/consult"
   :bind
   ("C-M-y" . consult-yank-replace)
-  ("M-g M-s" . consult-line)
-  ("C-c i" . consult-imenu)
-  ("C-c o" . consult-outline)
-  :commands consult-completion-in-region
+  ("M-g l" . consult-line)
+  ("M-g i" . consult-imenu)
+  ("M-g o" . consult-outline)
+  (:map minibuffer-local-map
+        ("M-r" . consult-history)
+        ("M-s"))
+  :commands
+  consult-completion-in-region
   :custom
-  (completion-in-region-function #'consult-completion-in-region))
+  (completion-in-region-function #'consult-completion-in-region)
+  :config
+  (consult-preview-mode)
+  (setf (alist-get 'slime-repl-mode consult-mode-histories)
+        'slime-repl-input-history))
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
@@ -679,30 +682,47 @@ prefix argument), do not fetch packages."
   :commands
   eshell/in-term
   eshell/for-each
-  interactive-cd
-  fix-eshell-keys)
+  interactive-cd)
 
 (use-package eshell
-  :bind ("C-!" . eshell)
+  :bind
+  ("C-!" . eshell)
   :config (setenv "PAGER" "cat"))
 
 (use-package esh-mode
-  :hook (eshell-mode . fix-eshell-keys))
+  :bind
+  (:map eshell-mode-map
+        ("<home>" . eshell-bol)
+        ("C-c d" . interactive-cd)
+        ("M-q" . quit-window)))
+
+(use-package comint
+  :bind ())
 
 (use-package em-hist
   :defer t
+  :bind
+  (:map eshell-hist-mode-map
+        ("M-r" . consult-history)
+        ("M-s"))
   :custom (eshell-hist-ignoredups t))
 
 (use-package shell
   :bind (:map shell-mode-map
-              ("C-c d" . interactive-cd)))
+              ("C-c d" . interactive-cd)
+              ("M-r" . consult-history)
+              ("M-s")))
 
 (use-package term
   :bind
   (:map term-mode-map
-        ("C-c d" . interactive-cd))
+        ("C-c d" . interactive-cd)
+        ("M-r" . consult-history)
+        ("M-s"))
   (:map term-raw-map
-        ("C-c d" . interactive-cd)))
+        ("C-c d" . interactive-cd)
+        ("M-r" . consult-history)
+        ("M-s")))
 
 (use-package magit
   :ensure t
@@ -889,7 +909,10 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package slime-repl
   :after slime
-  :bind (:map slime-repl-mode-map ("DEL")))
+  :bind (:map slime-repl-mode-map
+              ("DEL")
+              ("M-r" . consult-history)
+              ("M-s")))
 
 (use-package clojure-mode :ensure t :defer t)
 

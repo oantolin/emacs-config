@@ -24,11 +24,4 @@
   (term-mode)
   (term-char-mode))
 
-(defun fix-eshell-keys ()
-  (bind-keys
-   :map eshell-mode-map
-   ("<home>" . eshell-bol)
-   ("C-c d" . interactive-cd)
-   ("M-q" . quit-window)))
-
 (provide 'eshell-extras)
