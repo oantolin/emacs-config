@@ -193,13 +193,7 @@
   (load-theme 'modus-vivendi t (display-graphic-p)))
 
 (use-package imenu
-  :bind ("C-c i" . imenu)
   :custom (imenu-space-replacement nil))
-
-(use-package flimenu
-  :ensure t
-  :after imenu
-  :config (flimenu-global-mode))
 
 (use-package misc
   :bind
@@ -399,8 +393,8 @@
   :load-path "~/my-elisp-packages/embark"
   :bind
   ("C-;" . embark-act)
-  ("C-c o" . embark-occur)
-  ("C-c x" . embark-export)
+  ("C-c O" . embark-occur)
+  ("C-c e" . embark-export)
   (:map minibuffer-local-map
         ("C->" . embark-become))
   (:map minibuffer-local-completion-map
@@ -476,8 +470,10 @@ prefix argument), do not fetch packages."
   :bind
   ("C-M-y" . consult-yank-replace)
   ("M-g M-s" . consult-line)
+  ("C-c i" . consult-imenu)
+  ("C-c o" . consult-outline)
   :commands consult-completion-in-region
-  :custom 
+  :custom
   (completion-in-region-function #'consult-completion-in-region))
 
 (use-package tmp-buffer
@@ -720,7 +716,7 @@ prefix argument), do not fetch packages."
    ("C-c s" . org-store-link)
    ("C-c C" . org-clock-goto))
   (:map org-mode-map
-        ("C-c o" . ace-link-org)
+        ("C-c L" . ace-link-org)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
         ("C-'" . org-emphasize)
