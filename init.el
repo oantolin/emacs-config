@@ -424,6 +424,8 @@
         ("U" . package-update-all)
         ("I" . embark-insert)
         ("t" . try))
+  (:map embark-file-map
+        ("x" . consult-file-externally))
   :custom
   (embark-occur-initial-view-alist '((line . list)
                                      (kill-ring . list)
