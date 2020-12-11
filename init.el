@@ -395,7 +395,6 @@
   :load-path "~/my-elisp-packages/embark"
   :bind
   ("C-;" . embark-act)
-  ("C-c O" . embark-occur)
   ("C-c e" . embark-export)
   (:map minibuffer-local-map
         ("C->" . embark-become))
@@ -744,7 +743,7 @@ prefix argument), do not fetch packages."
    ("C-c s" . org-store-link)
    ("C-c C" . org-clock-goto))
   (:map org-mode-map
-        ("C-c L" . ace-link-org)
+        ("C-c o" . ace-link-org)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
         ("C-'" . org-emphasize)
