@@ -729,11 +729,7 @@ prefix argument), do not fetch packages."
         ("M-r" . consult-history)
         ("M-s")))
 
-(use-package magit
-  :ensure t
-  :bind
-  ("C-x g" . magit-status)
-  ("C-x M-g" . magit-dispatch))
+(use-package magit :ensure t :defer t)
 
 (use-package markdown-mode
   :ensure t
