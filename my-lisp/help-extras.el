@@ -21,6 +21,7 @@ Starting from Emacs 28, there is a built-in function for this."
     (princ (substitute-command-keys (format "\\{%s}" keymap)))))
 
 (defun command-of-the-day ()
+  "Show the documentation for a random command."
   (interactive)
   (with-output-to-temp-buffer "*Command of the day*"
     (setq-local revert-buffer-function #'command-of-the-day)
