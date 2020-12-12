@@ -402,7 +402,6 @@
         ("C-l" . embark-live-occur) ; only here for crm, really
         ("M-e" . embark-export)
         ("<down>" . embark-switch-to-live-occur)
-        ("<right>" . embark-forward-char-or-switch-to-live-occur)
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
@@ -412,8 +411,8 @@
   (:map embark-occur-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
-        ("C-'" . avy-embark-occur-choose)
-        ("C-\"" . avy-embark-occur-act))
+        ("'" . avy-embark-occur-choose)
+        ("\"" . avy-embark-occur-act))
   (:map embark-package-map
         ("g" . package-refresh-contents)
         ("a" . package-autoremove)
@@ -442,12 +441,10 @@ prefix argument), do not fetch packages."
       (package-menu-mark-upgrades)
       (condition-case nil (package-menu-execute) (user-error))))
   (defun embark-ignore-target (&rest _) (ignore (embark-target)))
-  (dolist (fn '(package-autoremove package-refresh-contents package-update-all))
+  (dolist (fn '(package-autoremove
+                package-refresh-contents
+                package-update-all))
     (advice-add fn :before #'embark-ignore-target))
-  (defun embark-forward-char-or-switch-to-live-occur ()
-    "Move forward one char if possible, else switch to Embark Occur buffer."
-    (interactive)
-    (if (eobp) (embark-switch-to-live-occur) (forward-char)))
   (advice-add 'tabulated-list-revert :after
               (defun resize-embark-live-occur-window (&rest _)
                 (when (and (eq major-mode 'embark-occur-mode)
