@@ -329,9 +329,6 @@
                 (if (string-match-p pat x) x (format fmt x)))))
     (defun my-regexp-converter (pattern)
       (cond
-       ((string-match-p " " pattern)
-        (rx-seq (format-unless "\\(%s\\)" "\\\\(")
-                (mapcar #'my-regexp-converter (split-string pattern))))
        ((string-fix-p "=" pattern) (regexp-quote (remfix "=" pattern)))
        ((string-fix-p "," pattern) (remfix "," pattern))
        ((string-match-p "^!." pattern)
