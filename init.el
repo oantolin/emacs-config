@@ -407,7 +407,7 @@
   (:map completion-list-mode-map
         (";" . embark-act))
   (:map embark-meta-map
-        ("C-?" . embark-keymap-help)
+        ("?" . embark-keymap-help)
         ("C-h"))
   (:map embark-occur-mode-map
         ("a") ; I don't like my own default :)
