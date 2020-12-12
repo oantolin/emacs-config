@@ -127,6 +127,7 @@
  ("M-K" . kill-paragraph)
  ("M-Z" . zap-to-char)
  ("M-o" . other-window)
+ ("C-h M" . describe-keymap)
  ("C-x C-p" . proced)
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
@@ -257,8 +258,7 @@
 (use-package block-undo)
 
 (use-package help-extras
-  :bind ("C-h M" . describe-keymap)
-  :commands cotd)
+  :commands cotd describe-keymap)
 
 (use-package epithet
   :load-path "~/my-elisp-packages/epithet"

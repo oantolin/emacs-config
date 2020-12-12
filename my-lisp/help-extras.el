@@ -1,7 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
 (defun describe-keymap (keymap)
-  "Describe keys bound in KEYMAP."
+  "Describe keys bound in KEYMAP.
+Starting from Emacs 28, there is a built-in function for this."
   (interactive
    (list
     (completing-read "Keymap: "
