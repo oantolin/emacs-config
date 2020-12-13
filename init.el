@@ -477,6 +477,7 @@ prefix argument), do not fetch packages."
         ("M-s"))
   :commands
   consult-completion-in-region
+  consult-file-externally
   :custom
   (completion-in-region-function #'consult-completion-in-region)
   :config
