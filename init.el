@@ -409,7 +409,8 @@
         ("a") ; I don't like my own default :)
         (";" . embark-act)
         ("'" . avy-embark-occur-choose)
-        ("\"" . avy-embark-occur-act))
+        ("\"" . avy-embark-occur-act)
+        ("C-j" . embark-update-consult-preview))
   (:map embark-package-map
         ("g" . package-refresh-contents)
         ("a" . package-autoremove)
@@ -442,6 +443,12 @@ prefix argument), do not fetch packages."
                 package-refresh-contents
                 package-update-all))
     (advice-add fn :before #'embark-ignore-target))
+  (defun embark-update-consult-preview (&rest _)
+    (interactive)
+    (when-let ((cand (button-label (point)))
+               (fun (car consult--preview-stack)))
+      (with-selected-window (active-minibuffer-window)
+        (funcall fun cand))))
   (advice-add 'tabulated-list-revert :after
               (defun resize-embark-live-occur-window (&rest _)
                 (when (and (eq major-mode 'embark-occur-mode)
