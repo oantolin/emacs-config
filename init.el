@@ -315,43 +315,38 @@
   :load-path "~/my-elisp-packages/orderless"
   :demand t
   :config
-  (cl-flet ((string-fix-p (u v)
-              (or (string-prefix-p u v) (string-suffix-p u v)))
-            (remfix (u v)
-              (let ((pre (string-prefix-p u v)))
-                (substring v (if pre 1 0) (if pre nil -1))))
-            (rx-seq (fmt seq)
-              (mapconcat
-               (if (stringp fmt) (lambda (x) (format fmt x)) fmt)
-               seq ".*?"))
-            (format-unless (fmt pat)
-              (lambda (x)
-                (if (string-match-p pat x) x (format fmt x)))))
-    (defun my-regexp-converter (pattern)
-      (cond
-       ((string-fix-p "=" pattern) (regexp-quote (remfix "=" pattern)))
-       ((string-fix-p "," pattern) (remfix "," pattern))
-       ((string-match-p "^!." pattern)
-        (rx-to-string
-         `(seq
-           (group string-start)         ; highlight nothing!
-           (zero-or-more
-            (or ,@(cl-loop for i from 1 below (length pattern)
-                           collect `(seq ,(substring pattern 1 i)
-                                         (or (not (any ,(aref pattern i)))
-                                             string-end)))))
-           string-end)))
-       ((string-match-p "^{.*}$" pattern)
-        (rx-seq "\\(%c\\)" (substring pattern 1 -1)))
-       ((and minibuffer-completing-file-name
-             (string-match-p "[-.]" pattern))
-        (rx-seq "\\<\\(%s\\)" (split-string pattern "[-.]" t)))
-       ((string-match-p "[/-]" pattern)
-        (rx-seq "\\<\\(%s\\)" (split-string pattern "[/-]" t)))
-       ((string-fix-p "." pattern)
-        (rx-seq "\\<\\(%c\\)" (remfix "." pattern)))
-       (t pattern))))
-  :custom (orderless-matching-styles #'my-regexp-converter))
+  (defmacro dispatch: (regexp spec string)
+    (cl-flet ((symcat (a b) (intern (concat a (symbol-name b)))))
+      (let ((style (if (consp spec) (cadr spec) spec))
+            (name (if (consp spec) (car spec) spec)))
+        `(defun ,(symcat "dispatch:" name) (pattern _index _total)
+           (when (string-match-p ,regexp pattern)
+             (cons ',(symcat "orderless-" style) ,string))))))
+  (cl-flet
+      ((remfix (fix str)
+          (cond
+           ((string-prefix-p fix str) (string-remove-prefix fix str))
+           ((string-suffix-p fix str) (string-remove-suffix fix str)))))
+    (dispatch: "^=\\|=$" literal (remfix "=" pattern))
+    (dispatch: "^,\\|,$" regexp (remfix "," pattern))
+    (dispatch: "^\\.\\|\\.$" initialism (remfix "." pattern)))
+  (dispatch: "^{.*}$" flex (substring pattern 1 -1))
+  (dispatch: "[./-]" prefixes pattern)
+  (dispatch: "^!" (not regexp)
+             (rx-to-string
+              `(seq
+                (group string-start)    ; highlight nothing!
+                (zero-or-more
+                 (or ,@(cl-loop for i from 1 below (length pattern)
+                                collect `(seq ,(substring pattern 1 i)
+                                              (or (not (any ,(aref pattern i)))
+                                                  string-end)))))
+                string-end)))
+  :custom
+  (orderless-matching-styles 'orderless-regexp)
+  (orderless-style-dispatchers
+   '(dispatch:literal dispatch:regexp dispatch:initialism
+     dispatch:flex dispatch:not dispatch:prefixes)))
 
 (use-package avy-embark-occur
   :bind
