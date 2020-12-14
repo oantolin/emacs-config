@@ -30,10 +30,4 @@
     (delete-region (minibuffer-prompt-end) (point-max)))
   (insert (cdr (assoc bm (cdb--bookmarked-directories)))))
 
-(defun minibuffer-try-complete-and-exit ()
-    (interactive)
-    (minibuffer-force-complete)
-    (setq-local deactivate-mark nil)
-    (throw 'exit nil))
-
 (provide 'minibuffer-extras)

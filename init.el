@@ -280,10 +280,13 @@
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
+        ("RET" . icomplete-force-complete-and-exit)
         ("<backtab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("M-?" . minibuffer-completion-help)
         ("SPC") ("?"))
+  (:map minibuffer-local-filename-completion-map
+        ("RET" . icomplete-force-complete-and-exit))
   :custom
   (completion-styles '(orderless))
   (completion-category-defaults nil)
@@ -356,8 +359,8 @@
 
 (use-package icomplete
   :demand t
-  ;; :config (icomplete-mode)
   :bind (:map icomplete-minibuffer-map
+              ("RET" . icomplete-force-complete-and-exit)
               ("<down>" . icomplete-forward-completions)
               ("C-n" . icomplete-forward-completions)
 	      ("<up>" . icomplete-backward-completions)
@@ -379,8 +382,7 @@
   :demand t
   :load-path "~/my-elisp-packages/icomplete-vertical"
   :bind (:map icomplete-minibuffer-map
-              ("C-v" . icomplete-vertical-toggle))
-  :config (icomplete-vertical-mode))
+              ("C-v" . icomplete-vertical-toggle)))
 
 (use-package embark
   :demand t
