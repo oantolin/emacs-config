@@ -280,13 +280,13 @@
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
-        ("RET" . icomplete-force-complete-and-exit)
+        ("RET" . minibuffer-force-complete-and-exit)
         ("<backtab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("M-?" . minibuffer-completion-help)
         ("SPC") ("?"))
   (:map minibuffer-local-filename-completion-map
-        ("RET" . icomplete-force-complete-and-exit))
+        ("RET" . minibuffer-force-complete-and-exit))
   :custom
   (completion-styles '(orderless))
   (completion-category-defaults nil)
