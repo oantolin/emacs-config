@@ -304,6 +304,9 @@
   :hook
   (minibuffer-setup . use-default-completion-in-region)
   :config
+  (defun messageless (fn &rest args)
+    (let ((minibuffer-message-timeout 0)) (apply fn args)))
+  (advice-add 'minibuffer-force-complete-and-exit :around #'messageless)
   (defun use-default-completion-in-region ()
     (unless (string= "Eval: " (minibuffer-prompt))
       (setq-local completion-in-region-function #'completion--in-region))))
