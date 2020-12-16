@@ -469,12 +469,12 @@ prefix argument), do not fetch packages."
   :load-path "~/my-elisp-packages/consult"
   :bind
   ("C-M-y" . consult-yank-replace)
-  ("M-g l" . consult-line)
-  ("M-g M-l" . consult-line)
-  ("M-g i" . consult-imenu)
-  ("M-g M-i" . consult-imenu)
-  ("M-g o" . consult-outline)
-  ("M-g M-o" . consult-outline)
+  ("M-g l" . consult-line)    ("M-g M-l" . consult-line)
+  ("M-g i" . consult-imenu)   ("M-g M-i" . consult-imenu)
+  ("M-g o" . consult-outline) ("M-g M-o" . consult-outline)
+  ("M-g ." . consult-line-symbol-at-point)
+  ("M-s l" . consult-line-from-isearch)
+  ("M-s m" . consult-multi-occur)
   (:map minibuffer-local-map
         ("M-r" . consult-history)
         ("M-s"))
