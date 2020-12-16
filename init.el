@@ -392,15 +392,11 @@
   :load-path "~/my-elisp-packages/embark"
   :bind
   ("C-;" . embark-act)
-  ("C-c e" . embark-export)
   (:map minibuffer-local-map
         ("C->" . embark-become))
   (:map minibuffer-local-completion-map
         ("C-;" . embark-act-noexit)
         ("C-:" . embark-act)
-        ("C-o" . embark-occur)
-        ("C-l" . embark-live-occur) ; only here for crm, really
-        ("M-e" . embark-export)
         ("<down>" . embark-switch-to-live-occur)
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
