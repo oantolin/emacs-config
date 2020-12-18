@@ -426,8 +426,8 @@
                                      (kill-ring . list)
                                      (t . grid)))
   (embark-occur-minibuffer-completion t)
-  (embark-annotator-alist '((t . embark-annotation-function-metadatum)))
-  (completing-read-function 'embark-completing-read)
+  :hook
+  (minibuffer-setup . embark-live-occur-after-input)
   :config
   (setf (alist-get 'variable embark-keymap-alist) 'embark-symbol-map)
   (defun package-update-all (&optional no-fetch)
