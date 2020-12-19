@@ -22,10 +22,10 @@
 (defun toggle-completion-ui ()
   "Toggle between embark and icomplete for completion."
   (interactive)
-  (if (eq completing-read-function 'embark-completing-read)
-      (progn (setq completing-read-function #'completing-read-default)
-             (icomplete-mode))
-    (setq completing-read-function #'embark-completing-read)
-    (icomplete-mode -1)))
+  (if (bound-and-true-p icomplete-mode)
+      (progn (icomplete-mode -1)
+             (add-hook 'minibuffer-setup-hook #'embark-live-occur-after-input))
+    (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-input)
+    (icomplete-mode)))
 
 (provide 'various-toggles)
