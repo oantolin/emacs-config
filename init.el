@@ -422,12 +422,10 @@
   (:map embark-file-map
         ("x" . consult-file-externally))
   :custom
-  (embark-occur-initial-view-alist '((line . list)
-                                     (kill-ring . list)
-                                     (t . grid)))
-  (embark-occur-minibuffer-completion t)
+  (embark-occur-minibuffer-completion t) 
   :hook
   (minibuffer-setup . embark-live-occur-after-input)
+  (embark-occur-post-revert . resize-embark-live-occur-window)
   :config
   (setf (alist-get 'variable embark-keymap-alist) 'embark-symbol-map)
   (defun package-update-all (&optional no-fetch)
@@ -451,12 +449,11 @@ prefix argument), do not fetch packages."
                (fun (car consult--preview-stack)))
       (with-selected-window (active-minibuffer-window)
         (funcall fun cand))))
-  (advice-add 'tabulated-list-revert :after
-              (defun resize-embark-live-occur-window (&rest _)
-                (when (and (eq major-mode 'embark-occur-mode)
-                           (string-match-p "Live" (buffer-name)))
-                  (fit-window-to-buffer (get-buffer-window)
-                                        (floor (frame-height) 2) 1)))))
+  (defun resize-embark-live-occur-window (&rest _)
+    (when (and (eq major-mode 'embark-occur-mode)
+               (string-match-p "Live" (buffer-name)))
+      (fit-window-to-buffer (get-buffer-window)
+                            (floor (frame-height) 2) 1))))
 
 (use-package marginalia
   :load-path "~/my-elisp-packages/marginalia"
