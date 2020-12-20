@@ -453,10 +453,10 @@ prefix argument), do not fetch packages."
   :demand t
   :bind
   (:map toggle-map
-        ("a" . marginalia-cycle-annotators))
+        ("a" . marginalia-cycle))
   :config
   (marginalia-mode)
-  (marginalia-cycle-annotators))
+  (marginalia-cycle))
 
 (use-package consult
   :ensure t
