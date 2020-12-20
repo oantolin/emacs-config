@@ -445,10 +445,10 @@ prefix argument), do not fetch packages."
     (advice-add fn :before #'embark-ignore-target))
   (defun embark-update-consult-preview (&rest _)
     (interactive)
-    (when-let ((cand (button-label (point)))
-               (fun (car consult--preview-stack)))
+    (when-let ((candidate (button-label (point))))
       (with-selected-window (active-minibuffer-window)
-        (funcall fun cand))))
+        (when consult--preview-function
+          (funcall consult--preview-function candidate)))))
   (defun resize-embark-live-occur-window (&rest _)
     (when (and (eq major-mode 'embark-occur-mode)
                (string-match-p "Live" (buffer-name)))
