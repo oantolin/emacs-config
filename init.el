@@ -436,11 +436,6 @@ prefix argument), do not fetch packages."
         (package-list-packages no-fetch))
       (package-menu-mark-upgrades)
       (condition-case nil (package-menu-execute) (user-error))))
-  (defun embark-ignore-target (&rest _) (ignore (embark-target)))
-  (dolist (fn '(package-autoremove
-                package-refresh-contents
-                package-update-all))
-    (advice-add fn :before #'embark-ignore-target))
   (defun embark-update-consult-preview (&rest _)
     (interactive)
     (when-let ((candidate (button-label (point))))
