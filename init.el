@@ -68,6 +68,8 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
+(dolist (dir '("embark" "placeholder" "math-delimiters" "epithet"))
+  (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
 (when (eq system-type 'windows-nt)
@@ -230,7 +232,6 @@
   :commands force-truncate-lines)
 
 (use-package placeholder
-  :load-path "~/my-elisp-packages/placeholder"
   :bind
   ("M-_" . placeholder-insert)
   ("C-S-n" . placeholder-forward)
@@ -250,7 +251,6 @@
   (isearch-mode-end . isearch-exit-at-start))
 
 (use-package math-delimiters
-  :load-path "~/my-elisp-packages/math-delimiters"
   :bind
   (:map toggle-map
         ("m" . math-delimiters-toggle))
@@ -264,7 +264,6 @@
   :commands cotd describe-keymap)
 
 (use-package epithet
-  :load-path "~/my-elisp-packages/epithet"
   :bind ("C-x B" . epithet-rename-buffer))
 
 (use-package various-toggles
@@ -321,7 +320,7 @@
         ("C-c C-d" . cd-bookmark)))
 
 (use-package orderless
-  :load-path "~/my-elisp-packages/orderless"
+  :ensure t
   :demand t
   :config
   (defmacro dispatch: (regexp spec string)
@@ -385,14 +384,13 @@
               :after #'visual-line-mode))
 
 (use-package icomplete-vertical
-  :demand t
-  :load-path "~/my-elisp-packages/icomplete-vertical"
+  :ensure t
+  :demand t  
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle)))
 
 (use-package embark
   :demand t
-  :load-path "~/my-elisp-packages/embark"
   :bind
   ("C-;" . embark-act)
   (:map minibuffer-local-map
@@ -456,7 +454,7 @@ prefix argument), do not fetch packages."
                             (floor (frame-height) 2) 1))))
 
 (use-package marginalia
-  :load-path "~/my-elisp-packages/marginalia"
+  :ensure t
   :demand t
   :bind
   (:map toggle-map
@@ -466,7 +464,7 @@ prefix argument), do not fetch packages."
   (marginalia-cycle-annotators))
 
 (use-package consult
-  :load-path "~/my-elisp-packages/consult"
+  :ensure t
   :bind
   ("C-M-y" . consult-yank-replace)
   ("M-g l" . consult-line)    ("M-g M-l" . consult-line)
