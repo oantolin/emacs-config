@@ -393,8 +393,6 @@
   :demand t
   :bind
   ("C-;" . embark-act)
-  (:map minibuffer-local-map
-        ("C->" . embark-become))
   (:map minibuffer-local-completion-map
         ("C-;" . embark-act-noexit)
         ("C-:" . embark-act)
