@@ -419,7 +419,9 @@
   (:map embark-file-map
         ("x" . consult-file-externally))
   :custom
-  (embark-occur-minibuffer-completion t) 
+  (embark-occur-minibuffer-completion t)
+  (embark-occur-initial-view-alist
+   '((line . list) (kill-ring . zebra) (t . grid)))
   :hook
   (minibuffer-setup . embark-live-occur-after-input)
   (embark-occur-post-revert . resize-embark-live-occur-window)
