@@ -357,6 +357,7 @@
      dispatch:flex dispatch:not dispatch:prefixes)))
 
 (use-package avy-embark-occur
+  :load-path "~/my-elisp-packages/embark/"
   :bind
   (:map minibuffer-local-completion-map
         ("C-'" . avy-embark-occur-choose)
