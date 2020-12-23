@@ -412,10 +412,6 @@
         ("\"" . avy-embark-occur-act)
         ("C-j" . embark-update-consult-preview))
   (:map embark-package-map
-        ("g" . package-refresh-contents)
-        ("a" . package-autoremove)
-        ("U" . package-update-all)
-        ("I" . embark-insert)
         ("t" . try))
   (:map embark-file-map
         ("x" . consult-file-externally))
@@ -428,16 +424,6 @@
   (embark-occur-post-revert . resize-embark-live-occur-window)
   :config
   (setf (alist-get 'variable embark-keymap-alist) 'embark-symbol-map)
-  (defun package-update-all (&optional no-fetch)
-    "Upgrade all packages.
-When optional argument NO-FETCH is non-nil (interactively with
-prefix argument), do not fetch packages."
-    (interactive "P")
-    (save-window-excursion
-      (let (package-menu-async)
-        (package-list-packages no-fetch))
-      (package-menu-mark-upgrades)
-      (condition-case nil (package-menu-execute) (user-error))))
   (defun embark-update-consult-preview (&rest _)
     (interactive)
     (when-let ((candidate (button-label (point))))
