@@ -414,6 +414,11 @@
   (minibuffer-setup . embark-live-occur-after-input)
   (embark-occur-post-revert . resize-embark-live-occur-window)
   :config
+  (setf (alist-get 'consult-imenu embark-setup-overrides) '(unique-completion))
+  (add-to-list 'embark-allow-edit-commands 'consult-imenu)
+  (defun unique-completion ()
+    (when (= (length (embark-minibuffer-candidates)) 1)
+      (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
   (setf (alist-get 'variable embark-keymap-alist) 'embark-symbol-map)
   (defun embark-update-consult-preview (&rest _)
     (interactive)
