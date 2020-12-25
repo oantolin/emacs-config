@@ -11,10 +11,9 @@
                        (beginning-of-line)
                        (point))
                      (point))))
-          (unless (cl-loop
-                   for c across word
-                   if (> (cl-count c word) (cl-count c letters))
-                   return t)
+          (when (cl-loop for c across word
+                         always (<= (cl-count c word)
+                                    (cl-count c letters)))
             (princ (format "%2d %s\n" (length word) word)))))))
   (with-current-buffer "*among*"
     (let ((inhibit-read-only t))
