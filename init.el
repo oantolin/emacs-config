@@ -427,8 +427,7 @@
         (when consult--preview-function
           (funcall consult--preview-function candidate)))))
   (defun resize-embark-live-occur-window (&rest _)
-    (when (and (eq major-mode 'embark-occur-mode)
-               (string-match-p "Live" (buffer-name)))
+    (when (string-match-p "Live" (buffer-name))
       (fit-window-to-buffer (get-buffer-window)
                             (floor (frame-height) 2) 1))))
 
