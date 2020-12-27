@@ -348,12 +348,6 @@
    '(dispatch:literal dispatch:regexp dispatch:initialism
      dispatch:flex dispatch:not dispatch:prefixes)))
 
-(use-package avy-embark-occur
-  :bind
-  (:map minibuffer-local-completion-map
-        ("C-'" . avy-embark-occur-choose)
-        ("C-\"" . avy-embark-occur-act)))
-
 (use-package icomplete
   :demand t
   :bind (:map icomplete-minibuffer-map
@@ -423,6 +417,12 @@
     (when (string-match-p "Live" (buffer-name))
       (fit-window-to-buffer (get-buffer-window)
                             (floor (frame-height) 2) 1))))
+
+(use-package avy-embark-occur
+  :bind
+  (:map minibuffer-local-completion-map
+        ("C-'" . avy-embark-occur-choose)
+        ("C-\"" . avy-embark-occur-act)))
 
 (use-package marginalia
   :ensure t
