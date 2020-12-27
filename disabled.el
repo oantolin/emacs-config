@@ -7,6 +7,11 @@
   :diminish
   :config (gcmh-mode))
 
+(use-package rainbow-delimiters
+  :ensure t
+  :hook
+  (prog-mode . rainbow-delimiters-mode-enable))
+
 (bind-keys
  :prefix "C-c f"
  :prefix-map file-ops-map
