@@ -400,8 +400,7 @@
         ("a") ; I don't like my own default :)
         (";" . embark-act)
         ("'" . avy-embark-occur-choose)
-        ("\"" . avy-embark-occur-act)
-        ("C-j" . embark-update-consult-preview))
+        ("\"" . avy-embark-occur-act))
   (:map embark-package-map
         ("t" . try))
   (:map embark-file-map
@@ -420,12 +419,6 @@
     (when (= (length (embark-minibuffer-candidates)) 1)
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
   (setf (alist-get 'variable embark-keymap-alist) 'embark-symbol-map)
-  (defun embark-update-consult-preview (&rest _)
-    (interactive)
-    (when-let ((candidate (button-label (point))))
-      (with-selected-window (active-minibuffer-window)
-        (when consult--preview-function
-          (funcall consult--preview-function candidate)))))
   (defun resize-embark-live-occur-window (&rest _)
     (when (string-match-p "Live" (buffer-name))
       (fit-window-to-buffer (get-buffer-window)
