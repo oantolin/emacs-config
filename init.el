@@ -426,13 +426,11 @@
 
 (use-package marginalia
   :ensure t
-  :demand t
-  :bind
-  (:map toggle-map
-        ("a" . marginalia-cycle))
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy
+                           marginalia-annotators-light))
   :config
-  (marginalia-mode)
-  (marginalia-cycle))
+  (marginalia-mode))
 
 (use-package consult
   :ensure t
