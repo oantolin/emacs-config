@@ -401,12 +401,12 @@
         ("x" . consult-file-externally))
   :custom
   (embark-occur-minibuffer-completion t)
-  (embark-occur-initial-view-alist
-   '((line . list) (kill-ring . zebra) (t . grid)))
   :hook
   (minibuffer-setup . embark-live-occur-after-input)
   (embark-occur-post-revert . resize-embark-live-occur-window)
   :config
+  (setf (alist-get 'symbol embark-occur-initial-view-alist) 'grid)
+  (setf (alist-get t embark-occur-initial-view-alist) 'grid)
   (setf (alist-get 'consult-imenu embark-setup-overrides) '(unique-completion))
   (add-to-list 'embark-allow-edit-commands 'consult-imenu)
   (defun unique-completion ()
@@ -442,8 +442,7 @@
   ("M-g m" . consult-mark)        ("M-g M-m" . consult-mark)
   ("M-g k" . consult-global-mark) ("M-g M-k" . consult-global-mark)
   ("M-g e" . consult-error)       ("M-g M-e" . consult-error)
-  ("M-g ." . consult-line-symbol-at-point)
-  ("M-s l" . consult-line-from-isearch)
+  ("M-s g" . consult-grep)
   ("M-s m" . consult-multi-occur)
   ("M-X" . consult-mode-command)
   ("C-c b" . consult-buffer)
