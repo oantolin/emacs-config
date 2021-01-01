@@ -315,12 +315,12 @@
   :ensure t
   :demand t
   :config
-  (defmacro dispatch: (regexp spec string)
+  (defmacro dispatch: (regexp spec string &optional guard)
     (cl-flet ((symcat (a b) (intern (concat a (symbol-name b)))))
       (let ((style (if (consp spec) (cadr spec) spec))
             (name (if (consp spec) (car spec) spec)))
         `(defun ,(symcat "dispatch:" name) (pattern _index _total)
-           (when (string-match-p ,regexp pattern)
+           (when (and (string-match-p ,regexp pattern) ,(or guard t))
              (cons ',(symcat "orderless-" style) ,string))))))
   (cl-flet
       ((remfix (fix str)
@@ -329,7 +329,8 @@
            ((string-suffix-p fix str) (string-remove-suffix fix str)))))
     (dispatch: "^=\\|=$" literal (remfix "=" pattern))
     (dispatch: "^,\\|,$" regexp (remfix "," pattern))
-    (dispatch: "^\\.\\|\\.$" initialism (remfix "." pattern)))
+    (dispatch: "^\\.\\|\\.$" initialism (remfix "." pattern)
+               (not minibuffer-completing-file-name)))
   (dispatch: "^{.*}$" flex (substring pattern 1 -1))
   (dispatch: "[./-]" prefixes pattern)
   (dispatch: "^!" without-literal (substring pattern 1))
