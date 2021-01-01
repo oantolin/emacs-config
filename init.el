@@ -403,7 +403,6 @@
   (defun unique-completion ()
     (when (= (length (embark-minibuffer-candidates)) 1)
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
-  (setf (alist-get 'variable embark-keymap-alist) 'embark-symbol-map)
   (defun resize-embark-live-occur-window (&rest _)
     (when (string-match-p "Live" (buffer-name))
       (fit-window-to-buffer (get-buffer-window)
