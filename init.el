@@ -372,12 +372,11 @@
   :ensure t
   :bind
   (:map selectrum-minibuffer-map
-        ("<C-backspace>" . up-directory))
+        ("<C-backspace>" . up-directory)
+        ("C-c C-d" . cd-bookmark))
   :custom
   (selectrum-refine-candidates-function #'orderless-filter)
   (selectrum-highlight-candidates-function #'orderless-highlight-matches)
-  :init
-  (selectrum-mode)
   :config
   (with-eval-after-load 'embark
     (add-hook 'embark-target-finders
@@ -402,7 +401,7 @@
   (:map minibuffer-local-map
         ("C-;" . embark-act-noexit)
         ("C-:" . embark-act)
-        ("<down>" . embark-switch-to-live-occur)
+        ("M-v" . embark-switch-to-live-occur)
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
@@ -421,7 +420,6 @@
   :custom
   (embark-occur-minibuffer-completion t)
   :hook
-  ;; (minibuffer-setup . embark-live-occur-after-input)
   (embark-occur-post-revert . resize-embark-live-occur-window)
   :config
   (setf (alist-get 'symbol embark-occur-initial-view-alist) 'grid)
