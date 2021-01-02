@@ -19,13 +19,15 @@
      ("english" "español")
      ("español" "english"))))
 
-(defun toggle-completion-ui ()
-  "Toggle between embark and icomplete for completion."
+(defun change-completion-ui ()
+  "Choose between Embark, Icomplete and Selectrum for completion."
   (interactive)
-  (if (bound-and-true-p icomplete-mode)
-      (progn (icomplete-mode -1)
-             (add-hook 'minibuffer-setup-hook #'embark-live-occur-after-input))
-    (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-input)
-    (icomplete-mode)))
+  (icomplete-mode -1)
+  (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-input)
+  (selectrum-mode -1)
+  (pcase (read-char-choice "Embark, Icomplete or Selectrum? " '(?e ?i ?s))
+    (?e (add-hook 'minibuffer-setup-hook #'embark-live-occur-after-input))
+    (?i (icomplete-mode))
+    (?s (selectrum-mode))))
 
 (provide 'various-toggles)

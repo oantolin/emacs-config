@@ -263,7 +263,7 @@
   (:map toggle-map
         ("w" . toggle-wrapping)
         ("l" . toggle-ispell-lang)
-        ("SPC" . toggle-completion-ui)))
+        ("SPC" . change-completion-ui)))
 
 (use-package window-extras
   :bind
@@ -367,12 +367,39 @@
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle)))
 
-(use-package embark
+
+(use-package selectrum
+  :ensure t
+  :bind
+  (:map selectrum-minibuffer-map
+        ("<C-backspace>" . up-directory))
+  :custom
+  (selectrum-refine-candidates-function #'orderless-filter)
+  (selectrum-highlight-candidates-function #'orderless-highlight-matches)
+  :init
+  (selectrum-mode)
+  :config
+  (with-eval-after-load 'embark
+    (add-hook 'embark-target-finders
+	      (defun current-candidate+category ()
+	        (when selectrum-active-p
+                  (cons (selectrum--get-meta 'category)
+		        (selectrum-get-current-candidate)))))
+    (add-hook 'embark-candidate-collectors
+              (defun current-candidates+category ()
+                (when selectrum-active-p
+	          (cons (selectrum--get-meta 'category) 
+		        (selectrum-get-current-candidates
+		         ;; Pass relative file names for dired.
+		         minibuffer-completing-file-name)))))
+    (add-hook 'embark-setup-hook 'selectrum-set-selected-candidate)))
+
+(use-package embark ; normal embark configuration
   :ensure t
   :demand t
   :bind
   ("C-;" . embark-act)
-  (:map minibuffer-local-completion-map
+  (:map minibuffer-local-map
         ("C-;" . embark-act-noexit)
         ("C-:" . embark-act)
         ("<down>" . embark-switch-to-live-occur)
@@ -394,7 +421,7 @@
   :custom
   (embark-occur-minibuffer-completion t)
   :hook
-  (minibuffer-setup . embark-live-occur-after-input)
+  ;; (minibuffer-setup . embark-live-occur-after-input)
   (embark-occur-post-revert . resize-embark-live-occur-window)
   :config
   (setf (alist-get 'symbol embark-occur-initial-view-alist) 'grid)
