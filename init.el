@@ -290,7 +290,6 @@
   (completion-ignore-case t)
   (enable-recursive-minibuffers t)
   (resize-mini-windows t)
-  (minibuffer-eldef-shorten-default t)
   :init
   (minibuffer-depth-indicate-mode)
   (minibuffer-electric-default-mode)
