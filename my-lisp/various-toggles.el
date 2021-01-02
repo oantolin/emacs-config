@@ -25,8 +25,6 @@
   (icomplete-mode -1)
   (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-input)
   (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-delay)
-  (define-key minibuffer-local-completion-map
-    (kbd "M-v") #'switch-to-completions)
   (selectrum-mode -1)
   (let ((ui (read-char-choice "Default, Embark, Icomplete or Selectrum? "
                               '(?d ?i ?e ?E ?s))))
@@ -35,9 +33,7 @@
        (add-hook 'minibuffer-setup-hook
                  (if (= ui ?e)
                      #'embark-live-occur-after-input
-                   #'embark-live-occur-after-delay))
-       (define-key minibuffer-local-completion-map
-         (kbd "M-v") #'embark-switch-to-live-occur))
+                   #'embark-live-occur-after-delay)))
       (?i (icomplete-mode))
       (?s (selectrum-mode)))))
 

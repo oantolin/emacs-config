@@ -398,6 +398,7 @@
   (:map minibuffer-local-map
         ("C-:" . embark-act))
   (:map minibuffer-local-completion-map
+        ("C-l" . embark-switch-to-live-occur)
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
