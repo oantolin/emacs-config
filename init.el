@@ -295,6 +295,7 @@
   (minibuffer-electric-default-mode)
   :hook
   (minibuffer-setup . use-default-completion-in-region)
+  (completion-list-mode . force-truncate-lines)
   :config
   (defun messageless (fn &rest args)
     (let ((minibuffer-message-timeout 0)) (apply fn args)))
