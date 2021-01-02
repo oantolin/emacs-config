@@ -24,10 +24,14 @@
   (interactive)
   (icomplete-mode -1)
   (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-input)
+  (define-key minibuffer-local-completion-map
+    (kbd "M-v") #'switch-to-completions)
   (selectrum-mode -1)
   (pcase (read-char-choice "Default, Embark, Icomplete or Selectrum? "
                            '(?d ?i ?e ?s))
-    (?e (add-hook 'minibuffer-setup-hook #'embark-live-occur-after-input))
+    (?e (add-hook 'minibuffer-setup-hook #'embark-live-occur-after-input)
+        (define-key minibuffer-local-completion-map
+          (kbd "M-v") #'embark-switch-to-live-occur))
     (?i (icomplete-mode))
     (?s (selectrum-mode))))
 

@@ -277,7 +277,6 @@
         ("RET" . minibuffer-force-complete-and-exit)
         ("<backtab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
-        ("M-?" . minibuffer-completion-help)
         ("SPC") ("?"))
   (:map minibuffer-local-filename-completion-map
         ("RET" . minibuffer-force-complete-and-exit))
@@ -400,7 +399,6 @@
   (:map minibuffer-local-map
         ("C-:" . embark-act))
   (:map minibuffer-local-completion-map
-        ("M-v" . embark-switch-to-live-occur)
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
