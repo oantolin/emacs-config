@@ -397,10 +397,10 @@
   :ensure t
   :demand t
   :bind
-  ("C-;" . embark-act)
+  ("C-;" . embark-act-noexit)
   (:map minibuffer-local-map
-        ("C-;" . embark-act-noexit)
-        ("C-:" . embark-act)
+        ("C-:" . embark-act))
+  (:map minibuffer-local-completion-map
         ("M-v" . embark-switch-to-live-occur)
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
