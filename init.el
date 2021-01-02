@@ -363,7 +363,6 @@
 
 (use-package icomplete-vertical
   :ensure t
-  :demand t  
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle)))
 

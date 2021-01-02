@@ -25,7 +25,8 @@
   (icomplete-mode -1)
   (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-input)
   (selectrum-mode -1)
-  (pcase (read-char-choice "Embark, Icomplete or Selectrum? " '(?e ?i ?s))
+  (pcase (read-char-choice "Default, Embark, Icomplete or Selectrum? "
+                           '(?d ?i ?e ?s))
     (?e (add-hook 'minibuffer-setup-hook #'embark-live-occur-after-input))
     (?i (icomplete-mode))
     (?s (selectrum-mode))))
