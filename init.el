@@ -472,6 +472,8 @@
   (setf (alist-get 'slime-repl-mode consult-mode-histories)
         'slime-repl-input-history))
 
+(use-package consult-selectrum :ensure t)
+
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
 
