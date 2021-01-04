@@ -752,6 +752,7 @@
   (org-hide-leading-stars t)
   (org-pretty-entities t)
   (org-preview-latex-image-directory "~/.cache/ltximg/")
+  (org-tags-column -66)
   :hook
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
@@ -869,6 +870,8 @@ if `org-store-link' is called from the #+TITLE line."
   :hook
   (message-send . set-smtp-server))
 
+;;; applications
+
 (use-package sx
   :ensure t
   :defer t
@@ -878,6 +881,12 @@ if `org-store-link' is called from the #+TITLE line."
   (sx-cache-directory "~/.private/sx")
   :custom-face
   (sx-question-mode-content-face ((t (:inherit default)))))
+
+(use-package pocket-reader
+  :ensure t
+  :custom
+  (pocket-reader-open-url-default-function #'eww)
+  (pocket-reader-pop-to-url-default-function #'eww))
 
 ;;; major modes
 
