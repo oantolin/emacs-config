@@ -129,6 +129,8 @@
  ("M-s k" . keep-lines)
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
+ ("C-h p" . describe-package)  ; swap these two
+ ("C-h P" . finder-by-keyword)
  ([remap list-buffers] . electric-buffer-list)
  ([remap upcase-word] . upcase-dwim)
  ([remap downcase-word] . downcase-dwim)
