@@ -399,7 +399,8 @@
   (:map minibuffer-local-map
         ("C-:" . embark-act))
   (:map minibuffer-local-completion-map
-        ("C-l" . embark-switch-to-live-occur)
+        ("C-M-l" . embark-switch-to-live-occur)
+        ("C-l" . embark-live-occur) ; for when I use default tab completion
         ("M-q" . embark-occur-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
