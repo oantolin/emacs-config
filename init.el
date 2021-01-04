@@ -884,6 +884,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package pocket-reader
   :ensure t
+  :defer t
   :custom
   (pocket-reader-open-url-default-function #'eww)
   (pocket-reader-pop-to-url-default-function #'eww))
