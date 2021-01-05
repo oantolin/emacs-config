@@ -30,6 +30,11 @@ Starting from Emacs 28, there is a built-in function for this."
            (command (nth (random (length commands)) commands)))
       (princ (describe-function command)))))
 
+(defun show-help ()
+  "Show the *Help* buffer."
+  (interactive)
+  (display-buffer "*Help*"))
+
 (defalias 'cotd #'command-of-the-day)
 
 (provide 'help-extras)

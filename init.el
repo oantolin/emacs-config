@@ -255,6 +255,8 @@
 (use-package block-undo)
 
 (use-package help-extras
+  :bind
+  ("C-h h" . show-help)
   :commands cotd describe-keymap)
 
 (use-package epithet
