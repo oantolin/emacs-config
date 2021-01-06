@@ -400,7 +400,7 @@
 		         minibuffer-completing-file-name)))))
     (add-hook 'embark-setup-hook 'selectrum-set-selected-candidate)))
 
-(use-package embark ; normal embark configuration
+(use-package embark
   :ensure t
   :demand t
   :bind
