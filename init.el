@@ -402,7 +402,6 @@
 
 (use-package embark
   :ensure t
-  :demand t
   :bind
   ("C-;" . embark-act-noexit)
   (:map minibuffer-local-map
