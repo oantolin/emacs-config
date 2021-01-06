@@ -293,6 +293,7 @@
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
   (enable-recursive-minibuffers t)
+  (minibuffer-eldef-shorten-default t)
   (resize-mini-windows t)
   :init
   (minibuffer-depth-indicate-mode)
@@ -301,6 +302,10 @@
   (minibuffer-setup . use-default-completion-in-region)
   (completion-list-mode . force-truncate-lines)
   :config
+  (defun stealthily (fn &rest args)
+    (let ((inhibit-modification-hooks t))
+      (apply fn args)))
+  (advice-add 'minibuf-eldef-setup-minibuffer :around #'stealthily)
   (defun messageless (fn &rest args)
     (let ((minibuffer-message-timeout 0)) (apply fn args)))
   (advice-add 'minibuffer-force-complete-and-exit :around #'messageless)
