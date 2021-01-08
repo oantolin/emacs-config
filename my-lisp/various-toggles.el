@@ -23,8 +23,8 @@
   "Choose between Embark, Icomplete and Selectrum for completion."
   (interactive)
   (icomplete-mode -1)
-  (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-input)
-  (remove-hook 'minibuffer-setup-hook #'embark-live-occur-after-delay)
+  (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-input)
+  (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-delay)
   (selectrum-mode -1)
   (let ((ui (read-char-choice "Default, Embark, Icomplete or Selectrum? "
                               '(?d ?i ?e ?E ?s))))
@@ -32,8 +32,8 @@
       ((or ?e ?E)
        (add-hook 'minibuffer-setup-hook
                  (if (= ui ?e)
-                     #'embark-live-occur-after-input
-                   #'embark-live-occur-after-delay)))
+                     #'embark-collect-completions-after-input
+                   #'embark-collect-completions-after-delay)))
       (?i (icomplete-mode))
       (?s (selectrum-mode)))))
 

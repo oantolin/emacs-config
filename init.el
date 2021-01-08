@@ -401,21 +401,22 @@
     (add-hook 'embark-setup-hook 'selectrum-set-selected-candidate)))
 
 (use-package embark
-  :ensure t
+  :load-path "~/my-elisp-packages/embark/"
+  ;; :ensure t
   :bind
   ("C-;" . embark-act-noexit)
   (:map minibuffer-local-map
         ("C-:" . embark-act))
   (:map minibuffer-local-completion-map
-        ("C-M-l" . embark-switch-to-live-occur)
-        ("C-l" . embark-live-occur) ; for when I use default tab completion
-        ("M-q" . embark-occur-toggle-view))
+        ("C-M-l" . embark-switch-to-collect-completions)
+        ("C-l" . embark-collect-completions) ; for default tab completion
+        ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
   (:map embark-meta-map
         ("?" . embark-keymap-help)
         ("C-h"))
-  (:map embark-occur-mode-map
+  (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
         ("'" . avy-embark-occur-choose)
@@ -424,19 +425,17 @@
         ("t" . try))
   (:map embark-file-map
         ("x" . consult-file-externally))
-  :custom
-  (embark-occur-minibuffer-completion t)
   :hook
-  (embark-occur-post-revert . resize-embark-live-occur-window)
+  (embark-collect-post-revert . resize-embark-collect-completions)
   :config
-  (setf (alist-get 'symbol embark-occur-initial-view-alist) 'grid)
-  (setf (alist-get t embark-occur-initial-view-alist) 'grid)
+  (setf (alist-get 'symbol embark-collect-initial-view-alist) 'grid)
+  (setf (alist-get t embark-collect-initial-view-alist) 'grid)
   (setf (alist-get 'consult-imenu embark-setup-overrides) '(unique-completion))
   (add-to-list 'embark-allow-edit-commands 'consult-imenu)
   (defun unique-completion ()
     (when (= (length (embark-minibuffer-candidates)) 1)
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
-  (defun resize-embark-live-occur-window (&rest _)
+  (defun resize-embark-collect-completions (&rest _)
     (when (string-match-p "Live" (buffer-name))
       (fit-window-to-buffer (get-buffer-window)
                             (floor (frame-height) 2) 1))))
