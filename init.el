@@ -401,8 +401,8 @@
     (add-hook 'embark-setup-hook 'selectrum-set-selected-candidate)))
 
 (use-package embark
-  :load-path "~/my-elisp-packages/embark/"
-  ;; :ensure t
+  ;; :load-path "~/my-elisp-packages/embark/"
+  :ensure t
   :bind
   ("C-;" . embark-act-noexit)
   (:map minibuffer-local-map
