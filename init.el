@@ -475,7 +475,6 @@
   :custom
   (completion-in-region-function #'consult-completion-in-region)
   :config
-  (consult-preview-mode)
   (setf (alist-get 'slime-repl-mode consult-mode-histories)
         'slime-repl-input-history))
 
