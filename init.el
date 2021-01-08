@@ -436,9 +436,8 @@
     (when (= (length (embark-minibuffer-candidates)) 1)
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
   (defun resize-embark-collect-completions (&rest _)
-    (when (string-match-p "Live" (buffer-name))
-      (fit-window-to-buffer (get-buffer-window)
-                            (floor (frame-height) 2) 1))))
+    (fit-window-to-buffer (get-buffer-window)
+                            (floor (frame-height) 2) 1)))
 
 (use-package avy-embark-occur
   :bind
