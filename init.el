@@ -439,11 +439,11 @@
     (fit-window-to-buffer (get-buffer-window)
                             (floor (frame-height) 2) 1)))
 
-(use-package avy-embark-occur
+(use-package avy-embark-collect
   :bind
   (:map minibuffer-local-completion-map
-        ("C-'" . avy-embark-occur-choose)
-        ("C-\"" . avy-embark-occur-act)))
+        ("C-'" . avy-embark-collect-choose)
+        ("C-\"" . avy-embark-collect-act)))
 
 (use-package marginalia
   :ensure t
