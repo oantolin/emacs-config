@@ -435,7 +435,7 @@
         'embark-consult-location-map)
   (add-to-list 'embark-allow-edit-commands 'consult-imenu)
   (defun unique-completion ()
-    (when (= (length (embark-minibuffer-candidates)) 1)
+    (unless (cddr (embark-minibuffer-candidates))
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
   (defun resize-embark-collect-completions (&rest _)
     (fit-window-to-buffer (get-buffer-window)
