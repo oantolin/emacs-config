@@ -408,8 +408,8 @@
   (:map minibuffer-local-map
         ("C-:" . embark-act))
   (:map minibuffer-local-completion-map
-        ("C-M-l" . embark-switch-to-collect-completions)
-        ("C-l" . embark-collect-completions) ; for default tab completion
+        ("<down>" . embark-switch-to-collect-completions)
+        ("M-SPC" . embark-collect-completions) ; for default tab completion
         ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
@@ -431,6 +431,8 @@
   (setf (alist-get 'symbol embark-collect-initial-view-alist) 'grid)
   (setf (alist-get t embark-collect-initial-view-alist) 'grid)
   (setf (alist-get 'consult-imenu embark-setup-overrides) '(unique-completion))
+  (setf (alist-get 'consult-location embark-keymap-alist)
+        'embark-consult-location-map)
   (add-to-list 'embark-allow-edit-commands 'consult-imenu)
   (defun unique-completion ()
     (when (= (length (embark-minibuffer-candidates)) 1)
