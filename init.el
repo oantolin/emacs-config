@@ -340,7 +340,7 @@
     (dispatch: "^\\.\\|\\.$" initialism (remfix "." pattern)
                (not minibuffer-completing-file-name)))
   (dispatch: "^{.*}$" flex (substring pattern 1 -1))
-  (dispatch: "[./-]" prefixes pattern)
+  (dispatch: "^[^][\\+*]*[./-][^][\\+*]*$" prefixes pattern)
   (dispatch: "^!" without-literal (substring pattern 1))
   :custom
   (orderless-matching-styles 'orderless-regexp)
@@ -434,6 +434,7 @@
   (setf (alist-get 'consult-location embark-keymap-alist)
         'embark-consult-location-map)
   (add-to-list 'embark-allow-edit-commands 'consult-imenu)
+  (add-to-list 'embark-allow-edit-commands 'consult-line)
   (defun unique-completion ()
     (unless (cddr (embark-minibuffer-candidates))
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
