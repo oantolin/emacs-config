@@ -446,7 +446,7 @@
         ("C-'" . avy-embark-collect-choose)
         ("C-\"" . avy-embark-collect-act)))
 
-(use-package embark-consult-preview
+(use-package embark-consult
   :hook
   (embark-collect-mode . embark-consult-preview-minor-mode))
 
