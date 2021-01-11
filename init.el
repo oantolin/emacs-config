@@ -446,6 +446,10 @@
         ("C-'" . avy-embark-collect-choose)
         ("C-\"" . avy-embark-collect-act)))
 
+(use-package embark-consult-preview
+  :hook
+  (embark-collect-mode . embark-consult-preview-minor-mode))
+
 (use-package marginalia
   :ensure t
   :custom
