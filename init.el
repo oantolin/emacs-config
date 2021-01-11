@@ -431,8 +431,6 @@
   (setf (alist-get 'symbol embark-collect-initial-view-alist) 'grid)
   (setf (alist-get t embark-collect-initial-view-alist) 'grid)
   (setf (alist-get 'consult-imenu embark-setup-overrides) '(unique-completion))
-  (setf (alist-get 'consult-location embark-keymap-alist)
-        'embark-consult-location-map)
   (add-to-list 'embark-allow-edit-commands 'consult-imenu)
   (add-to-list 'embark-allow-edit-commands 'consult-line)
   (defun unique-completion ()
