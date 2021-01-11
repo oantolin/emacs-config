@@ -60,8 +60,8 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "epithet"))
-  (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
+(dolist (dir '("placeholder" "math-delimiters" "epithet" "embark"))
+  (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir) t))
 (add-to-list 'load-path "~/.private/")
 
 (when (eq system-type 'windows-nt)
