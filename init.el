@@ -479,6 +479,7 @@
         ("M-s"))
   :custom
   (completion-in-region-function #'consult-completion-in-region)
+  (register-preview-function #'consult-register-preview)
   :config
   (setf (alist-get 'slime-repl-mode consult-mode-histories)
         'slime-repl-input-history))
