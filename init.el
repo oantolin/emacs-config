@@ -60,8 +60,8 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "epithet" "embark"))
-  (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir) t))
+(dolist (dir '("placeholder" "math-delimiters" "epithet"))
+  (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
 (when (eq system-type 'windows-nt)
@@ -441,12 +441,14 @@
                             (floor (frame-height) 2) 1)))
 
 (use-package avy-embark-collect
+  :ensure t
   :bind
   (:map minibuffer-local-completion-map
         ("C-'" . avy-embark-collect-choose)
         ("C-\"" . avy-embark-collect-act)))
 
 (use-package embark-consult
+  :ensure t
   :hook
   (embark-collect-mode . embark-consult-preview-minor-mode))
 
