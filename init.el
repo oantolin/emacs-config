@@ -428,17 +428,17 @@
   :hook
   (embark-collect-post-revert . resize-embark-collect-completions)
   :config
-  (setf (alist-get 'symbol embark-collect-initial-view-alist) 'grid)
-  (setf (alist-get t embark-collect-initial-view-alist) 'grid)
-  (setf (alist-get 'consult-imenu embark-setup-overrides) '(unique-completion))
-  (add-to-list 'embark-allow-edit-commands 'consult-imenu)
-  (add-to-list 'embark-allow-edit-commands 'consult-line)
+  (dolist (type '(symbol t))
+    (setf (alist-get type embark-collect-initial-view-alist) 'grid))
+  (dolist (cmd '(consult-imenu consult-outline consult-line))
+    (setf (alist-get cmd embark-setup-overrides) '(unique-completion))
+    (add-to-list 'embark-allow-edit-commands cmd))
   (defun unique-completion ()
     (unless (cddr (embark-minibuffer-candidates))
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
   (defun resize-embark-collect-completions (&rest _)
     (fit-window-to-buffer (get-buffer-window)
-                            (floor (frame-height) 2) 1)))
+                          (floor (frame-height) 2) 1)))
 
 (use-package avy-embark-collect
   :ensure t
