@@ -116,7 +116,6 @@
 (defalias 'yes-or-no-p #'y-or-n-p)
 
 (bind-keys
- ("C-:" . eval-print-last-sexp)
  ("C-d" . delete-forward-char)
  ("M-K" . kill-paragraph)
  ("M-Z" . zap-to-char)
