@@ -17,15 +17,15 @@ paths I don't think I would explore on my own.
 I intend to publish the most reusable parts of my configuration as
 separate packages. So far that is:
 
-- [[https://github.com/oantolin/icomplete-vertical][icomplete-vertical]]
+- [[https://github.com/oantolin/embark][embark]]
 - [[https://github.com/oantolin/orderless][orderless]]
+- [[https://github.com/oantolin/icomplete-vertical][icomplete-vertical]]
 - [[https://github.com/oantolin/math-delimiters][math-delimiters]]
 - [[https://github.com/oantolin/placeholder][placeholder]]
 - [[https://github.com/oantolin/epithet][epithet]]
-- [[https://github.com/oantolin/restricto][restricto]]
-- [[https://github.com/oantolin/embark][embark]]
-- [[https://github.com/oantolin/live-completions][live-completions]]
 - [[https://github.com/oantolin/completing-history][completing-history]]
+- [[https://github.com/oantolin/restricto][restricto]]
+- [[https://github.com/oantolin/live-completions][live-completions]]
 
 * Themes
 
@@ -42,5 +42,4 @@ I separated the personal part of my configuration to publish this. The
 personal part doesn't cover that much: email addresses and signatures,
 org capture templates, org agenda configuration, and the org-publish
 configuration for my academic website, basically. In particular most
-my org mode configuration is in this public part.
-
+of my org mode configuration is in this public part.
