@@ -20,7 +20,8 @@
      ("español" "english"))))
 
 (defun embark-collect-completions-1 (_start _end)
-  (embark-collect-completions))
+  (unless (bound-and-true-p embark-collect-linked-buffer)
+    (embark-collect-completions)))
 
 (defun change-completion-ui ()
   "Choose between Embark, Icomplete and Selectrum for completion."
@@ -28,8 +29,8 @@
   (icomplete-mode -1)
   (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-input)
   (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-delay)
-  (defalias 'minibuffer-completion-help 'original-minibuffer-completion-help)
-  (defalias 'switch-to-completions 'original-switch-to-completions)
+  (advice-remove 'minibuffer-completion-help 'embark-collect-completions-1)
+  (advice-remove 'switch-to-completions 'embark-switch-to-collect-completions)
   (setq completion-auto-help nil)
   (selectrum-mode -1)
   (let ((ui (read-char-choice
