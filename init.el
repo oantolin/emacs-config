@@ -418,8 +418,8 @@
   (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
-        ("'" . avy-embark-occur-choose)
-        ("\"" . avy-embark-occur-act))
+        ("'" . avy-embark-collect-choose)
+        ("\"" . avy-embark-collect-act))
   (:map embark-package-map
         ("t" . try))
   (:map embark-file-map
