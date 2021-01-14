@@ -431,12 +431,16 @@
   (dolist (cmd '(consult-imenu consult-outline consult-line))
     (setf (alist-get cmd embark-setup-overrides) '(unique-completion))
     (add-to-list 'embark-allow-edit-commands cmd))
+  (add-to-list 'display-buffer-alist
+             '("\\`\\*Embark Collect Completions\\*"
+               nil
+               (window-parameters (mode-line-format . none))))
   (defun unique-completion ()
     (unless (cddr (embark-minibuffer-candidates))
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
   (defun resize-embark-collect-completions (&rest _)
     (fit-window-to-buffer (get-buffer-window)
-                          (floor (frame-height) 2) 1)))
+                          (floor (* 0.4 (frame-height))) 1)))
 
 (use-package avy-embark-collect
   :ensure t
