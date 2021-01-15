@@ -340,7 +340,7 @@
                (not minibuffer-completing-file-name)))
   (dispatch: "^{.*}$" flex (substring pattern 1 -1))
   (dispatch: "^[^][\\+*]*[./-][^][\\+*]*$" prefixes pattern)
-  (dispatch: "^!" without-literal (substring pattern 1))
+  (dispatch: "^!." without-literal (substring pattern 1))
   :custom
   (orderless-matching-styles 'orderless-regexp)
   (orderless-style-dispatchers
