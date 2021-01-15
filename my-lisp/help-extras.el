@@ -23,12 +23,10 @@ Starting from Emacs 28, there is a built-in function for this."
 (defun command-of-the-day ()
   "Show the documentation for a random command."
   (interactive)
-  (with-output-to-temp-buffer "*Command of the day*"
-    (setq-local revert-buffer-function #'command-of-the-day)
-    (let* ((commands (cl-loop for s being the symbols
-                              when (commandp s) collect s))
-           (command (nth (random (length commands)) commands)))
-      (princ (describe-function command)))))
+  (let* ((commands (cl-loop for s being the symbols
+                            when (commandp s) collect s))
+         (command (nth (random (length commands)) commands)))
+    (describe-function command)))
 
 (defun show-help ()
   "Show the *Help* buffer."
