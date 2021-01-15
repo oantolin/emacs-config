@@ -382,44 +382,13 @@
         ("C-c C-d" . cd-bookmark))
   :custom
   (selectrum-refine-candidates-function #'orderless-filter)
-  (selectrum-highlight-candidates-function #'orderless-highlight-matches)
-  :config
-  (with-eval-after-load 'embark
-    (add-hook 'embark-target-finders
-	      (defun selectrum-target-finder ()
-	        (when selectrum-active-p
-                  (cons (selectrum--get-meta 'category)
-		        (selectrum-get-current-candidate)))))
-    (add-hook 'embark-candidate-collectors
-              (defun selectrum-target-collector ()
-                (when selectrum-active-p
-	          (cons (selectrum--get-meta 'category) 
-		        (selectrum-get-current-candidates
-		         ;; Pass relative file names for dired.
-		         minibuffer-completing-file-name)))))
-    (add-hook 'embark-setup-hook 'selectrum-set-selected-candidate)))
+  (selectrum-highlight-candidates-function #'orderless-highlight-matches))
 
 (use-package ivy
   :ensure t
   :diminish
   :custom
-  (ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-  :config
-  (with-eval-after-load 'embark
-    (add-hook 'embark-target-finders
-              (defun ivy-target-finder ()
-                (when (eq mwheel-scroll-up-function 'ivy-next-line)
-                  (cons (completion-metadata-get (embark--metadata) 'category)
-                        (ivy--expand-file-name
-                         (if (and (> ivy--length 0)
-                                  (stringp (ivy-state-current ivy-last)))
-                             (ivy-state-current ivy-last)
-                           ivy-text))))))
-    (add-hook 'embark-candidate-collectors
-              (defun ivy-target-collector ()
-                (when (eq mwheel-scroll-up-function 'ivy-next-line)
-                  (cons (completion-metadata-get (embark--metadata) 'category)
-                        ivy--old-cands))))))
+  (ivy-re-builders-alist '((t . orderless-ivy-re-builder))))
 
 (use-package embark
   :ensure t
@@ -510,8 +479,6 @@
   :config
   (setf (alist-get 'slime-repl-mode consult-mode-histories)
         'slime-repl-input-history))
-
-(use-package consult-selectrum :ensure t)
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
