@@ -470,7 +470,7 @@
   ("M-X" . consult-mode-command)
   ("C-c b" . consult-buffer)
   ("C-c k" . consult-keep-lines)
-  ("C-c f" . consult-keep-lines)
+  ("C-c h" . consult-hide-lines)
   (:map minibuffer-local-map
         ("M-r" . consult-history)
         ("M-s"))
