@@ -442,6 +442,7 @@
 (use-package embark-consult
   :ensure t
   :after (embark consult)
+  :demand t
   :hook
   (embark-collect-mode . embark-consult-preview-minor-mode))
 
