@@ -27,15 +27,21 @@
   "Choose between Embark, Icomplete and Selectrum for completion."
   (interactive)
   (icomplete-mode -1)
+  (selectrum-mode -1)
+  (ivy-mode -1)
   (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-input)
   (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-delay)
   (advice-remove 'minibuffer-completion-help 'embark-collect-completions-1)
   (advice-remove 'switch-to-completions 'embark-switch-to-collect-completions)
   (setq completion-auto-help nil)
-  (selectrum-mode -1)
   (let ((ui (read-char-choice
-             "[d]efault, Embark ([e]asy, [I]nput, [D]elay), [i]complete or [s]electrum? "
-             '(?d ?D ?i ?I ?e ?s))))
+             (replace-regexp-in-string
+              "_."
+              (lambda (x)
+                (propertize (substring x 1) 'face '(:foreground "purple")))
+              (concat "_default, _embark (_Input, _Delay), "
+                      "_icomplete, _selectrum or i_vy? "))
+             '(?d ?D ?i ?I ?e ?s ?v))))
     (pcase ui
       ((or ?I ?D)
        (add-hook 'minibuffer-setup-hook
@@ -49,6 +55,7 @@
        (advice-add 'switch-to-completions
                    :override 'embark-switch-to-collect-completions))
       (?i (icomplete-mode))
-      (?s (selectrum-mode)))))
+      (?s (selectrum-mode))
+      (?v (ivy-mode)))))
 
 (provide 'various-toggles)

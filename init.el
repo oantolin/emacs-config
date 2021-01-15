@@ -386,12 +386,12 @@
   :config
   (with-eval-after-load 'embark
     (add-hook 'embark-target-finders
-	      (defun current-candidate+category ()
+	      (defun selectrum-target-finder ()
 	        (when selectrum-active-p
                   (cons (selectrum--get-meta 'category)
 		        (selectrum-get-current-candidate)))))
     (add-hook 'embark-candidate-collectors
-              (defun current-candidates+category ()
+              (defun selectrum-target-collector ()
                 (when selectrum-active-p
 	          (cons (selectrum--get-meta 'category) 
 		        (selectrum-get-current-candidates
@@ -399,12 +399,33 @@
 		         minibuffer-completing-file-name)))))
     (add-hook 'embark-setup-hook 'selectrum-set-selected-candidate)))
 
+(use-package ivy
+  :ensure t
+  :diminish
+  :custom
+  (ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+  :config
+  (with-eval-after-load 'embark
+    (add-hook 'embark-target-finders
+              (defun ivy-target-finder ()
+                (when (eq mwheel-scroll-up-function 'ivy-next-line)
+                  (cons (completion-metadata-get (embark--metadata) 'category)
+                        (ivy--expand-file-name
+                         (if (and (> ivy--length 0)
+                                  (stringp (ivy-state-current ivy-last)))
+                             (ivy-state-current ivy-last)
+                           ivy-text))))))
+    (add-hook 'embark-candidate-collectors
+              (defun ivy-target-collector ()
+                (when (eq mwheel-scroll-up-function 'ivy-next-line)
+                  (cons (completion-metadata-get (embark--metadata) 'category)
+                        ivy--old-cands))))))
+
 (use-package embark
   :ensure t
   :bind
   ("C-;" . embark-act-noexit)
-  (:map minibuffer-local-map
-        ("C-:" . embark-act))
+  ("C-:" . embark-act)
   (:map minibuffer-local-completion-map
         ("<down>" . embark-switch-to-collect-completions)
         ("M-SPC" . embark-collect-completions) ; for default tab completion
