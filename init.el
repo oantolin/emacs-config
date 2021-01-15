@@ -422,9 +422,9 @@
     (setf (alist-get cmd embark-setup-overrides) '(unique-completion))
     (add-to-list 'embark-allow-edit-commands cmd))
   (add-to-list 'display-buffer-alist
-             '("\\`\\*Embark Collect Completions\\*"
-               nil
-               (window-parameters (mode-line-format . none))))
+               '("\\`\\*Embark Collect Completions\\*"
+                 nil
+                 (window-parameters (mode-line-format . none))))
   (defun unique-completion ()
     (unless (cddr (embark-minibuffer-candidates))
       (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
