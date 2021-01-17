@@ -382,7 +382,8 @@
         ("C-c C-d" . cd-bookmark))
   :custom
   (selectrum-refine-candidates-function #'orderless-filter)
-  (selectrum-highlight-candidates-function #'orderless-highlight-matches))
+  (selectrum-highlight-candidates-function #'orderless-highlight-matches)
+  (selectrum-completion-in-region-styles completion-styles))
 
 (use-package ivy
   :ensure t
