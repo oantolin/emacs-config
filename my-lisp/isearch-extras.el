@@ -1,11 +1,14 @@
 ;;; -*- lexical-binding: t; -*-
 
+(defvar avy-command)
+
 (defun isearch-exit-at-start ()
   "Exit search at the beginning of the current match."
   (unless (or isearch-mode-end-hook-quit
               (bound-and-true-p isearch-suspended)
               (not isearch-forward)
-              (not isearch-other-end))
+              (not isearch-other-end)
+              (eq avy-command 'avy-isearch))
     (goto-char isearch-other-end)))
 
 (defun isearch-exit-at-end ()
