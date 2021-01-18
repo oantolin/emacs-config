@@ -281,7 +281,7 @@
         ("<backtab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("SPC") ("?"))
-  (:map minibuffer-local-filename-completion-map
+  (:map minibuffer-local-must-match-map
         ("RET" . minibuffer-force-complete-and-exit))
   :custom
   (completion-styles '(orderless))
