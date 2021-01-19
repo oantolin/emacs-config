@@ -199,7 +199,7 @@
   ("M-z" . zap-up-to-char)
   ("M-F" . forward-to-word)
   ("M-B" . backward-to-word)
-  ("C-M-\"". copy-from-above-command))
+  ("M-\"". copy-from-above-command))
 
 (use-package text-extras
   :bind
