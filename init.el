@@ -394,8 +394,9 @@
 (use-package embark
   :ensure t
   :bind
-  ("C-;" . embark-act-noexit)
-  ("C-:" . embark-act)
+  ("C-;" . embark-act)
+  (:map minibuffer-local-map
+        ("C-g" . embark-quit))
   (:map minibuffer-local-completion-map
         ("<down>" . embark-switch-to-collect-completions)
         ("M-SPC" . embark-collect-completions) ; for default tab completion
@@ -409,13 +410,16 @@
         ("a") ; I don't like my own default :)
         (";" . embark-act)
         ("'" . avy-embark-collect-choose)
-        ("\"" . avy-embark-collect-act))
+        ("\"" . avy-embark-collect-act)
+        ("C-g" . embark-quit))
   (:map embark-package-map
         ("t" . try))
   (:map embark-file-map
         ("x" . consult-file-externally))
   :hook
   (embark-collect-post-revert . resize-embark-collect-completions)
+  :custom
+  (embark-quit-after-action nil)
   :config
   (dolist (type '(symbol t))
     (setf (alist-get type embark-collect-initial-view-alist) 'grid))
