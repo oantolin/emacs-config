@@ -414,8 +414,6 @@
         ("C-g" . embark-quit))
   (:map embark-package-map
         ("t" . try))
-  (:map embark-file-map
-        ("x" . consult-file-externally))
   :hook
   (embark-collect-post-revert . resize-embark-collect-completions)
   :custom
