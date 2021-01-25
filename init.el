@@ -220,8 +220,6 @@
   ("C-S-r" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
   ("M-'" . dabbrev-next)
-  ("C-`" . store-register-dwim)
-  ("M-`" . use-register-dwim)
   :commands force-truncate-lines)
 
 (use-package placeholder
@@ -471,6 +469,9 @@
   ("C-c b" . consult-buffer)
   ("C-c k" . consult-keep-lines)
   ("C-c f" . consult-focus-lines)
+  ("C-`" . consult-register-store)
+  ("M-`" . consult-register-load)
+  ("C-M-`" . consult-register)
   (:map minibuffer-local-map
         ("M-r" . consult-history)
         ("M-s"))
