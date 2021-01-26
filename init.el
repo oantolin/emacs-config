@@ -275,12 +275,9 @@
 (use-package minibuffer
   :bind
   (:map minibuffer-local-completion-map
-        ("RET" . minibuffer-force-complete-and-exit)
         ("<backtab>" . minibuffer-force-complete)
         ("M-RET" . exit-minibuffer)
         ("SPC") ("?"))
-  (:map minibuffer-local-must-match-map
-        ("RET" . minibuffer-force-complete-and-exit))
   :custom
   (completion-styles '(orderless))
   (completion-category-defaults nil)
@@ -303,9 +300,6 @@
     (let ((inhibit-modification-hooks t))
       (apply fn args)))
   (advice-add 'minibuf-eldef-setup-minibuffer :around #'stealthily)
-  (defun messageless (fn &rest args)
-    (let ((minibuffer-message-timeout 0)) (apply fn args)))
-  (advice-add 'minibuffer-force-complete-and-exit :around #'messageless)
   (defun use-default-completion-in-region ()
     (unless (string= "Eval: " (minibuffer-prompt))
       (setq-local completion-in-region-function #'completion--in-region))))
@@ -424,8 +418,11 @@
                  nil
                  (window-parameters (mode-line-format . none))))
   (defun unique-completion ()
-    (unless (cddr (embark-minibuffer-candidates))
-      (run-at-time 0 nil #'minibuffer-force-complete-and-exit)))
+    (let ((candidates (embark-minibuffer-candidates)))
+      (unless (or (null (cdr candidates)) (cddr candidates))
+        (delete-minibuffer-contents)
+        (insert (cadr candidates))
+        (run-at-time 0 nil #'exit-minibuffer))))
   (defun resize-embark-collect-completions (&rest _)
     (fit-window-to-buffer (get-buffer-window)
                           (floor (* 0.4 (frame-height))) 1)))
