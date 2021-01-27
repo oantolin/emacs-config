@@ -274,9 +274,10 @@
 
 (use-package minibuffer
   :bind
+  (:map minibuffer-local-map
+        ("M-RET" . exit-minibuffer))
   (:map minibuffer-local-completion-map
         ("<backtab>" . minibuffer-force-complete)
-        ("M-RET" . exit-minibuffer)
         ("SPC") ("?"))
   :custom
   (completion-styles '(orderless))
@@ -347,8 +348,7 @@
               ("C-n" . icomplete-forward-completions)
 	      ("<up>" . icomplete-backward-completions)
 	      ("C-p" . icomplete-backward-completions)
-              ("C-M-i" . minibuffer-complete)
-              ("M-RET" . exit-minibuffer))
+              ("C-M-i" . minibuffer-complete))
   :hook
   (icomplete-minibuffer-setup . visual-line-mode)
   :custom
