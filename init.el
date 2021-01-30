@@ -434,10 +434,12 @@
 
 (use-package marginalia
   :ensure t
+  :bind
+  ("M-A" . marginalia-cycle)
   :custom
   (marginalia-annotators '(marginalia-annotators-heavy
                            marginalia-annotators-light))
-  :config
+  :init
   (marginalia-mode))
 
 (use-package consult
