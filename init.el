@@ -410,19 +410,10 @@
   :config
   (dolist (type '(symbol t))
     (setf (alist-get type embark-collect-initial-view-alist) 'grid))
-  (dolist (cmd '(consult-imenu consult-outline consult-line))
-    (setf (alist-get cmd embark-setup-overrides) '(unique-completion))
-    (add-to-list 'embark-allow-edit-commands cmd))
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect Completions\\*"
                  nil
                  (window-parameters (mode-line-format . none))))
-  (defun unique-completion ()
-    (let ((candidates (embark-minibuffer-candidates)))
-      (unless (or (null (cdr candidates)) (cddr candidates))
-        (delete-minibuffer-contents)
-        (insert (cadr candidates))
-        (run-at-time 0 nil #'exit-minibuffer))))
   (defun resize-embark-collect-completions (&rest _)
     (fit-window-to-buffer (get-buffer-window)
                           (floor (* 0.4 (frame-height))) 1)))
