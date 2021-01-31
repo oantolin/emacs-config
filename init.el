@@ -194,6 +194,9 @@
 (use-package imenu
   :custom (imenu-space-replacement nil))
 
+(use-package recentf
+  :init (recentf-mode))
+
 (use-package misc
   :bind
   ("M-z" . zap-up-to-char)
