@@ -452,9 +452,10 @@
   ("M-g l" . consult-line)    ("M-g M-l" . consult-line)
   ("M-g i" . consult-imenu)   ("M-g M-i" . consult-imenu)
   ("M-g o" . consult-outline) ("M-g M-o" . consult-outline)
+  ("M-g I" . consult-project-imenu)
   ("M-g m" . consult-mark)
   ("M-g k" . consult-global-mark)
-  ("M-g e" . consult-error)
+  ("M-g f" . consult-find)
   ("M-s g" . consult-grep)
   ("M-s G" . consult-git-grep)
   ("M-s m" . consult-multi-occur)
@@ -462,15 +463,18 @@
   ("C-c b" . consult-buffer)
   ("C-c k" . consult-keep-lines)
   ("C-c f" . consult-focus-lines)
-  ("C-`" . consult-register-store)
-  ("M-`" . consult-register-load)
+  ("M-`" . consult-register-store)
+  ("C-`" . consult-register-load)
   ("C-M-`" . consult-register)
   (:map minibuffer-local-map
         ("M-r" . consult-history)
         ("M-s"))
+  (:map consult-narrow-map
+        ("?" . consult-narrow-help))
   :custom
   (completion-in-region-function #'consult-completion-in-region)
   (register-preview-function #'consult-register-preview)
+  (consult-narrow-key "<")
   :config
   (setf (alist-get 'slime-repl-mode consult-mode-histories)
         'slime-repl-input-history))
