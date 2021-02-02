@@ -160,4 +160,10 @@ times."
     (insert " ")
     (dabbrev-expand 1)))
 
+(defun dabbrev-complete-next ()
+  "Choose a continuation for the previous expansion with completion."
+  (interactive)
+  (insert " ")
+  (dabbrev-completion))
+
 (provide 'misc-text)

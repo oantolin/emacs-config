@@ -223,6 +223,7 @@
   ("C-S-r" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
   ("M-'" . dabbrev-next)
+  ("C-M-'" . dabbrev-complete-next)
   :commands force-truncate-lines)
 
 (use-package placeholder
