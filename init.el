@@ -474,9 +474,11 @@
         ("?" . consult-narrow-help))
   :custom
   (completion-in-region-function #'consult-completion-in-region)
-  (register-preview-function #'consult-register-preview)
+  (register-preview-function #'consult-register-format)
   (consult-narrow-key "<")
   :config
+  (advice-add #'register-preview :override #'consult-register-window)
+  (advice-add #'consult-register-window :after #'force-truncate-lines)
   (setf (alist-get 'slime-repl-mode consult-mode-histories)
         'slime-repl-input-history))
 
