@@ -110,8 +110,7 @@
  '(save-interprogram-paste-before-kill t)
  '(password-cache-expiry 300)
  '(debugger-stack-frame-as-list t)
- '(split-width-threshold 140)
- '(bookmark-default-file "~/.private/bookmarks"))
+ '(split-width-threshold 140))
 
 (defalias 'yes-or-no-p #'y-or-n-p)
 
@@ -341,8 +340,8 @@
   :custom
   (orderless-matching-styles 'orderless-regexp)
   (orderless-style-dispatchers
-   '(dispatch:literal dispatch:regexp dispatch:initialism
-     dispatch:flex dispatch:without-literal dispatch:prefixes)))
+   '(dispatch:literal dispatch:regexp dispatch:without-literal
+     dispatch:initialism dispatch:flex dispatch:prefixes)))
 
 (use-package icomplete
   :demand t
