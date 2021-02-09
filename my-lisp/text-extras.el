@@ -149,11 +149,9 @@ times."
 (def-thing-marker mark-non-whitespace "vim WORDS"
   forward-to-whitespace)
 
-(defun force-truncate-lines (&optional buffer &rest _)
+(defun force-truncate-lines ()
   "Force line truncation. For use in hooks."
-  (if buffer
-      (setf (buffer-local-value 'truncate-lines buffer) t)
-    (setq truncate-lines t)))
+  (setq truncate-lines t))
 
 (defun dabbrev-next (arg)
   "Insert the next ARG words from where previous expansion was found."

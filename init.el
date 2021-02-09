@@ -477,7 +477,6 @@
   (consult-narrow-key "<")
   :config
   (advice-add #'register-preview :override #'consult-register-window)
-  (advice-add #'consult-register-window :after #'force-truncate-lines)
   (setf (alist-get 'slime-repl-mode consult-mode-histories)
         'slime-repl-input-history))
 
