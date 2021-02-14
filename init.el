@@ -461,6 +461,7 @@
   ("M-s m" . consult-multi-occur)
   ("M-X" . consult-mode-command)
   ("C-c b" . consult-buffer)
+  ("C-c 4 b" . consult-buffer-other-window)
   ("C-c k" . consult-keep-lines)
   ("C-c f" . consult-focus-lines)
   ("M-`" . consult-register-store)
