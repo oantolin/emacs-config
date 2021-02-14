@@ -543,6 +543,9 @@
 
 (use-package eldoc :defer t :diminish)
 
+(use-package diff-mode
+  :bind (:map diff-mode-map ("M-o")))
+
 (use-package ediff
   :defer t
   :custom
