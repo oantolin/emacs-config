@@ -30,4 +30,19 @@
     (delete-region (minibuffer-prompt-end) (point-max)))
   (insert (cdr (assoc bm (cdb--bookmarked-directories)))))
 
+(defun exit-with-top-completion ()
+  "Exit minibuffer with top completion candidate."
+  (interactive)
+  (let ((content (minibuffer-contents-no-properties)))
+    (unless (test-completion content
+                             minibuffer-completion-table
+                             minibuffer-completion-predicate)
+      (when-let ((completions (completion-all-sorted-completions)))
+        (delete-minibuffer-contents)
+        (insert
+         (concat
+          (substring content 0 (or (cdr (last completions)) 0))
+          (car completions)))))
+    (exit-minibuffer)))
+
 (provide 'minibuffer-extras)

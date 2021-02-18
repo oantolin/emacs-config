@@ -310,7 +310,12 @@
 
 (use-package minibuffer-extras
   :bind
+  (:map minibuffer-local-completion-map
+        ("RET" . exit-with-top-completion))
+  (:map minibuffer-local-must-match-map
+        ("RET" . exit-with-top-completion))
   (:map minibuffer-local-filename-completion-map
+        ("RET" . exit-with-top-completion)
         ("<C-backspace>" . up-directory)
         ("C-c C-d" . cd-bookmark)))
 
