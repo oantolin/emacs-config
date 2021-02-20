@@ -406,7 +406,8 @@
         ("a") ; I don't like my own default :)
         (";" . embark-act)
         ("'" . avy-embark-collect-choose)
-        ("\"" . avy-embark-collect-act))
+        ("\"" . avy-embark-collect-act)
+        ("F" . consult-focus-lines))
   (:map embark-package-map
         ("t" . try))
   :hook
