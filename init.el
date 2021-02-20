@@ -286,7 +286,7 @@
   (completion-styles '(orderless))
   (completion-category-defaults nil)
   (completion-auto-help nil)
-  (completion-cycle-threshold 5)
+  (completion-cycle-threshold 3)
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
