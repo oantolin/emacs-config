@@ -381,11 +381,7 @@
   :bind
   (:map selectrum-minibuffer-map
         ("<C-backspace>" . up-directory)
-        ("C-c C-d" . cd-bookmark))
-  :custom
-  (selectrum-refine-candidates-function #'orderless-filter)
-  (selectrum-highlight-candidates-function #'orderless-highlight-matches)
-  (selectrum-completion-in-region-styles completion-styles))
+        ("C-c C-d" . cd-bookmark)))
 
 (use-package ivy
   :ensure t
