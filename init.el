@@ -376,6 +376,8 @@
 
 (use-package selectrum
   :ensure t
+  :init
+  (setq selectrum-complete-in-buffer nil)
   :bind
   (:map selectrum-minibuffer-map
         ("<C-backspace>" . up-directory)
