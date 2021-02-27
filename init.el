@@ -373,7 +373,6 @@
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle)))
 
-
 (use-package selectrum
   :ensure t
   :init
@@ -386,8 +385,8 @@
 (use-package ivy
   :ensure t
   :diminish
-  :custom
-  (ivy-re-builders-alist '((t . orderless-ivy-re-builder))))
+  :config
+  (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder))))
 
 (use-package embark
   :ensure t
