@@ -414,6 +414,10 @@
   :custom
   (embark-quit-after-action nil)
   :config
+  (setq embark-candidate-collectors
+        (cl-substitute 'embark-sorted-minibuffer-candidates
+                       'embark-minibuffer-candidates
+                       embark-candidate-collectors))
   (dolist (type '(symbol t))
     (setf (alist-get type embark-collect-initial-view-alist) 'grid))
   (add-to-list 'display-buffer-alist
