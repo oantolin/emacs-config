@@ -178,6 +178,8 @@
 
 ;;; packages
 
+(defalias 'require-theme #'require)
+
 (use-package modus-themes
   :ensure t
   :bind
@@ -187,8 +189,11 @@
   (modus-themes-bold-constructs t)
   (modus-themes-scale-headings t)
   :init
-  (load-theme 'modus-operandi t (not (display-graphic-p)))
-  (load-theme 'modus-vivendi t (display-graphic-p)))
+  (modus-themes-load-themes)
+  :config
+  (if (display-graphic-p)
+      (modus-themes-load-operandi)
+    (modus-themes-load-vivendi)))
 
 (use-package imenu
   :custom (imenu-space-replacement nil))
