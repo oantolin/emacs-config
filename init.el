@@ -390,6 +390,7 @@
 (use-package ivy
   :ensure t
   :diminish
+  :defer t
   :config
   (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder))))
 
