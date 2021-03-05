@@ -366,7 +366,7 @@
   (icomplete-minibuffer-setup . visual-line-mode)
   :custom
   (icomplete-show-matches-on-no-input t)
-  (icomplete-prospects-height 5)
+  (icomplete-prospects-height 1)
   (icomplete-separator " ⋮ ")
   (icomplete-hide-common-prefix nil)
   :config
@@ -380,8 +380,12 @@
 
 (use-package selectrum
   :ensure t
-  :init
-  (setq selectrum-complete-in-buffer nil)
+  :custom
+  (selectrum-complete-in-buffer nil)
+  (selectrum-display-style '(horizontal :candidates-separator " ⋮ "))
+  (selectrum-display-style-cycle-list
+   '((horizontal :candidates-separator " ⋮ ")
+     (vertical)))
   :bind
   (:map selectrum-minibuffer-map
         ("<C-backspace>" . up-directory)
