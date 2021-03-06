@@ -743,7 +743,9 @@
   :bind
   (:map log-edit-mode-map
         ("M-r" . consult-history)
-        ("M-s")))
+        ("M-s"))
+  :config
+  (remove-hook 'log-edit-hook #'log-edit-show-files))
 
 (use-package magit :ensure t :defer t)
 
