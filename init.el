@@ -495,8 +495,8 @@
   (consult-narrow-key "<")
   :config
   (advice-add #'register-preview :override #'consult-register-window)
-  (setf (alist-get 'slime-repl-mode consult-mode-histories)
-        'slime-repl-input-history))
+  (setf (alist-get 'log-edit-mode consult-mode-histories)
+        'log-edit-comment-ring))
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
@@ -736,6 +736,12 @@
         ("M-s"))
   (:map term-raw-map
         ("C-c d" . interactive-cd)
+        ("M-r" . consult-history)
+        ("M-s")))
+
+(use-package log-edit
+  :bind
+  (:map log-edit-mode-map
         ("M-r" . consult-history)
         ("M-s")))
 
