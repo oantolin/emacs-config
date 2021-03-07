@@ -749,6 +749,19 @@
   (advice-add 'consult-history :before #'delete-contents-of-log-edit)
   (remove-hook 'log-edit-hook #'log-edit-show-files))
 
+(use-package log-view
+  :bind
+  (:map log-view-mode-map
+        ("w" . log-view-save-hash))
+  :config
+  (defun log-view-save-hash ()
+    ;; This is Protesilaos' prot-vc-log-kill-hash function
+    "Save commit hash of log entry at point to `kill-ring'."
+    (interactive)
+    (let ((commit (cadr (log-view-current-entry (point) t))))
+      (kill-new (format "%s" commit))
+      (message "Copied: %s" commit))))
+
 (use-package vc
   :bind
   (:map vc-prefix-map
