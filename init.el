@@ -743,6 +743,10 @@
         ("M-r" . consult-history)
         ("M-s"))
   :config
+  (defun delete-contents-of-log-edit (&optional _)
+    (when (derived-mode-p 'log-edit-mode)
+      (delete-minibuffer-contents)))
+  (advice-add 'consult-history :before #'delete-contents-of-log-edit)
   (remove-hook 'log-edit-hook #'log-edit-show-files))
 
 (use-package vc
