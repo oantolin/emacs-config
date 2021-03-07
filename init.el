@@ -752,9 +752,9 @@
 (use-package log-view
   :bind
   (:map log-view-mode-map
-        ("w" . log-view-save-hash))
+        ("w" . log-view-save-commit-hash))
   :config
-  (defun log-view-save-hash ()
+  (defun log-view-save-commit-hash ()
     ;; This is Protesilaos' prot-vc-log-kill-hash function
     "Save commit hash of log entry at point to `kill-ring'."
     (interactive)
