@@ -178,8 +178,6 @@
 
 ;;; packages
 
-(defalias 'require-theme #'require)
-
 (use-package modus-themes
   :ensure t
   :bind
