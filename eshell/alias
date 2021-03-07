@@ -1,2 +1,2 @@
-alias xx for-each open-externally $*
+alias xx for-each consult-file-externally $*
 alias ff for-each find-file $*
