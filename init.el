@@ -747,6 +747,11 @@
   :config
   (remove-hook 'log-edit-hook #'log-edit-show-files))
 
+(use-package vc
+  :bind
+  (:map vc-prefix-map
+        ("d" . vc-dir-root)))
+
 (use-package magit :ensure t :defer t)
 
 (use-package markdown-mode
