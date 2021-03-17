@@ -434,7 +434,17 @@
                  (window-parameters (mode-line-format . none))))
   (defun resize-embark-collect-completions (&rest _)
     (fit-window-to-buffer (get-buffer-window)
-                          (floor (* 0.4 (frame-height))) 1)))
+                          (floor (* 0.4 (frame-height))) 1))
+  (defun target-org-table-cell ()
+    (when (and (derived-mode-p 'org-mode) (org-at-table-p))
+      (cons 'org-table-cell
+            (save-excursion
+              (string-trim (org-table-get-field))))))
+  (setq embark-target-finders
+        (append
+         (butlast embark-target-finders)
+         (cons #'target-org-table-cell
+               (last embark-target-finders)))))
 
 (use-package avy-embark-collect
   :ensure t
