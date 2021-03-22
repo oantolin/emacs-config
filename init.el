@@ -421,6 +421,7 @@
   (embark-collect-post-revert . resize-embark-collect-completions)
   :custom
   (embark-quit-after-action nil)
+  (prefix-help-command #'embark-prefix-help-command)
   :config
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
