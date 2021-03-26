@@ -400,6 +400,7 @@
   :ensure t
   :bind
   ("C-;" . embark-act)
+  ("C-h b" . embark-bindings)
   (:map minibuffer-local-completion-map
         ("<down>" . embark-switch-to-collect-completions)
         ("M-SPC" . embark-collect-completions) ; for default tab completion
