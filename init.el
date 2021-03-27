@@ -423,6 +423,10 @@
   :custom
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
+  :custom-face
+  (embark-keybinding ((t :inherit default
+                         :background "#efefef"
+                         :box (:line-width (1 . -1) :color "#bcbcbc"))))
   :config
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
