@@ -785,17 +785,17 @@
 (use-package vc
   :bind
   (:map vc-prefix-map
-        ("d" . vc-dir-root))
+        ("d" . vc-dir-dwim))
   :config
-  (unless (fboundp 'vc-dir-root)
-    (defun vc-dir-root ()
-      "Run `vc-dir' in the repository root directory without prompt.
-If the default directory of the current buffer is
-not under version control, prompt for a directory."
-      (interactive)
-      (let ((root-dir (vc-root-dir)))
-        (if root-dir (vc-dir root-dir)
-          (call-interactively 'vc-dir))))))
+  (defun vc-dir-dwim (&optional arg)
+    "Run `vc-dir' in the repository root directory without prompt.
+If the default directory of the current buffer is not under
+version control or if called with a prefix ARG, prompt for a
+directory."
+    (interactive "P")
+    (let ((root-dir (vc-root-dir)))
+      (if (and (not arg) root-dir) (vc-dir root-dir)
+        (call-interactively 'vc-dir)))))
 
 (use-package magit :ensure t :defer t)
 
