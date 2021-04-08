@@ -380,10 +380,9 @@
   :ensure t
   :custom
   (selectrum-complete-in-buffer nil)
-  (selectrum-display-style '(horizontal :candidates-separator " ⋮ "))
+  (selectrum-display-style '(vertical))
   (selectrum-display-style-cycle-list
-   '((horizontal :candidates-separator " ⋮ ")
-     (vertical)))
+   '((horizontal :candidates-separator " ⋮ ") (vertical)))
   :bind
   (:map selectrum-minibuffer-map
         ("<C-backspace>" . up-directory)
