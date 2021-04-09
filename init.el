@@ -478,6 +478,28 @@
   :custom
   (marginalia-annotators '(marginalia-annotators-heavy
                            marginalia-annotators-light))
+  :config
+  (defun marginalia-annotate-file (cand)
+  "Annotate file CAND with its size, modification time and other attributes.
+These annotations are skipped for remote paths."
+  (if (or (marginalia--remote-p cand)
+          (when-let (win (active-minibuffer-window))
+            (with-current-buffer (window-buffer win)
+              (marginalia--remote-p (minibuffer-contents-no-properties)))))
+      (marginalia--fields ("*Remote*" :face 'marginalia-documentation))
+    (when-let ((attributes
+                (file-attributes
+                 (substitute-in-file-name (marginalia--full-file cand))
+                 'string)))
+      (marginalia--fields
+       ((format-time-string
+         "%b %d %H:%M"
+         (file-attribute-modification-time attributes))
+        :face 'marginalia-date)
+       ((file-size-human-readable (file-attribute-size attributes))
+        :width 6 :face 'marginalia-size)
+       ((file-attribute-modes attributes)
+        :face 'marginalia-file-modes)))))
   :init
   (marginalia-mode))
 
