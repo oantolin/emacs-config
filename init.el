@@ -60,7 +60,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "epithet"))
+(dolist (dir '("placeholder" "math-delimiters" "epithet" "vertico"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -375,6 +375,8 @@
   :ensure t
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle)))
+
+(use-package vertico :commands vertico-mode)
 
 (use-package selectrum
   :ensure t
