@@ -376,7 +376,12 @@
   :bind (:map icomplete-minibuffer-map
               ("C-v" . icomplete-vertical-toggle)))
 
-(use-package vertico :ensure t :commands vertico-mode)
+(use-package vertico
+  :ensure t
+  :commands vertico-mode
+  :config
+  (unless (boundp 'minibuffer--require-match)
+    (defvar minibuffer--require-match nil)))
 
 (use-package selectrum
   :ensure t
