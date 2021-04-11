@@ -489,7 +489,7 @@ These annotations are skipped for remote paths."
       (marginalia--fields ("*Remote*" :face 'marginalia-documentation))
     (when-let ((attributes
                 (file-attributes
-                 (substitute-in-file-name (marginalia--full-file cand))
+                 (substitute-in-file-name (marginalia--full-candidate cand))
                  'string)))
       (marginalia--fields
        ((format-time-string
