@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-;;; customize thinks it knows better than me
+;;; Customize thinks it knows better than me
 
 (setq custom-file (make-temp-file "emacs-custom-"))
 
@@ -639,11 +639,14 @@ These annotations are skipped for remote paths."
 
 (use-package eww
   :bind
-  (("C-x w" . eww)
-   ("C-x W" . eww-list-bookmarks))
+  ("C-x w" . eww)
   :custom
   (eww-bookmarks-directory "~/.private/")
   (eww-search-prefix "http://google.com/search?q="))
+
+(use-package eww-extras
+  :bind
+  ("C-x W" . eww-bookmark-jump))
 
 (use-package latex
   :ensure auctex
