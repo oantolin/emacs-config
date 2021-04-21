@@ -432,9 +432,15 @@
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
   :custom-face
-  (embark-keybinding ((t :inherit default
-                         :background "#efefef"
-                         :box (:line-width -1 :color "#bcbcbc"))))
+  (embark-keybinding
+   ((default :inherit default)
+    (((class color) (min-colors 88) (background light))
+     :background "grey96" :box (:line-width -1 :color "grey80"))
+    (((class color) (min-colors 88) (background dark))
+     :background "grey19" :box (:line-width -1 :color "grey35"))
+    (((class color grayscale) (background light)) :background "grey90")
+    (((class color grayscale) (background dark)) :background "grey25")
+    (t :background "grey90")))
   :config
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
