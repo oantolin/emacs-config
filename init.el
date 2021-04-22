@@ -41,8 +41,7 @@
  '(package-archives
    '(("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
-     ("org" . "https://orgmode.org/elpa/")))
- '(package-enable-at-startup nil))
+     ("org" . "https://orgmode.org/elpa/"))))
 (require 'package)
 (package-initialize)
 
