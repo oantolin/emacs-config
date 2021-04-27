@@ -11,7 +11,7 @@
 With optional prefix ARG (\\[universal-argument]) open bookmark
 in a new EWW buffer."
   (interactive "p")
-  (eww-read-bookmarks t)
+  (eww-read-bookmarks)
   (let ((bookmarks (mapcar
                     (lambda (bm) (cons (plist-get bm :title)
                                        (plist-get bm :url)))
