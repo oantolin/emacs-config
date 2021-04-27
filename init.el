@@ -974,7 +974,6 @@ if `org-store-link' is called from the #+TITLE line."
   :bind (:map message-mode-map
               ("<C-tab>" . expand-mail-aliases))
   :custom
-  (message-mail-user-agent t)
   (message-signature nil)
   (message-from-style 'angles)
   ;; all-user-mail-addresses-regexp is defined in email-config
