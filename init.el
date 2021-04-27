@@ -955,24 +955,26 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package email-config) ; private package
 
-(use-package bbdb
+(use-package ebdb
   :ensure t
   :after message
-  :hook
-  (message-mode . bbdb-mail-aliases)
   :custom
-  (bbdb-file "~/.private/bbdb")
-  (bbdb-mua-pop-up nil)
-  (bbdb-completion-display-record nil)
-  (bbdb-update-records-p 'query)
+  (ebdb-sources "~/.private/ebdb")
+  (ebdb-mua-pop-up nil)
+  (ebdb-complete-mail 'capf)
+  (ebdb-completion-display-record nil)
+  (ebdb-save-on-exit t)
   :config
-  (bbdb-initialize 'gnus 'message)
-  (bbdb-mua-auto-update-init 'message))
+  (ebdb-load))
+
+(use-package ebdb-gnus :after gnus)
+(use-package ebdb-message :after message)
 
 (use-package message
   :bind (:map message-mode-map
               ("<C-tab>" . expand-mail-aliases))
   :custom
+  (message-mail-user-agent t)
   (message-signature nil)
   (message-from-style 'angles)
   ;; all-user-mail-addresses-regexp is defined in email-config
