@@ -321,7 +321,7 @@
   (:map minibuffer-local-filename-completion-map
         ("RET" . exit-with-top-completion)
         ("<C-backspace>" . up-directory)
-        ("C-c C-d" . cd-bookmark)))
+        ("C-." . cd-bookmark)))
 
 (use-package orderless
   :ensure t
@@ -394,7 +394,7 @@
   :bind
   (:map selectrum-minibuffer-map
         ("<C-backspace>" . up-directory)
-        ("C-c C-d" . cd-bookmark)))
+        ("C-." . cd-bookmark)))
 
 (use-package ivy
   :ensure t
