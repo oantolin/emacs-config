@@ -91,6 +91,7 @@
 
 (custom-set-variables
  '(set-mark-command-repeat-pop t)
+ '(tab-always-indent 'complete)
  '(current-language-environment "UTF-8")
  '(after-save-hook '(executable-make-buffer-file-executable-if-script-p))
  '(column-number-indicator-zero-based nil)
