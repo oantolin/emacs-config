@@ -1005,6 +1005,14 @@ if `org-store-link' is called from the #+TITLE line."
   :custom-face
   (sx-question-mode-content-face ((t (:inherit default)))))
 
+(use-package pocket-reader
+  :when (eq system-type "gnu/linux")
+  :ensure t
+  :defer t
+  :custom
+  (pocket-reader-open-url-default-function #'eww)
+  (pocket-reader-pop-to-url-default-function #'eww))
+
 ;;; major modes
 
 (use-package python
