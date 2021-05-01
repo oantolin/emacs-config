@@ -384,6 +384,11 @@
   (unless (boundp 'minibuffer--require-match)
     (defvar minibuffer--require-match nil)))
 
+(use-package corfu
+  :ensure t
+  :config
+  (corfu-global-mode))
+
 (use-package selectrum
   :ensure t
   :custom
