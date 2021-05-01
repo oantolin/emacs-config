@@ -1011,7 +1011,7 @@ if `org-store-link' is called from the #+TITLE line."
   (sx-question-mode-content-face ((t (:inherit default)))))
 
 (use-package pocket-reader
-  :when (eq system-type "gnu/linux")
+  :when (eq system-type 'gnu/linux)
   :ensure t
   :defer t
   :custom
