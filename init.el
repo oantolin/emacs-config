@@ -1019,6 +1019,18 @@ if `org-store-link' is called from the #+TITLE line."
 
 ;;; major modes
 
+(use-package elisp-mode
+  :custom
+  (lisp-indent-function #'hybrid-lisp-indent-function)
+  :config
+  (defun hybrid-lisp-indent-function (indent-point state)
+    (if (save-excursion
+          (cl-loop for pt in (nth 9 state)
+                   do (goto-char pt)
+                   thereis (looking-at "(cl-\\(?:label\\|flet\\)")))
+        (common-lisp-indent-function indent-point state)
+      (lisp-indent-function indent-point state))))
+
 (use-package python
   :defer t
   :custom
