@@ -488,9 +488,6 @@
   :ensure t
   :bind
   ("M-A" . marginalia-cycle)
-  :custom
-  (marginalia-annotators '(marginalia-annotators-heavy
-                           marginalia-annotators-light))
   :config
   (defun marginalia-annotate-file (cand)
   "Annotate file CAND with its size, modification time and other attributes.
