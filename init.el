@@ -319,7 +319,7 @@
   (:map minibuffer-local-filename-completion-map
         ("RET" . exit-with-top-completion)
         ("<C-backspace>" . up-directory)
-        ("C-." . cd-bookmark)))
+        ("M-." . cd-bookmark)))
 
 (use-package orderless
   :ensure t
@@ -397,7 +397,7 @@
   :bind
   (:map selectrum-minibuffer-map
         ("<C-backspace>" . up-directory)
-        ("C-." . cd-bookmark)))
+        ("M-." . cd-bookmark)))
 
 (use-package ivy
   :ensure t
@@ -576,6 +576,8 @@ These annotations are skipped for remote paths."
   (defvar dot-mode-map (assoc 'dot-mode minor-mode-map-alist))
   (unbind-key "C-M-." dot-mode-map)
   (unbind-key "C-c ." dot-mode-map)
+  :hook
+  (minibuffer-setup . dot-mode)
   :bind
   (:map dot-mode-map
         ("C->" . dot-mode-override)
