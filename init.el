@@ -307,9 +307,7 @@
       (apply fn args)))
   (advice-add 'minibuf-eldef-setup-minibuffer :around #'stealthily)
   (defun use-default-completion-in-region ()
-    (if (eq this-command 'eval-expression)
-        (setq-local consult-config
-                    '((consult-completion-in-region :preview-key nil)))
+    (unless (eq this-command 'eval-expression)
       (setq-local completion-in-region-function #'completion--in-region))))
 
 (use-package minibuffer-extras
