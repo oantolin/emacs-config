@@ -299,16 +299,12 @@
   (minibuffer-depth-indicate-mode)
   (minibuffer-electric-default-mode)
   :hook
-  (minibuffer-setup . use-default-completion-in-region)
   (completion-list-mode . force-truncate-lines)
   :config
   (defun stealthily (fn &rest args)
     (let ((inhibit-modification-hooks t))
       (apply fn args)))
-  (advice-add 'minibuf-eldef-setup-minibuffer :around #'stealthily)
-  (defun use-default-completion-in-region ()
-    (unless (eq this-command 'eval-expression)
-      (setq-local completion-in-region-function #'completion--in-region))))
+  (advice-add 'minibuf-eldef-setup-minibuffer :around #'stealthily))
 
 (use-package minibuffer-extras
   :bind
@@ -384,6 +380,8 @@
 
 (use-package corfu
   :ensure t
+  :hook
+  (eval-expression-minibuffer-setup . corfu-mode)
   :config
   (corfu-global-mode))
 
@@ -546,7 +544,6 @@ These annotations are skipped for remote paths."
   (:map consult-narrow-map
         ("?" . consult-narrow-help))
   :custom
-  (completion-in-region-function #'consult-completion-in-region)
   (register-preview-function #'consult-register-format)
   (consult-narrow-key "<")
   :config
