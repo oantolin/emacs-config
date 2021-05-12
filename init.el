@@ -330,13 +330,14 @@
              (cons ',(symcat "orderless-" style) ,string))))))
   (cl-flet
       ((remfix (fix str)
-          (cond
+         (cond
            ((string-prefix-p fix str) (string-remove-prefix fix str))
            ((string-suffix-p fix str) (string-remove-suffix fix str)))))
     (dispatch: "^=\\|=$" literal (remfix "=" pattern))
     (dispatch: "^,\\|,$" regexp (remfix "," pattern))
     (dispatch: "^\\.\\|\\.$" initialism (remfix "." pattern)
-               (not minibuffer-completing-file-name)))
+               (not (or minibuffer-completing-file-name
+                        (eq major-mode 'eshell-mode)))))
   (dispatch: "^{.*}$" flex (substring pattern 1 -1))
   (dispatch: "^[^][\\+*]*[./-][^][\\+*]*$" prefixes pattern)
   (dispatch: "^!." without-literal (substring pattern 1))
