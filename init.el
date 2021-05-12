@@ -374,10 +374,7 @@
 
 (use-package vertico
   :ensure t
-  :commands vertico-mode
-  :config
-  (unless (boundp 'minibuffer--require-match)
-    (defvar minibuffer--require-match nil)))
+  :commands vertico-mode)
 
 (use-package corfu
   :ensure t
