@@ -380,7 +380,7 @@
   :ensure t
   :hook
   (eval-expression-minibuffer-setup . corfu-mode)
-  :config
+  :init
   (corfu-global-mode))
 
 (use-package selectrum
