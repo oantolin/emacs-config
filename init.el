@@ -940,15 +940,17 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package ebdb
   :ensure t
-  :after message
   :custom
   (ebdb-sources "~/.private/ebdb")
   (ebdb-mua-pop-up nil)
   (ebdb-complete-mail 'capf)
   (ebdb-completion-display-record nil)
   (ebdb-save-on-exit t)
+  :hook
+  (message-setup . ensure-ebdb-loaded)
   :config
-  (ebdb-load))
+  (defun ensure-ebdb-loaded ()
+    (unless ebdb-db-list (ebdb-load))))
 
 (use-package ebdb-gnus :after gnus)
 (use-package ebdb-message :after message)
