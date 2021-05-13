@@ -69,13 +69,6 @@
 
 ;;; misc
 
-(let ((home-bin (expand-file-name "bin" (getenv "HOME")))
-      (path (getenv "PATH")))
-  (unless (or (string-prefix-p home-bin path)
-              (not (file-exists-p home-bin)))
-    (setenv "PATH" (concat home-bin ":" path))
-    (add-to-list 'exec-path home-bin)))
-
 (dolist (cmd '(narrow-to-region
                upcase-region
                downcase-region
@@ -923,15 +916,6 @@ if `org-store-link' is called from the #+TITLE line."
                :description (cadar (org-collect-keywords '("TITLE"))))))))
 
 (use-package org-config :after org) ; private package
-
-(use-package org-variable-pitch
-  :ensure t
-  :after org
-  :diminish
-  org-variable-pitch-minor-mode
-  buffer-face-mode
-  :bind (:map org-mode-map
-              ("C-c t v" . org-variable-pitch-minor-mode)))
 
 (use-package ispell
   :defer t
