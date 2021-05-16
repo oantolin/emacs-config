@@ -471,9 +471,7 @@
 (use-package embark-consult
   :ensure t
   :after (embark consult)
-  :demand t
-  :hook
-  (embark-collect-mode . embark-consult-preview-minor-mode))
+  :demand t)
 
 (use-package marginalia
   :ensure t
@@ -534,6 +532,8 @@ These annotations are skipped for remote paths."
   :custom
   (register-preview-function #'consult-register-format)
   (consult-narrow-key "<")
+  :hook
+  ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
   :config
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
