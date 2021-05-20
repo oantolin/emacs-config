@@ -369,13 +369,6 @@
   :ensure t
   :commands vertico-mode)
 
-(use-package corfu
-  :ensure t
-  :hook
-  (eval-expression-minibuffer-setup . corfu-mode)
-  :init
-  (corfu-global-mode))
-
 (use-package selectrum
   :ensure t
   :custom
@@ -531,10 +524,15 @@ These annotations are skipped for remote paths."
         ("?" . consult-narrow-help))
   :custom
   (register-preview-function #'consult-register-format)
+  (completion-in-region-function #'consult-completion-in-region)
   (consult-narrow-key "<")
   :hook
   ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
+  (minibuffer-setup . choose-completion-in-region)
   :config
+  (defun choose-completion-in-region ()
+    (unless (eq this-command 'eval-expression)
+      (setq-local completion-in-region-function #'completion--in-region)))
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring))
