@@ -505,9 +505,6 @@ These annotations are skipped for remote paths."
   ("M-g I" . consult-project-imenu)
   ("M-g m" . consult-mark)
   ("M-g k" . consult-global-mark)
-  ("M-g f" . consult-find)
-  ("M-s g" . consult-grep)
-  ("M-s G" . consult-git-grep)
   ("M-s m" . consult-multi-occur)
   ("M-X" . consult-mode-command)
   ("C-c b" . consult-buffer)
@@ -536,6 +533,15 @@ These annotations are skipped for remote paths."
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring))
+
+(use-package affe
+  :bind
+  ("M-s g" . affe-grep)
+  ("M-g f" . affe-find)
+  :config
+  (setq affe-regexp-function #'orderless-pattern-compiler
+        affe-highlight-function #'orderless-highlight-matches)
+  (consult-customize affe-grep :preview-key (kbd "M-.")))
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
