@@ -19,32 +19,44 @@
      ("english" "español")
      ("español" "english"))))
 
-(defun change-completion-ui ()
+(defun embark-collect-completions-1 (&optional _start _end)
+  (unless (bound-and-true-p embark-collect-linked-buffer)
+    (embark-collect-completions)))
+
+(defun change-completion-ui (ui)
   "Choose between Embark, Icomplete, Vertico and Selectrum for completion."
-  (interactive)
+  (interactive
+   (list (read-char-choice
+          (replace-regexp-in-string
+           "_."
+           (lambda (x)
+             (propertize (substring x 1) 'face '(:foreground "purple")))
+           (concat "_default, _embark (after _Input, _Delay), "
+                   "_icomplete, _vertico, _selectrum or iv_y? "))
+          '(?d ?e ?D ?i ?I ?s ?v ?y))))
+  ;; turn off all completion UIs
   (icomplete-mode -1)
   (selectrum-mode -1)
   (ivy-mode -1)
   (vertico-mode -1)
   (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-input)
   (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-delay)
-  (let ((ui (read-char-choice
-             (replace-regexp-in-string
-              "_."
-              (lambda (x)
-                (propertize (substring x 1) 'face '(:foreground "purple")))
-              (concat "_default, embark (after _Input, _Delay), "
-                      "_icomplete, _vertico, _selectrum or iv_y? "))
-             '(?d ?D ?i ?I ?s ?v ?y))))
-    (pcase ui
-      ((or ?I ?D)
-       (add-hook 'minibuffer-setup-hook
-                 (if (= ui ?I)
-                     #'embark-collect-completions-after-input
-                   #'embark-collect-completions-after-delay)))
-      (?i (icomplete-mode))
-      (?s (selectrum-mode))
-      (?v (vertico-mode))
-      (?y (ivy-mode)))))
+  (advice-remove 'minibuffer-completion-help #'embark-collect-completions-1)
+  (setq completion-auto-help nil completion-cycle-threshold 3)
+  ;; activate chosen one
+  (pcase ui
+    (?e
+     (setq completion-auto-help t completion-cycle-threshold nil)
+     (advice-add 'minibuffer-completion-help
+                 :override #'embark-collect-completions-1))
+    ((or ?I ?D)
+     (add-hook 'minibuffer-setup-hook
+               (if (= ui ?I)
+                   #'embark-collect-completions-after-input
+                 #'embark-collect-completions-after-delay)))
+    (?i (icomplete-mode))
+    (?s (selectrum-mode))
+    (?v (vertico-mode))
+    (?y (ivy-mode))))
 
 (provide 'various-toggles)

@@ -262,7 +262,9 @@
   (:map toggle-map
         ("w" . toggle-wrapping)
         ("l" . toggle-ispell-lang)
-        ("SPC" . change-completion-ui)))
+        ("SPC" . change-completion-ui))
+  :init
+  (change-completion-ui ?e))
 
 (use-package window-extras
   :bind
@@ -280,8 +282,6 @@
   :custom
   (completion-styles '(orderless))
   (completion-category-defaults nil)
-  (completion-auto-help nil)
-  (completion-cycle-threshold 3)
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
