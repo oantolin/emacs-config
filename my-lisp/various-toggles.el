@@ -42,13 +42,16 @@
   (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-input)
   (remove-hook 'minibuffer-setup-hook #'embark-collect-completions-after-delay)
   (advice-remove 'minibuffer-completion-help #'embark-collect-completions-1)
+  (advice-remove 'switch-to-completions #'embark-switch-to-collect-completions)
   (setq completion-auto-help nil completion-cycle-threshold 3)
   ;; activate chosen one
   (pcase ui
     (?e
      (setq completion-auto-help t completion-cycle-threshold nil)
      (advice-add 'minibuffer-completion-help
-                 :override #'embark-collect-completions-1))
+                 :override #'embark-collect-completions-1)
+     (advice-add 'switch-to-completions
+                 :override #'embark-switch-to-collect-completions))
     ((or ?I ?D)
      (add-hook 'minibuffer-setup-hook
                (if (= ui ?I)
