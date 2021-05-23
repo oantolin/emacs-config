@@ -833,6 +833,9 @@ directory."
 
 (use-package markdown-mode
   :ensure t
+  :custom-face
+  (markdown-metadata-key-face ((t (:foreground nil))))
+  (markdown-metadata-value-face ((t (:foreground nil))))
   :config
   (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table))
 
