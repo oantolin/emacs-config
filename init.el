@@ -112,7 +112,6 @@
  ("M-K" . kill-paragraph)
  ("M-Z" . zap-to-char)
  ("M-o" . other-window)
- ("C-h M" . describe-keymap)
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
  ("C-x C-p" . list-packages)
@@ -252,6 +251,7 @@
 (use-package help-extras
   :bind
   ("C-h h" . show-help)
+  ("C-h M" . embark-describe-keymap)
   :commands cotd describe-keymap)
 
 (use-package epithet

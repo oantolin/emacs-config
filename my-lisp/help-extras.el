@@ -1,8 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
-(defun describe-keymap (keymap)
-  "Describe keys bound in KEYMAP.
-Starting from Emacs 28, there is a built-in function for this."
+(defun embark-describe-keymap (keymap)
+  "Prompt for KEYMAP and show its bindings using `completing-read'."
   (interactive
    (list
     (completing-read "Keymap: "
@@ -10,15 +9,9 @@ Starting from Emacs 28, there is a built-in function for this."
               if (and (boundp x) (keymapp (symbol-value x)))
               collect (symbol-name x))
      nil t nil 'variable-name-history)))
-  (help-setup-xref (list #'describe-keymap keymap)
-                   (called-interactively-p 'interactive))
-  (with-output-to-temp-buffer (help-buffer)
-    (princ keymap) (terpri) (terpri)
-    (let ((doc (documentation-property
-                (intern keymap)
-                'variable-documentation)))
-      (when doc (princ doc) (terpri) (terpri)))
-    (princ (substitute-command-keys (format "\\{%s}" keymap)))))
+  (require 'embark)
+  (embark-completing-read-prompter
+   (symbol-value (intern keymap))))
 
 (defun command-of-the-day ()
   "Show the documentation for a random command."
