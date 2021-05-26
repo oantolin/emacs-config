@@ -138,8 +138,6 @@
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
 
-(global-set-key (kbd "M-r") ctl-x-r-map)
-
 (when (string= (system-name)  "penguin")
   ;; Alt+backspace sends <delete> on the Chromebook...
   (bind-key "<delete>" #'backward-kill-word))
