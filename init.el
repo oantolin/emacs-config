@@ -529,8 +529,8 @@ These annotations are skipped for remote paths."
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring)
-  (setf (plist-get consult--source-project-file :enabled) #'project-current)
-  (setf (plist-get consult--source-project-file :items)
+  (plist-put consult--source-project-file :enabled #'project-current)
+  (plist-put consult--source-project-file :items
         (lambda ()
           (mapcar #'file-relative-name (project-files (project-current))))))
 
