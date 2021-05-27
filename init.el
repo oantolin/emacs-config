@@ -365,7 +365,9 @@
 
 (use-package vertico
   :ensure t
-  :commands vertico-mode)
+  :commands vertico-mode
+  :init
+  (defvar minibuffer--require-match nil))
 
 (use-package selectrum
   :ensure t
