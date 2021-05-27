@@ -459,8 +459,7 @@
 
 (use-package embark-consult
   :ensure t
-  :after (embark consult)
-  :demand t)
+  :after (embark consult))
 
 (use-package marginalia
   :ensure t
