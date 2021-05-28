@@ -37,11 +37,7 @@
 (when (version< emacs-version "26.3")
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
-(custom-set-variables
- '(package-archives
-   '(("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/")
-     ("org" . "https://orgmode.org/elpa/"))))
+(push '("melpa" . "https://melpa.org/packages/") package-archives)
 (require 'package)
 (package-initialize)
 
@@ -847,7 +843,7 @@ directory."
   (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table))
 
 (use-package org
-  :ensure org-plus-contrib
+  :ensure t
   :bind
   (("C-c c" . org-capture)
    ("C-c a" . org-agenda)
@@ -928,6 +924,8 @@ if `org-store-link' is called from the #+TITLE line."
                :description (cadar (org-collect-keywords '("TITLE"))))))))
 
 (use-package org-config :after org) ; private package
+
+(use-package org-contrib :ensure t :defer t)
 
 (use-package ispell
   :defer t
