@@ -398,13 +398,15 @@
   ("C-;" . embark-act)
   ("C-," . embark-default-action)
   ("C-h b" . embark-bindings)
+  (:map minibuffer-local-map
+        ("C-:" . embark-act&quit))
   (:map minibuffer-local-completion-map
         ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
   (:map embark-meta-map
-        ("?" . embark-keymap-help)
-        ("C-h"))
+        ("C-h") ; I don't like my own default :)
+        ("?" . embark-keymap-help)) 
   (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
@@ -429,6 +431,11 @@
     (((class color grayscale) (background dark)) :background "grey25")
     (t :background "grey90")))
   :config
+  (defun embark-act&quit ()
+    "Prompt user for an action, perform it and quit the minibuffer."
+    (interactive)
+    (let ((embark-quit-after-action t))
+      (embark-act)))
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
