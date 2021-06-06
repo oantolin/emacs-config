@@ -396,6 +396,7 @@
   :ensure t
   :bind
   ("C-;" . embark-act)
+  ("C-," . embark-default-action)
   ("C-h b" . embark-bindings)
   (:map minibuffer-local-completion-map
         ("M-q" . embark-collect-toggle-view))
@@ -853,6 +854,7 @@ directory."
    ("C-c s" . org-store-link)
    ("C-c C" . org-clock-goto))
   (:map org-mode-map
+        ("C-,")
         ("C-c o" . ace-link-org)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
