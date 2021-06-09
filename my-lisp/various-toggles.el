@@ -46,6 +46,7 @@
   (setq completion-auto-help nil completion-cycle-threshold 3)
   ;; activate chosen one
   (pcase ui
+    (?d (setq completion-auto-help t))
     (?e
      (setq completion-auto-help t completion-cycle-threshold nil)
      (advice-add 'minibuffer-completion-help
