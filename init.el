@@ -844,6 +844,7 @@ directory."
 
 (use-package markdown-mode
   :ensure t
+  :defer t
   :custom-face
   (markdown-metadata-key-face ((t (:foreground nil))))
   (markdown-metadata-value-face ((t (:foreground nil))))
