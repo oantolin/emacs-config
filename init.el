@@ -775,9 +775,6 @@ These annotations are skipped for remote paths."
         ("C-c d" . interactive-cd)
         ("M-q" . quit-window)))
 
-(use-package comint
-  :bind ())
-
 (use-package em-hist
   :defer t
   :bind
