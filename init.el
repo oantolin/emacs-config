@@ -1028,7 +1028,7 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (python-shell-interpreter "python3"))
 
-(use-package sly :ensure t)
+(use-package sly :ensure t :defer t)
 
 (use-package clojure-mode :ensure t :defer t)
 
