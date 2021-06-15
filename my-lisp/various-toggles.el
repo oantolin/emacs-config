@@ -54,6 +54,8 @@
      (advice-add 'switch-to-completions
                  :override #'embark-switch-to-collect-completions))
     ((or ?I ?D)
+     (advice-add 'switch-to-completions
+                 :override #'embark-switch-to-collect-completions)
      (add-hook 'minibuffer-setup-hook
                (if (= ui ?I)
                    #'embark-collect-completions-after-input
