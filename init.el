@@ -396,7 +396,7 @@
   :ensure t
   :bind
   ("C-;" . embark-act)
-  ("C-," . embark-default-action)
+  ("C-," . embark-dwim)
   ("C-h b" . embark-bindings)
   (:map minibuffer-local-map
         ("C-:" . embark-act&quit))
