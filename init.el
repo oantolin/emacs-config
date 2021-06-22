@@ -873,6 +873,7 @@ directory."
   (org-confirm-babel-evaluate nil)
   (org-export-async-init-file "~/.emacs.d/my-lisp/org-async-init.el")
   (org-special-ctrl-a/e t)
+  (org-return-follows-link t)
   (org-hide-emphasis-markers t)
   (org-hide-leading-stars t)
   (org-pretty-entities t)
