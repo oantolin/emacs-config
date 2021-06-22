@@ -881,9 +881,15 @@ directory."
   :hook
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
+  (org-mode . echo-area-tooltips)
   :config
   (defun ediff-with-org-show-all ()
     (add-hook 'ediff-prepare-buffer-hook #'org-show-all nil t))
+  (defun echo-area-tooltips ()
+    (setq-local help-at-pt-display-when-idle t
+                help-at-pt-timer-delay 0)
+    (help-at-pt-cancel-timer)
+    (help-at-pt-set-timer))
   (customize-set-variable
    'org-structure-template-alist
    (append org-structure-template-alist
