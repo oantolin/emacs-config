@@ -22,6 +22,19 @@ argument, copy the rest of the line."
       (goto-char p)
       (insert (buffer-substring beg (min end lim))))))
 
+(defun duplicate-line-kill-word ()
+  "Duplicate the current line and kill the word at point in the duplicate."
+  (interactive)
+  (let ((column (current-column)))
+    (forward-line)
+    (open-line 1)
+    (copy-from-above-command)
+    (beginning-of-line)
+    (forward-char column)
+    (unless (looking-at "\\<")
+      (backward-word))
+    (kill-word 1)))
+
 (defmacro def-thing-marker (fn-name things forward-thing &rest extra)
   `(defun ,fn-name (&optional arg allow-extend)
      ,(format "Mark ARG %s starting with the current one. If ARG is negative,
