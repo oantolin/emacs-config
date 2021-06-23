@@ -297,6 +297,7 @@
   (completion-list-mode . force-truncate-lines)
   :config
   (defun stealthily (fn &rest args)
+    "Apply FN to ARGS while inhibiting modification hooks."
     (let ((inhibit-modification-hooks t))
       (apply fn args)))
   (advice-add 'minibuf-eldef-setup-minibuffer :around #'stealthily))
@@ -440,9 +441,11 @@
                  nil
                  (window-parameters (mode-line-format . none))))
   (defun resize-embark-collect-completions (&rest _)
+    "Resize current window to fit buffer or 40% of the frame height."
     (fit-window-to-buffer (get-buffer-window)
                           (floor (* 0.4 (frame-height))) 1))
   (defun target-org-table-cell ()
+    "Target contents of current cell in an orb table."
     (when (and (derived-mode-p 'org-mode) (org-at-table-p))
       (cons 'org-table-cell
             (save-excursion
@@ -453,6 +456,7 @@
          (cons #'target-org-table-cell
                (last embark-target-finders))))
   (defun display-completions-automatically (fn &rest args)
+    "Apply FN to ARGS automatically using Embark to display any completions."
     (minibuffer-with-setup-hook #'embark-collect-completions (apply fn args)))
   (advice-add #'embark-completing-read-prompter
               :around #'display-completions-automatically))
@@ -538,6 +542,7 @@ These annotations are skipped for remote paths."
     (setq consult-find-command
           (replace-regexp-in-string "\\*" "\\\\*" consult-find-command)))
   (defun choose-completion-in-region ()
+    "Use default `completion--in-region' unless we are in `eval-expression'."
     (unless (eq this-command 'eval-expression)
       (setq-local completion-in-region-function #'completion--in-region)))
   (advice-add #'register-preview :override #'consult-register-window)
@@ -665,7 +670,7 @@ These annotations are skipped for remote paths."
   (TeX-source-correlate-mode t)
   (TeX-source-correlate-start-server t)
   :hook
-  (LaTeX-mode . fix-LaTeX-minor-annoyances)
+  (LaTeX-mode . make-backslash-a-prefix-in-LaTeX)
   (LaTeX-mode . turn-on-cdlatex)
   :config
   (defun LaTeX-outline-name ()
@@ -680,7 +685,8 @@ These annotations are skipped for remote paths."
               (forward-char -1))
           (error (forward-sentence 1)))
         (buffer-substring beg (point)))))
-  (defun fix-LaTeX-minor-annoyances ()
+  (defun make-backslash-a-prefix-in-LaTeX ()
+    "Set the syntax class of \\ to ' in LaTeX buffers."
     (modify-syntax-entry ?\\ "'" LaTeX-mode-syntax-table))
   (setcdr (assq 'output-pdf TeX-view-program-selection)
           '("PDF Tools")))
@@ -800,6 +806,8 @@ These annotations are skipped for remote paths."
         ("M-s"))
   :config
   (defun clear-log-edit-buffer (&optional _)
+    "Clear the buffer if it is in `log-edit-mode'.
+Intended to be used as advice for `consult-history'."
     (when (derived-mode-p 'log-edit-mode)
       (delete-minibuffer-contents)))
   (advice-add 'consult-history :before #'clear-log-edit-buffer)
@@ -885,8 +893,10 @@ directory."
   (org-mode . echo-area-tooltips)
   :config
   (defun ediff-with-org-show-all ()
+    "Expand all headings prior to ediffing org buffers."
     (add-hook 'ediff-prepare-buffer-hook #'org-show-all nil t))
   (defun echo-area-tooltips ()
+    "Show tooltips in the echo area automatically for current buffer."
     (setq-local help-at-pt-display-when-idle t
                 help-at-pt-timer-delay 0)
     (help-at-pt-cancel-timer)
@@ -970,6 +980,7 @@ if `org-store-link' is called from the #+TITLE line."
   (message-setup . ensure-ebdb-loaded)
   :config
   (defun ensure-ebdb-loaded ()
+    "Load the EDBD database unless already loaded."
     (unless ebdb-db-list (ebdb-load))))
 
 (use-package ebdb-gnus :after gnus)
@@ -1017,6 +1028,9 @@ if `org-store-link' is called from the #+TITLE line."
   (lisp-indent-function #'hybrid-lisp-indent-function)
   :config
   (defun hybrid-lisp-indent-function (indent-point state)
+    "An indent function for Emacs Lisp that handles `cl-label' and `cl-flet'.
+For those constructs, it uses `common-lisp-indent-function', for
+everything else, it uses `lisp-indent-function'."
     (if (save-excursion
           (cl-loop for pt in (nth 9 state)
                    do (goto-char pt)
