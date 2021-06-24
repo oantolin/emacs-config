@@ -739,6 +739,11 @@ These annotations are skipped for remote paths."
 (use-package pdf-loader
   :init (pdf-loader-install))
 
+(use-package tramp
+  :defer t
+  :when (executable-find "plink.exe")
+  :custom (tramp-default-method "plink"))
+
 (use-package dired
   :bind (:map dired-mode-map
               ("e" . dired-toggle-read-only)
