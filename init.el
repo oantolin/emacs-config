@@ -317,13 +317,11 @@
   :ensure t
   :demand t
   :config
-  (defmacro dispatch: (regexp spec string)
+  (defmacro dispatch: (regexp style string)
     (cl-flet ((symcat (a b) (intern (concat a (symbol-name b)))))
-      (let ((style (if (consp spec) (cadr spec) spec))
-            (name (if (consp spec) (car spec) spec)))
-        `(defun ,(symcat "dispatch:" name) (pattern _index _total)
-           (when (string-match-p ,regexp pattern)
-             (cons ',(symcat "orderless-" style) ,string))))))
+      `(defun ,(symcat "dispatch:" style) (pattern _index _total)
+         (when (string-match-p ,regexp pattern)
+           (cons ',(symcat "orderless-" style) ,string)))))
   (cl-flet
       ((remfix (fix str)
          (cond
