@@ -317,22 +317,18 @@
   :ensure t
   :demand t
   :config
-  (defmacro dispatch: (regexp style string)
+  (defmacro dispatch: (regexp style)
     (cl-flet ((symcat (a b) (intern (concat a (symbol-name b)))))
       `(defun ,(symcat "dispatch:" style) (pattern _index _total)
-         (when (string-match-p ,regexp pattern)
-           (cons ',(symcat "orderless-" style) ,string)))))
-  (cl-flet
-      ((remfix (fix str)
-         (cond
-           ((string-prefix-p fix str) (string-remove-prefix fix str))
-           ((string-suffix-p fix str) (string-remove-suffix fix str)))))
-    (dispatch: "^=\\|=$" literal (remfix "=" pattern))
-    (dispatch: "^'\\|'$" regexp (remfix "'" pattern))
-    (dispatch: "^;\\|;$" initialism (remfix ";" pattern)))
-  (dispatch: "^{.*}$" flex (substring pattern 1 -1))
-  (dispatch: "^[^][\\+*]*[./-][^][\\+*]*$" prefixes pattern)
-  (dispatch: "^!." without-literal (substring pattern 1))
+         (when (string-match ,regexp pattern)
+           (cons ',(symcat "orderless-" style) (match-string 1 pattern))))))
+  (cl-flet ((pre/post (str) (format "^%s\\(.*\\)$\\|^\\(.*\\)%s$" str str)))
+    (dispatch: (pre/post "=") literal)
+    (dispatch: (pre/post "'") regexp)
+    (dispatch: (pre/post ";") initialism))
+  (dispatch: "^{\\(.*\\)}$" flex)
+  (dispatch: "^\\([^][\\+*]*[./-][^][\\+*]*\\)$" prefixes)
+  (dispatch: "^!\\(.+\\)$" without-literal)
   :custom
   (orderless-matching-styles 'orderless-regexp)
   (orderless-style-dispatchers
