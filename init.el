@@ -163,7 +163,8 @@
  :prefix-docstring "Keymap for operations on Emacs Lisp libraries."
  ("l" . load-library)
  ("f" . find-library)
- ("b" . eval-buffer)
+ ("e" . eval-buffer)
+ ("h" . finder-commentary)
  ("c" . byte-compile-file)
  ("r" . byte-recompile-file)
  ("a" . apropos-library)
