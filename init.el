@@ -327,8 +327,7 @@
     (dispatch: (pre/post "'") regexp)
     (dispatch: (pre/post (if (or minibuffer-completing-file-name
                                  (derived-mode-p 'eshell-mode))
-                             ";"
-                           "[.;]"))
+                             "`" "."))
                initialism))
   (dispatch: "^{\\(.*\\)}$" flex)
   (dispatch: "^\\([^][\\+*]*[./-][^][\\+*]*\\)$" prefixes)
