@@ -124,6 +124,7 @@
  ("M-s c" . count-matches)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
+ ("C-c l" . load-library)
  ([remap list-buffers] . electric-buffer-list)
  ([remap upcase-word] . upcase-dwim)
  ([remap downcase-word] . downcase-dwim)
@@ -156,19 +157,6 @@
  ("s" . whitespace-mode)
  ("v" . variable-pitch-mode)
  ("o" . org-toggle-link-display))
-
-(bind-keys
- :prefix "C-c l"
- :prefix-map lib-ops-map
- :prefix-docstring "Keymap for operations on Emacs Lisp libraries."
- ("l" . load-library)
- ("f" . find-library)
- ("e" . eval-buffer)
- ("h" . finder-commentary)
- ("c" . byte-compile-file)
- ("r" . byte-recompile-file)
- ("a" . apropos-library)
- ("w" . locate-library))
 
 ;;; packages
 
@@ -472,30 +460,12 @@
   :ensure t
   :bind
   ("M-A" . marginalia-cycle)
-  :config
-  (defun marginalia-annotate-file (cand)
-  "Annotate file CAND with its size, modification time and other attributes.
-These annotations are skipped for remote paths."
-  (if (or (marginalia--remote-p cand)
-          (when-let (win (active-minibuffer-window))
-            (with-current-buffer (window-buffer win)
-              (marginalia--remote-p (minibuffer-contents-no-properties)))))
-      (marginalia--fields ("*Remote*" :face 'marginalia-documentation))
-    (when-let ((attributes
-                (file-attributes
-                 (substitute-in-file-name (marginalia--full-candidate cand))
-                 'string)))
-      (marginalia--fields
-       ((format-time-string
-         "%b %d %H:%M"
-         (file-attribute-modification-time attributes))
-        :face 'marginalia-date)
-       ((file-size-human-readable (file-attribute-size attributes))
-        :width 6 :face 'marginalia-size)
-       ((file-attribute-modes attributes)
-        :face 'marginalia-file-modes)))))
   :init
   (marginalia-mode))
+
+(use-package library-support
+  :after (marginalia embark)
+  :demand t)
 
 (use-package consult
   :ensure t
