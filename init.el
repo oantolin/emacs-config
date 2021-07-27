@@ -471,6 +471,9 @@
   :after (marginalia embark)
   :demand t)
 
+(use-package embark-which-key-indicator
+  :commands (embark-which-key-indicator))
+
 (use-package consult
   :ensure t
   :bind
