@@ -355,6 +355,9 @@
 (use-package vertico
   :ensure t
   :commands vertico-mode
+  :bind
+  (:map vertico-map
+        ("<C-backspace>" . up-directory))
   :init
   (defvar minibuffer--require-match nil))
 
