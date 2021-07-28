@@ -442,9 +442,10 @@
   (defun target-org-table-cell ()
     "Target contents of current cell in an orb table."
     (when (and (derived-mode-p 'org-mode) (org-at-table-p))
-      (cons 'org-table-cell
-            (save-excursion
-              (string-trim (org-table-get-field))))))
+      `(org-table-cell
+        ,(save-excursion (string-trim (org-table-get-field)))
+        . (,(save-excursion (skip-chars-backward "^|") (point))
+           . ,(save-excursion (skip-chars-forward "^|") (point))))))
   (setq embark-target-finders
         (append
          (butlast embark-target-finders)
