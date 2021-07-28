@@ -450,12 +450,7 @@
         (append
          (butlast embark-target-finders)
          (cons #'target-org-table-cell
-               (last embark-target-finders))))
-  (defun display-completions-automatically (fn &rest args)
-    "Apply FN to ARGS automatically using Embark to display any completions."
-    (minibuffer-with-setup-hook #'embark-collect-completions (apply fn args)))
-  (advice-add #'embark-completing-read-prompter
-              :around #'display-completions-automatically))
+               (last embark-target-finders)))))
 
 (use-package avy-embark-collect
   :ensure t

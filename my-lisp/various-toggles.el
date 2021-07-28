@@ -19,9 +19,15 @@
      ("english" "español")
      ("español" "english"))))
 
+;;; completion UIs
+
 (defun embark-collect-completions-1 (&optional _start _end)
   (unless (bound-and-true-p embark-collect-linked-buffer)
     (embark-collect-completions)))
+
+(defun display-completions-automatically (fn &rest args)
+  "Apply FN to ARGS automatically using Embark to display any completions."
+  (minibuffer-with-setup-hook #'embark-collect-completions (apply fn args)))
 
 (defun change-completion-ui (ui)
   "Choose between Embark, Icomplete, Vertico and Selectrum for completion."
@@ -44,16 +50,22 @@
   (advice-remove 'minibuffer-completion-help #'embark-collect-completions-1)
   (advice-remove 'switch-to-completions #'embark-switch-to-collect-completions)
   (setq completion-auto-help nil completion-cycle-threshold 3)
+  (advice-remove #'embark-completing-read-prompter
+                 #'display-completions-automatically)
   ;; activate chosen one
   (pcase ui
     (?d (setq completion-auto-help t))
     (?e
      (setq completion-auto-help t completion-cycle-threshold nil)
+     (advice-add #'embark-completing-read-prompter
+                 :around #'display-completions-automatically)
      (advice-add 'minibuffer-completion-help
                  :override #'embark-collect-completions-1)
      (advice-add 'switch-to-completions
                  :override #'embark-switch-to-collect-completions))
     ((or ?I ?D)
+     (advice-add #'embark-completing-read-prompter
+                 :around #'display-completions-automatically)
      (advice-add 'switch-to-completions
                  :override #'embark-switch-to-collect-completions)
      (add-hook 'minibuffer-setup-hook
