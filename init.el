@@ -464,13 +464,19 @@
         ("C-'" . avy-embark-collect-choose)
         ("C-\"" . avy-embark-collect-act)))
 
-(use-package embark-consult :ensure t :after (embark consult))
+(use-package embark-consult
+  :ensure t
+  :after (embark consult))
 
-(use-package library-support :after (marginalia embark) :demand t)
+(use-package library-support
+  :after (marginalia embark)
+  :demand t)
 
-(use-package embark-kmacro :after embark)
+(use-package embark-kmacro
+  :after embark)
 
-(use-package embark-which-key-indicator :commands (embark-which-key-indicator))
+(use-package embark-which-key-indicator
+  :commands (embark-which-key-indicator))
 
 (use-package consult
   :ensure t
