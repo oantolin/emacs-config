@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'embark)
+
 (defun embark-kmacro-target ()
   "Target a textual kmacro in braces."
   (save-excursion

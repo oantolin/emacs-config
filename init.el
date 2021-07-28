@@ -380,6 +380,13 @@
   :config
   (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder))))
 
+(use-package marginalia
+  :ensure t
+  :bind
+  ("M-A" . marginalia-cycle)
+  :init
+  (marginalia-mode))
+
 (use-package embark
   :ensure t
   :bind
@@ -456,23 +463,13 @@
         ("C-'" . avy-embark-collect-choose)
         ("C-\"" . avy-embark-collect-act)))
 
-(use-package embark-consult
-  :ensure t
-  :after (embark consult))
+(use-package embark-consult :ensure t :after (embark consult))
 
-(use-package marginalia
-  :ensure t
-  :bind
-  ("M-A" . marginalia-cycle)
-  :init
-  (marginalia-mode))
+(use-package library-support :after (marginalia embark) :demand t)
 
-(use-package library-support
-  :after (marginalia embark)
-  :demand t)
+(use-package embark-kmacro :after embark)
 
-(use-package embark-which-key-indicator
-  :commands (embark-which-key-indicator))
+(use-package embark-which-key-indicator :commands (embark-which-key-indicator))
 
 (use-package consult
   :ensure t
