@@ -30,6 +30,7 @@
   ("k" kill-buffer)
   ("z" bury-buffer)
   ("|" embark-shell-command-on-buffer)
-  ("g" revert-buffer))
+  ("g" revert-buffer)
+  ("p" pwd))
 
 (provide 'embark-this-buffer)
