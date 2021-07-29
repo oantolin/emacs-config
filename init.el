@@ -188,6 +188,8 @@
   ("M-B" . backward-to-word)
   ("M-\"". copy-from-above-command))
 
+(use-package file-extras)
+
 (use-package text-extras
   :bind
   ("M-Q" . unfill-paragraph)
