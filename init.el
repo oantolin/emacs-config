@@ -806,17 +806,7 @@ Intended to be used as advice for `consult-history'."
 (use-package vc
   :bind
   (:map vc-prefix-map
-        ("d" . vc-dir-dwim))
-  :config
-  (defun vc-dir-dwim (&optional arg)
-    "Run `vc-dir' in the repository root directory without prompt.
-If the default directory of the current buffer is not under
-version control or if called with a prefix ARG, prompt for a
-directory."
-    (interactive "P")
-    (let ((root-dir (vc-root-dir)))
-      (if (and (not arg) root-dir) (vc-dir root-dir)
-        (call-interactively 'vc-dir)))))
+        ("R" . vc-rename-file)))
 
 (use-package magit :ensure t :defer t)
 
