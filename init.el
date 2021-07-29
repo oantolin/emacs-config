@@ -472,6 +472,9 @@
 (use-package embark-kmacro
   :after embark)
 
+(use-package embark-this-buffer
+  :after embark)
+
 (use-package embark-which-key-indicator
   :commands (embark-which-key-indicator))
 
