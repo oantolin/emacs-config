@@ -20,7 +20,7 @@
   ("w" write-file)
   ("R" vc-rename-file)
   ("D" vc-delete-file)
-  ("c" diff-buffer-with-file)           ; c for changes
+  ("n" diff-buffer-with-file)           ; n for new
   ("C-=" ediff-buffers)
   ("=" ediff-files)
   ("!" shell-command)
