@@ -5,7 +5,7 @@
 (defun embark-target-this-buffer ()
   (cons 'this-buffer (buffer-name)))
 
-(add-to-list 'embark-target-finders #'embark-target-this-buffer 'append)
+(add-to-list 'embark-target-finders #'embark-target-this-buffer t)
 
 (add-to-list 'embark-keymap-alist '(this-buffer . this-buffer-map))
 
