@@ -1016,7 +1016,7 @@ if `org-store-link' is called from the #+TITLE line."
                '("Embark Keymaps"
                  "^\\s-*(embark-define-keymap\\s-+\\(\\(?:\\sw\\|\\s_\\)+\\)"
                  1)
-               t))
+               t)
   (defun hybrid-lisp-indent-function (indent-point state)
     "An indent function for Emacs Lisp that handles `cl-label' and `cl-flet'.
 For those constructs, it uses `common-lisp-indent-function', for
