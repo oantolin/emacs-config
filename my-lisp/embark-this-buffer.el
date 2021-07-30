@@ -11,6 +11,8 @@
 
 (add-to-list 'embark-allow-edit-commands #'write-file)
 
+(defun revert-buffer-no-question (_) (revert-buffer nil t))
+
 (embark-define-keymap this-buffer-map
   "Commands to act on current file or buffer."
   ("RET" eval-buffer)
@@ -32,7 +34,7 @@
   ("k" kill-buffer)
   ("z" bury-buffer)
   ("|" embark-shell-command-on-buffer)
-  ("g" revert-buffer)
+  ("g" revert-buffer-no-question)
   ("p" pwd))
 
 (provide 'embark-this-buffer)
