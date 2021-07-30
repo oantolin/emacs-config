@@ -178,6 +178,15 @@
 (use-package imenu
   :custom (imenu-space-replacement nil))
 
+(use-package custom
+  :hook
+  (Custom-mode . configure-imenu-Custom)
+  :config
+  (defun configure-imenu-Custom ()
+    (setq imenu-generic-expression
+          '(("Faces" "^\\(?:Show\\|Hide\\) \\(.*\\) face: \\[sample\\]" 1)
+            ("Variables" "^\\(?:Show Value\\|Hide\\) \\([^:\n]*\\)" 1)))))
+
 (use-package recentf
   :init (recentf-mode))
 
