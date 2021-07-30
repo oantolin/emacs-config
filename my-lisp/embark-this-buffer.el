@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
+(require 'embark)
+
 (defun embark-target-this-buffer ()
   (cons 'this-buffer (buffer-name)))
 
