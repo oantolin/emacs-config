@@ -487,6 +487,9 @@
 (use-package embark-which-key-indicator
   :commands (embark-which-key-indicator))
 
+(use-package embark-imenu-collector
+  :after embark)
+
 (use-package consult
   :ensure t
   :bind
