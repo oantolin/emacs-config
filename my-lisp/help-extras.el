@@ -10,8 +10,7 @@
               collect (symbol-name x))
      nil t nil 'variable-name-history)))
   (require 'embark)
-  (embark-completing-read-prompter
-   (symbol-value (intern keymap))))
+  (embark-completing-read-prompter (symbol-value (intern keymap)) nil))
 
 (defun command-of-the-day ()
   "Show the documentation for a random command."
