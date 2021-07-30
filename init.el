@@ -811,7 +811,8 @@ Intended to be used as advice for `consult-history'."
 (use-package vc
   :bind
   (:map vc-prefix-map
-        ("R" . vc-rename-file)))
+        ("R" . vc-rename-file)
+        ("d" . vc-dir-root)))
 
 (use-package magit :ensure t :defer t)
 
