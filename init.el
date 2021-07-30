@@ -1009,6 +1009,11 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (lisp-indent-function #'hybrid-lisp-indent-function)
   :config
+  (add-to-list 'lisp-imenu-generic-expression
+               '("Embark Keymaps"
+                 "^\\s-*(embark-define-keymap\\s-+\\(\\(?:\\sw\\|\\s_\\)+\\)"
+                 1)
+               t))
   (defun hybrid-lisp-indent-function (indent-point state)
     "An indent function for Emacs Lisp that handles `cl-label' and `cl-flet'.
 For those constructs, it uses `common-lisp-indent-function', for
