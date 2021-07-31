@@ -423,7 +423,6 @@
   (embark-collect-post-revert . resize-embark-collect-completions)
   :custom
   (embark-quit-after-action nil)
-  (embark-indicator #'embark-minimal-indicator)
   (prefix-help-command #'embark-prefix-help-command)
   :custom-face
   (embark-keybinding
