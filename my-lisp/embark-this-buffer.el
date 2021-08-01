@@ -35,6 +35,12 @@
   ("z" bury-buffer)
   ("|" embark-shell-command-on-buffer)
   ("g" revert-buffer-no-question)
-  ("p" pwd))
+  ("p" pwd)
+  ("SPC" mark-whole-buffer)
+  ("<" previous-buffer)
+  (">" next-buffer))
+
+(add-to-list 'embark-repeat-commands #'previous-buffer)
+(add-to-list 'embark-repeat-commands #'next-buffer)
 
 (provide 'embark-this-buffer)
