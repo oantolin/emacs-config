@@ -107,7 +107,8 @@
  '(save-interprogram-paste-before-kill t)
  '(password-cache-expiry 300)
  '(debugger-stack-frame-as-list t)
- '(split-width-threshold 140))
+ '(split-width-threshold 140)
+ '(y-or-n-p-use-read-key t))
 
 (defalias 'yes-or-no-p #'y-or-n-p)
 
