@@ -417,7 +417,8 @@
         (";" . embark-act)
         ("'" . avy-embark-collect-choose)
         ("\"" . avy-embark-collect-act)
-        ("F" . consult-focus-lines))
+        ("F" . consult-focus-lines)
+        ("C-g" . abort-recursive-edit))
   (:map embark-package-map
         ("t" . try))
   :hook
