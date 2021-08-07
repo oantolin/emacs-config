@@ -8,7 +8,8 @@
     (let ((beg (progn (skip-chars-backward "^{}\n") (point)))
           (end (progn (skip-chars-forward "^{}\n") (point))))
       (when (and (eq (char-before beg) ?{) (eq (char-after end) ?}))
-        (cons 'kmacro (buffer-substring-no-properties beg end))))))
+        `(kmacro ,(buffer-substring-no-properties beg end)
+                 . (,(1- beg) . ,(1+ end)))))))
 
 (add-to-list 'embark-target-finders 'embark-kmacro-target)
 
