@@ -499,7 +499,7 @@
   ("M-g l" . consult-line)    ("M-g M-l" . consult-line)
   ("M-g i" . consult-imenu)   ("M-g M-i" . consult-imenu)
   ("M-g o" . consult-outline) ("M-g M-o" . consult-outline)
-  ("M-g I" . consult-project-imenu)
+  ("M-g I" . consult-imenu-multi)
   ("M-g m" . consult-mark)
   ("M-g k" . consult-global-mark)
   ("M-s m" . consult-multi-occur)
