@@ -326,13 +326,13 @@
            (cons ',(symcat "orderless-" style) (match-string 1 pattern))))))
   (cl-flet ((pre/post (str) (format "^%s\\(.*\\)$\\|^\\(?1:.*\\)%s$" str str)))
     (dispatch: (pre/post "=") literal)
-    (dispatch: (pre/post "'") regexp)
+    (dispatch: (pre/post "`") regexp)
     (dispatch: (pre/post (if (or minibuffer-completing-file-name
                                  (derived-mode-p 'eshell-mode))
                              "%" "[%.]"))
                initialism))
   (dispatch: "^{\\(.*\\)}$" flex)
-  (dispatch: "^\\([^][\\+*]*[./-][^][\\+*]*\\)$" prefixes)
+  (dispatch: "^\\([^][^\\+*]*[./-][^][\\+*$]*\\)$" prefixes)
   (dispatch: "^!\\(.+\\)$" without-literal)
   :custom
   (orderless-matching-styles 'orderless-regexp)
