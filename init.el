@@ -518,7 +518,6 @@
   :custom
   (register-preview-function #'consult-register-format)
   (completion-in-region-function #'consult-completion-in-region)
-  (consult-async-split-style 'space)
   (consult-narrow-key "<")
   :hook
   ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
