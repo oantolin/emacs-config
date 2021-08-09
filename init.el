@@ -99,7 +99,6 @@
  '(indent-tabs-mode nil)
  '(standard-indent 2)
  '(track-eol t)
- '(text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
  '(view-read-only t)
  '(kill-read-only-ok t)
  '(history-delete-duplicates t)
@@ -220,7 +219,9 @@
   ("M-W" . mark-non-whitespace)
   ("M-'" . dabbrev-next)
   ("C-M-'" . dabbrev-complete-next)
-  :commands force-truncate-lines)
+  :commands
+  force-truncate-lines
+  turn-off-visual-line-mode)
 
 (use-package placeholder
   :bind
@@ -348,16 +349,11 @@
 	      ("<up>" . icomplete-backward-completions)
 	      ("C-p" . icomplete-backward-completions)
               ("C-M-i" . minibuffer-complete))
-  :hook
-  (icomplete-minibuffer-setup . visual-line-mode)
   :custom
   (icomplete-show-matches-on-no-input t)
   (icomplete-prospects-height 1)
   (icomplete-separator " ⋮ ")
-  (icomplete-hide-common-prefix nil)
-  :config
-  (advice-add 'icomplete-vertical-minibuffer-teardown
-              :after #'visual-line-mode))
+  (icomplete-hide-common-prefix nil))
 
 (use-package icomplete-vertical
   :ensure t
@@ -602,7 +598,6 @@
   :hook 
   (text-mode . turn-on-visual-line-mode)
   :config
-  (remove-hook 'text-mode-hook 'turn-on-auto-fill)
   (modify-syntax-entry ?\" "\"" text-mode-syntax-table))
 
 (use-package eldoc :defer t :diminish)
@@ -876,6 +871,8 @@ Intended to be used as advice for `consult-history'."
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
   (org-mode . echo-area-tooltips)
+  (org-mode . turn-on-auto-fill)
+  (org-mode . turn-off-visual-line-mode)
   :config
   (defun ediff-with-org-show-all ()
     "Expand all headings prior to ediffing org buffers."

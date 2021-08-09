@@ -166,6 +166,10 @@ times."
   "Force line truncation. For use in hooks."
   (setq truncate-lines t))
 
+(defun turn-off-visual-line-mode ()
+  "Turn off `visual-line-mode'.  For use in hooks."
+  (visual-line-mode -1))
+
 (defun dabbrev-next (arg)
   "Insert the next ARG words from where previous expansion was found."
   (interactive "p")
