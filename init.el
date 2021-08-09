@@ -282,7 +282,7 @@
         ("M-RET" . exit-minibuffer))
   (:map minibuffer-local-completion-map
         ("<backtab>" . minibuffer-force-complete)
-        ("SPC") ("?"))
+        ("SPC"))
   :custom
   (completion-styles '(orderless))
   (completion-category-defaults nil)
@@ -365,7 +365,8 @@
   :commands vertico-mode
   :bind
   (:map vertico-map
-        ("<C-backspace>" . up-directory))
+        ("<C-backspace>" . up-directory)
+        ("M-." . cd-bookmark))
   :init
   (defvar minibuffer--require-match nil))
 
@@ -464,8 +465,8 @@
   :ensure t
   :bind
   (:map minibuffer-local-completion-map
-        ("C-'" . avy-embark-collect-choose)
-        ("C-\"" . avy-embark-collect-act)))
+        ("'" . avy-embark-collect-choose)
+        ("\"" . avy-embark-collect-act)))
 
 (use-package embark-consult
   :ensure t
