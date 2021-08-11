@@ -497,9 +497,9 @@
   :ensure t
   :bind
   ("M-y" . consult-yank-pop)
-  ("M-g l" . consult-line)    ("M-g M-l" . consult-line)
-  ("M-g i" . consult-imenu)   ("M-g M-i" . consult-imenu)
-  ("M-g o" . consult-outline) ("M-g M-o" . consult-outline)
+  ("M-g l" . consult-line)
+  ("M-g i" . consult-imenu)
+  ("M-g o" . consult-outline)
   ("M-g I" . consult-imenu-multi)
   ("M-g m" . consult-mark)
   ("M-g k" . consult-global-mark)
@@ -520,7 +520,7 @@
         ("M-r" . consult-history)
         ("M-s"))
   (:map consult-narrow-map
-        ("?" . consult-narrow-help))
+        ("C-<" . consult-narrow-help))
   :custom
   (register-preview-function #'consult-register-format)
   (completion-in-region-function #'consult-completion-in-region)
