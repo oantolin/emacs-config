@@ -265,7 +265,11 @@
   :bind
   (:map toggle-map
         ("w" . toggle-wrapping)
-        ("l" . toggle-ispell-lang)
+        ("l" . toggle-ispell-lang)))
+
+(use-package completion-ui
+  :bind
+  (:map toggle-map
         ("SPC" . change-completion-ui))
   :init
   (change-completion-ui ?e))
