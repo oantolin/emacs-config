@@ -319,11 +319,6 @@
         ("<C-backspace>" . up-directory)
         ("M-." . cd-bookmark)))
 
-(use-package resume
-  :demand t
-  :bind ("M-r" . resume)
-  :config (resume-minor-mode))
-
 (use-package orderless
   :ensure t
   :demand t
