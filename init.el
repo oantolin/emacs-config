@@ -432,6 +432,9 @@
   :custom
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
+  (embark-indicators '(embark-minimal-indicator
+                       embark-highlight-indicator
+                       embark-isearch-highlight-indicator))
   :custom-face
   (embark-keybinding
    ((default :inherit default)
