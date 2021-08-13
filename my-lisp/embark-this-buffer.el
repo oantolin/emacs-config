@@ -9,7 +9,7 @@
 
 (add-to-list 'embark-keymap-alist '(this-buffer . this-buffer-map))
 
-(add-to-list 'embark-allow-edit-commands #'write-file)
+(add-to-list 'embark-allow-edit-actions #'write-file)
 
 (embark-define-keymap this-buffer-map
   "Commands to act on current file or buffer."
@@ -38,7 +38,7 @@
   ("<" previous-buffer)
   (">" next-buffer))
 
-(add-to-list 'embark-repeat-commands #'previous-buffer)
-(add-to-list 'embark-repeat-commands #'next-buffer)
+(add-to-list 'embark-repeat-actions #'previous-buffer)
+(add-to-list 'embark-repeat-actions #'next-buffer)
 
 (provide 'embark-this-buffer)
