@@ -19,7 +19,7 @@
   ("e" eval-buffer)
   ("r" rename-file)
   ("d" delete-file)
-  ("w" write-file)
+  ("W" write-file)
   ("R" vc-rename-file)
   ("D" vc-delete-file)
   ("n" diff-buffer-with-file)           ; n for new
