@@ -25,6 +25,7 @@
   ("n" diff-buffer-with-file)           ; n for new
   ("C-=" ediff-buffers)
   ("=" ediff-files)
+  ("$" ispell)
   ("!" shell-command)
   ("&" async-shell-command)
   ("x" consult-file-externally)         ; useful for PDFs
