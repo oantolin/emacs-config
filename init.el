@@ -316,8 +316,7 @@
         ("RET" . exit-with-top-completion))
   (:map minibuffer-local-filename-completion-map
         ("RET" . exit-with-top-completion)
-        ("<C-backspace>" . up-directory)
-        ("M-." . cd-bookmark)))
+        ("<C-backspace>" . up-directory)))
 
 (use-package orderless
   :ensure t
@@ -478,6 +477,13 @@
 (use-package embark-consult
   :ensure t
   :after (embark consult))
+
+(use-package consult-dir
+  :ensure t
+  :bind
+  (:map minibuffer-local-filename-completion-map
+        ("M-." . consult-dir)
+        ("M-j" . consult-dir-jump-file)))
 
 (use-package library-support
   :after (marginalia embark)
