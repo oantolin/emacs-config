@@ -446,10 +446,12 @@
                        embark-candidate-collectors))
   (dolist (type '(symbol t))
     (setf (alist-get type embark-collect-initial-view-alist) 'grid))
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect Completions\\*"
-                 nil
-                 (window-parameters (mode-line-format . none))))
+  (setq display-buffer-alist
+        (append
+         '(("\\`\\*Embark Collect" nil (window-height . fit-window-to-buffer))
+           ("\\`\\*Embark Collect Completions\\*" nil
+            (window-parameters (mode-line-format . none))))
+         display-buffer-alist))
   (defun resize-embark-collect-completions (&rest _)
     "Resize current window to fit buffer or 40% of the frame height."
     (fit-window-to-buffer (get-buffer-window)
