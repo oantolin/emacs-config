@@ -198,7 +198,7 @@
   ("M-B" . backward-to-word)
   ("M-\"". copy-from-above-command))
 
-(use-package file-extras)
+(use-package visiting-buffer)
 
 (use-package text-extras
   :bind
