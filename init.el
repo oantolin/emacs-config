@@ -427,6 +427,7 @@
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
   (embark-indicators '(embark-minimal-indicator
+                       embark-minibuffer-indicator
                        embark-highlight-indicator
                        embark-isearch-highlight-indicator))
   :custom-face
@@ -498,8 +499,10 @@
 (use-package embark-this-buffer
   :after embark)
 
-(use-package embark-which-key-indicator
-  :commands (embark-which-key-indicator))
+(use-package embark-extra-indicators
+  :commands
+  embark-which-key-indicator
+  embark-minibuffer-indicator)
 
 (use-package embark-imenu-collector
   :after embark)
@@ -642,17 +645,16 @@
   (shr-use-colors nil))
 
 (use-package eww
-  :bind
-  ("C-x w" . eww)
+  :defer t
   :custom
-  (eww-bookmarks-directory "~/.private/")
-  (eww-search-prefix "http://google.com/search?q="))
+  (eww-bookmarks-directory "~/.private/"))
 
 (use-package eww-extras
   :bind
   ("C-x W" . eww-bookmark-jump)
-  (:map eww-mode-map
-        ("W" . eww-bookmark-jump)))
+  ;; (:map eww-mode-map
+  ;;       ("W" . eww-bookmark-jump))
+  )
 
 (use-package latex
   :ensure auctex
