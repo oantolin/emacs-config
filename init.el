@@ -125,6 +125,7 @@
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
  ("C-c l" . load-library)
+ ("C-c f" . find-library)
  ([remap list-buffers] . electric-buffer-list)
  ([remap upcase-word] . upcase-dwim)
  ([remap downcase-word] . downcase-dwim)
@@ -526,7 +527,7 @@
   ("C-c b" . consult-buffer)
   ("C-c 4 b" . consult-buffer-other-window)
   ("C-c k" . consult-keep-lines)
-  ("C-c f" . consult-focus-lines)
+  ("C-c F" . consult-focus-lines)
   ("M-`" . consult-register-store)
   ("C-`" . consult-register-load)
   ("C-M-`" . consult-register)
