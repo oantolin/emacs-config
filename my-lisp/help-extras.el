@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; help-extras.el --- Miscellaneous help-related commands    -*- lexical-binding: t; -*-
 
 (defun embark-describe-keymap (keymap)
   "Prompt for KEYMAP and show its bindings using `completing-read'."

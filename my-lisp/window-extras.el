@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; window-extras.el --- Miscellaneous window commands    -*- lexical-binding: t; -*-
 
 (defun toggle-window-split ()
   "Toggle window split from vertical to horizontal."

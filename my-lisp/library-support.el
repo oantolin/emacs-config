@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;  library-support.el --- Embark & Marginalia support for elisp libraries   -*- lexical-binding: t; -*-
 
 (require 'marginalia)
 (require 'embark)

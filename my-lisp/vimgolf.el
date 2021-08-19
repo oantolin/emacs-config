@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; vimgolf.el --- Play VimGolf in Emacs    -*- lexical-binding: t; -*-
 
 (require 'json)
 

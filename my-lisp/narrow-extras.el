@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; narrow-extras.el --- Miscellaneous narrowing commands    -*- lexical-binding: t; -*-
 
 (declare-function org-edit-src-code 'org-src)
 (declare-function org-edit-src-exit 'org-src)

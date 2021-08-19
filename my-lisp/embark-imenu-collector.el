@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;  embark-imenu-collector.el --- Have Embark collect imenu items   -*- lexical-binding: t; -*-
 
 (require 'embark)
 (require 'consult-imenu)

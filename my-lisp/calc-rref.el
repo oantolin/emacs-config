@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; calc-rref.el --- Row-reduce echelon form for Calc    -*- lexical-binding: t; -*-
 
 (require 'calc-mtx)
 

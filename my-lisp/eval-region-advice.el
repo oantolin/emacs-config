@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; eval-region-advice.el --- Advise eval commands to use region if active    -*- lexical-binding: t; -*-
 
 (defun eval-region-if-active (arg)
   "Advice for evaluation commands, to have them call

@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; embark-kmacro.el --- Embark support for Hyperbole key series    -*- lexical-binding: t; -*-
 
 (require 'embark)
 

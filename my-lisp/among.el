@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; among.el --- Words among letters    -*- lexical-binding: t; -*-
 
 (defun among (letters)
   (interactive "sAmong: ")

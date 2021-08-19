@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; tmp-buffer.el --- Temporary buffers in specified major mode    -*- lexical-binding: t; -*-
 
 (defcustom tmp-buffer-mode-alist
   '((?o . org-mode)

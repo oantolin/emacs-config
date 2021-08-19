@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; minibuffer-extras.el --- Miscellaneous minibuffer commands    -*- lexical-binding: t; -*-
 
 ;;; tools for navigating the file system in the minibuffer
 ;;; bind in minibuffer-local-filename-map

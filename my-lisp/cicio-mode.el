@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; cicio-mode.el --- Major mode for cicio programs    -*- lexical-binding: t; -*-
 
 (add-to-list 'auto-mode-alist '("\\.ci\\'" . cicio-mode))
 

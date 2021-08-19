@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;  embark-extra-indicators.el --- Which-key and minibuffer embark indicators   -*- lexical-binding: t; -*-
 
 (defvar which-key--buffer)
 (declare-function which-key--show-keymap "ext:which-key")

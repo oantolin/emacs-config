@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;  completion-ui.el --- Switch between vaious completion UIs   -*- lexical-binding: t; -*-
 
 (defun embark-collect-completions-1 (&optional _start _end)
   (unless (bound-and-true-p embark-collect-linked-buffer)

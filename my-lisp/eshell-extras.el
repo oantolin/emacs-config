@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;  eshell-extras.el --- Miscellaneous eshell commands   -*- lexical-binding: t; -*-
 
 (defun interactive-cd (dir)
   "Prompt for a directory and cd to it."

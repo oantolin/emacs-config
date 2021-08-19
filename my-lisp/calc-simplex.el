@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; calc-simplex.el --- Simplex method for Calc    -*- lexical-binding: t; -*-
 
 (defun display-index (i cols phase-1)
   (cond

@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; isearch-extras.el --- Some isearch tweaks    -*- lexical-binding: t; -*-
 
 (defvar avy-command)
 

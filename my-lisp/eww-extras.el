@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t -*-
+;;; eww-extras.el ---  Jump to eww bookmark with completion   -*- lexical-binding: t -*-
 
 (require 'eww)
 
@@ -29,3 +29,5 @@ in a new EWW buffer."
                 (complete-with-action action bookmarks string predicate))))
            bookmarks))
          arg)))
+
+(provide 'eww-extras)

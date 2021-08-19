@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; block-undo.el --- Undo keyboard macros in a single step    -*- lexical-binding: t; -*-
 
 (defun block-undo (fn &rest args)
   (let ((marker (prepare-change-group)))

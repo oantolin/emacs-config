@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;  embark-this-buffer.el --- Embark whole buffer target & actions   -*- lexical-binding: t; -*-
 
 (require 'embark)
 

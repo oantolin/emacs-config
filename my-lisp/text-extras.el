@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; text-extras.el --- Miscellaneous text editing commands    -*- lexical-binding: t; -*-
 
 (defun unfill-paragraph ()
   "Join a paragraph into a single line."

@@ -1,6 +1,8 @@
-;;; -*- lexical-binding: t; -*-
+;;; org-extras.el --- Miscellaneous Org extras    -*- lexical-binding: t; -*-
 
 ;;; arXiv links
+
+(require 'org)
 
 (org-link-set-parameters
  "arXiv"

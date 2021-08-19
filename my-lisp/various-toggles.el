@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; various-toggles.el --- Commands to toggle wrapping or ispell language    -*- lexical-binding: t; -*-
 
 (defun toggle-wrapping ()
   "Toggle both auto fill and visual line modes."

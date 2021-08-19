@@ -1,4 +1,4 @@
-;;; -*- lexical-binding: t; -*-
+;;; auctex-cache.el --- Cache of LaTeX documentclasses and packages     -*- lexical-binding: t; -*-
 
 (defvar LaTeX-global-class-files)
 (setq LaTeX-global-class-files
