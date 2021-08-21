@@ -58,7 +58,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "epithet"))
+(dolist (dir '("placeholder" "math-delimiters" "epithet" "embark"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -1049,7 +1049,11 @@ everything else, it uses `lisp-indent-function'."
   :custom
   (python-shell-interpreter "python3"))
 
-(use-package sly :ensure t :defer t)
+(use-package sly
+  :ensure t
+  :defer t
+  :custom
+  (inferior-lisp-program "sbcl"))
 
 (use-package clojure-mode :ensure t :defer t)
 
