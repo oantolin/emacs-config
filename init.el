@@ -413,8 +413,6 @@
   (:map embark-meta-map
         ("C-h") ; I don't like my own default :)
         ("?" . embark-keymap-help))
-  (:map embark-general-map
-        ("DEL" . delete-region))
   (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
@@ -472,9 +470,7 @@
         (append
          (butlast embark-target-finders)
          (cons #'target-org-table-cell
-               (last embark-target-finders))))
-  (push 'embark--mark-target
-        (alist-get 'delete-region embark-pre-action-hooks)))
+               (last embark-target-finders)))))
 
 (use-package avy-embark-collect
   :ensure t
