@@ -632,6 +632,11 @@
   (:map woman-mode-map
         ("o" . link-hint-open-link)))
 
+(use-package package
+  :bind
+  (:map package-menu-mode-map
+        ("o" . link-hint-open-link)))
+
 (use-package elec-pair :init (electric-pair-mode))
 
 (use-package paren :init (show-paren-mode))
