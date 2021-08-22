@@ -873,11 +873,14 @@ Intended to be used as advice for `consult-history'."
 
 (use-package markdown-mode
   :ensure t
-  :defer t
+  :bind
+  (:map markdown-mode-map
+        ("C-'" . markdown-mode-style-map))
   :custom-face
   (markdown-metadata-key-face ((t (:foreground nil))))
   (markdown-metadata-value-face ((t (:foreground nil))))
   :config
+  (fset 'markdown-mode-style-map markdown-mode-style-map)
   (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table))
 
 (use-package org
