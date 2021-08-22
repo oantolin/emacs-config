@@ -549,9 +549,10 @@
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring)
   (plist-put consult--source-project-file :enabled #'project-current)
-  (plist-put consult--source-project-file :items
-        (lambda ()
-          (mapcar #'file-relative-name (project-files (project-current))))))
+  (plist-put
+   consult--source-project-file
+   :items (lambda ()
+            (mapcar #'file-relative-name (project-files (project-current))))))
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
