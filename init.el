@@ -418,7 +418,6 @@
   (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
-        ("'" . link-hint-open-hint)
         ("F" . consult-focus-lines)
         ("C-g" . abort-recursive-edit))
   (:map embark-package-map
@@ -596,7 +595,7 @@
    ("M-i" . avy-goto-char-timer)
    ([remap goto-line] . avy-goto-line))
   (:map isearch-mode-map
-        ("M-'" . avy-isearch))
+        ("C-'" . avy-isearch))
   :config
   (defun avy-embark-act (pt)
     "Use Embark to act on the completion at PT."
@@ -607,34 +606,18 @@
 (use-package link-hint
   :ensure t
   :bind
-  (("C-c o" . link-hint-open-link)
-   ("C-c w" . link-hint-copy-link)
-   (:map minibuffer-local-completion-map
-         ("'" . link-hint-open-link))
-   (:map help-mode-map
-         ("o" . link-hint-open-link))
-   (:map Info-mode-map
-         ("o" . link-hint-open-link))))
-
-(use-package apropos
-  :bind
-  (:map apropos-mode-map
-        ("o" . link-hint-open-link)))
-
-(use-package man
-  :bind
-  (:map Man-mode-map
-        ("o" . link-hint-open-link)))
-
-(use-package woman
-  :bind
-  (:map woman-mode-map
-        ("o" . link-hint-open-link)))
-
-(use-package package
-  :bind
-  (:map package-menu-mode-map
-        ("o" . link-hint-open-link)))
+  ("C-'" . link-hint-open-link)
+  :init
+  (cl-loop for (mode map) in '((minibuffer minibuffer-local-completion-map)
+                               (embark embark-collect-mode-map)
+                               (help help-mode-map)
+                               (info Info-mode-map)
+                               (apropos apropos-mode-map)
+                               (man Man-mode-map)
+                               (woman woman-mode-map)
+                               (package package-menu-mode-map))
+           do (eval-after-load mode
+                `(define-key ,map "'" #'link-hint-open-link))))
 
 (use-package elec-pair :init (electric-pair-mode))
 
@@ -690,7 +673,7 @@
   :bind
   (:map LaTeX-mode-map
         ("$" . math-delimiters-insert)
-        ("C-'" . TeX-font)
+        ("C-=" . TeX-font)
         ([remap next-error])
         ([remap previous-error])
         ("M-g M-n" . TeX-next-error)
@@ -875,7 +858,7 @@ Intended to be used as advice for `consult-history'."
   :ensure t
   :bind
   (:map markdown-mode-map
-        ("C-'" . markdown-mode-style-map))
+        ("C-=" . markdown-mode-style-map))
   :custom-face
   (markdown-metadata-key-face ((t (:foreground nil))))
   (markdown-metadata-value-face ((t (:foreground nil))))
@@ -894,7 +877,7 @@ Intended to be used as advice for `consult-history'."
         ("C-,")
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
-        ("C-'" . org-emphasize)
+        ("C-=" . org-emphasize)
         ("C-x n s" . org-narrow-to-subtree)
         ("C-x n b" . org-narrow-to-block)  
         ("C-x n e" . org-narrow-to-element))
