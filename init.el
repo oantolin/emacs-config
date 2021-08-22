@@ -474,13 +474,6 @@
          (cons #'target-org-table-cell
                (last embark-target-finders)))))
 
-(use-package avy-embark-collect
-  :ensure t
-  :bind
-  (:map minibuffer-local-completion-map
-        ("'" . avy-embark-collect-choose)
-        ("\"" . avy-embark-collect-act)))
-
 (use-package embark-consult
   :ensure t
   :after (embark consult))
@@ -604,13 +597,21 @@
    ("M-i" . avy-goto-char-timer)
    ([remap goto-line] . avy-goto-line))
   (:map isearch-mode-map
-        ("M-'" . avy-isearch)))
+        ("M-'" . avy-isearch))
+  :config
+  (defun avy-embark-act (pt)
+    "Use Embark to act on the completion at PT."
+    (goto-char pt)
+    (embark-act))
+  (add-to-list 'avy-dispatch-alist '(?\; . avy-embark-act)))
 
 (use-package link-hint
   :ensure t
   :bind
   (("C-c o" . link-hint-open-link)
    ("C-c w" . link-hint-copy-link)
+   (:map minibuffer-local-completion-map
+         ("'" . link-hint-open-link))
    (:map help-mode-map
          ("o" . link-hint-open-link))
    (:map Info-mode-map
