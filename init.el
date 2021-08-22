@@ -610,16 +610,17 @@
   :bind
   ("C-'" . link-hint-open-link)
   :init
-  (cl-loop for (mode map) in '((minibuffer minibuffer-local-completion-map)
-                               (embark embark-collect-mode-map)
-                               (help help-mode-map)
-                               (info Info-mode-map)
-                               (apropos apropos-mode-map)
-                               (man Man-mode-map)
-                               (woman woman-mode-map)
-                               (package package-menu-mode-map))
-           do (eval-after-load mode
-                `(define-key ,map "'" #'link-hint-open-link))))
+  (cl-loop
+   for (mode map) in '((minibuffer minibuffer-local-completion-map)
+                       (embark embark-collect-mode-map)
+                       (help help-mode-map)
+                       (info Info-mode-map)
+                       (apropos apropos-mode-map)
+                       (man Man-mode-map)
+                       (woman woman-mode-map)
+                       (package package-menu-mode-map)
+                       (eww eww-mode-map))
+   do (eval-after-load mode `(define-key ,map "'" #'link-hint-open-link))))
 
 (use-package elec-pair :init (electric-pair-mode))
 
@@ -657,9 +658,7 @@
   (shr-use-colors nil))
 
 (use-package eww
-  :bind
-  (:map eww-mode-map
-        ("o" . link-hint-open-link))
+  :defer t
   :custom
   (eww-bookmarks-directory "~/.private/"))
 
