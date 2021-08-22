@@ -370,7 +370,8 @@
   :bind
   (:map vertico-map
         ("<C-backspace>" . up-directory)
-        ("M-." . cd-bookmark))
+        ("M-." . consult-dir)
+        ("M-j" . consult-dir-jump-file))
   :init
   (defvar minibuffer--require-match nil))
 
@@ -384,7 +385,8 @@
   :bind
   (:map selectrum-minibuffer-map
         ("<C-backspace>" . up-directory)
-        ("M-." . cd-bookmark)))
+        ("M-." . consult-dir)
+        ("M-j" . consult-dir-jump-file)))
 
 (use-package ivy
   :ensure t
