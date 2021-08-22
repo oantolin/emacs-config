@@ -606,11 +606,30 @@
   (:map isearch-mode-map
         ("M-'" . avy-isearch)))
 
-(use-package ace-link
+(use-package link-hint
   :ensure t
-  :config
-  (ace-link-setup-default)
-  (setq avy-styles-alist nil))
+  :bind
+  (("C-c o" . link-hint-open-link)
+   ("C-c w" . link-hint-copy-link)
+   (:map help-mode-map
+         ("o" . link-hint-open-link))
+   (:map Info-mode-map
+         ("o" . link-hint-open-link))))
+
+(use-package apropos
+  :bind
+  (:map apropos-mode-map
+        ("o" . link-hint-open-link)))
+
+(use-package man
+  :bind
+  (:map Man-mode-map
+        ("o" . link-hint-open-link)))
+
+(use-package woman
+  :bind
+  (:map woman-mode-map
+        ("o" . link-hint-open-link)))
 
 (use-package elec-pair :init (electric-pair-mode))
 
@@ -648,7 +667,9 @@
   (shr-use-colors nil))
 
 (use-package eww
-  :defer t
+  :bind
+  (:map eww-mode-map
+        ("o" . link-hint-open-link))
   :custom
   (eww-bookmarks-directory "~/.private/"))
 
@@ -863,7 +884,6 @@ Intended to be used as advice for `consult-history'."
    ("C-c C" . org-clock-goto))
   (:map org-mode-map
         ("C-,")
-        ("C-c o" . ace-link-org)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
         ("C-'" . org-emphasize)
