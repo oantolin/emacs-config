@@ -431,6 +431,7 @@
                        embark-minibuffer-indicator
                        embark-highlight-indicator
                        embark-isearch-highlight-indicator))
+  (embark-cycle-key ";")
   :custom-face
   (embark-keybinding
    ((default :inherit default)
