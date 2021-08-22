@@ -257,7 +257,7 @@
   :bind
   ("C-h h" . show-help)
   ("C-h M" . embark-describe-keymap)
-  :commands cotd describe-keymap)
+  :commands cotd)
 
 (use-package epithet
   :bind ("C-x B" . epithet-rename-buffer))

@@ -20,11 +20,11 @@
          (command (nth (random (length commands)) commands)))
     (describe-function command)))
 
+(defalias 'cotd #'command-of-the-day)
+
 (defun show-help ()
   "Show the *Help* buffer."
   (interactive)
   (display-buffer "*Help*"))
-
-(defalias 'cotd #'command-of-the-day)
 
 (provide 'help-extras)
