@@ -418,8 +418,7 @@
   (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
-        ("'" . avy-embark-collect-choose)
-        ("\"" . avy-embark-collect-act)
+        ("'" . link-hint-open-hint)
         ("F" . consult-focus-lines)
         ("C-g" . abort-recursive-edit))
   (:map embark-package-map
