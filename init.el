@@ -611,8 +611,9 @@
   :config
   (defun avy-embark-act (pt)
     "Use Embark to act on the completion at PT."
-    (goto-char pt)
-    (embark-act))
+    (save-excursion
+      (goto-char pt)
+      (embark-act)))
   (add-to-list 'avy-dispatch-alist '(?\; . avy-embark-act)))
 
 (use-package link-hint
