@@ -157,7 +157,7 @@
  ("t" . toggle-truncate-lines)
  ("s" . whitespace-mode)
  ("v" . variable-pitch-mode)
- ("o" . org-toggle-link-display))
+ ("i" . visible-mode))
 
 ;;; packages
 
@@ -926,6 +926,7 @@ Intended to be used as advice for `consult-history'."
   (org-mode . turn-on-auto-fill)
   (org-mode . turn-off-visual-line-mode)
   (org-mode . org-tweak-syntax-table)
+  (org-mode . add-pretty-entities-hook)
   :config
   (defun ediff-with-org-show-all ()
     "Expand all headings prior to ediffing org buffers."
@@ -936,6 +937,9 @@ Intended to be used as advice for `consult-history'."
                 help-at-pt-timer-delay 0)
     (help-at-pt-cancel-timer)
     (help-at-pt-set-timer))
+  (defun add-pretty-entities-hook ()
+    "Add `org-toggle-pretty-entities' to local value of `visible-mode-hook'."
+    (add-hook 'visible-mode-hook 'org-toggle-pretty-entities nil t))
   (customize-set-variable
    'org-structure-template-alist
    (append org-structure-template-alist
