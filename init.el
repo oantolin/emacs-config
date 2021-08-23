@@ -842,6 +842,9 @@
   (:map log-edit-mode-map
         ("M-r" . consult-history)
         ("M-s"))
+  :hook
+  (log-edit . turn-off-visual-line-mode)
+  (log-edit . turn-on-auto-fill)
   :config
   (defun clear-log-edit-buffer (&optional _)
     "Clear the buffer if it is in `log-edit-mode'.
