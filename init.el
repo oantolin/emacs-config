@@ -485,7 +485,11 @@
 
 (use-package embark-consult
   :ensure t
-  :after (embark consult))
+  :after (embark consult)
+  :config
+  (defun collect-outline ()
+    (cons 'consult-location (consult--outline-candidates)))
+  (add-to-list 'embark-candidate-collectors #'collect-outline t))
 
 (use-package consult-dir
   :ensure t
@@ -508,9 +512,6 @@
   :commands
   embark-which-key-indicator
   embark-minibuffer-indicator)
-
-(use-package embark-imenu-collector
-  :after embark)
 
 (use-package consult
   :ensure t
