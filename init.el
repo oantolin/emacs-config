@@ -274,6 +274,12 @@
   :bind
   (:map toggle-map
         ("SPC" . change-completion-ui))
+  (:map completion-list-mode-map
+        ("C-g" . abort-recursive-edit)
+        ("n" . next-line)
+        ("p" . previous-line)
+        ("F" . consult-focus-lines)
+        ("s" . isearch))
   :init
   (add-to-list 'display-buffer-alist
                '("\\`\\*Completions\\*\\'" nil
