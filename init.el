@@ -481,14 +481,19 @@
         (append
          (butlast embark-target-finders)
          (cons #'target-org-table-cell
-               (last embark-target-finders)))))
+               (last embark-target-finders))))
+  (push #'embark--mark-target
+        (alist-get 'comment-dwim embark-pre-action-hooks)))
 
 (use-package embark-consult
   :ensure t
   :after (embark consult)
   :config
   (defun collect-outline ()
-    (cons 'consult-location (consult--outline-candidates)))
+    (cons 'consult-location
+          (mapcar
+           (pcase-lambda (`(,hd ,num "")) (propertize hd 'line-prefix num))
+           (mapcar (consult--line-prefix) (consult--outline-candidates)))))
   (add-to-list 'embark-candidate-collectors #'collect-outline t))
 
 (use-package consult-dir
