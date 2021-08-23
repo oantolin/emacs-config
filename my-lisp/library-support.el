@@ -6,7 +6,11 @@
 
 (add-to-list 'marginalia-prompt-categories '("\\<[lL]ibrary\\>" . library))
 
-(defun library-summary (library) (lm-summary (ffap-el-mode library)))
+(defun library-summary (library)
+  (setq library (string-remove-suffix ".elc" library))
+  (concat
+   (propertize " " 'display '(space :align-to (- right 60)))
+   (lm-summary (ffap-el-mode library))))
 
 (add-to-list 'marginalia-annotator-registry
              '(library library-summary builtin none))

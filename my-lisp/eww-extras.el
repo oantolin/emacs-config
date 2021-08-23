@@ -15,7 +15,9 @@ in a new EWW buffer."
   (let ((bookmarks (mapcar
                     (lambda (bm) (cons (plist-get bm :title)
                                        (plist-get bm :url)))
-                    eww-bookmarks)))
+                    eww-bookmarks))
+        (max-width (cl-loop for bm in eww-bookmarks
+                            maximize (length (plist-get bm :url)))))
     (eww (cdr
           (assoc
            (completing-read
@@ -25,7 +27,13 @@ in a new EWW buffer."
                   `(metadata
                     (category . eww-bookmark-title)
                     (annotation-function
-                     . ,(lambda (title) (cdr (assoc title bookmarks)))))
+                     . ,(lambda (title)
+                          (concat
+                           (propertize
+                            " "
+                            'display
+                            `(space :align-to (- right ,max-width)))
+                           (cdr (assoc title bookmarks))))))
                 (complete-with-action action bookmarks string predicate))))
            bookmarks))
          arg)))
