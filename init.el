@@ -269,9 +269,15 @@
         ("l" . toggle-ispell-lang)))
 
 (use-package completion-ui
+  :custom
+  (completion-show-help nil)
   :bind
   (:map toggle-map
-        ("SPC" . change-completion-ui)))
+        ("SPC" . change-completion-ui))
+  :init
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Completions\\*\\'" nil
+                 (window-parameters (mode-line-format . none)))))
 
 (use-package window-extras
   :bind
@@ -295,7 +301,6 @@
   (enable-recursive-minibuffers t)
   (minibuffer-eldef-shorten-default t)
   (resize-mini-windows t)
-  (completion-show-help nil)
   :init
   (minibuffer-depth-indicate-mode)
   (minibuffer-electric-default-mode)
