@@ -892,7 +892,9 @@ Intended to be used as advice for `consult-history'."
    ("C-c s" . org-store-link)
    ("C-c C" . org-clock-goto))
   (:map org-mode-map
-        ("C-,")
+        ("C-,") ; I use this for embark-dwim
+        ("C-'") ; and this for link-hint-open-link
+        ("C-c C-'" . org-cycle-agenda-files) 
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
         ("C-=" . org-emphasize)
