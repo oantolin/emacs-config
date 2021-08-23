@@ -635,7 +635,8 @@
                        (man Man-mode-map)
                        (woman woman-mode-map)
                        (package package-menu-mode-map)
-                       (eww eww-mode-map))
+                       (eww eww-mode-map)
+                       (dired dired-mode-map))
    do (eval-after-load mode `(define-key ,map "'" #'link-hint-open-link))))
 
 (use-package elec-pair :init (electric-pair-mode))
