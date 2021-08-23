@@ -31,7 +31,7 @@ already narrowed."
         (t (narrow-to-defun))))
 
 (defun narrow-to-point ()
-  "Narrow to point, useful to insert text without the possibility of disturbing the environs. Often followed by pasting a rectangle, to make it use new lines."
+  "Narrow to point, useful for yanking a rectangle."
   (interactive)
   (narrow-to-region (point) (point)))
 
