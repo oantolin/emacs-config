@@ -958,6 +958,7 @@ Intended to be used as advice for `consult-history'."
     (customize-set-variable 'org-latex-pdf-process '("latexmk -pdf %f")))
   (modify-syntax-entry ?< "_" org-mode-syntax-table)
   (modify-syntax-entry ?> "_" org-mode-syntax-table)
+  (modify-syntax-entry ?\\ "'" org-mode-syntax-table)
   (bind-keys :map narrow-map ("s" . narrow-to-sexp) ("b") ("e"))
   (org-link-set-parameters
    "org-title"
