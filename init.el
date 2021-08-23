@@ -968,7 +968,6 @@ Intended to be used as advice for `consult-history'."
     (modify-syntax-entry ?< "." org-mode-syntax-table)
     (modify-syntax-entry ?> "." org-mode-syntax-table)
     (modify-syntax-entry ?\\ "'" org-mode-syntax-table))
-  (bind-keys :map narrow-map ("s" . narrow-to-sexp) ("b") ("e"))
   (org-link-set-parameters
    "org-title"
    :store (defun store-org-title-link ()
