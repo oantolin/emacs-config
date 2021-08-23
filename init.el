@@ -682,9 +682,8 @@
 (use-package eww-extras
   :bind
   ("C-x W" . eww-bookmark-jump)
-  ;; (:map eww-mode-map
-  ;;       ("W" . eww-bookmark-jump))
-  )
+  (:map eww-mode-map
+        ("W" . eww-bookmark-jump)))
 
 (use-package latex
   :ensure auctex
