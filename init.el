@@ -900,10 +900,7 @@ Intended to be used as advice for `consult-history'."
         ("C-c C-'" . org-cycle-agenda-files) 
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
-        ("C-=" . org-emphasize)
-        ("C-x n s" . org-narrow-to-subtree)
-        ("C-x n b" . org-narrow-to-block)  
-        ("C-x n e" . org-narrow-to-element))
+        ("C-=" . org-emphasize))
   :custom
   (org-ellipsis "…")
   (org-refile-use-outline-path 'file)
