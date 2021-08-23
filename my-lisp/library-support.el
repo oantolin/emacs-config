@@ -8,9 +8,10 @@
 
 (defun library-summary (library)
   (setq library (string-remove-suffix ".elc" library))
-  (concat
-   (propertize " " 'display '(space :align-to (- right 60)))
-   (lm-summary (ffap-el-mode library))))
+  (when-let (summary (lm-summary (ffap-el-mode library)))
+    (concat
+     (propertize " " 'display '(space :align-to (- right 60)))
+     (propertize summary 'face 'completions-annotations))))
 
 (add-to-list 'marginalia-annotator-registry
              '(library library-summary builtin none))
