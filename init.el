@@ -922,6 +922,7 @@ Intended to be used as advice for `consult-history'."
   (org-mode . echo-area-tooltips)
   (org-mode . turn-on-auto-fill)
   (org-mode . turn-off-visual-line-mode)
+  (org-mode . org-tweak-syntax-table)
   :config
   (defun ediff-with-org-show-all ()
     "Expand all headings prior to ediffing org buffers."
@@ -956,9 +957,10 @@ Intended to be used as advice for `consult-history'."
    (cons '("AUTO" "babel" t ("pdflatex")) org-latex-packages-alist))
   (when (executable-find "latexmk")
     (customize-set-variable 'org-latex-pdf-process '("latexmk -pdf %f")))
-  (modify-syntax-entry ?< "_" org-mode-syntax-table)
-  (modify-syntax-entry ?> "_" org-mode-syntax-table)
-  (modify-syntax-entry ?\\ "'" org-mode-syntax-table)
+  (defun org-tweak-syntax-table ()
+    (modify-syntax-entry ?< "." org-mode-syntax-table)
+    (modify-syntax-entry ?> "." org-mode-syntax-table)
+    (modify-syntax-entry ?\\ "'" org-mode-syntax-table))
   (bind-keys :map narrow-map ("s" . narrow-to-sexp) ("b") ("e"))
   (org-link-set-parameters
    "org-title"
