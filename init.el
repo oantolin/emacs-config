@@ -279,7 +279,7 @@
         ("n" . next-line)
         ("p" . previous-line)
         ("F" . consult-focus-lines)
-        ("s" . isearch))
+        ("s" . isearch-forward))
   :init
   (add-to-list 'display-buffer-alist
                '("\\`\\*Completions\\*\\'" nil
