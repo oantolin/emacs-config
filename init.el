@@ -690,12 +690,16 @@
   (:map eww-mode-map
         ("W" . eww-bookmark-jump)))
 
+(use-package coordinates
+  :commands coordinates-insert coordinates-calibrate)
+
 (use-package latex
   :ensure auctex
   :bind
   (:map LaTeX-mode-map
+        ("C-c p" . coordinates-insert)
+        ("C-c P" . coordinates-calibrate)
         ("$" . math-delimiters-insert)
-        ("C-c p" . insert-coordinates)
         ("C-=" . TeX-font)
         ([remap next-error])
         ([remap previous-error])
@@ -723,15 +727,6 @@
               (forward-char -1))
           (error (forward-sentence 1)))
         (buffer-substring beg (point)))))
-  (defun insert-coordinates ()
-    "Insert coordinates (in centimeters) of mouse click."
-    (interactive)
-    (let ((pos (event-start (pdf-util-read-click-event "Click on PDF"))))
-      (insert
-       (with-selected-window (posn-window pos)
-         (let ((pt (pdf-util-scale-pixel-to-points (posn-object-x-y pos))))
-           (cl-flet ((f (x) (* 2.54 (/ x 72.0))))
-             (format "(%.1fcm,%.1fcm)" (f (car pt)) (f (cdr pt)))))))))
   (defun make-backslash-a-prefix-in-LaTeX ()
     "Set the syntax class of \\ to ' in LaTeX buffers."
     (modify-syntax-entry ?\\ "'" LaTeX-mode-syntax-table))
