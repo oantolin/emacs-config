@@ -4,9 +4,9 @@
   (unless (bound-and-true-p embark-collect-linked-buffer)
     (embark-collect-completions)))
 
-(defun automatic-embark-completions (fn &rest args)
+(defun automatic-completions (fn &rest args)
   "Apply FN to ARGS automatically using Embark to display any completions."
-  (minibuffer-with-setup-hook #'embark-collect-completions (apply fn args)))
+  (minibuffer-with-setup-hook #'minibuffer-completion-help (apply fn args)))
 
 (defun change-completion-ui (ui)
   "Choose between Embark, Icomplete, Vertico and Selectrum for completion."
@@ -29,18 +29,21 @@
   (advice-remove 'minibuffer-completion-help #'embark-collect-completions-1)
   (advice-remove 'switch-to-completions #'embark-switch-to-collect-completions)
   (setq completion-auto-help nil completion-cycle-threshold 3)
-  (advice-remove #'embark-completing-read-prompter
-                 #'automatic-embark-completions)
-  (advice-remove #'consult-completion-in-region
-                 #'automatic-embark-completions)
+  (advice-remove #'embark-completing-read-prompter #'automatic-completions)
+  (advice-remove #'consult-completion-in-region #'automatic-completions)
   ;; activate chosen one
   (pcase ui
-    (?d (setq completion-auto-help t))
-    ((or ?e ?I ?D)
-     (advice-add #'consult-completion-in-region :around
-                 #'automatic-embark-completions)
+    (?d
+     (setq completion-auto-help t)
+     (advice-add #'consult-completion-in-region
+                 :around #'automatic-completions)
      (advice-add #'embark-completing-read-prompter
-                 :around #'automatic-embark-completions)
+                 :around #'automatic-completions))
+    ((or ?e ?I ?D)
+     (advice-add #'consult-completion-in-region
+                 :around #'automatic-completions)
+     (advice-add #'embark-completing-read-prompter
+                 :around #'automatic-completions)
      (advice-add 'minibuffer-completion-help
                  :override #'embark-collect-completions-1)
      (advice-add 'switch-to-completions

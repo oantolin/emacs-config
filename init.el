@@ -281,15 +281,18 @@
         ("F" . consult-focus-lines)
         ("s" . isearch))
   :init
+  (change-completion-ui ?d)
   (add-to-list 'display-buffer-alist
                '("\\`\\*Completions\\*\\'" nil
-                 (window-parameters (mode-line-format . none)))))
+                 (window-parameters (mode-line-format . none))
+                 (window-height . fit-window-to-buffer-max-40%))))
 
 (use-package window-extras
   :bind
   (:map ctl-x-4-map
         ("s" . toggle-window-split)
-        ("t" . transpose-windows)))
+        ("t" . transpose-windows))
+  :commands fit-window-to-buffer-max-40%)
 
 (use-package minibuffer
   :bind
@@ -464,12 +467,8 @@
          '(("\\`\\*Embark Collect Completions\\*" nil
             (window-parameters (mode-line-format . none)))
            ("\\`\\*Embark Collect" nil
-            (window-height . shrink-window-if-larger-than-buffer)))
+            (window-height . fit-window-to-buffer-max-40%)))
          display-buffer-alist))
-  (defun resize-embark-collect-completions (&rest _)
-    "Resize current window to fit buffer or 40% of the frame height."
-    (fit-window-to-buffer (get-buffer-window)
-                          (floor (* 0.4 (frame-height))) 1))
   (defun target-org-table-cell ()
     "Target contents of current cell in an orb table."
     (when (and (derived-mode-p 'org-mode) (org-at-table-p))
