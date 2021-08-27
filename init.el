@@ -133,6 +133,7 @@
  ([remap just-one-space] . cycle-spacing)
  ([remap count-words-region] . count-words)
  ("C-M-o" . up-list)
+ ("C-o" . split-line)
  ((if (string= (system-name) "penguin") "<C-delete>" "<C-M-backspace>") .
   ;; Alt+backspace sends <delete> on the Chromebook...  
   kill-backward-up-list)
