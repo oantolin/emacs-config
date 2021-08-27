@@ -436,7 +436,7 @@
   (:map embark-package-map
         ("t" . try))
   :hook
-  (embark-collect-post-revert . resize-embark-collect-completions)
+  (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
