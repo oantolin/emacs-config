@@ -1,5 +1,7 @@
 ;; coordinates.el --- Insert coordinates of mouse click    -*- lexical-binding: t; -*-
 
+(require 'pdf-util)
+
 (defvar coordinates--offset '(0 . 0)
   "Offsets to add to coordinates before inserting.")
 
