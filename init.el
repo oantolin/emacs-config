@@ -555,8 +555,8 @@
   (minibuffer-setup . choose-completion-in-region)
   :config
   (when (eq (window-system) 'w32)
-    (setq consult-find-command
-          (replace-regexp-in-string "\\*" "\\\\*" consult-find-command)))
+    (setq consult-find-args
+          (replace-regexp-in-string "\\*" "\\\\*" consult-find-args)))
   (defun choose-completion-in-region ()
     "Use default `completion--in-region' unless we are in `eval-expression'."
     (unless (eq this-command 'eval-expression)
