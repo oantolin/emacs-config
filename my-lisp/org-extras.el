@@ -4,39 +4,42 @@
 
 (require 'org)
 
-(org-link-set-parameters
- "arXiv"
- :face 'org-link
- :follow (lambda (path)
-           (when (string-match "^\\(.*\\)/\\(.*\\)$" path)
-             (browse-url
-              (format "http://arxiv.org/abs/%s"
-                      (match-string 1 path)))))
- :export (lambda (path desc backend)
-           (when (and (memq backend '(latex html))
-                      (null desc)
-                      (string-match "^\\(.*\\)/\\(.*\\)$" path))
-             (format
-              (pcase backend
-                ('latex "\\href{https://arxiv.org/abs/%s}{\\texttt{arXiv:%s [%s]}}")
-                ('html "<a href=\"https://arxiv.org/abs/%s\"><code>arXiv:%s [%s]</code></a>"))
-              (match-string 1 path)
-              (match-string 1 path)
-              (match-string 2 path)))))
+(defun org-extras--link-exporter
+    (path-regexp url-format title-format-1 &optional title-format-2)
+  (lambda (path description backend)
+    (when (and (memq backend '(latex html))
+               (string-match path-regexp path))
+      (format (pcase backend
+                ('latex "\\href{%s}{%s}")
+                ('html "<a href=\"%s\">%s</a>"))
+              (format url-format (match-string 1 path))
+              (or description
+                  (format (pcase backend
+                            ('latex "\\texttt{%s}")
+                            ('html "<code>%s</code>"))
+                          (format (if (match-string 2 path)
+                                      title-format-2
+                                    title-format-1)
+                                  (match-string 1 path)
+                                  (match-string 2 path))))))))
+
+(let ((arxiv-regexp "^\\(.*?\\)\\(?:/\\(.*\\)\\)?$")
+      (arxiv-url-format "https://arxiv.org/abs/%s"))
+  (org-link-set-parameters
+   "arXiv"
+   :face 'org-link
+   :follow (lambda (path)
+             (when (string-match arxiv-regexp path)
+               (browse-url
+                (format arxiv-url-format (match-string 1 path)))))
+   :export (org-extras--link-exporter
+            arxiv-regexp arxiv-url-format "arXiv:%s" "arXiv:%s [%s]")))
 
 ;;; doi links
 
 (org-link-set-parameters
  "doi" ; already has a sensible :follow
- :export (lambda (path desc backend)
-           (when (and (memq backend '(latex html))
-                      (null desc))
-             (format
-              (pcase backend
-                ('latex "\\href{https://doi.org/%s}{\\texttt{doi:%s}}")
-                ('html "<a href=\"https://doi.org/%s\"><code>doi:%s</code></a>"))
-              path
-              path))))
+ :export (org-extras--link-exporter "^\\(.*\\)$" "https://doi.org/%s" "doi:%s"))
 
 ;;; Inline JavaScript
 
