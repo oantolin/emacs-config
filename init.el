@@ -691,15 +691,10 @@
   (:map eww-mode-map
         ("W" . eww-bookmark-jump)))
 
-(use-package coordinates
-  :commands coordinates-insert coordinates-calibrate)
-
 (use-package latex
   :ensure auctex
   :bind
   (:map LaTeX-mode-map
-        ("C-c p" . coordinates-insert)
-        ("C-c P" . coordinates-calibrate)
         ("$" . math-delimiters-insert)
         ("C-=" . TeX-font)
         ([remap next-error])
