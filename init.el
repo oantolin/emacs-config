@@ -209,18 +209,21 @@
         ("x" . rectangle-exchange-point-and-mark)
         ("*" . calc-grab-rectangle)
         (":" . calc-grab-sum-down)
-        ("_" . calc-grab-sum-down))
+        ("_" . calc-grab-sum-across))
   :init
   (autoload 'calc-grab-sum-down "calc" nil t)
   (autoload 'calc-grab-sum-across "calc" nil t))
 
 (use-package selected
   :ensure t
-  :init
+  :after embark
+  :config
   (selected-global-mode)
   (setq selected-keymap
         (make-composed-keymap
-         '(keymap (?\ ) (?\C-s) (?B) (?C) (?E) (?L) (?w . kill-ring-save))
+         '(keymap (?\ ) (??) (?\C-s) (?B) (?C) (?E) (?L)
+                  (?w . kill-ring-save)
+                  (?x . exchange-point-and-mark))
          embark-region-map)))
 
 (use-package visiting-buffer)
