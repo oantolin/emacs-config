@@ -216,7 +216,7 @@
 
 (use-package selected
   :ensure t
-  :diminish
+  :diminish selected-minor-mode
   :bind
   (:map selected-keymap
         ("x" . exchange-point-and-mark)
