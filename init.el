@@ -214,6 +214,15 @@
   (autoload 'calc-grab-sum-down "calc" nil t)
   (autoload 'calc-grab-sum-across "calc" nil t))
 
+(use-package selected
+  :ensure t
+  :init
+  (selected-global-mode)
+  (setq selected-keymap
+        (make-composed-keymap
+         '(keymap (?\ ) (?\C-s) (?B) (?C) (?E) (?L) (?w . kill-ring-save))
+         embark-region-map)))
+
 (use-package visiting-buffer)
 
 (use-package text-extras
