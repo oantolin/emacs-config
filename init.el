@@ -216,15 +216,30 @@
 
 (use-package selected
   :ensure t
-  :after embark
-  :config
-  (selected-global-mode)
-  (setq selected-keymap
-        (make-composed-keymap
-         '(keymap (?\ ) (??) (?\C-s) (?B) (?C) (?E) (?L)
-                  (?w . kill-ring-save)
-                  (?x . exchange-point-and-mark))
-         embark-region-map)))
+  :diminish
+  :bind
+  (:map selected-keymap
+        ("x" . exchange-point-and-mark)
+        ("SPC" . mark-sexp)
+        ("b" . backward-sexp)
+        ("f" . forward-sexp)
+        ("w" . kill-ring-save)
+        ("t" . transpose-regions)
+        ("m" . apply-macro-to-region-lines)
+        ("i" . indent-rigidly)
+        ("$" . ispell-region)
+        ("=" . count-words-region)
+        ("e" . eval-region)
+        ("|" . shell-command-on-region)
+        ("o" . org-table-convert-region)
+        ("n" . narrow-to-region)
+        ("s" . whitespace-cleanup-region)
+        ("r" . rot13-region)
+        ("S" . sort-lines)
+        ("R" . reverse-region)
+        ("*" . calc-grab-region))
+  :init
+  (selected-global-mode))
 
 (use-package visiting-buffer)
 
@@ -445,6 +460,7 @@
 
 (use-package embark
   :ensure t
+  :demand t
   :bind
   ("C-;" . embark-act)
   ("C-," . embark-dwim)
