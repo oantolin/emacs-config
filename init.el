@@ -282,7 +282,7 @@
         ("F" . consult-focus-lines)
         ("s" . isearch-forward))
   :init
-  (change-completion-ui ?d)
+  (change-completion-ui ?e)
   (add-to-list 'display-buffer-alist
                '("\\`\\*Completions\\*\\'" nil
                  (window-parameters (mode-line-format . none))
