@@ -14,9 +14,10 @@
   "Exit minibuffer with top completion candidate."
   (interactive)
   (let ((content (minibuffer-contents-no-properties)))
-    (unless (test-completion content
-                             minibuffer-completion-table
-                             minibuffer-completion-predicate)
+    (unless (let (completion-ignore-case)
+              (test-completion content
+                               minibuffer-completion-table
+                               minibuffer-completion-predicate))
       (when-let ((completions (completion-all-sorted-completions)))
         (delete-minibuffer-contents)
         (insert
