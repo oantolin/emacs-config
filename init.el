@@ -199,6 +199,21 @@
   ("M-B" . backward-to-word)
   ("M-\"". copy-from-above-command))
 
+(use-package rect
+  :bind
+  (:map rectangle-mark-mode-map
+        ("t" . string-rectangle)
+        ("o" . open-rectangle)
+        ("c" . clear-rectangle)
+        ("n" . rectangle-number-lines)
+        ("x" . rectangle-exchange-point-and-mark)
+        ("*" . calc-grab-rectangle)
+        (":" . calc-grab-sum-down)
+        ("_" . calc-grab-sum-down))
+  :init
+  (autoload 'calc-grab-sum-down "calc" nil t)
+  (autoload 'calc-grab-sum-across "calc" nil t))
+
 (use-package visiting-buffer)
 
 (use-package text-extras
