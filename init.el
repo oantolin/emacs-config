@@ -124,8 +124,7 @@
  ("M-s c" . count-matches)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
- ("C-c l" . load-library)
- ("C-c f" . find-library)
+ ("C-c l" . find-library)
  ([remap list-buffers] . electric-buffer-list)
  ([remap upcase-word] . upcase-dwim)
  ([remap downcase-word] . downcase-dwim)
