@@ -554,10 +554,6 @@
         ("M-." . consult-dir)
         ("M-j" . consult-dir-jump-file)))
 
-(use-package library-support
-  :after (marginalia embark)
-  :demand t)
-
 (use-package embark-kmacro
   :after embark)
 
