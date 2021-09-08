@@ -702,6 +702,13 @@
   :config
   (modify-syntax-entry ?\" "\"" text-mode-syntax-table))
 
+(use-package outline
+  :config
+  ;; NEWS files use single quotes around elisp symbols. I think those
+  ;; are the only files I view in outline-mode, but if I find others
+  ;; then I might modify the syntax only locally in NEWS files.
+  (modify-syntax-entry ?' "\"" outline-mode-syntax-table))
+
 (use-package eldoc :defer t :diminish)
 
 (use-package diff-mode
