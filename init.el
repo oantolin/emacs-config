@@ -235,7 +235,6 @@
         ("t" . transpose-regions)
         ("m" . apply-macro-to-region-lines)
         ("i" . indent-rigidly)
-        ("$" . ispell-region)
         ("=" . count-words-region)
         ("e" . eval-region)
         ("|" . shell-command-on-region)
