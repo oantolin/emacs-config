@@ -1066,35 +1066,26 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package email-config) ; private package
 
-(use-package ebdb
-  :ensure t
+(use-package ecomplete
+  :defer t
   :custom
-  (ebdb-sources "~/.private/ebdb")
-  (ebdb-mua-pop-up nil)
-  (ebdb-complete-mail 'capf)
-  (ebdb-completion-display-record nil)
-  (ebdb-save-on-exit t)
-  :hook
-  (message-setup . ensure-ebdb-loaded)
+  (ecomplete-database-file "~/.private/ecompleterc")
   :config
-  (defun ensure-ebdb-loaded ()
-    "Load the EDBD database unless already loaded."
-    (unless ebdb-db-list (ebdb-load))))
-
-(use-package ebdb-gnus :after gnus)
-(use-package ebdb-message :after message)
+  (setq completion-category-defaults nil))
 
 (use-package message
   :bind (:map message-mode-map
               ("<C-tab>" . expand-mail-aliases))
   :custom
   (message-signature nil)
-  (message-from-style 'angles)
+  (message-mail-alias-type nil)
+  (message-expand-name-standard-ui t)
   ;; all-user-mail-addresses-regexp is defined in email-config
   (message-alternative-emails all-user-mail-addresses-regexp)
   :hook
   (message-mode . turn-off-auto-fill)
-  (message-mode . turn-on-visual-line-mode))
+  (message-mode . turn-on-visual-line-mode)
+  (message-sent . message-put-addresses-in-ecomplete))
 
 (use-package message-extras
   ;; private package
