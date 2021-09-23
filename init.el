@@ -159,6 +159,13 @@
  ("v" . variable-pitch-mode)
  ("i" . visible-mode))
 
+(bind-keys
+ :prefix "C-c T"
+ :prefix-map time-map
+ ("w" . world-clock)
+ ("t" . display-time-mode)
+ ("c" . calendar))
+
 ;;; packages
 
 (use-package modus-themes
