@@ -1019,11 +1019,9 @@ Intended to be used as advice for `consult-history'."
              ("el"   . "src emacs-lisp"))))
   (customize-set-variable
    'org-latex-default-packages-alist
-   (seq-filter
-    (lambda (x)
-      ;; Won't install these packages on the space limited Chromebook
-      (not (member (cadr x) '("fontenc" "textcomp"))))
-    org-latex-default-packages-alist))
+   (cl-set-difference org-latex-default-packages-alist
+                      '("fontenc" "textcomp")
+                      :test #'equal))
   (customize-set-variable
    'org-latex-packages-alist
    (cons '("AUTO" "babel" t ("pdflatex")) org-latex-packages-alist))
