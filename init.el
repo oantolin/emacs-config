@@ -1047,7 +1047,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package org-config :after org) ; private package
 
-(use-package org-contrib :ensure t :defer t)
+(use-package citeproc :ensure t :defer t)
 
 (use-package ispell
   :defer t
