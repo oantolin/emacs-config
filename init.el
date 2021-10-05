@@ -735,6 +735,10 @@
   :ensure t
   :bind ("C-x M-c" . restart-emacs))
 
+(use-package olivetti
+  :ensure t
+  :bind ("C-c t o" . olivetti-mode))
+
 (use-package shr
   :defer t
   :custom
