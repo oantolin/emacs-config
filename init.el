@@ -940,7 +940,9 @@ Intended to be used as advice for `consult-history'."
   :bind
   (:map vc-prefix-map
         ("R" . vc-rename-file)
-        ("d" . vc-dir-root)))
+        ("d" . vc-dir-root))
+  (:map vc-dir-mode-map
+        ("r" . vc-revert)))
 
 (use-package magit :ensure t :defer t)
 
