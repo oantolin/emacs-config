@@ -220,41 +220,6 @@
   (autoload 'calc-grab-sum-down "calc" nil t)
   (autoload 'calc-grab-sum-across "calc" nil t))
 
-(use-package selected
-  :ensure t
-  :diminish selected-minor-mode
-  :bind
-  (:map selected-keymap
-        ("x" . exchange-point-and-mark)
-        ("b" . backward-sexp)
-        ("SPC" . mark-sexp)
-        ("f" . forward-sexp)
-        ("," . backward-sentence)
-        ("." . mark-end-of-sentence)
-        (";" . forward-sentence)
-        ("<" . backward-paragraph)
-        ("h" . mark-paragraph)
-        (">" . forward-paragraph)
-        ("B" . beginning-of-defun)
-        ("d" . mark-defun)
-        ("F" . end-of-defun)
-        ("w" . kill-ring-save)
-        ("t" . transpose-regions)
-        ("m" . apply-macro-to-region-lines)
-        ("i" . indent-rigidly)
-        ("=" . count-words-region)
-        ("e" . eval-region)
-        ("|" . shell-command-on-region)
-        ("o" . org-table-convert-region)
-        ("n" . narrow-to-region)
-        ("s" . whitespace-cleanup-region)
-        ("r" . rot13-region)
-        ("S" . sort-lines)
-        ("R" . reverse-region)
-        ("*" . calc-grab-region))
-  :init
-  (selected-global-mode))
-
 (use-package visiting-buffer)
 
 (use-package text-extras
