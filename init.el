@@ -905,7 +905,10 @@ Intended to be used as advice for `consult-history'."
   :bind
   (:map vc-prefix-map
         ("R" . vc-rename-file)
-        ("d" . vc-dir-root))
+        ("d" . vc-dir-root)))
+
+(use-package vc-dir
+  :bind
   (:map vc-dir-mode-map
         ("r" . vc-revert)))
 
