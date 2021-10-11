@@ -1049,7 +1049,8 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (ecomplete-database-file "~/.private/ecompleterc")
   :config
-  (setq completion-category-defaults nil))
+  (setq completion-category-defaults nil)
+  (ecomplete-setup))
 
 (use-package message
   :bind (:map message-mode-map
