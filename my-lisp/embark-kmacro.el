@@ -39,6 +39,7 @@
   ("n" embark-kmacro-name)
   ("b" embark-kmacro-bind))
 
-(add-to-list 'embark-keymap-alist '(kmacro . embark-kmacro-map))
+(let ((file-tail (cl-member 'file embark-keymap-alist :key #'car)))
+  (setcdr file-tail (cons '(kmacro . embark-keymap-map) (cdr file-tail))))
 
 (provide 'embark-kmacro)
