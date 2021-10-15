@@ -23,6 +23,7 @@ targets."
        nil nil t))))
 
 (defun embark-minibuffer-indicator ()
+  "An embark indicator for the minibuffer that shows the target in an overlay."
   (let ((indicator-overlay))
     (lambda (&optional keymap targets _prefix)
       (if (null keymap)
