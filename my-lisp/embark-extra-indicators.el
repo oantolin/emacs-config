@@ -8,19 +8,23 @@
 The which-key help message will show the type and value of the
 current target followed by an ellipsis if there are further
 targets."
-  (require 'which-key)
   (lambda (&optional keymap targets prefix)
     (if (null keymap)
-        (kill-buffer which-key--buffer)
+        (which-key--hide-popup-ignore-command)
       (which-key--show-keymap
-       (if (eq (caar targets) 'embark-become)
+       (if (eq (plist-get (car targets) :type) 'embark-become)
            "Become"
          (format "Act on %s '%s'%s"
-                 (caar targets)
-                 (embark--truncate-target (cdar targets))
+                 (plist-get (car targets) :type)
+                 (embark--truncate-target (plist-get (car targets) :target))
                  (if (cdr targets) "…" "")))
-       (if prefix (lookup-key keymap prefix) keymap)
-       nil nil t))))
+       (if prefix
+           (pcase (lookup-key keymap prefix 'accept-default)
+             ((and (pred keymapp) km) km)
+             (_ (key-binding prefix 'accept-default)))
+         keymap)
+       nil nil t (lambda (binding)
+                   (not (string-suffix-p "-argument" (cdr binding))))))))
 
 (defun embark-minibuffer-indicator ()
   "An embark indicator for the minibuffer that shows the target in an overlay."
