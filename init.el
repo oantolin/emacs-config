@@ -643,8 +643,7 @@
     "Exchange sexp at PT with the one at point."
     (set-mark pt)
     (transpose-sexps 0))
-  (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange))
-  (add-to-list 'avy-dispatch-alist '(?p . avy-action-goto)))
+  (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
 (use-package link-hint
   :ensure t
