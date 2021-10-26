@@ -2,6 +2,10 @@
 
 (require 'embark)
 
+(autoload 'kmacro-push-ring "kmacro")
+(autoload 'kmacro-name-last-macro "kmacro")
+(autoload 'kmacro-bind-to-key "kmacro")
+
 (defun embark-kmacro-target ()
   "Target a textual kmacro in braces."
   (save-excursion
