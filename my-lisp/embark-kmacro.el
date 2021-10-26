@@ -40,6 +40,6 @@
   ("b" embark-kmacro-bind))
 
 (let ((file-tail (cl-member 'file embark-keymap-alist :key #'car)))
-  (setcdr file-tail (cons '(kmacro . embark-keymap-map) (cdr file-tail))))
+  (setcdr file-tail (cons '(kmacro . embark-kmacro-map) (cdr file-tail))))
 
 (provide 'embark-kmacro)

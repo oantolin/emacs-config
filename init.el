@@ -635,9 +635,13 @@
   :config
   (defun avy-embark-act (pt)
     "Use Embark to act on the completion at PT."
-    (save-excursion
-      (goto-char pt)
-      (embark-act)))
+    (unwind-protect
+        (save-excursion
+          (goto-char pt)
+          (embark-act))
+      (select-window
+       (cdr (ring-ref avy-ring 0)))
+      t))
   (add-to-list 'avy-dispatch-alist '(?\; . avy-embark-act))
   (defun avy-action-exchange (pt)
     "Exchange sexp at PT with the one at point."
