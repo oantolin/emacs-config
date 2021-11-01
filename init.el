@@ -1121,11 +1121,16 @@ everything else, it uses `lisp-indent-function'."
   :custom
   (python-shell-interpreter "python3"))
 
-(use-package sly
+(use-package slime
   :ensure t
   :defer t
-  :custom
-  (inferior-lisp-program "sbcl"))
+  :bind
+  (:map slime-repl-mode-map ("DEL"))
+  :config
+  (setq inferior-lisp-program "sbcl")
+  (defun just-use-cirf  (completions start end)
+    (funcall completion-in-region-function start end completions))
+  (advice-add 'slime-display-or-scroll-completions :override #'just-use-cirf))
 
 (use-package clojure-mode :ensure t :defer t)
 
