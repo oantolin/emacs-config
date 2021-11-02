@@ -1124,13 +1124,14 @@ everything else, it uses `lisp-indent-function'."
 (use-package slime
   :ensure t
   :defer t
-  :bind
-  (:map slime-repl-mode-map ("DEL"))
   :config
   (setq inferior-lisp-program "sbcl")
   (defun just-use-cirf  (completions start end)
     (funcall completion-in-region-function start end completions))
-  (advice-add 'slime-display-or-scroll-completions :override #'just-use-cirf))
+  (advice-add 'slime-display-or-scroll-completions :override #'just-use-cirf)
+  (with-eval-after-load 'slime-repl
+    (define-key slime-repl-mode-map (kbd "DEL") nil)))
+
 
 (use-package clojure-mode :ensure t :defer t)
 
