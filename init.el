@@ -504,8 +504,14 @@
          (butlast embark-target-finders)
          (cons #'target-org-table-cell
                (last embark-target-finders))))
-  (push #'embark--mark-target
-        (alist-get 'comment-dwim embark-pre-action-hooks)))
+  (dolist (cmd '(comment-dwim
+                 markdown-insert-code
+                 markdown-insert-italic
+                 markdown-insert-bold
+                 org-emphasize
+                 cdlatex-math-modify
+                 TeX-font))
+    (push #'embark--mark-target (alist-get cmd embark-pre-action-hooks))))
 
 (use-package embark-consult
   :ensure t
