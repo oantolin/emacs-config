@@ -58,7 +58,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "epithet"))
+(dolist (dir '("placeholder" "math-delimiters"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -281,9 +281,6 @@
   ("C-h h" . show-help)
   ("C-h M" . embark-describe-keymap)
   :commands cotd)
-
-(use-package epithet
-  :bind ("C-x B" . epithet-rename-buffer))
 
 (use-package various-toggles
   :bind
