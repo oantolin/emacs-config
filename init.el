@@ -453,6 +453,10 @@
         ("C-g" . abort-recursive-edit))
   (:map embark-package-map
         ("t" . try))
+  (:map embark-symbol-map
+        ("(" . insert-parentheses))
+  (:map embark-expression-map
+        ("(" . insert-parentheses))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
@@ -501,6 +505,7 @@
          (cons #'target-org-table-cell
                (last embark-target-finders))))
   (dolist (cmd '(comment-dwim
+                 insert-parentheses
                  markdown-insert-code
                  markdown-insert-italic
                  markdown-insert-bold
