@@ -446,9 +446,6 @@
         ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
-  (:map embark-meta-map
-        ("C-h") ; I don't like my own default :)
-        ("?" . embark-keymap-help))
   (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
@@ -466,6 +463,7 @@
                        embark-highlight-indicator
                        embark-isearch-highlight-indicator))
   (embark-cycle-key ";")
+  (embark-help-key "?")
   :custom-face
   (embark-keybinding
    ((default :inherit default)
