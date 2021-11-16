@@ -516,14 +516,7 @@
 
 (use-package embark-consult
   :ensure t
-  :after (embark consult)
-  :config
-  (defun collect-outline ()
-    (cons 'consult-location
-          (mapcar
-           (pcase-lambda (`(,hd ,num "")) (propertize hd 'line-prefix num))
-           (mapcar (consult--line-prefix) (consult--outline-candidates)))))
-  (add-to-list 'embark-candidate-collectors #'collect-outline t))
+  :after (embark consult))
 
 (use-package consult-dir
   :ensure t
