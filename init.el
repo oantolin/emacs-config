@@ -457,6 +457,8 @@
         ("(" . insert-parentheses))
   (:map embark-expression-map
         ("(" . insert-parentheses))
+  (:map embark-email-map
+        ("+" . add-email-to-ecomplete))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
@@ -1054,7 +1056,21 @@ if `org-store-link' is called from the #+TITLE line."
   (ecomplete-database-file "~/.private/ecompleterc")
   :config
   (setq completion-category-defaults nil)
-  (ecomplete-setup))
+  (ecomplete-setup)
+  (defun add-email-to-ecomplete (email)
+    "Add email address to ecomplete's database."
+    (interactive "sEmail address: ")
+    (let (name)
+      (if (string-match "^\\(.*\\) <\\(.*\\)>$" email)
+          (setq name (match-string 1 email)
+                email (match-string 2 email))
+        (setq name (read-string "Name: ")))
+      (ecomplete-add-item
+       'mail email
+       (format (cond ((equal name "") "%s%s")
+                     ((string-match-p "^[A-Za-z0-9 ]*$" name) "%s <%s>")
+                     (t "\"%s\" <%s>"))
+               name email)))))
 
 (use-package message
   :bind (:map message-mode-map
