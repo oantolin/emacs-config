@@ -1073,7 +1073,8 @@ if `org-store-link' is called from the #+TITLE line."
        (format (cond ((equal name "") "%s%s")
                      ((string-match-p "^[A-Za-z0-9 ]*$" name) "%s <%s>")
                      (t "\"%s\" <%s>"))
-               name email)))))
+               name email))
+      (ecomplete-save))))
 
 (use-package message
   :bind (:map message-mode-map
