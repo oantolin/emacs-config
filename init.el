@@ -1099,13 +1099,14 @@ if `org-store-link' is called from the #+TITLE line."
         ("C-c t f" . toggle-from-address))
   :commands set-smtp-server
   :hook
-  (message-send . set-smtp-server))
+  (message-send . set-smtp-server)
+  (message-send . message-lint))
 
 ;;; applications
 
 (use-package sx
   :ensure t
-  :defer t
+  :defer tx
   :init
   (defalias 'sx #'sx-tab-all-questions)
   :custom
