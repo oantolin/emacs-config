@@ -253,6 +253,9 @@
   ("C-S-n" . placeholder-forward)
   ("C-S-p" . placeholder-backward))
 
+(use-package topaz-paste
+  :commands topaz-paste-region topaz-paste-buffer)
+
 (use-package isearch-extras 
   :custom
   (search-whitespace-regexp ".*?")
@@ -459,6 +462,8 @@
         ("(" . insert-parentheses))
   (:map embark-email-map
         ("+" . add-email-to-ecomplete))
+  (:map embark-region-map
+        ("P" . topaz-paste-region))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
@@ -531,7 +536,11 @@
   :after embark)
 
 (use-package embark-this-buffer
-  :after embark)
+  :after embark
+  :demand t
+  :bind
+  (:map this-buffer-map
+        ("P" . topaz-paste-buffer)))
 
 (use-package embark-extra-indicators
   :commands
