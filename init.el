@@ -1091,11 +1091,9 @@ if `org-store-link' is called from the #+TITLE line."
   (message-sent . message-put-addresses-in-ecomplete))
 
 (use-package message-extras
-  ;; private package
   :after message
   :bind
   (:map message-mode-map
-        ([remap message-insert-signature] . choose-signature)
         ("C-c t f" . toggle-from-address))
   :commands set-smtp-server
   :hook
