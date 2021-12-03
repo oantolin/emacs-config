@@ -1164,7 +1164,6 @@ everything else, it uses `lisp-indent-function'."
   (with-eval-after-load 'slime-repl
     (define-key slime-repl-mode-map (kbd "DEL") nil)))
 
-
 (use-package clojure-mode :ensure t :defer t)
 
 (use-package cicio-mode
