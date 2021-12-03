@@ -1146,6 +1146,13 @@ everything else, it uses `lisp-indent-function'."
   :custom
   (python-shell-interpreter "python3"))
 
+(use-package cperl-mode
+  :mode "\\.\\([pP]\\([Llm]\\|erl\\|od\\)\\|al\\)\\'"
+  :interpreter "\\(mini\\)?perl5?"
+  :bind
+  (:map cperl-mode-map
+        ([remap display-local-help] . cperl-perldoc)))
+
 (use-package slime
   :ensure t
   :defer t
