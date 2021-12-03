@@ -456,7 +456,7 @@
         ("C-g" . abort-recursive-edit))
   (:map embark-package-map
         ("t" . try))
-  (:map embark-symbol-map
+  (:map embark-identifier-map
         ("(" . insert-parentheses))
   (:map embark-expression-map
         ("(" . insert-parentheses))
