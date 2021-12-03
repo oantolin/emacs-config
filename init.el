@@ -532,9 +532,6 @@
         ("M-." . consult-dir)
         ("M-j" . consult-dir-jump-file)))
 
-(use-package embark-kmacro
-  :after embark)
-
 (use-package embark-this-buffer
   :after embark
   :demand t
