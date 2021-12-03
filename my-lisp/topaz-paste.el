@@ -11,9 +11,11 @@
   (interactive "r")
   (kill-new
    (concat "https://topaz.github.io/paste/#"
-           (with-output-to-string
-             (call-shell-region begin end "xz -zc --format=lzma | base64"
-                                nil standard-output)))))
+           (string-replace
+            "\n" ""
+            (with-output-to-string
+              (call-shell-region begin end "xz -zc --format=lzma | base64"
+                                 nil standard-output))))))
 
 (defun topaz-paste-buffer ()
   "Save topaz paste URL for buffer contents on the kill-ring."
