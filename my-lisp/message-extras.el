@@ -35,11 +35,9 @@ Add to `message-send-hook'."
 (defun message-lint ()
   "Check for missing subject or attachments.
 Add to `message-send-hook'."
-  (let ((pt (point)))
+  (unless (message-field-value "Subject")
     (message-goto-subject)
-    (when (looking-back "Subject: " 9)
-      (user-error "Add a subject line"))
-    (goto-char pt))
+    (user-error "Add a subject line"))
   (cl-flet ((containsp (re) (save-excursion
                               (message-goto-body)
                               (re-search-forward re nil t))))
