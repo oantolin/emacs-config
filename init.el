@@ -875,6 +875,10 @@
               ("M-r" . consult-history)
               ("M-s")))
 
+(use-package sh-script
+  :bind (:map sh-mode-map
+              ([remap display-local-help] . man)))
+
 (use-package term
   :bind
   (:map term-mode-map
