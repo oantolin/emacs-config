@@ -1168,12 +1168,6 @@ everything else, it uses `lisp-indent-function'."
         ([remap pp-eval-expression] . slime-interactive-eval)
         ([remap xref-find-definitions] . slime-edit-definition))
   :config
-  (defun slime-repl-symbols-are-identifiers (target)
-    (if (and (derived-mode-p 'slime-repl-mode) (eq (car target) 'symbol))
-        (cons 'identifier (cdr target))
-      target))
-  (advice-add 'embark-target-identifier-at-point
-              :filter-return #'slime-repl-symbols-are-identifiers )
   (setq inferior-lisp-program "sbcl")
   (defun just-use-cirf  (completions start end)
     (funcall completion-in-region-function start end completions))
