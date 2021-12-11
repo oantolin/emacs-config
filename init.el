@@ -1160,6 +1160,13 @@ everything else, it uses `lisp-indent-function'."
 (use-package slime
   :ensure t
   :defer t
+  :bind
+  (:map slime-editing-map
+        ([remap display-local-help] . slime-describe-symbol)
+        ([remap embark-pp-eval-defun] . slime-compile-defun)
+        ([remap pp-macroexpand-expression] . slime-expand-1)
+        ([remap pp-eval-expression] . slime-interactive-eval)
+        ([remap xref-find-definitions] . slime-edit-definition))
   :config
   (setq inferior-lisp-program "sbcl")
   (defun just-use-cirf  (completions start end)
