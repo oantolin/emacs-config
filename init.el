@@ -1175,7 +1175,7 @@ everything else, it uses `lisp-indent-function'."
 
 (use-package slime-repl
   :defer t
-  :bind (:map slime-repl-mode-map ("DEL")))
+  :bind (:map slime-repl-mode-map ("DEL") ("<return>")))
 
 (use-package clojure-mode :ensure t :defer t)
 
