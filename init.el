@@ -462,8 +462,8 @@
         ("(" . insert-parentheses))
   (:map embark-email-map
         ("+" . add-email-to-ecomplete))
-  (:map embark-region-map
-        ("P" . topaz-paste-region))
+  (:map embark-encode-map
+        ("p" . topaz-paste-region))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
