@@ -506,11 +506,7 @@
         ,(save-excursion (string-trim (org-table-get-field)))
         . (,(save-excursion (skip-chars-backward "^|") (point))
            . ,(save-excursion (skip-chars-forward "^|") (point))))))
-  (setq embark-target-finders
-        (append
-         (butlast embark-target-finders)
-         (cons #'target-org-table-cell
-               (last embark-target-finders))))
+  (push #'target-org-table-cell embark-target-finders)
   (dolist (cmd '(comment-dwim
                  insert-parentheses
                  markdown-insert-code
@@ -690,7 +686,9 @@
   ;; NEWS files use single quotes around elisp symbols. I think those
   ;; are the only files I view in outline-mode, but if I find others
   ;; then I might modify the syntax only locally in NEWS files.
-  (modify-syntax-entry ?' "\"" outline-mode-syntax-table))
+  (modify-syntax-entry ?' "\"" outline-mode-syntax-table)
+  :diminish outline-minor-mode
+  :hook (prog-mode . outline-minor-mode))
 
 (use-package eldoc :defer t :diminish)
 
