@@ -668,6 +668,8 @@
                        (woman woman-mode-map)
                        (package package-menu-mode-map)
                        (eww eww-mode-map)
+                       (gnus-art gnus-article-mode-map)
+                       (gnus-sum gnus-summary-mode-map)
                        (dired dired-mode-map))
    do (eval-after-load mode `(define-key ,map "'" #'link-hint-open-link))))
 
