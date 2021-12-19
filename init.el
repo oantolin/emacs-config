@@ -282,7 +282,6 @@
 (use-package help-extras
   :bind
   ("C-h h" . show-help)
-  ("C-h M" . embark-describe-keymap)
   :commands cotd)
 
 (use-package various-toggles
