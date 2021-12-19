@@ -444,6 +444,8 @@
   ("C-;" . embark-act)
   ("C-," . embark-dwim)
   ("C-h b" . embark-bindings)
+  ("C-h B" . embark-bindings-at-point)
+  ("C-h M" . embark-bindings-in-keymap)
   (:map minibuffer-local-completion-map
         ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
