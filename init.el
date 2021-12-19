@@ -636,6 +636,7 @@
   (:map isearch-mode-map
         ("C-'" . avy-isearch))
   :config
+  (add-to-list 'avy-dispatch-alist '(?\. . avy-action-goto))
   (defun avy-embark-act (pt)
     "Use Embark to act on the completion at PT."
     (unwind-protect
