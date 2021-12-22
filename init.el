@@ -282,7 +282,6 @@
 (use-package help-extras
   :bind
   ("C-h h" . show-help)
-  ("C-h M" . embark-describe-keymap)
   :commands cotd)
 
 (use-package various-toggles
@@ -445,6 +444,8 @@
   ("C-;" . embark-act)
   ("C-," . embark-dwim)
   ("C-h b" . embark-bindings)
+  ("C-h B" . embark-bindings-at-point)
+  ("C-h M" . embark-bindings-in-keymap)
   (:map minibuffer-local-completion-map
         ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
@@ -637,6 +638,7 @@
   (:map isearch-mode-map
         ("C-'" . avy-isearch))
   :config
+  (add-to-list 'avy-dispatch-alist '(?\. . avy-action-goto))
   (defun avy-embark-act (pt)
     "Use Embark to act on the completion at PT."
     (unwind-protect
@@ -668,6 +670,8 @@
                        (woman woman-mode-map)
                        (package package-menu-mode-map)
                        (eww eww-mode-map)
+                       (gnus-art gnus-article-mode-map)
+                       (gnus-sum gnus-summary-mode-map)
                        (dired dired-mode-map))
    do (eval-after-load mode `(define-key ,map "'" #'link-hint-open-link))))
 
