@@ -1155,25 +1155,15 @@ everything else, it uses `lisp-indent-function'."
   (:map cperl-mode-map
         ([remap display-local-help] . cperl-perldoc)))
 
-(use-package slime
+(use-package sly
   :ensure t
-  :defer t
-  :bind
-  (:map slime-editing-map
-        ([remap display-local-help] . slime-describe-symbol)
-        ([remap embark-pp-eval-defun] . slime-compile-defun)
-        ([remap pp-macroexpand-expression] . slime-expand-1)
-        ([remap pp-eval-expression] . slime-interactive-eval)
-        ([remap xref-find-definitions] . slime-edit-definition))
+  :custom
+  (inferior-lisp-program "sbcl")
+  :hook
+  (sly-mode . turn-off-sly-symbol-completion-mode)
   :config
-  (setq inferior-lisp-program "sbcl")
-  (defun just-use-cirf  (completions start end)
-    (funcall completion-in-region-function start end completions))
-  (advice-add 'slime-display-or-scroll-completions :override #'just-use-cirf))
-
-(use-package slime-repl
-  :defer t
-  :bind (:map slime-repl-mode-map ("DEL") ("<return>")))
+  (defun turn-off-sly-symbol-completion-mode ()
+    (sly-symbol-completion-mode -1)))
 
 (use-package clojure-mode :ensure t :defer t)
 

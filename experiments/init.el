@@ -1,6 +1,26 @@
 ;;; Packages or keybindings that I am not currently using, but whose
 ;;; configuration I still sometimes want to load
 
+(use-package slime
+  :ensure t
+  :defer t
+  :bind
+  (:map slime-editing-map
+        ([remap display-local-help] . slime-describe-symbol)
+        ([remap embark-pp-eval-defun] . slime-compile-defun)
+        ([remap pp-macroexpand-expression] . slime-expand-1)
+        ([remap pp-eval-expression] . slime-interactive-eval)
+        ([remap xref-find-definitions] . slime-edit-definition))
+  :config
+  (setq inferior-lisp-program "sbcl")
+  (defun just-use-cirf  (completions start end)
+    (funcall completion-in-region-function start end completions))
+  (advice-add 'slime-display-or-scroll-completions :override #'just-use-cirf))
+
+(use-package slime-repl
+  :defer t
+  :bind (:map slime-repl-mode-map ("DEL") ("<return>")))
+
 (use-package selected
   :ensure t
   :diminish selected-minor-mode
