@@ -1161,6 +1161,19 @@ everything else, it uses `lisp-indent-function'."
 
 (use-package sly
   :ensure t
+  :bind
+  (:map sly-editing-mode-map
+        ([remap display-local-help] . sly-describe-symbol)
+        ([remap embark-pp-eval-defun] . sly-compile-defun)
+        ([remap pp-macroexpand-expression] . sly-expand-1)
+        ([remap pp-eval-expression] . sly-interactive-eval)
+        ([remap xref-find-definitions] . sly-edit-definition))
+  (:map sly-mrepl-mode-map
+        ([remap display-local-help] . sly-describe-symbol)
+        ([remap embark-pp-eval-defun] . sly-compile-defun)
+        ([remap pp-macroexpand-expression] . sly-expand-1)
+        ([remap pp-eval-expression] . sly-interactive-eval)
+        ([remap xref-find-definitions] . sly-edit-definition))
   :custom
   (inferior-lisp-program "sbcl")
   :hook
