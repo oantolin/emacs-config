@@ -442,6 +442,7 @@
   :demand t
   :bind
   ("C-;" . embark-act)
+  ("C-:" . embark-act-quit)
   ("C-," . embark-dwim)
   ("C-h b" . embark-bindings)
   ("C-h B" . embark-bindings-at-point)
@@ -487,6 +488,13 @@
     (((class color grayscale) (background dark)) :background "grey25")
     (t :background "grey90")))
   :config
+  (defun embark-act-quit (&optional arg)
+    "Act on target then quit minibuffer.
+This is a version of `embark-act' that quits the minibuffer by
+default."
+    (interactive "P")
+    (let ((embark-quit-after-action t))
+      (embark-act arg)))
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
