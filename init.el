@@ -1145,7 +1145,7 @@ if `org-store-link' is called from the #+TITLE line."
                t)
   (defun hybrid-lisp-indent-function (indent-point state)
     "An indent function for Emacs Lisp that handles some cl construcs.
-It handles `cl-label', `cl-flet' and `cl-macrolet'.
+It handles `cl-labels', `cl-flet' and `cl-macrolet'.
 For those constructs, it uses `common-lisp-indent-function', for
 everything else, it uses `lisp-indent-function'."
     (if (save-excursion
