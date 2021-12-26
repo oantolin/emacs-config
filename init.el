@@ -1176,12 +1176,6 @@ everything else, it uses `lisp-indent-function'."
         ([remap pp-macroexpand-expression] . sly-expand-1)
         ([remap pp-eval-expression] . sly-interactive-eval)
         ([remap xref-find-definitions] . sly-edit-definition))
-  (:map sly-mrepl-mode-map
-        ([remap display-local-help] . sly-describe-symbol)
-        ([remap embark-pp-eval-defun] . sly-compile-defun)
-        ([remap pp-macroexpand-expression] . sly-expand-1)
-        ([remap pp-eval-expression] . sly-interactive-eval)
-        ([remap xref-find-definitions] . sly-edit-definition))
   :custom
   (inferior-lisp-program "sbcl")
   :hook
@@ -1189,6 +1183,15 @@ everything else, it uses `lisp-indent-function'."
   :config
   (defun turn-off-sly-symbol-completion-mode ()
     (sly-symbol-completion-mode -1)))
+
+(use-package sly-mrepl
+  :bind
+  (:map sly-mrepl-mode-map
+        ([remap display-local-help] . sly-describe-symbol)
+        ([remap embark-pp-eval-defun] . sly-compile-defun)
+        ([remap pp-macroexpand-expression] . sly-expand-1)
+        ([remap pp-eval-expression] . sly-interactive-eval)
+        ([remap xref-find-definitions] . sly-edit-definition)))
 
 (use-package clojure-mode :ensure t :defer t)
 
