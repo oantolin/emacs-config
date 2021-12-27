@@ -454,8 +454,7 @@
   (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
         (";" . embark-act)
-        ("F" . consult-focus-lines)
-        ("C-g" . abort-recursive-edit))
+        ("F" . consult-focus-lines))
   (:map embark-package-map
         ("t" . try))
   (:map embark-identifier-map
