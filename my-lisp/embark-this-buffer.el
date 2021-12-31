@@ -9,7 +9,7 @@
 
 (add-to-list 'embark-keymap-alist '(this-buffer . this-buffer-map))
 
-(add-to-list 'embark-allow-edit-actions #'write-file)
+(push 'embark--allow-edit (alist-get 'write-file embark-target-injection-hooks))
 
 (embark-define-keymap this-buffer-map
   "Commands to act on current file or buffer."
@@ -37,9 +37,11 @@
   ("p" pwd)
   ("SPC" mark-whole-buffer)
   ("<" previous-buffer)
-  (">" next-buffer))
+  (">" next-buffer)
+  ("t" transpose-windows))
 
 (add-to-list 'embark-repeat-actions #'previous-buffer)
 (add-to-list 'embark-repeat-actions #'next-buffer)
+(add-to-list 'embark-repeat-actions #'transpose-windows)
 
 (provide 'embark-this-buffer)
