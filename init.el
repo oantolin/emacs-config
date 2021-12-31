@@ -523,7 +523,9 @@ default."
                  org-emphasize
                  cdlatex-math-modify
                  TeX-font))
-    (push #'embark--mark-target (alist-get cmd embark-pre-action-hooks))))
+    (push #'embark--mark-target (alist-get cmd embark-pre-action-hooks)))
+  (push #'embark--xref-push-markers
+        (alist-get 'find-file embark-pre-action-hooks)))
 
 (use-package embark-consult
   :ensure t
