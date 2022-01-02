@@ -108,7 +108,8 @@
  '(password-cache-expiry 300)
  '(debugger-stack-frame-as-list t)
  '(split-width-threshold 140)
- '(y-or-n-p-use-read-key t))
+ '(y-or-n-p-use-read-key t)
+ '(async-shell-command-display-buffer nil))
 
 (defalias 'yes-or-no-p #'y-or-n-p)
 
