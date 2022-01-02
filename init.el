@@ -467,7 +467,8 @@
         ("p" . topaz-paste-region))
   (:map embark-file-map
         ("vd" . vc-delete-file)
-        ("vr" . vc-rename-file))
+        ("vr" . vc-rename-file)
+        ("vi" . vc-ignore))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
