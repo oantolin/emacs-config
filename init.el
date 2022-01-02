@@ -465,6 +465,9 @@
         ("+" . add-email-to-ecomplete))
   (:map embark-encode-map
         ("p" . topaz-paste-region))
+  (:map embark-file-map
+        ("vd" . vc-delete-file)
+        ("vr" . vc-rename-file))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
