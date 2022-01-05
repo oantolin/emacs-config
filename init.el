@@ -1033,7 +1033,7 @@ Intended to be used as advice for `consult-history'."
   (when (executable-find "latexmk")
     (customize-set-variable 'org-latex-pdf-process '("latexmk -pdf %f")))
   (defun org-tweak-syntax-table ()
-    (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'"))
+    (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'") (?' "'"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
   (org-link-set-parameters
    "org-title"
