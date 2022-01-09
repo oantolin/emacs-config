@@ -477,12 +477,6 @@
         ("+" . add-email-to-ecomplete))
   (:map embark-encode-map
         ("p" . topaz-paste-region))
-  (:map embark-file-map
-        ("vd" . vc-delete-file)
-        ("vr" . vc-rename-file)
-        ("vi" . vc-ignore))
-  (:map embark-become-file+buffer-map
-        ("v" . vc-dir))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
@@ -1049,7 +1043,7 @@ Intended to be used as advice for `consult-history'."
   (when (executable-find "latexmk")
     (customize-set-variable 'org-latex-pdf-process '("latexmk -pdf %f")))
   (defun org-tweak-syntax-table ()
-    (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'"))
+    (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'") (?' "'"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
   (org-link-set-parameters
    "org-title"
