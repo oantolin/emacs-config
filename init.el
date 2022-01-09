@@ -416,7 +416,7 @@
      (consult-location (:not unobtrusive))
      (kill-ring (:not unobtrusive))
      (imenu (:not unobtrusive))
-     ("" unobtrusive)))
+     (t unobtrusive)))
   :init
   (defvar minibuffer--require-match nil)
   :config
