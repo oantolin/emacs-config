@@ -304,7 +304,7 @@
         ("F" . consult-focus-lines)
         ("s" . isearch-forward))
   :init
-  (change-completion-ui ?e)
+  (change-completion-ui ?v)
   (add-to-list 'display-buffer-alist
                '("\\`\\*Completions\\*\\'" nil
                  (window-parameters (mode-line-format . none))
@@ -402,14 +402,25 @@
 
 (use-package vertico
   :ensure t
-  :commands vertico-mode
   :bind
   (:map vertico-map
         ("<C-backspace>" . up-directory)
         ("M-." . consult-dir)
-        ("M-j" . consult-dir-jump-file))
+        ("M-j" . consult-dir-jump-file)
+        ("M-q" . vertico-multiform-grid)
+        ("M-Q" . vertico-multiform-unobtrusive)
+        ("'" . vertico-quick-jump))
+  :custom
+  (vertico-multiform-categories
+   '((embark-keybinding grid)
+     (consult-location (:not unobtrusive))
+     (kill-ring (:not unobtrusive))
+     (imenu (:not unobtrusive))
+     ("" unobtrusive)))
   :init
-  (defvar minibuffer--require-match nil))
+  (defvar minibuffer--require-match nil)
+  :config
+  (vertico-multiform-mode))
 
 (use-package selectrum
   :ensure t
@@ -478,7 +489,6 @@
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
   (embark-indicators '(embark-minimal-indicator
-                       embark-minibuffer-indicator
                        embark-highlight-indicator
                        embark-isearch-highlight-indicator))
   (embark-cycle-key ";")
