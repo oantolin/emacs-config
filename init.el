@@ -414,6 +414,7 @@
   (vertico-multiform-categories
    '((embark-keybinding grid)
      (consult-location (:not unobtrusive))
+     (consult-grep (:not unobtrusive))
      (kill-ring (:not unobtrusive))
      (imenu (:not unobtrusive))
      (t unobtrusive)))
