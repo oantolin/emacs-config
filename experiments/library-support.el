@@ -8,7 +8,8 @@
 
 (defun library-summary (library)
   (setq library (string-remove-suffix ".elc" library))
-  (when-let (summary (lm-summary (ffap-el-mode library)))
+  (when-let (summary (let ((inhibit-message t))
+                       (lm-summary (ffap-el-mode library))))
     (concat
      (propertize " " 'display '(space :align-to (- right 60)))
      (propertize summary 'face 'completions-annotations))))
