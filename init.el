@@ -984,10 +984,7 @@ Intended to be used as advice for `consult-history'."
   :custom
   (org-ellipsis "…")
   (org-refile-use-outline-path 'file)
-  (org-goto-interface 'outline-path-completion)
-  (org-outline-path-complete-in-steps nil)
   (org-refile-allow-creating-parent-nodes 'confirm)
-  (org-support-shift-select t)
   (org-capture-bookmark nil)
   (org-highlight-latex-and-related '(latex script entities))
   (org-export-with-smart-quotes t)
