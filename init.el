@@ -58,7 +58,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters"))
+(dolist (dir '("placeholder" "math-delimiters" "vertico" "vertico/extensions"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -452,7 +452,6 @@
 
 (use-package embark
   :ensure t
-  :demand t
   :bind
   ("C-;" . embark-act)
   ("C-:" . embark-act-quit)
