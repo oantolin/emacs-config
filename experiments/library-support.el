@@ -6,13 +6,16 @@
 
 (add-to-list 'marginalia-prompt-categories '("\\<[lL]ibrary\\>" . library))
 
+(defvar library-summary-cache (make-hash-table :test #'equal))
+
 (defun library-summary (library)
   (setq library (string-remove-suffix ".elc" library))
-  (when-let (summary (let ((inhibit-message t))
-                       (lm-summary (ffap-el-mode library))))
-    (concat
-     (propertize " " 'display '(space :align-to (- right 60)))
-     (propertize summary 'face 'completions-annotations))))
+  (or (gethash library library-summary-cache)
+      (setf (gethash library library-summary-cache)
+            (when-let ((path (ffap-el-mode library))
+                       (summary (let ((inhibit-message t)) (lm-summary path))))
+              (concat (propertize " " 'display '(space :align-to (- right 60)))
+                      (propertize summary 'face 'completions-annotations))))))
 
 (add-to-list 'marginalia-annotator-registry
              '(library library-summary builtin none))
