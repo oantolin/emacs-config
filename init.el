@@ -609,6 +609,8 @@ default."
 
 (use-package corfu
   :ensure t
+  :hook
+  (eval-expression-minibuffer-setup . corfu-mode)
   :init
   (corfu-global-mode))
 
