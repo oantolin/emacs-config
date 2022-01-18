@@ -1,6 +1,17 @@
 ;;; Packages or keybindings that I am not currently using, but whose
 ;;; configuration I still sometimes want to load
 
+(use-package consult                    ; just the completion in region stuff
+  :custom
+  (completion-in-region-function #'consult-completion-in-region)
+  :hook
+  (minibuffer-setup . choose-completion-in-region)
+  :config
+  (defun choose-completion-in-region ()
+    "Use default `completion--in-region' unless we are in `eval-expression'."
+    (unless (eq this-command 'eval-expression)
+      (setq-local completion-in-region-function #'completion--in-region))))
+
 (use-package slime
   :ensure t
   :defer t

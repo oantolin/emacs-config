@@ -591,19 +591,13 @@ default."
         ("C-<" . consult-narrow-help))
   :custom
   (register-preview-function #'consult-register-format)
-  (completion-in-region-function #'consult-completion-in-region)
   (consult-narrow-key "<")
   :hook
   ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
-  (minibuffer-setup . choose-completion-in-region)
   :config
   (when (eq (window-system) 'w32)
     (setq consult-find-args
           (replace-regexp-in-string "\\*" "\\\\*" consult-find-args)))
-  (defun choose-completion-in-region ()
-    "Use default `completion--in-region' unless we are in `eval-expression'."
-    (unless (eq this-command 'eval-expression)
-      (setq-local completion-in-region-function #'completion--in-region)))
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring)
@@ -612,6 +606,11 @@ default."
    consult--source-project-file
    :items (lambda ()
             (mapcar #'file-relative-name (project-files (project-current))))))
+
+(use-package corfu
+  :ensure t
+  :init
+  (corfu-global-mode))
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
