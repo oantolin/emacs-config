@@ -995,7 +995,7 @@ Intended to be used as advice for `consult-history'."
   (org-hide-leading-stars t)
   (org-pretty-entities t)
   (org-preview-latex-image-directory "~/.cache/ltximg/")
-  (org-tags-column -66)
+  (org-tags-column -55)
   :hook
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
