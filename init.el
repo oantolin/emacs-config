@@ -26,7 +26,7 @@
  '(default ((((type w32)) :family "Consolas"))))
 
 (custom-set-faces
- `(variable-pitch ((((type w32)) :family "Georgia")
+ `(variable-pitch ((((type w32)) :family "Tahoma")
                    (t :family "Noto Sans")))
  '(Info-quoted ((t :inherit fixed-pitch)))
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
