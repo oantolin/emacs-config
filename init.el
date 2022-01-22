@@ -27,7 +27,7 @@
 
 (custom-set-faces
  `(variable-pitch ((((type w32)) :family "Georgia")
-                   (t :family "DejaVu Serif")))
+                   (t :family "Noto Sans")))
  '(Info-quoted ((t :inherit fixed-pitch)))
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
@@ -459,6 +459,7 @@
   ("C-h b" . embark-bindings)
   ("C-h B" . embark-bindings-at-point)
   ("C-h M" . embark-bindings-in-keymap)
+  ("C-h E" . embark-on-last-message)
   (:map minibuffer-local-completion-map
         ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
@@ -536,7 +537,13 @@ default."
                  TeX-font))
     (push #'embark--mark-target (alist-get cmd embark-pre-action-hooks)))
   (push #'embark--xref-push-marker
-        (alist-get 'find-file embark-pre-action-hooks)))
+        (alist-get 'find-file embark-pre-action-hooks))
+  (defun embark-on-last-message (arg)
+    "Act on the last message displayed in the echo area."
+    (interactive "P")
+    (with-current-buffer "*Messages*"
+      (goto-char (1- (point-max)))
+      (embark-act arg))))
 
 (use-package embark-consult
   :ensure t
