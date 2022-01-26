@@ -32,6 +32,9 @@
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
 
+(set-fontset-font "fontset-default" 'symbol
+                  (font-spec :family "Noto Color Emoji"))
+
 ;;; package.el & use-package setup
 
 (when (version< emacs-version "26.3")
