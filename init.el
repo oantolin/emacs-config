@@ -33,7 +33,9 @@
  '(fringe ((t :background nil))))
 
 (set-fontset-font "fontset-default" 'symbol
-                  (font-spec :family "Noto Color Emoji"))
+                  (font-spec :family (if (eq system-type 'windows-nt)
+                                         "Segoe UI Emoji"
+                                       "Noto Color Emoji")))
 
 ;;; package.el & use-package setup
 
