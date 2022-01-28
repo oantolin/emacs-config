@@ -2,21 +2,19 @@
 
 (require 'ecomplete)
 
-(defun email--name+address (email &optional prompt)
-  "Return a pair of the name and address for an EMAIL.
-If the EMAIL does not contain a name and PROMPT is non-nil, prompt for it."
+(defun email--name+address (email)
+  "Return a pair of the name and address for an EMAIL."
   (let (name)
-    (cond
-     ((string-match "^\\(.*\\) <\\(.*\\)>$" email)
+    (when (string-match "^\\(.*\\) <\\(.*\\)>$" email)
       (setq name (match-string 1 email)
             email (match-string 2 email)))
-      (prompt (setq name (read-string "Name: "))))
     (cons name email)))
 
 (defun add-email-to-ecomplete (email)
   "Add email address to ecomplete's database."
   (interactive "sEmail address: ")
-  (pcase-let ((`(,name . ,email) (email--name+address email t)))
+  (pcase-let ((`(,name . ,email) (email--name+address email)))
+    (unless name (setq name (read-string "Name: ")))
     (ecomplete-add-item
      'mail email
      (format (cond ((equal name "") "%s%s")
