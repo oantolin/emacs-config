@@ -1152,7 +1152,7 @@ Use this function as :filter-args advice for `org-gnus-article-link'."
   :custom
   (sx-cache-directory "~/.private/sx")
   :custom-face
-  (sx-question-mode-content-face ((t (:inherit default)))))
+  (sx-question-mode-content-face ((t (:background nil)))))
 
 ;;; major modes
 
