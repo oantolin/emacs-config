@@ -514,14 +514,6 @@ default."
            ("\\`\\*Embark Collect" nil
             (window-height . fit-window-to-buffer-max-40%)))
          display-buffer-alist))
-  (defun target-org-table-cell ()
-    "Target contents of current cell in an orb table."
-    (when (and (derived-mode-p 'org-mode) (org-at-table-p))
-      `(org-table-cell
-        ,(save-excursion (string-trim (org-table-get-field)))
-        . (,(save-excursion (skip-chars-backward "^|") (point))
-           . ,(save-excursion (skip-chars-forward "^|") (point))))))
-  (push #'target-org-table-cell embark-target-finders)
   (dolist (cmd '(comment-dwim
                  insert-parentheses
                  markdown-insert-code
