@@ -1129,13 +1129,15 @@ Use this function as :filter-args advice for `org-gnus-article-link'."
 
 (use-package sx
   :ensure t
-  :defer tx
+  :defer t
   :init
   (defalias 'sx #'sx-tab-all-questions)
   :custom
   (sx-cache-directory "~/.private/sx")
   :custom-face
   (sx-question-mode-content-face ((t (:background nil)))))
+
+(use-package nov :ensure t :mode ("\\.epub\\'" . nov-mode))
 
 ;;; major modes
 
