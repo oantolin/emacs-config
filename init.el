@@ -1145,10 +1145,15 @@ Use this function as :filter-args advice for `org-gnus-article-link'."
 (use-package pocket-reader
   :ensure t
   :defer t
+  :bind
+  (:map pocket-reader-mode-map
+        ("w" . pocket-reader-copy-url)) ; the default binding of c is "unemacsy"
   :custom
   (pocket-reader-open-url-default-function #'eww)
   (pocket-reader-pop-to-url-default-function #'eww)
   :config
+  ;; I don't need this target finder now, but someday I might add some
+  ;; URL actions that aren't covered by Pocket Reader commands.
   (defun target-pocket-reader-url ()
     "Target the URL of the pocket-reader item at point."
     (when-let (((derived-mode-p 'pocket-reader-mode))
