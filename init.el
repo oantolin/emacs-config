@@ -460,6 +460,8 @@
   add-email-to-ecomplete
   remove-email-from-ecomplete)
 
+(autoload 'pocket-lib-add-urls "pocket-lib")
+
 (use-package embark
   :ensure t
   :bind
@@ -489,6 +491,8 @@
         ("\\" . remove-email-from-ecomplete))
   (:map embark-encode-map
         ("p" . topaz-paste-region))
+  (:map embark-url-map
+        ("p" . pocket-lib-add-urls))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
@@ -1138,6 +1142,13 @@ Use this function as :filter-args advice for `org-gnus-article-link'."
   (sx-question-mode-content-face ((t (:background nil)))))
 
 (use-package nov :ensure t :mode ("\\.epub\\'" . nov-mode))
+
+(use-package pocket-reader
+  :ensure t
+  :defer t
+  :custom
+  (pocket-reader-open-url-default-function #'eww)
+  (pocket-reader-pop-to-url-default-function #'eww))
 
 ;;; major modes
 
