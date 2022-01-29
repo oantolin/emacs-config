@@ -1148,7 +1148,17 @@ Use this function as :filter-args advice for `org-gnus-article-link'."
   :defer t
   :custom
   (pocket-reader-open-url-default-function #'eww)
-  (pocket-reader-pop-to-url-default-function #'eww))
+  (pocket-reader-pop-to-url-default-function #'eww)
+  :config
+  (defun target-pocket-reader-url ()
+    "Target the URL of the pocket-reader item at point."
+    (when-let (((derived-mode-p 'pocket-reader-mode))
+               (id (tabulated-list-get-id))
+               (item (ht-get pocket-reader-items id))
+               (url (pocket-reader--get-url item)))
+      `(url ,url ,(line-beginning-position) . ,(line-end-position))))
+  (with-eval-after-load 'embark
+    (add-to-list 'embark-target-finders #'target-pocket-reader-url)))
 
 ;;; major modes
 
