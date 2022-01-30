@@ -741,7 +741,10 @@ default."
 
 (use-package olivetti
   :ensure t
-  :bind ("C-c t o" . olivetti-mode))
+  :bind
+  ("C-c t o" . olivetti-mode)
+  :custom
+  (olivetti-minimum-body-width 80))
 
 (use-package shr
   :defer t
