@@ -803,6 +803,8 @@ default."
 (use-package cdlatex
   :ensure t
   :defer t
+  :diminish
+  :diminish org-cdlatex-mode
   :bind (:map cdlatex-mode-map ("$") ("(") ("[") ("{"))
   :custom
   (cdlatex-math-modify-alist '((?B "\\mathbb" nil t nil nil)
