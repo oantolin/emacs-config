@@ -1068,15 +1068,6 @@ if `org-store-link' is called from the #+TITLE line."
                :link (concat "file:" (buffer-file-name))
                :description (cadar (org-collect-keywords '("TITLE"))))))))
 
-(use-package ol-gnus
-  :config
-  (defun old-gmail-switcheroo (args)
-    "Redirect all Org links to Gnus from INBOX to [Gmail]/All Mail.
-Use this function as :filter-args advice for `org-gnus-article-link'."
-    (cons (if (equal (car args) "INBOX") "[Gmail]/All Mail" (car args))
-          (cdr args)))
-  (advice-add 'org-gnus-article-link :filter-args #'old-gmail-switcheroo))
-
 (use-package org-config :after org) ; private package
 
 (use-package citeproc :ensure t :defer t)
