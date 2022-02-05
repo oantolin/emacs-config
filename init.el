@@ -57,7 +57,7 @@
 
 (eval-when-compile (require 'use-package))
 
-(use-package diminish :ensure t)
+(use-package diminish :ensure t :defer t)
 
 (use-package bind-key
   :bind ("C-h y" . describe-personal-keybindings))
@@ -191,6 +191,7 @@
     (modus-themes-load-vivendi)))
 
 (use-package imenu
+  :defer t
   :custom (imenu-space-replacement nil))
 
 (use-package custom
@@ -204,6 +205,11 @@
 
 (use-package recentf
   :init (recentf-mode))
+
+(use-package bookmark
+  :defer t
+  :custom
+  (bookmark-fontify nil))
 
 (use-package misc
   :bind
@@ -386,7 +392,6 @@
      dispatch:initialism dispatch:flex dispatch:prefixes)))
 
 (use-package icomplete
-  :demand t
   :bind (:map icomplete-minibuffer-map
               ("RET" . icomplete-force-complete-and-exit)
               ("<down>" . icomplete-forward-completions)
@@ -711,6 +716,7 @@ default."
   (modify-syntax-entry ?\" "\"" text-mode-syntax-table))
 
 (use-package outline
+  :defer t
   :config
   ;; NEWS files use single quotes around elisp symbols. I think those
   ;; are the only files I view in outline-mode, but if I find others
@@ -742,9 +748,7 @@ default."
 (use-package olivetti
   :ensure t
   :bind
-  ("C-c t o" . olivetti-mode)
-  :custom
-  (olivetti-minimum-body-width 80))
+  ("C-c t o" . olivetti-mode))
 
 (use-package shr
   :defer t
@@ -802,7 +806,6 @@ default."
 
 (use-package cdlatex
   :ensure t
-  :defer t
   :diminish
   :diminish org-cdlatex-mode
   :bind (:map cdlatex-mode-map ("$") ("(") ("[") ("{"))
@@ -891,15 +894,13 @@ default."
         ("M-q" . quit-window)))
 
 (use-package em-hist
-  :defer t
   :bind
   (:map eshell-hist-mode-map
         ("M-r" . consult-history)
         ("M-s"))
   :custom (eshell-hist-ignoredups t))
 
-(use-package ffap-extras
-  :after (eshell ffap))
+(use-package ffap-extras :after (eshell ffap))
 
 (use-package shell
   :bind (:map shell-mode-map
