@@ -1161,6 +1161,16 @@ if `org-store-link' is called from the #+TITLE line."
   (with-eval-after-load 'embark
     (add-to-list 'embark-target-finders #'target-pocket-reader-url)))
 
+(use-package calc
+  :bind
+  (:map calc-mode-map
+        ("C-?" . calc-all-bindings))
+  :config
+  (defun calc-all-bindings ()
+    "Prompt for and run a Calc command."
+    (interactive)
+    (embark-bindings-in-keymap calc-mode-map)))
+
 ;;; major modes
 
 (use-package elisp-mode
