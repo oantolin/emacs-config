@@ -589,7 +589,7 @@ default."
   ("C-c b" . consult-buffer)
   ("C-c 4 b" . consult-buffer-other-window)
   ("C-c k" . consult-keep-lines)
-  ("C-c F" . consult-focus-lines)
+  ("C-c f" . consult-focus-lines)
   ("M-`" . consult-register-store)
   ("C-`" . consult-register-load)
   ("C-M-`" . consult-register)
