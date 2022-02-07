@@ -418,7 +418,7 @@
         ("M-." . consult-dir)
         ("M-j" . consult-dir-jump-file)
         ("M-q" . vertico-multiform-grid)
-        ("?" . vertico-multiform-unobtrusive)
+        ("M-a" . vertico-multiform-unobtrusive)
         ("'" . vertico-quick-jump))
   :custom
   (vertico-multiform-categories
