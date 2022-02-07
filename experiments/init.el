@@ -1,6 +1,13 @@
 ;;; Packages or keybindings that I am not currently using, but whose
 ;;; configuration I still sometimes want to load
 
+(defun echo-area-tooltips () ; I used this in Org mode buffers
+  "Show tooltips in the echo area automatically for current buffer."
+  (setq-local help-at-pt-display-when-idle t
+              help-at-pt-timer-delay 0)
+  (help-at-pt-cancel-timer)
+  (help-at-pt-set-timer))
+
 (use-package consult                    ; just the completion in region stuff
   :custom
   (completion-in-region-function #'consult-completion-in-region)

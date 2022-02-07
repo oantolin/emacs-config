@@ -1011,7 +1011,6 @@ Intended to be used as advice for `consult-history'."
   :hook
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
-  (org-mode . echo-area-tooltips)
   (org-mode . turn-on-auto-fill)
   (org-mode . turn-off-visual-line-mode)
   (org-mode . org-tweak-syntax-table)
@@ -1020,12 +1019,6 @@ Intended to be used as advice for `consult-history'."
   (defun ediff-with-org-show-all ()
     "Expand all headings prior to ediffing org buffers."
     (add-hook 'ediff-prepare-buffer-hook #'org-show-all nil t))
-  (defun echo-area-tooltips ()
-    "Show tooltips in the echo area automatically for current buffer."
-    (setq-local help-at-pt-display-when-idle t
-                help-at-pt-timer-delay 0)
-    (help-at-pt-cancel-timer)
-    (help-at-pt-set-timer))
   (defun add-pretty-entities-hook ()
     "Add `org-toggle-pretty-entities' to local value of `visible-mode-hook'."
     (add-hook 'visible-mode-hook 'org-toggle-pretty-entities nil t))
