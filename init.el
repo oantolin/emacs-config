@@ -745,6 +745,11 @@ default."
   :bind
   ("C-c t o" . olivetti-mode))
 
+(use-package shr
+  :defer t
+  :custom
+  (shr-use-colors nil))
+
 (use-package eww
   :defer t
   :custom
