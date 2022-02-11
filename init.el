@@ -1087,22 +1087,21 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (ecomplete-database-file "~/.private/ecompleterc")
   :config
-  (setq completion-category-defaults nil)
-  (ecomplete-setup))
+  (setq completion-category-defaults nil))
 
 (use-package message
   :bind (:map message-mode-map
               ("<C-tab>" . expand-mail-aliases))
   :custom
   (message-signature nil)
-  (message-mail-alias-type nil)
+  (message-mail-alias-type 'ecomplete)
+  (message-self-insert-commands nil)
   (message-expand-name-standard-ui t)
   ;; all-user-mail-addresses-regexp is defined in email-config
   (message-alternative-emails all-user-mail-addresses-regexp)
   :hook
   (message-mode . turn-off-auto-fill)
-  (message-mode . turn-on-visual-line-mode)
-  (message-sent . message-put-addresses-in-ecomplete))
+  (message-mode . turn-on-visual-line-mode))
 
 (use-package message-extras
   :after message
