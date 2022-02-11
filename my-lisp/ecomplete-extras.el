@@ -5,7 +5,7 @@
 (defun email--name+address (email)
   "Return a pair of the name and address for an EMAIL."
   (let (name)
-    (when (string-match "^\\(.*\\) <\\(.*\\)>$" email)
+    (when (string-match "^\\(?:\\(.*\\) \\)?<\\(.*\\)>$" email)
       (setq name (match-string 1 email)
             email (match-string 2 email)))
     (cons name email)))
