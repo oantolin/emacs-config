@@ -430,6 +430,9 @@
      (kill-ring (:not unobtrusive))
      (imenu (:not unobtrusive))
      (t unobtrusive)))
+  (vertico-multiform-commands
+   '((org-refile (:not unobtrusive))
+     (org-capture-refile (:not unobtrusive))))
   :init
   (defvar minibuffer--require-match nil)
   :config
