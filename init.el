@@ -1137,8 +1137,6 @@ if `org-store-link' is called from the #+TITLE line."
   (pocket-reader-open-url-default-function #'eww)
   (pocket-reader-pop-to-url-default-function #'eww))
 
-(use-package nov :ensure t :defer t)
-
 (use-package calc
   :bind
   (:map calc-mode-map
