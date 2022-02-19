@@ -1003,6 +1003,9 @@ Intended to be used as advice for `consult-history'."
   (org-preview-latex-image-directory "~/.cache/ltximg/")
   (org-tags-column -55)
   (org-use-speed-commands t)
+  (org-agenda-skip-timestamp-if-done t)
+  (org-agenda-skip-scheduled-if-done t)
+  (org-agenda-skip-deadline-if-done t)
   :hook
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
