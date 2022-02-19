@@ -20,8 +20,8 @@
   ("r" rename-file)
   ("d" delete-file)
   ("W" write-file)
-  ("R" vc-rename-file)
-  ("D" vc-delete-file)
+  ("vr" vc-rename-file)
+  ("vd" vc-delete-file)
   ("n" diff-buffer-with-file)           ; n for new
   ("C-=" ediff-buffers)
   ("=" ediff-files)
