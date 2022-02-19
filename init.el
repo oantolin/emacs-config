@@ -138,7 +138,6 @@
  ([remap upcase-word] . upcase-dwim)
  ([remap downcase-word] . downcase-dwim)
  ([remap capitalize-word] . capitalize-dwim)
- ([remap just-one-space] . cycle-spacing)
  ([remap count-words-region] . count-words)
  ("C-M-o" . up-list)
  ("C-o" . split-line)
