@@ -1150,6 +1150,12 @@ if `org-store-link' is called from the #+TITLE line."
     (interactive)
     (embark-bindings-in-keymap calc-mode-map)))
 
+(use-package crossword
+  :ensure t
+  :custom
+  (crossword-save-path "~/.private/crosswords")
+  (crossword-quit-to-browser nil))
+
 ;;; major modes
 
 (use-package elisp-mode
