@@ -183,6 +183,7 @@
   :custom
   (modus-themes-italic-constructs t)
   (modus-themes-bold-constructs t)
+  (modus-themes-mixed-fonts t)
   (modus-themes-headings '((1 1.3) (2 1.2) (3 1.1)))
   :init
   (modus-themes-load-themes)
