@@ -686,26 +686,6 @@ default."
     (transpose-sexps 0))
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
-(use-package link-hint
-  :ensure t
-  :bind
-  ("C-'" . link-hint-open-link)
-  :init
-  (cl-loop
-   for (mode map) in '((minibuffer minibuffer-local-completion-map)
-                       (embark embark-collect-mode-map)
-                       (help help-mode-map)
-                       (info Info-mode-map)
-                       (apropos apropos-mode-map)
-                       (man Man-mode-map)
-                       (woman woman-mode-map)
-                       (package package-menu-mode-map)
-                       (eww eww-mode-map)
-                       (gnus-art gnus-article-mode-map)
-                       (gnus-sum gnus-summary-mode-map)
-                       (dired dired-mode-map))
-   do (eval-after-load mode `(define-key ,map "'" #'link-hint-open-link))))
-
 (use-package elec-pair :init (electric-pair-mode))
 
 (use-package paren :init (show-paren-mode))
@@ -982,7 +962,6 @@ Intended to be used as advice for `consult-history'."
    ("C-c C" . org-clock-goto))
   (:map org-mode-map
         ("C-,") ; I use this for embark-dwim
-        ("C-'") ; and this for link-hint-open-link
         ("C-c C-'" . org-cycle-agenda-files) 
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
