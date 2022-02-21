@@ -193,4 +193,30 @@ marks the next ARG %s after the ones already marked." things things things)
   (insert " ")
   (dabbrev-completion))
 
+;;; pop up a buffer for text to send to clipboard
+
+(defun text-to-clipboard--done ()
+  "Copy buffer contents to clipboard and quit window."
+  (interactive)
+  (gui-set-selection
+   'CLIPBOARD
+   (buffer-substring-no-properties (point-min) (point-max)))
+  (quit-window :kill))
+
+(defvar text-to-clipboard-minor-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c C-c") #'text-to-clipboard--done)
+    map))
+
+(define-minor-mode text-to-clipboard-minor-mode
+  "Minor mode binding a key to quit window and copy buffer to clipboard.")
+
+(defun text-to-clipboard ()
+  "Pop up a temporay buffer for text input to send to clipboard."
+  (interactive)
+  (pop-to-buffer (generate-new-buffer "*clipboard*"))
+  (markdown-mode)
+  (activate-input-method "TeX")
+  (text-to-clipboard-minor-mode))
+
 (provide 'misc-text)

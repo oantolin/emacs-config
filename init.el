@@ -257,6 +257,7 @@
   ("M-W" . mark-non-whitespace)
   ("M-'" . dabbrev-next)
   ("C-M-'" . dabbrev-complete-next)
+  ("C-c e" . text-to-clipboard)
   :commands
   force-truncate-lines
   turn-off-visual-line-mode)
