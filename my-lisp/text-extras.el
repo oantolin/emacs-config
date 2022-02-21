@@ -212,7 +212,10 @@ marks the next ARG %s after the ones already marked." things things things)
   "Minor mode binding a key to quit window and copy buffer to clipboard.")
 
 (defun text-to-clipboard ()
-  "Pop up a temporay buffer for text input to send to clipboard."
+  "Pop up a temporary buffer to collect text to send to the clipboard.
+The pop up buffer is in `markdown-mode' and uses the TeX input
+method.  Use \\<text-to-clipboard-minor-mode-map>\\[text-to-clipboard--done] to send the buffer contents to the clipboard
+and quit the window, killing the buffer."
   (interactive)
   (pop-to-buffer (generate-new-buffer "*clipboard*"))
   (markdown-mode)
