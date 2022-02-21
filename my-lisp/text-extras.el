@@ -1,5 +1,7 @@
 ;;; text-extras.el --- Miscellaneous text editing commands    -*- lexical-binding: t; -*-
 
+;;; the most micellaneous commands of all
+
 (defun unfill-paragraph ()
   "Join a paragraph into a single line."
   (interactive)
@@ -34,76 +36,6 @@ argument, copy the rest of the line."
     (unless (looking-at "\\<")
       (backward-word))
     (kill-word 1)))
-
-(defmacro def-thing-marker (fn-name things forward-thing &rest extra)
-  `(defun ,fn-name (&optional arg allow-extend)
-     ,(format "Mark ARG %s starting with the current one. If ARG is negative,
-mark -ARG %s ending with the current one.
-
-Interactively (or if ALLOW-EXTEND is non-nil), if this command is
-repeated or (in Transient Mark mode) if the mark is active, it
-marks the next ARG %s after the ones already marked." things things things)
-     (interactive "p\np")
-     (unless arg (setq arg 1))
-     (if (and allow-extend
-              (or (and (eq last-command this-command) (mark t))
-                  (and transient-mark-mode mark-active)))
-         (set-mark
-          (save-excursion
-            (goto-char (mark))
-            (,forward-thing arg)
-            (point)))
-       ,(plist-get extra :pre)
-       (,forward-thing arg)
-       ,(plist-get extra :post)
-       (push-mark nil t t)
-       (,forward-thing (- arg)))))
-
-(def-thing-marker mark-line "lines" forward-line
-  :post (unless (= (preceding-char) ?\n)
-          (setq arg (1- arg))))
-
-(def-thing-marker mark-char "characters" forward-char)
-
-(def-thing-marker mark-my-word "words" forward-word
-  :pre (when (and (looking-at "\\>") (> arg 0))
-         (forward-word -1)))
-
-(defun mark-inside-sexp ()
-  "Mark inside a sexp."
-  (interactive)
-  (let (beg end)
-    (backward-up-list 1 t t)
-    (setq beg (1+ (point)))
-    (forward-sexp)
-    (setq end (1- (point)))
-    (goto-char beg)
-    (push-mark)
-    (goto-char end))
-  (activate-mark))
-
-(defun kill-inside-sexp ()
-  "Kill inside a sexp."
-  (interactive)
-  (mark-inside-sexp)
-  (kill-region (mark) (point)))
-
-(defun unwrap-sexp ()
-  "Unwrap a sexp."
-  (interactive)
-  (let (end)
-    (mark-inside-sexp)
-    (delete-char 1)
-    (setq end (1- (point)))
-    (goto-char (mark))
-    (delete-char -1)
-    (set-mark end)))
-
-(defun unwrap-mark-sexp ()
-  "Unwrap a sexp and mark the contents."
-  (interactive)
-  (unwrap-sexp)
-  (setq deactivate-mark nil))
 
 (defun align-matches (arg start end regexp)
   "Align matches of the given regular expression.
@@ -159,8 +91,84 @@ times."
   (interactive "^p")
   (forward-to-whitespace (- arg)))
 
+;;; marking things
+
+(defmacro def-thing-marker (fn-name things forward-thing &rest extra)
+  `(defun ,fn-name (&optional arg allow-extend)
+     ,(format "Mark ARG %s starting with the current one. If ARG is negative,
+mark -ARG %s ending with the current one.
+
+Interactively (or if ALLOW-EXTEND is non-nil), if this command is
+repeated or (in Transient Mark mode) if the mark is active, it
+marks the next ARG %s after the ones already marked." things things things)
+     (interactive "p\np")
+     (unless arg (setq arg 1))
+     (if (and allow-extend
+              (or (and (eq last-command this-command) (mark t))
+                  (and transient-mark-mode mark-active)))
+         (set-mark
+          (save-excursion
+            (goto-char (mark))
+            (,forward-thing arg)
+            (point)))
+       ,(plist-get extra :pre)
+       (,forward-thing arg)
+       ,(plist-get extra :post)
+       (push-mark nil t t)
+       (,forward-thing (- arg)))))
+
+(def-thing-marker mark-line "lines" forward-line
+  :post (unless (= (preceding-char) ?\n)
+          (setq arg (1- arg))))
+
+(def-thing-marker mark-char "characters" forward-char)
+
+(def-thing-marker mark-my-word "words" forward-word
+  :pre (when (and (looking-at "\\>") (> arg 0))
+         (forward-word -1)))
+
 (def-thing-marker mark-non-whitespace "vim WORDS"
   forward-to-whitespace)
+
+;;; poor man's paredit
+
+(defun mark-inside-sexp ()
+  "Mark inside a sexp."
+  (interactive)
+  (let (beg end)
+    (backward-up-list 1 t t)
+    (setq beg (1+ (point)))
+    (forward-sexp)
+    (setq end (1- (point)))
+    (goto-char beg)
+    (push-mark)
+    (goto-char end))
+  (activate-mark))
+
+(defun kill-inside-sexp ()
+  "Kill inside a sexp."
+  (interactive)
+  (mark-inside-sexp)
+  (kill-region (mark) (point)))
+
+(defun unwrap-sexp ()
+  "Unwrap a sexp."
+  (interactive)
+  (let (end)
+    (mark-inside-sexp)
+    (delete-char 1)
+    (setq end (1- (point)))
+    (goto-char (mark))
+    (delete-char -1)
+    (set-mark end)))
+
+(defun unwrap-mark-sexp ()
+  "Unwrap a sexp and mark the contents."
+  (interactive)
+  (unwrap-sexp)
+  (setq deactivate-mark nil))
+
+;;; functions for hooks
 
 (defun force-truncate-lines ()
   "Force line truncation. For use in hooks."
@@ -169,6 +177,8 @@ times."
 (defun turn-off-visual-line-mode ()
   "Turn off `visual-line-mode'.  For use in hooks."
   (visual-line-mode -1))
+
+;;; Continue dabbreving with the greatest of ease
 
 (defun dabbrev-next (arg)
   "Insert the next ARG words from where previous expansion was found."
