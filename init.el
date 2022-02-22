@@ -1000,6 +1000,7 @@ Intended to be used as advice for `consult-history'."
   (org-agenda-skip-timestamp-if-done t)
   (org-agenda-skip-scheduled-if-done t)
   (org-agenda-skip-deadline-if-done t)
+  (org-log-into-drawer t)
   :hook
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
