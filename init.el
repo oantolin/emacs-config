@@ -849,9 +849,9 @@ default."
   :custom (tramp-default-method "plink"))
 
 (use-package dired
-  :bind (:map dired-mode-map
-              ("e" . dired-toggle-read-only)
-              ("E" . dired-open-externally))
+  :bind
+  (:map dired-mode-map
+        ("e" . dired-open-externally))
   :custom
   (dired-dwim-target t)
   :hook
