@@ -747,7 +747,7 @@ default."
   :bind
   (:map LaTeX-mode-map
         ("$" . math-delimiters-insert)
-        ("C-=" . TeX-font)
+        ("C-'" . TeX-font)
         ([remap next-error])
         ([remap previous-error])
         ("M-g M-n" . TeX-next-error)
@@ -960,7 +960,7 @@ Intended to be used as advice for `consult-history'."
   :ensure t
   :bind
   (:map markdown-mode-map
-        ("C-=" . markdown-mode-style-map))
+        ("C-'" . markdown-mode-style-map))
   :custom-face
   (markdown-metadata-key-face ((t (:foreground nil))))
   (markdown-metadata-value-face ((t (:foreground nil))))
@@ -980,7 +980,7 @@ Intended to be used as advice for `consult-history'."
         ("C-c C-'" . org-cycle-agenda-files) 
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
-        ("C-=" . org-emphasize))
+        ("C-'" . org-emphasize))
   :custom
   (org-ellipsis "…")
   (org-refile-use-outline-path 'file)
