@@ -814,7 +814,8 @@ default."
   (pdf-view-midnight-colors '("#ffffff" . "#000000"))
   :bind
   (:map pdf-view-mode-map
-        ("d" . pdf-view-midnight-minor-mode))
+        ("d" . pdf-view-midnight-minor-mode)
+        ("i" . consult-imenu))
   :config
   (add-hook 'TeX-after-compilation-finished-functions
             #'TeX-revert-document-buffer))
@@ -828,6 +829,19 @@ default."
 
 (use-package pdf-loader
   :init (pdf-loader-install))
+
+(use-package pdf-outline
+  :defer t
+  :custom
+  (pdf-outline-imenu-use-flat-menus t)
+  :config
+  (defun pdf-outline-indent (fn link &optional labels)
+    (let ((item (funcall fn link labels))
+          (indent pdf-outline-buffer-indent))
+      (cons (concat (make-string (* indent (1- (alist-get 'depth link))) ?\s)
+                    (car item))
+            (cdr item))))
+  (advice-add 'pdf-outline-imenu-create-item :around #'pdf-outline-indent))
 
 (use-package tramp
   :defer t
