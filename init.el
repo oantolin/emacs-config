@@ -1079,6 +1079,16 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package email-config) ; private package
 
+(use-package gnus
+  :bind
+  ("C-c g" . gnus))
+
+(use-package gnus-sum
+  :bind
+  (:map gnus-summary-mode-map
+        ("M-i") ; I use this for avy-goto-char-timer
+        ("M-a" . gnus-symbolic-argument)))
+
 (use-package ecomplete
   :defer t
   :custom
