@@ -13,7 +13,8 @@ prompted for them."
   (interactive
    (if current-prefix-arg
        (mapcar #'read-number '("Year: " "Day: "))
-     (car (read-from-string (format-time-string "(%Y %d)")))))
+     (let ((today (decode-time)))
+         (list (decoded-time-year today) (decoded-time-day today)))))
   (let ((url-request-extra-headers
          `(("Cookie"
             . ,(concat "session="
