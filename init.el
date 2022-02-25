@@ -1140,7 +1140,8 @@ if `org-store-link' is called from the #+TITLE line."
   :defer t
   :bind
   (:map pocket-reader-mode-map
-        ("w" . pocket-reader-copy-url)) ; the default binding of c is "unemacsy"
+        ("c") ; the default binding of c is "unemacsy"
+        ("w" . pocket-reader-copy-url))
   :custom
   (pocket-reader-open-url-default-function #'eww)
   (pocket-reader-pop-to-url-default-function #'eww))
@@ -1160,6 +1161,19 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (crossword-save-path "~/.private/crosswords")
   (crossword-quit-to-browser nil))
+
+(use-package elfeed
+  :ensure t
+  :bind
+  ("C-c w" . elfeed)
+  (:map elfeed-search-mode-map
+        ("y") ; Wellons is brilliant but he confused yank & save
+        ("w" . elfeed-search-yank))
+  (:map elfeed-show-mode-map
+        ("y") ; Again...
+        ("w" . elfeed-show-yank)))
+
+(use-package elfeed-config :after elfeed)
 
 ;;; major modes
 
