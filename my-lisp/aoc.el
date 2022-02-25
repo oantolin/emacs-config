@@ -8,13 +8,14 @@
 
 (defun aoc (year day)
   "Download AoC input for DAY of YEAR, and open the puzzle in `eww'.
-DAY and YEAR default to today, but with a prefix argument you are
-prompted for them."
+DAY and YEAR default to today during December, but outside
+December, or with a prefix argument you are prompted for them."
   (interactive
-   (if current-prefix-arg
-       (mapcar #'read-number '("Year: " "Day: "))
-     (let ((today (decode-time)))
-         (list (decoded-time-year today) (decoded-time-day today)))))
+   (let ((today (decode-time)))
+     (if (or current-prefix-arg
+             (not (= (decoded-time-month today) 12)))
+         (mapcar #'read-number '("Year: " "Day: "))
+       (list (decoded-time-year today) (decoded-time-day today)))))
   (let ((url-request-extra-headers
          `(("Cookie"
             . ,(concat "session="
