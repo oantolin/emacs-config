@@ -503,6 +503,7 @@
   (:map embark-encode-map
         ("p" . topaz-paste-region))
   (:map embark-url-map
+        ("x" . browse-url-default-browser)
         ("p" . pocket-lib-add-urls))
   :hook
   (embark-collect-post-revert . fit-window-to-buffer-max-40%)
