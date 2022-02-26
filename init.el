@@ -1173,9 +1173,8 @@ if `org-store-link' is called from the #+TITLE line."
         ("G" . elfeed-search-update--force))
   (:map elfeed-show-mode-map
         ("y") ; Again...
-        ("w" . elfeed-show-yank))
-  :custom
-  (elfeed-search-clipboard-type 'CLIPBOARD))
+        ("w" . elfeed-show-yank)
+        ("S-SPC" . scroll-down-command)))
 
 (use-package elfeed-config :after elfeed)
 
