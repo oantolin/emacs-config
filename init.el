@@ -1168,10 +1168,14 @@ if `org-store-link' is called from the #+TITLE line."
   ("C-c w" . elfeed)
   (:map elfeed-search-mode-map
         ("y") ; Wellons is brilliant but he confused yank & save
-        ("w" . elfeed-search-yank))
+        ("w" . elfeed-search-yank)
+        ("g" . elfeed-update) ; I'm used to g updating
+        ("G" . elfeed-search-update--force))
   (:map elfeed-show-mode-map
         ("y") ; Again...
-        ("w" . elfeed-show-yank)))
+        ("w" . elfeed-show-yank))
+  :custom
+  (elfeed-search-clipboard-type 'CLIPBOARD))
 
 (use-package elfeed-config :after elfeed)
 
