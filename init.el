@@ -1159,8 +1159,9 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package crossword
   :ensure t
   :custom
-  (crossword-save-path "~/.private/crosswords")
   (crossword-quit-to-browser nil))
+
+(use-package crossword-config :after crossword) ; private package
 
 (use-package elfeed
   :ensure t
@@ -1176,7 +1177,7 @@ if `org-store-link' is called from the #+TITLE line."
         ("w" . elfeed-show-yank)
         ("S-SPC" . scroll-down-command)))
 
-(use-package elfeed-config :after elfeed)
+(use-package elfeed-config :after elfeed) ; private package
 
 ;;; major modes
 
