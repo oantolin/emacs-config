@@ -1184,8 +1184,6 @@ if `org-store-link' is called from the #+TITLE line."
   (:map elfeed-search-mode-map
         ("y") ; Wellons is brilliant but he confused yank & save
         ("w" . elfeed-search-yank)
-        ("g" . elfeed-update) ; I'm used to g updating
-        ("G" . elfeed-search-update--force)
         ("SPC" . scroll-up-command)
         ("S-SPC" . scroll-down-command))
   (:map elfeed-show-mode-map
