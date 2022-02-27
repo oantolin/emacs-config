@@ -733,13 +733,27 @@ default."
   :bind
   ("C-c t o" . olivetti-mode))
 
-(use-package shr
+(use-package browse-url
   :defer t
   :custom
-  (shr-use-colors nil))
+  (browse-url-browser-function #'eww-browse-url))
+
+(use-package shr
+  :bind
+  (:map shr-map
+        ("P" . pocket-reader-shr-add-link)
+        ("v")) ; don't override view-source with a useless synonym for RET
+  :custom
+  (shr-use-colors nil)
+  (shr-max-image-proportion 0.6)
+  (shr-image-animate nil))
+
+(autoload 'pocket-reader-eww-add-page "pocket-reader-extras")
 
 (use-package eww
-  :defer t
+  :bind
+  (:map eww-mode-map
+        ("P" . pocket-reader-eww-add-page))
   :custom
   (eww-bookmarks-directory "~/.private/"))
 
@@ -1138,14 +1152,16 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package pocket-reader
   :ensure t
-  :defer t
   :bind
+  ("C-c p" . pocket-reader)
   (:map pocket-reader-mode-map
         ("c") ; the default binding of c is "unemacsy"
         ("w" . pocket-reader-copy-url))
   :custom
   (pocket-reader-open-url-default-function #'eww)
   (pocket-reader-pop-to-url-default-function #'eww))
+
+(use-package pocket-reader-extras :after pocket-reader)
 
 (use-package embark-pocket-reader :after (pocket-reader embark))
 
@@ -1184,12 +1200,23 @@ if `org-store-link' is called from the #+TITLE line."
   (:map elfeed-search-mode-map
         ("y") ; Wellons is brilliant but he confused yank & save
         ("w" . elfeed-search-yank)
+        ("P" . pocket-reader-elfeed-search-add-link)
         ("SPC" . scroll-up-command)
         ("S-SPC" . scroll-down-command))
   (:map elfeed-show-mode-map
         ("y") ; Again...
+        ("P" . pocket-reader-elfeed-entry-add-link)
+        ("E" . elfeed-show-play-enclosure)
         ("w" . elfeed-show-yank)
         ("S-SPC" . scroll-down-command)))
+
+(use-package elfeed-comments
+  :after elfeed
+  :bind
+  (:map elfeed-search-mode-map
+        ("C" . elfeed-comments))
+  (:map elfeed-show-mode-map
+        ("C" . elfeed-comments)))
 
 (use-package embark-elfeed :after (elfeed embark))
 
