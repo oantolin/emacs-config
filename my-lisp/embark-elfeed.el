@@ -17,6 +17,16 @@
              (urls (mapcar #'elfeed-entry-link entries)))
     (cons 'url urls)))
 
+(defun embark-elfeed-target-first-url-in-content ()
+  "Target the first URL in the content of the entry at point."
+  (when-let (((derived-mode-p 'elfeed-search-mode))
+             (entry (elfeed-search-selected :ignore-region))
+             (content (elfeed-deref (elfeed-entry-content entry)))
+             (url (when (string-match "a href=\"\\([^\"]+\\)\"" content)
+                    (match-string 1 content))))
+    `(url ,url ,(line-beginning-position) . ,(line-end-position))))
+
+(add-to-list 'embark-target-finders #'embark-elfeed-target-first-url-in-content)
 (add-to-list 'embark-target-finders #'embark-elfeed-target-url)
 (add-to-list 'embark-candidate-collectors #'embark-elfeed-url-candidates)
 
