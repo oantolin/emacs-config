@@ -733,10 +733,16 @@ default."
   :bind
   ("C-c t o" . olivetti-mode))
 
+(use-package browse-url
+  :defer t
+  :custom
+  (browse-url-browser-function #'eww-browse-url))
+
 (use-package shr
   :defer t
   :custom
-  (shr-use-colors nil))
+  (shr-use-colors nil)
+  (shr-max-image-proportion 0.6))
 
 (use-package eww
   :defer t
