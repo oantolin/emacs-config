@@ -1147,6 +1147,8 @@ if `org-store-link' is called from the #+TITLE line."
   (pocket-reader-open-url-default-function #'eww)
   (pocket-reader-pop-to-url-default-function #'eww))
 
+(use-package embark-pocket-reader :after (pocket-reader embark))
+
 (use-package calc
   :bind
   (:map calc-mode-map
@@ -1183,11 +1185,15 @@ if `org-store-link' is called from the #+TITLE line."
         ("y") ; Wellons is brilliant but he confused yank & save
         ("w" . elfeed-search-yank)
         ("g" . elfeed-update) ; I'm used to g updating
-        ("G" . elfeed-search-update--force))
+        ("G" . elfeed-search-update--force)
+        ("SPC" . scroll-up-command)
+        ("S-SPC" . scroll-down-command))
   (:map elfeed-show-mode-map
         ("y") ; Again...
         ("w" . elfeed-show-yank)
         ("S-SPC" . scroll-down-command)))
+
+(use-package embark-elfeed :after (elfeed embark))
 
 (use-package elfeed-config :after elfeed) ; private package
 
