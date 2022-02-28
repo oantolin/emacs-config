@@ -252,7 +252,7 @@
   ("M-U" . unwrap-sexp)
   ("M-S" . unwrap-mark-sexp)
   ("C-|" . pipe-region)
-  ("C-S-w" . forward-to-whitespace)
+  ("C-S-s" . forward-to-whitespace)
   ("C-S-r" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
   ("M-'" . dabbrev-next)
