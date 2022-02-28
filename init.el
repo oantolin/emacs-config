@@ -736,7 +736,9 @@ default."
 (use-package browse-url
   :defer t
   :custom
-  (browse-url-browser-function #'eww-browse-url))
+  (browse-url-browser-function #'eww-browse-url)
+  :config
+  (advice-add 'browse-url-generic :override 'browse-url-default-browser))
 
 (use-package shr
   :bind
