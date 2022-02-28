@@ -17,6 +17,12 @@
   (when-let ((url (elfeed-extras--get-link-by-title "comments")))
     (if generic (browse-url-generic url) (browse-url url))))
 
+(defun elfeed-extras-link (&optional generic)
+  "Browse link named 'link' in current entry."
+  (interactive "P")
+  (when-let ((url (elfeed-extras--get-link-by-title "link")))
+    (if generic (browse-url-generic url) (browse-url url))))
+
 (defun elfeed-extras-arxiv-pdf (&optional generic)
   "View the PDF corresponing to an arXiv submission in Elfeed."
   (interactive "P")
