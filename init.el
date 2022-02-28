@@ -1210,13 +1210,15 @@ if `org-store-link' is called from the #+TITLE line."
         ("w" . elfeed-show-yank)
         ("S-SPC" . scroll-down-command)))
 
-(use-package elfeed-comments
+(use-package elfeed-extras
   :after elfeed
   :bind
   (:map elfeed-search-mode-map
-        ("C" . elfeed-comments))
+        ("C" . elfeed-extras-comments)
+        ("v" . elfeed-extras-arxiv-pdf))
   (:map elfeed-show-mode-map
-        ("C" . elfeed-comments)))
+        ("C" . elfeed-extras-comments)
+        ("v" . elfeed-extras-arxiv-pdf)))
 
 (use-package embark-elfeed :after (elfeed embark))
 
