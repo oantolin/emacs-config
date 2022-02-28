@@ -695,6 +695,7 @@ default."
 (use-package text-mode
   :hook 
   (text-mode . turn-on-visual-line-mode)
+  (text-mode . variable-pitch-mode)
   :config
   (modify-syntax-entry ?\" "\"" text-mode-syntax-table))
 
