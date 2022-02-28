@@ -11,20 +11,20 @@
            content)
       (match-string 1 content))))
 
-(defun elfeed-extras-comments ()
+(defun elfeed-extras-comments (&optional generic)
   "Browse comments in current entry."
-  (interactive)
+  (interactive "P")
   (when-let ((url (elfeed-extras--get-link-by-title "comments")))
-    (browse-url url)))
+    (if generic (browse-url-generic url) (browse-url url))))
 
-(defun elfeed-extras-arxiv-pdf ()
+(defun elfeed-extras-arxiv-pdf (&optional generic)
   "View the PDF corresponing to an arXiv submission in Elfeed."
-  (interactive)
+  (interactive "P")
   (when-let ((abs "^https?://arxiv.org/abs/\\(.*\\)$")
              (pdf "https://arxiv.org/pdf/%s.pdf")
-             (item (or (elfeed-search-selected :single) elfeed-show-entry))
+             (item (or (elfeed-search-selected t) elfeed-show-entry))
              (url (elfeed-entry-link item))
              ((string-match abs url)))
-    (browse-url (format pdf (match-string 1 url)))))
+    (if generic (browse-url-generic url) (browse-url url))))
 
 (provide 'elfeed-extras)
