@@ -1212,7 +1212,9 @@ if `org-store-link' is called from the #+TITLE line."
         ("P" . pocket-reader-elfeed-entry-add-link)
         ("E" . elfeed-show-play-enclosure)
         ("w" . elfeed-show-yank)
-        ("S-SPC" . scroll-down-command)))
+        ("S-SPC" . scroll-down-command))
+  :hook
+  (elfeed-show-mode . visual-line-mode))
 
 (use-package elfeed-extras
   :after elfeed
