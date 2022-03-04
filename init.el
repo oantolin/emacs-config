@@ -931,6 +931,12 @@ default."
         ("M-r" . consult-history)
         ("M-s")))
 
+(use-package vc-extras
+  :commands
+  clear-log-edit-buffer
+  log-view-save-commit-hash
+  vc-git-commit)
+
 (use-package log-edit
   :bind
   (:map log-edit-mode-map
@@ -940,37 +946,26 @@ default."
   (log-edit-mode . turn-off-visual-line-mode)
   (log-edit-mode . turn-on-auto-fill)
   :config
-  (defun clear-log-edit-buffer (&optional _)
-    "Clear the buffer if it is in `log-edit-mode'.
-Intended to be used as advice for `consult-history'."
-    (when (derived-mode-p 'log-edit-mode)
-      (delete-minibuffer-contents)))
   (advice-add 'consult-history :before #'clear-log-edit-buffer)
   (remove-hook 'log-edit-hook #'log-edit-show-files))
 
 (use-package log-view
   :bind
   (:map log-view-mode-map
-        ("w" . log-view-save-commit-hash))
-  :config
-  (defun log-view-save-commit-hash ()
-    ;; This is Protesilaos' prot-vc-log-kill-hash function
-    "Save commit hash of log entry at point to `kill-ring'."
-    (interactive)
-    (let ((commit (cadr (log-view-current-entry (point) t))))
-      (kill-new (format "%s" commit))
-      (message "Copied: %s" commit))))
+        ("w" . log-view-save-commit-hash)))
 
 (use-package vc
   :bind
   (:map vc-prefix-map
         ("R" . vc-rename-file)
-        ("d" . vc-dir-root)))
+        ("d" . vc-dir-root)
+        ("c" . vc-git-commit)))
 
 (use-package vc-dir
   :bind
   (:map vc-dir-mode-map
-        ("r" . vc-revert)))
+        ("r" . vc-revert)
+        ("c" . vc-git-commit)))
 
 (use-package magit :ensure t :defer t)
 
