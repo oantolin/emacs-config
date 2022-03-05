@@ -1,3 +1,4 @@
+
 ;;; -*- lexical-binding: t -*-
 
 ;;; Customize thinks it knows better than me
@@ -116,7 +117,8 @@
  '(split-width-threshold 140)
  '(y-or-n-p-use-read-key t)
  '(async-shell-command-display-buffer nil)
- '(revert-without-query '("")))
+ '(revert-without-query '(""))
+ '(recenter-positions '(top middle bottom)))
 
 (defalias 'yes-or-no-p #'y-or-n-p)
 
