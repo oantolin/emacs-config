@@ -786,7 +786,10 @@ default."
   (:map eww-mode-map
         ("P" . pocket-reader-eww-add-page))
   :custom
-  (eww-bookmarks-directory "~/.private/"))
+  (eww-bookmarks-directory "~/.private/")
+  :config
+  (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
+  (modify-syntax-entry ?\” ")“" eww-mode-syntax-table))
 
 (use-package latex
   :ensure auctex
