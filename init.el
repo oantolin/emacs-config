@@ -781,7 +781,7 @@ default."
         ("v")) ; don't override view-source with a useless synonym for RET
   :custom
   (shr-use-colors nil)
-  (shr-max-image-proportion 0.6)
+  (shr-max-image-proportion 0.7)
   (shr-image-animate nil))
 
 (autoload 'pocket-reader-eww-add-page "pocket-reader-extras")
