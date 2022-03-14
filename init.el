@@ -789,7 +789,9 @@ default."
 (use-package eww
   :bind
   (:map eww-mode-map
-        ("P" . pocket-reader-eww-add-page))
+        ("P" . pocket-reader-eww-add-page)
+        ("{" . backward-paragraph)
+        ("}" . forward-paragraph))
   :custom
   (eww-bookmarks-directory "~/.private/")
   :config
