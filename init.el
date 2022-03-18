@@ -1048,6 +1048,7 @@ default."
   (org-preview-latex-image-directory "~/.cache/ltximg/")
   (org-tags-column -55)
   (org-use-speed-commands t)
+  (org-cycle-emulate-tab 'whitestart)
   (org-return-follows-link t)
   (org-agenda-skip-timestamp-if-done t)
   (org-agenda-skip-scheduled-if-done t)
@@ -1110,6 +1111,8 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package org-config :after org) ; private package
 
+(use-package org-modern :ensure t :defer t)
+
 (use-package citeproc :ensure t :defer t)
 
 (use-package ispell
@@ -1128,6 +1131,14 @@ if `org-store-link' is called from the #+TITLE line."
   (add-to-list 'ispell-tex-skip-alists '(("\\$" . "\\$"))))
 
 (use-package try :ensure t :defer t)
+
+(use-package logos
+  :ensure t
+  :custom
+  (logos-outlines-are-pages t)
+  :bind
+  ([remap forward-page] . logos-forward-page-dwim)
+  ([remap backward-page] . logos-backward-page-dwim))
 
 ;;; email packages
 
