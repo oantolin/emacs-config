@@ -426,15 +426,7 @@
         ("'" . vertico-quick-jump))
   :custom
   (vertico-multiform-categories
-   '((embark-keybinding grid)
-     (consult-location (:not unobtrusive))
-     (consult-grep (:not unobtrusive))
-     (kill-ring (:not unobtrusive))
-     (imenu (:not unobtrusive))
-     (t unobtrusive)))
-  (vertico-multiform-commands
-   '((org-refile (:not unobtrusive))
-     (org-capture-refile (:not unobtrusive))))
+   '((embark-keybinding grid)))
   :init
   (defvar minibuffer--require-match nil)
   :config
