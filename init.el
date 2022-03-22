@@ -644,7 +644,6 @@ default."
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring))
 
-(use-package consult-eww-source :after (consult eww))
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
