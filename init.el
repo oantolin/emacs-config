@@ -644,7 +644,17 @@ default."
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring))
 
-(use-package consult-eww-source :after (consult eww))
+(use-package webjump
+  :bind
+  ("C-x w" . webjump))
+
+(use-package webjump-extras
+  :after webjump
+  :demand t
+  :bind
+  ("C-x W" . webjump-reload)
+  :config
+  (webjump-reload))
 
 (use-package tmp-buffer
   :bind ("C-c n" . tmp-buffer))
