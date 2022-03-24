@@ -207,7 +207,10 @@
             ("Variables" "^\\(?:Show Value\\|Hide\\) \\([^:\n]*\\)" 1)))))
 
 (use-package recentf
-  :init (recentf-mode))
+  :custom
+  (recentf-max-saved-items 50)
+  :init
+  (recentf-mode))
 
 (use-package bookmark
   :defer t
