@@ -4,7 +4,7 @@
 (require 'eww)
 
 (defcustom webjump-search-engines
-  '(("DuckDuckGo" . "https://duckduckgo.com/?q=")
+  '(("DuckDuckGo" . "https://html.duckduckgo.com/html/?q=")
     ("Google" . "https://google.com/?q=")
     ("Wikipedia" . "https://en.wikipedia.org/wiki/")
     ("DLE RAE" . "https://dle.rae.es/")
