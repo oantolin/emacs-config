@@ -1229,24 +1229,6 @@ if `org-store-link' is called from the #+TITLE line."
     (interactive)
     (embark-bindings-in-keymap calc-mode-map)))
 
-(use-package crossword
-  :ensure t
-  :custom
-  (crossword-quit-to-browser nil)
-  :custom-face
-  (crossword-current-face
-   ((((class color) (background light))
-     (:background "lightgreen" :foreground "black" :inherit 'normal))
-    (((class color) (background dark))
-     (:background "darkgreen" :foreground "lightgrey" :inherit 'normal))))
-  (crossword-other-dir-face
-   ((((class color) (background light))
-     (:background "darkgrey" :foreground "black" :inherit 'normal))
-    (((class color) (background dark))
-     (:background "grey10" :foreground "lightgrey" :inherit 'normal)))))
-
-(use-package crossword-config :after crossword) ; private package
-
 (use-package elfeed
   :ensure t
   :bind
