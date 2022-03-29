@@ -1030,7 +1030,8 @@ default."
   (("C-c c" . org-capture)
    ("C-c a" . org-agenda)
    ("C-c s" . org-store-link)
-   ("C-c C" . org-clock-goto))
+   ("C-c C" . org-clock-goto)
+   ("C-c o" . org-open-at-point-global))
   (:map org-mode-map
         ("C-,") ; I use this for embark-dwim
         ("C-c C-'" . org-cycle-agenda-files) 
