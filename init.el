@@ -506,8 +506,6 @@
   ("M-s n" . embark-next-symbol) ; for when M-n is taken
   ("M-p" . embark-previous-symbol)
   ("M-s p" . embark-previous-symbol) ; for when M-p is taken
-  (:map minibuffer-local-completion-map
-        ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
   (:map embark-collect-mode-map
@@ -550,8 +548,6 @@ default."
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
                        embark-candidate-collectors))
-  (dolist (type '(symbol t))
-    (setf (alist-get type embark-collect-initial-view-alist) 'grid))
   (setq display-buffer-alist
         (append
          '(("\\`\\*Embark Collect Completions\\*" nil
