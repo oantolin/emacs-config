@@ -771,7 +771,8 @@ default."
    '(("\\`https?://\\(?:youtu\\.be\\|\\(?:www\\.\\)youtube\\.com\\)"
       . browse-url-default-browser)
      ("\\`https?://[^/]+zoom\\.us" . browse-url-default-browser)
-     ("https://meet\\.google\\.com" . browse-url-default-browser)))
+     ("https?://meet\\.google\\.com" . browse-url-default-browser)
+     ("https?://bluejeans\\.com" . browse-url-default-browser)))
   :config
   (advice-add 'browse-url-generic :override 'browse-url-default-browser))
 
