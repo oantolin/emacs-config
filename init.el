@@ -1182,7 +1182,7 @@ if `org-store-link' is called from the #+TITLE line."
   :after message
   :bind
   (:map message-mode-map
-        ("C-c t f" . toggle-from-address))
+        ("C-c t f" . cycle-from-address))
   :commands set-smtp-server
   :hook
   (message-send . set-smtp-server)

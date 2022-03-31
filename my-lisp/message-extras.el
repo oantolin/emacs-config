@@ -8,8 +8,8 @@
 ;; server. I set mine in a private configuration package.
 (defvar all-user-mail-addresses)
 
-(defun toggle-from-address ()
-  "Toggle between my email addresses."
+(defun cycle-from-address ()
+  "Cycle between my email addresses."
   (interactive)
   (save-excursion
     (let ((from (cadr
