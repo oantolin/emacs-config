@@ -17,8 +17,8 @@
                   (message-field-value "From"))))
           (emails (mapcar #'car all-user-mail-addresses)))
       (message-goto-from)
-      (zap-up-to-char -1 ?:)
-      (insert " "
+      (delete-region (point) (search-backward ":"))
+      (insert ": "
               (message-make-from
                user-full-name
                (elt emails (mod (1+ (seq-position emails from))
