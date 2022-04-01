@@ -8,8 +8,8 @@
 ;; server. I set mine in a private configuration package.
 (defvar all-user-mail-addresses)
 
-(defun toggle-from-address ()
-  "Toggle between my email addresses."
+(defun cycle-from-address ()
+  "Cycle between my email addresses."
   (interactive)
   (save-excursion
     (let ((from (cadr
@@ -17,8 +17,8 @@
                   (message-field-value "From"))))
           (emails (mapcar #'car all-user-mail-addresses)))
       (message-goto-from)
-      (zap-up-to-char -1 ?:)
-      (insert " "
+      (delete-region (point) (search-backward ":"))
+      (insert ": "
               (message-make-from
                user-full-name
                (elt emails (mod (1+ (seq-position emails from))

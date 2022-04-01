@@ -19,8 +19,13 @@ Intended to be used as advice for `consult-history'."
     (message "Copied: %s" commit)))
 
 (defun vc-git-commit (message)
-  "Run git commit -m MESSAGE."
-  (interactive "sCommit message: ")
+  "Run git commit -m MESSAGE.
+Interactively MESSAGE is just \"Merge resolving conflicts\", but
+with a prefix argument you are prompted for a message."
+  (interactive
+   (list (if current-prefix-arg
+             (read-from-minibuffer "Commit message: " "Merge")
+           "Merge resolving conflicts")))
   (vc-git-command nil 0 nil "commit" "-m" message))
 
 (provide 'vc-extras)

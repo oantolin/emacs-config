@@ -506,8 +506,6 @@
   ("M-s n" . embark-next-symbol) ; for when M-n is taken
   ("M-p" . embark-previous-symbol)
   ("M-s p" . embark-previous-symbol) ; for when M-p is taken
-  (:map minibuffer-local-completion-map
-        ("M-q" . embark-collect-toggle-view))
   (:map completion-list-mode-map
         (";" . embark-act))
   (:map embark-collect-mode-map
@@ -550,8 +548,6 @@ default."
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
                        embark-candidate-collectors))
-  (dolist (type '(symbol t))
-    (setf (alist-get type embark-collect-initial-view-alist) 'grid))
   (setq display-buffer-alist
         (append
          '(("\\`\\*Embark Collect Completions\\*" nil
@@ -775,7 +771,8 @@ default."
    '(("\\`https?://\\(?:youtu\\.be\\|\\(?:www\\.\\)youtube\\.com\\)"
       . browse-url-default-browser)
      ("\\`https?://[^/]+zoom\\.us" . browse-url-default-browser)
-     ("https://meet\\.google\\.com" . browse-url-default-browser)))
+     ("https?://meet\\.google\\.com" . browse-url-default-browser)
+     ("https?://bluejeans\\.com" . browse-url-default-browser)))
   :config
   (advice-add 'browse-url-generic :override 'browse-url-default-browser))
 
@@ -1030,7 +1027,8 @@ default."
   (("C-c c" . org-capture)
    ("C-c a" . org-agenda)
    ("C-c s" . org-store-link)
-   ("C-c C" . org-clock-goto))
+   ("C-c C" . org-clock-goto)
+   ("C-c o" . org-open-at-point-global))
   (:map org-mode-map
         ("C-,") ; I use this for embark-dwim
         ("C-c C-'" . org-cycle-agenda-files) 
@@ -1184,7 +1182,7 @@ if `org-store-link' is called from the #+TITLE line."
   :after message
   :bind
   (:map message-mode-map
-        ("C-c t f" . toggle-from-address))
+        ("C-c t f" . cycle-from-address))
   :commands set-smtp-server
   :hook
   (message-send . set-smtp-server)
@@ -1284,6 +1282,8 @@ if `org-store-link' is called from the #+TITLE line."
             (json-false false-object)
             (json-key-type nil))
         (json-read-from-string string)))))
+
+(use-package osm-ol :after org :demand t)
 
 ;;; major modes
 
