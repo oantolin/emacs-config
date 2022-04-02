@@ -1225,16 +1225,6 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package embark-pocket-reader :after (pocket-reader embark))
 
-(use-package calc
-  :bind
-  (:map calc-mode-map
-        ("C-?" . calc-all-bindings))
-  :config
-  (defun calc-all-bindings ()
-    "Prompt for and run a Calc command."
-    (interactive)
-    (embark-bindings-in-keymap calc-mode-map)))
-
 (use-package elfeed
   :ensure t
   :bind
