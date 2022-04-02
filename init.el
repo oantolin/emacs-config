@@ -800,6 +800,14 @@ default."
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
   (modify-syntax-entry ?\” ")“" eww-mode-syntax-table))
 
+(use-package eww-heading
+  :after eww
+  :bind (:map eww-mode-map
+              ("C-c C-n" . eww-heading-next)
+              ("C-c C-p" . eww-heading-previous))
+  :hook
+  (eww-mode . eww-heading-setup-imenu))
+
 (use-package latex
   :ensure auctex
   :bind
