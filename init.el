@@ -786,6 +786,12 @@ default."
   (shr-max-image-proportion 0.7)
   (shr-image-animate nil))
 
+(use-package shr-heading
+  :commands
+  shr-heading-setup-imenu
+  shr-heading-next
+  shr-heading-previous)
+
 (autoload 'pocket-reader-eww-add-page "pocket-reader-extras")
 
 (use-package eww
@@ -793,20 +799,16 @@ default."
   (:map eww-mode-map
         ("P" . pocket-reader-eww-add-page)
         ("{" . backward-paragraph)
-        ("}" . forward-paragraph))
+        ("}" . forward-paragraph)
+        ("C-c C-p" . shr-heading-previous)
+        ("C-c C-n" . shr-heading-next))
   :custom
   (eww-bookmarks-directory "~/.private/")
+  :hook
+  (eww-mode . shr-heading-setup-imenu)
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
   (modify-syntax-entry ?\” ")“" eww-mode-syntax-table))
-
-(use-package eww-heading
-  :after eww
-  :bind (:map eww-mode-map
-              ("C-c C-n" . eww-heading-next)
-              ("C-c C-p" . eww-heading-previous))
-  :hook
-  (eww-mode . eww-heading-setup-imenu))
 
 (use-package latex
   :ensure auctex
@@ -1242,9 +1244,12 @@ if `org-store-link' is called from the #+TITLE line."
         ("w" . elfeed-show-yank)
         ("S-SPC" . scroll-down-command)
         ("{" . backward-paragraph)
-        ("}" . forward-paragraph))
+        ("}" . forward-paragraph)
+        ("C-c C-p" . shr-heading-previous)
+        ("C-c C-n" . shr-heading-next))
   :hook
-  (elfeed-show-mode . visual-line-mode))
+  (elfeed-show-mode . visual-line-mode)
+  (elfeed-show-mode . shr-heading-setup-imenu))
 
 (use-package elfeed-extras
   :after elfeed

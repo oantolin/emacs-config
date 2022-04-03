@@ -1,6 +1,6 @@
-;;; eww-heading.el --- Navigation by heading   -*- lexical-binding: t; -*-
+;;; shr-heading.el --- Navigation by heading   -*- lexical-binding: t; -*-
 
-(defun eww-heading-next (&optional arg)
+(defun shr-heading-next (&optional arg)
   "Move forward by ARG headings (any h1-h4).
 If ARG is negative move backwards, ARG defaults to 1."
   (interactive "p")
@@ -22,21 +22,22 @@ If ARG is negative move backwards, ARG defaults to 1."
     (beginning-of-line)
     (point)))
 
-(defun eww-heading-previous (&optional arg)
+(defun shr-heading-previous (&optional arg)
   "Move backward by ARG headings (any h1-h4).
 If ARG is negative move forwards instead, ARG defaults to 1."
   (interactive "p")
-  (eww-heading-next (- (or arg 1))))
+  (shr-heading-next (- (or arg 1))))
 
-(defun eww-heading--line-at-point ()
+(defun shr-heading--line-at-point ()
   "Return the current line."
   (buffer-substring (line-beginning-position) (line-end-position)))
 
-(defun eww-heading-setup-imenu ()
+(defun shr-heading-setup-imenu ()
   "Setup imenu for h1-h4 headings in eww buffer.
-Add this function to `eww-mode-hook'."
+Add this function to appropriate major mode hooks such as
+`eww-mode-hook' or `elfeed-show-mode-hook'."
   (setq-local
-   imenu-prev-index-position-function #'eww-heading-previous
-   imenu-extract-index-name-function  #'eww-heading--line-at-point))
+   imenu-prev-index-position-function #'shr-heading-previous
+   imenu-extract-index-name-function  #'shr-heading--line-at-point))
 
-(provide 'eww-heading)
+(provide 'shr-heading)
