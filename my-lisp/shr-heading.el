@@ -8,13 +8,14 @@ If ARG is negative move backwards, ARG defaults to 1."
   (catch 'return
     (dotimes (_ (abs arg))
       (when (> arg 0) (end-of-line))
-      (if-let ((match (funcall (if (> arg 0)
-                                   #'text-property-search-forward
-                                 #'text-property-search-backward)
-                               'face '(shr-h1 shr-h2 shr-h3 shr-h4)
-                               (lambda (tags face)
-                                 (cl-loop for x in (ensure-list face)
-                                          thereis (memq x tags))))))
+      (if-let ((match
+                (funcall (if (> arg 0)
+                             #'text-property-search-forward
+                           #'text-property-search-backward)
+                         'face '(shr-h1 shr-h2 shr-h3 shr-h4)
+                         (lambda (tags face)
+                           (cl-loop for x in (if (consp face) face (list face))
+                                    thereis (memq x tags))))))
           (goto-char
            (if (> arg 0) (prop-match-beginning match) (prop-match-end match)))
         (throw 'return nil))
