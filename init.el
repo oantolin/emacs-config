@@ -924,6 +924,7 @@ default."
         ("e" . dired-open-externally))
   :custom
   (dired-dwim-target t)
+  (dired-listing-switches "-alGh")
   :hook
   (dired-mode . force-truncate-lines)
   (dired-mode . dired-hide-details-mode)
