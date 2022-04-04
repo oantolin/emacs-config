@@ -35,10 +35,4 @@ Saves to a temp file and puts the filename in the kill ring."
     (kill-new filename)
     (message filename)))
 
-(defun fit-window-to-buffer-max-40% (&optional window)
-  "Resize current window to fit buffer or 40% of the frame height."
-  (fit-window-to-buffer
-   (or window (get-buffer-window (current-buffer)))
-   (floor (* 0.4 (frame-height))) 1))
-
 (provide 'window-extras)

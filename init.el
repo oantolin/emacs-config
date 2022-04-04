@@ -322,11 +322,7 @@
         ("F" . consult-focus-lines)
         ("s" . isearch-forward))
   :init
-  (change-completion-ui ?v)
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Completions\\*\\'" nil
-                 (window-parameters (mode-line-format . none))
-                 (window-height . fit-window-to-buffer-max-40%))))
+  (change-completion-ui ?v))
 
 (use-package window-extras
   :bind
@@ -525,13 +521,6 @@ default."
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
                        embark-candidate-collectors))
-  (setq display-buffer-alist
-        (append
-         '(("\\`\\*Embark Collect Completions\\*" nil
-            (window-parameters (mode-line-format . none)))
-           ("\\`\\*Embark Collect" nil
-            (window-height . fit-window-to-buffer-max-40%)))
-         display-buffer-alist))
   (dolist (cmd '(comment-dwim
                  insert-parentheses
                  markdown-insert-code
