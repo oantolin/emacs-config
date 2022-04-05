@@ -654,8 +654,6 @@ default."
   :ensure t
   :diminish beginend-global-mode
   :config
-  (beginend-define-mode elfeed-search-mode
-    (progn) (progn (forward-line -1)))
   (dolist (mode beginend-modes) (diminish (cdr mode)))
   (beginend-global-mode))
 
