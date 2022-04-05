@@ -3,10 +3,9 @@
 (defun command-of-the-day ()
   "Show the documentation for a random command."
   (interactive)
-  (let* ((commands (cl-loop for s being the symbols
-                            when (commandp s) collect s))
-         (command (nth (random (length commands)) commands)))
-    (describe-function command)))
+  (let (commands)
+    (mapatoms (lambda (s) (when (commandp s) (push s commands))))
+    (describe-function (nth (random (length commands)) commands))))
 
 (defalias 'cotd #'command-of-the-day)
 
