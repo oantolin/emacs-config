@@ -12,9 +12,10 @@
            "_."
            (lambda (x)
              (propertize (substring x 1) 'face '(:foreground "purple")))
-           (concat "_default, _icomplete, _vertico, _selectrum or iv_y? "))
-          '(?d ?i ?s ?v ?y))))
+           "_default, _mct, _icomplete, _vertico, _selectrum or iv_y? ")
+          '(?d ?m ?i ?s ?v ?y))))
   ;; turn off all completion UIs
+  (mct-minibuffer-mode -1)
   (icomplete-mode -1)
   (selectrum-mode -1)
   (ivy-mode -1)
@@ -30,6 +31,7 @@
                  :around #'automatic-completions)
      (advice-add #'embark-completing-read-prompter
                  :around #'automatic-completions))
+    (?m (mct-minibuffer-mode))
     (?i (icomplete-mode))
     (?s (selectrum-mode))
     (?v (vertico-mode))

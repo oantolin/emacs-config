@@ -64,7 +64,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "vertico" "vertico/extensions"))
+(dolist (dir '("embark" "placeholder" "math-delimiters" "vertico" "vertico/extensions"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -291,7 +291,7 @@
 (use-package math-delimiters
   :bind
   (:map toggle-map
-        ("m" . math-delimiters-toggle))
+        ("$" . math-delimiters-toggle))
   :commands
   math-delimiters-no-dollars
   math-delimiters-insert)
@@ -322,7 +322,7 @@
         ("F" . consult-focus-lines)
         ("s" . isearch-forward))
   :init
-  (change-completion-ui ?v))
+  (change-completion-ui ?m))
 
 (use-package window-extras
   :bind
@@ -430,6 +430,13 @@
   (defvar minibuffer--require-match nil)
   :config
   (vertico-multiform-mode))
+
+(use-package mct
+  :ensure t
+  :custom
+  (mct-hide-completion-mode-line t)
+  (mct-live-update-delay 0.1)
+  (mct-completion-passlist '(embark-keybinding)))
 
 (use-package selectrum
   :ensure t
@@ -1091,7 +1098,11 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package org-config :after org) ; private package
 
-(use-package org-modern :ensure t :defer t)
+(use-package org-modern
+  :ensure t
+  :bind
+  (:map toggle-map
+        ("m" . org-modern-mode)))
 
 (use-package citeproc :ensure t :defer t)
 
@@ -1126,13 +1137,13 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package gnus
   :bind
-  ("C-c g" . gnus))
-
-(use-package gnus-sum
-  :bind
+  ("C-c g" . gnus)
   (:map gnus-summary-mode-map
         ("M-i") ; I use this for avy-goto-char-timer
-        ("M-a" . gnus-symbolic-argument)))
+        ("M-a" . gnus-symbolic-argument))
+  (:map gnus-article-mode-map
+        ("{" . backward-paragraph)
+        ("}" . forward-paragraph)))
 
 (use-package ecomplete
   :defer t
