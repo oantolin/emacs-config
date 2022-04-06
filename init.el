@@ -328,8 +328,7 @@
   :bind
   (:map ctl-x-4-map
         ("s" . toggle-window-split)
-        ("t" . transpose-windows))
-  :commands fit-window-to-buffer-max-40%)
+        ("t" . transpose-windows)))
 
 (use-package minibuffer
   :bind
@@ -337,7 +336,7 @@
         ("M-RET" . exit-minibuffer))
   (:map minibuffer-local-completion-map
         ("<backtab>" . minibuffer-force-complete)
-        ("SPC"))
+        ("SPC") ("?"))
   :custom
   (completion-styles '(orderless))
   (completion-category-defaults nil)
@@ -506,8 +505,6 @@
   (:map embark-url-map
         ("x" . browse-url-default-browser)
         ("p" . pocket-lib-add-urls))
-  :hook
-  (embark-collect-post-revert . fit-window-to-buffer-max-40%)
   :custom
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
