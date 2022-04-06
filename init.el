@@ -391,7 +391,8 @@
   (orderless-matching-styles 'orderless-regexp)
   (orderless-style-dispatchers
    '(dispatch:literal dispatch:regexp dispatch:without-literal
-     dispatch:initialism dispatch:flex dispatch:prefixes)))
+     dispatch:initialism dispatch:flex dispatch:prefixes))
+  (orderless-component-separator #'orderless-escapable-split-on-space))
 
 (use-package icomplete
   :bind (:map icomplete-minibuffer-map
