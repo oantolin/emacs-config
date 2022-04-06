@@ -172,7 +172,10 @@
            :prefix-docstring "Keymap for commands that deal with time."
            ("w" . world-clock)
            ("t" . display-time-mode)
-           ("c" . calendar))
+           ("c" . calendar)
+           ("o" . org-timer-set-timer)
+           ("p" . org-timer-pause-or-continue)
+           ("s" . org-timer-stop))
 
 ;;; packages
 
