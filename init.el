@@ -115,11 +115,10 @@
  '(debugger-stack-frame-as-list t)
  '(split-width-threshold 140)
  '(y-or-n-p-use-read-key t)
+ '(use-short-answers)
  '(async-shell-command-display-buffer nil)
  '(revert-without-query '(""))
  '(recenter-positions '(top middle bottom)))
-
-(defalias 'yes-or-no-p #'y-or-n-p)
 
 (bind-keys
  ("C-d" . delete-forward-char)
