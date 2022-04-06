@@ -157,23 +157,22 @@
   ;; Alt+backspace sends <delete> on the Chromebook...
   (bind-key "<delete>" #'backward-kill-word))
 
-(bind-keys
- :prefix "C-c t"
- :prefix-map toggle-map
- :prefix-docstring "Keymap for commands that toggle various settings."
- ("c" . column-number-mode)
- ("d" . toggle-debug-on-error)
- ("t" . toggle-truncate-lines)
- ("s" . whitespace-mode)
- ("v" . variable-pitch-mode)
- ("i" . visible-mode))
+(bind-keys :prefix-map toggle-map
+           :prefix "C-c t"
+           :prefix-docstring "Keymap for commands that toggle settings."
+           ("c" . column-number-mode)
+           ("d" . toggle-debug-on-error)
+           ("t" . toggle-truncate-lines)
+           ("s" . whitespace-mode)
+           ("v" . variable-pitch-mode)
+           ("i" . visible-mode))
 
-(bind-keys
- :prefix "C-c T"
- :prefix-map time-map
- ("w" . world-clock)
- ("t" . display-time-mode)
- ("c" . calendar))
+(bind-keys :prefix-map time-map
+           :prefix "C-c T"
+           :prefix-docstring "Keymap for commands that deal with time."
+           ("w" . world-clock)
+           ("t" . display-time-mode)
+           ("c" . calendar))
 
 ;;; packages
 
