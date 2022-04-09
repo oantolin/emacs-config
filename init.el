@@ -115,7 +115,7 @@
  '(debugger-stack-frame-as-list t)
  '(split-width-threshold 140)
  '(y-or-n-p-use-read-key t)
- '(use-short-answers)
+ '(use-short-answers t)
  '(async-shell-command-display-buffer nil)
  '(revert-without-query '(""))
  '(recenter-positions '(top middle bottom)))
