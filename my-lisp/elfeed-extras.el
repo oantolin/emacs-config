@@ -41,4 +41,17 @@
              (pdf (format "https://arxiv.org/pdf/%s.pdf" (match-string 1 url))))
     (elfeed-extras--browse pdf generic)))
 
+(defun elfeed-extras-youtube ()
+  "Browse first embedded YouTube link in an external browser."
+  (interactive)
+  (when-let ((entry (elfeed-extras--entry)))
+    (url-retrieve
+     (elfeed-entry-link entry)
+     (lambda (_)
+       (when (re-search-forward
+              "https://www\\.youtube\\.com/embed/\\([A-Za-z0-9_-]+\\)" nil t)
+         (browse-url-generic
+          (concat "https://www.youtube.com/watch?v=" (match-string 1)))))
+     nil t t)))
+
 (provide 'elfeed-extras)

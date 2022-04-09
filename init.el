@@ -1234,11 +1234,13 @@ if `org-store-link' is called from the #+TITLE line."
   (:map elfeed-search-mode-map
         ("C" . elfeed-extras-comments)
         ("l" . elfeed-extras-link)
-        ("v" . elfeed-extras-arxiv-pdf))
+        ("v" . elfeed-extras-arxiv-pdf)
+        ("y" . elfeed-extras-youtube))
   (:map elfeed-show-mode-map
         ("C" . elfeed-extras-comments)
         ("l" . elfeed-extras-link)
-        ("v" . elfeed-extras-arxiv-pdf)))
+        ("v" . elfeed-extras-arxiv-pdf)
+        ("y" . elfeed-extras-youtube)))
 
 (use-package embark-elfeed :after (elfeed embark))
 
