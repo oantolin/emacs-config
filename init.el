@@ -406,7 +406,7 @@
   :ensure t
   :bind
   (:map vertico-map
-        ("C-<backspace>" . vertico-directory-up)
+        ("DEL" . vertico-directory-delete-char)
         ("M-." . consult-dir)
         ("M-j" . consult-dir-jump-file)
         ("M-q" . vertico-multiform-grid)
