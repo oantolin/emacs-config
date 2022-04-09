@@ -333,8 +333,6 @@
 
 (use-package minibuffer
   :bind
-  (:map minibuffer-local-map
-        ("M-RET" . exit-minibuffer))
   (:map minibuffer-local-completion-map
         ("<backtab>" . minibuffer-force-complete)
         ("SPC") ("?"))
@@ -358,16 +356,6 @@
     (let ((inhibit-modification-hooks t))
       (apply fn args)))
   (advice-add 'minibuf-eldef-setup-minibuffer :around #'stealthily))
-
-(use-package minibuffer-extras
-  :bind
-  (:map minibuffer-local-completion-map
-        ("RET" . exit-with-top-completion))
-  (:map minibuffer-local-must-match-map
-        ("RET" . exit-with-top-completion))
-  (:map minibuffer-local-filename-completion-map
-        ("RET" . exit-with-top-completion)
-        ("<C-backspace>" . up-directory)))
 
 (use-package orderless
   :ensure t
@@ -418,7 +406,7 @@
   :ensure t
   :bind
   (:map vertico-map
-        ("<C-backspace>" . up-directory)
+        ("C-<backspace>" . vertico-directory-up)
         ("M-." . consult-dir)
         ("M-j" . consult-dir-jump-file)
         ("M-q" . vertico-multiform-grid)
