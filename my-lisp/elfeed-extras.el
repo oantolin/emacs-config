@@ -48,10 +48,11 @@
     (url-retrieve
      (elfeed-entry-link entry)
      (lambda (_)
-       (when (re-search-forward
-              "https://www\\.youtube\\.com/embed/\\([A-Za-z0-9_-]+\\)" nil t)
-         (browse-url-generic
-          (concat "https://www.youtube.com/watch?v=" (match-string 1)))))
+       (if (re-search-forward
+            "https://www\\.youtube\\.com/embed/\\([A-Za-z0-9_-]+\\)" nil t)
+           (browse-url-generic
+            (concat "https://www.youtube.com/watch?v=" (match-string 1)))
+         (user-error "No YouTube link found")))
      nil t t)))
 
 (provide 'elfeed-extras)
