@@ -157,7 +157,7 @@
   (bind-key "<delete>" #'backward-kill-word))
 
 (bind-keys :prefix-map toggle-map
-           :prefix "C-c t"
+           :prefix "C-c x"
            :prefix-docstring "Keymap for commands that toggle settings."
            ("c" . column-number-mode)
            ("d" . toggle-debug-on-error)
@@ -167,7 +167,7 @@
            ("i" . visible-mode))
 
 (bind-keys :prefix-map time-map
-           :prefix "C-c T"
+           :prefix "C-c t"
            :prefix-docstring "Keymap for commands that deal with time."
            ("w" . world-clock)
            ("t" . display-time-mode)
@@ -181,7 +181,7 @@
 (use-package modus-themes
   :ensure t
   :bind
-  ("C-c t b" . modus-themes-toggle)
+  ("C-c x b" . modus-themes-toggle)
   :custom
   (modus-themes-italic-constructs t)
   (modus-themes-bold-constructs t)
@@ -721,7 +721,7 @@ default."
 (use-package olivetti
   :ensure t
   :bind
-  ("C-c t o" . olivetti-mode))
+  ("C-c x o" . olivetti-mode))
 
 (use-package browse-url
   :defer t
@@ -1147,7 +1147,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package message
   :bind (:map message-mode-map
-              ("<C-tab>" . expand-mail-aliases))
+              ("C-<tab>" . expand-mail-aliases))
   :custom
   (message-signature nil)
   (message-mail-alias-type 'ecomplete)
@@ -1163,7 +1163,7 @@ if `org-store-link' is called from the #+TITLE line."
   :after message
   :bind
   (:map message-mode-map
-        ("C-c t f" . cycle-from-address))
+        ("C-c x f" . cycle-from-address))
   :commands set-smtp-server
   :hook
   (message-send . set-smtp-server)
