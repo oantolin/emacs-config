@@ -1124,13 +1124,19 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package gnus
   :bind
-  ("C-c g" . gnus)
-  (:map gnus-summary-mode-map
-        ("M-i") ; I use this for avy-goto-char-timer
-        ("M-a" . gnus-symbolic-argument))
+  ("C-c g" . gnus))
+
+(use-package gnus-art
+  :bind
   (:map gnus-article-mode-map
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)))
+
+(use-package gnus-sum
+  :bind
+  (:map gnus-summary-mode-map
+        ("M-i") ; I use this for avy-goto-char-timer
+        ("M-a" . gnus-symbolic-argument)))
 
 (use-package ecomplete
   :defer t
