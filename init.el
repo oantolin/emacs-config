@@ -589,7 +589,8 @@ default."
   (register-preview-function #'consult-register-format)
   (consult-narrow-key "<")
   :hook
-  ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
+  ((embark-collect-mode completion-list-mode)
+   . consult-preview-at-point-mode)
   (minibuffer-setup . choose-completion-in-region)
   :config
   (defun choose-completion-in-region ()
@@ -602,6 +603,13 @@ default."
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring))
+
+(use-package consult-imenu
+  :config
+  (setf
+   (alist-get
+    ?k (plist-get (alist-get 'emacs-lisp-mode consult-imenu-config) :types))
+   '("Embark Keymaps" font-lock-variable-name-face)))
 
 (use-package webjump
   :bind
