@@ -1269,7 +1269,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package osm-ol :after org :demand t)
 
-;;; major modes
+;;; major modes for programming languages
 
 (use-package elisp-mode
   :custom
@@ -1336,23 +1336,25 @@ everything else, it uses `lisp-indent-function'."
   :mode ("\\.ci\\'" . cicio-mode)
   :commands run-cicio)
 
-(use-package lua-mode
-  :ensure t
-  :defer t
-  :custom
-  (lua-indent-level 2)
-  (lua-default-application "luajit"))
+(when (or (executable-find "lua") (executable-find "luajit"))
+  (use-package lua-mode
+    :ensure t
+    :defer t
+    :custom
+    (lua-indent-level 2)
+    (lua-default-application "luajit")))
 
-(use-package julia-mode
-  :ensure t
-  :defer t
-  :config
-  (defun run-julia ()
-    "Just run julia in a term buffer."
-    (interactive)
-    (switch-to-buffer (make-term "julia" "julia"))
-    (term-mode)
-    (term-char-mode)))
+(when (executable-find "julia")
+  (use-package julia-mode
+    :ensure t
+    :defer t
+    :config
+    (defun run-julia ()
+      "Just run julia in a term buffer."
+      (interactive)
+      (switch-to-buffer (make-term "julia" "julia"))
+      (term-mode)
+      (term-char-mode))))
 
 (when (executable-find "sage")
   (defun sage-notebook ()
@@ -1362,3 +1364,6 @@ the Sage kernel, useful to shut it down, for example."
     (bury-buffer
      (process-buffer
       (start-process "sage-notebook" "*sage*" "sage" "--notebook=jupyter")))))
+
+(when (executable-find "ijconsole")
+  (use-package j-mode :ensure t :defer t))
