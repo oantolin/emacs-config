@@ -594,8 +594,8 @@ default."
   (minibuffer-setup . choose-completion-in-region)
   :config
   (defun choose-completion-in-region ()
-    "Use default `completion--in-region' unless we are in `eval-expression'."
-    (unless (eq this-command 'eval-expression)
+    "Use default `completion--in-region' unless we are not completing."
+    (when minibuffer-completion-table
       (setq-local completion-in-region-function #'completion--in-region)))
   (when (eq (window-system) 'w32)
     (setq consult-find-args
