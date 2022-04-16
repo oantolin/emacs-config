@@ -78,7 +78,7 @@
   (interactive)
   (goto-char (point-max))
   (if (boundp 'cicio-source-buffer)
-      (let ((file (buffer-file-name cicio-source-buffer)))                   
+      (let ((file (buffer-file-name cicio-source-buffer)))
         (comint-send-string "*cicio*"
          (format "(runfile \"%s\")(io.write \";; loaded %s\")nil\n"
                  file (file-name-nondirectory file))))
