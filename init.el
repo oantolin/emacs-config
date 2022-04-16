@@ -249,7 +249,6 @@
   ("M-L" . mark-line)
   ("M-C" . mark-char)
   ("M-@" . mark-my-word)
-  ("C-c A" . align-matches)
   ("M-g r" . goto-random-line)
   ("M-g M-r" . goto-random-line)
   ("C-M--" . kill-inside-sexp)
@@ -1375,3 +1374,5 @@ the Sage kernel, useful to shut it down, for example."
     (defun turn-off-electric-pair-local-mode ()
       (electric-pair-local-mode -1))))
 
+(when (executable-find "janet")
+  (use-package janet-mode :ensure t :defer t))

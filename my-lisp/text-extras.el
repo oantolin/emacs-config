@@ -37,14 +37,6 @@ argument, copy the rest of the line."
       (backward-word))
     (kill-word 1)))
 
-(defun align-matches (arg start end regexp)
-  "Align matches of the given regular expression.
-
-By default align all matches, with universal prefix align only first match."
-  (interactive "P\nr\nsAlign regexp: ")
-  (align-regexp start end (concat "\\(\\s-*\\)" regexp) 1 1
-                (not (equal arg '(4)))))
-
 (defun goto-random-line ()
   "Goto a random line in the buffer."
   (interactive)
