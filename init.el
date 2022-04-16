@@ -338,6 +338,7 @@
   :custom
   (completion-styles '(orderless))
   (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles basic partial-completion))))
   (read-file-name-completion-ignore-case t)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
