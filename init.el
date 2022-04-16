@@ -1365,15 +1365,5 @@ the Sage kernel, useful to shut it down, for example."
      (process-buffer
       (start-process "sage-notebook" "*sage*" "sage" "--notebook=jupyter")))))
 
-(when (executable-find "ijconsole")
-  (use-package j-mode
-    :ensure t
-    :defer t
-    :hook
-    ((j-mode inferior-j-mode) . turn-off-electric-pair-local-mode)
-    :config
-    (defun turn-off-electric-pair-local-mode ()
-      (electric-pair-local-mode -1))))
-
 (when (executable-find "janet")
   (use-package janet-mode :ensure t :defer t))
