@@ -1332,9 +1332,7 @@ everything else, it uses `lisp-indent-function'."
 
 (use-package clojure-mode :ensure t :defer t)
 
-(use-package cicio-mode
-  :mode ("\\.ci\\'" . cicio-mode)
-  :commands run-cicio)
+(use-package cicio-mode :mode "\\.ci\\'" :commands run-cicio)
 
 (when (or (executable-find "lua") (executable-find "luajit"))
   (use-package lua-mode
@@ -1367,3 +1365,5 @@ the Sage kernel, useful to shut it down, for example."
 
 (when (executable-find "janet")
   (use-package janet-mode :ensure t :defer t))
+
+(use-package j-mode :mode "\\.ijs\\'" :commands run-j j-mode)
