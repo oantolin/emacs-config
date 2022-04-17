@@ -3,7 +3,8 @@
 (defgroup j-mode nil "Major mode for J programs"
   :group 'languages)
 
-(defcustom j-mode-interpreter "ijconsole"
+(defcustom j-mode-interpreter
+  (or (executable-find "jconsole") (executable-find "ijconsole"))
   "Name of J interpreter"
   :type 'string)
 
