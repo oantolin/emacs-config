@@ -47,14 +47,22 @@
       (comint-send-string "*J*" (format "load '%s'\n" file))
     (user-error "No associated source buffer")))
 
-(defun j-mode-eval ()
-  "Send active region or current line to inferior J process."
-  (interactive)
+(defun j-mode-eval (arg)
+  "Evaluate some portion of the buffer in inferior J process.
+If the region is active, evaluate that.  With no active region
+evaluate the current paragraph by default, or the current line
+with one universal argument, or the entire buffer with two."
+  (interactive "P")
   (save-excursion (run-j))
   (apply #'comint-send-region "*J*"
-         (if (use-region-p)
-             (list (region-beginning) (region-end))
-           (list (line-beginning-position) (line-end-position))))
+         (cond
+          ((use-region-p) (list (region-beginning) (region-end)))
+          ((equal arg '(4))
+           (list (line-beginning-position) (line-end-position)))
+          ((equal arg '(16)) (list (point-min) (point-max)))
+          (t (save-excursion
+               (list (progn (backward-paragraph) (point))
+                     (progn (forward-paragraph)  (point)))))))
   (with-current-buffer "*J*" (comint-send-input)))
 
 (defun run-j ()
