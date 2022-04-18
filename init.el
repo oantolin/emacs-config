@@ -142,7 +142,7 @@
  ("C-M-o" . up-list)
  ("C-o" . split-line)
  ((if (string= (system-name) "penguin") "<C-delete>" "<C-M-backspace>") .
-  ;; Alt+backspace sends <delete> on the Chromebook...  
+  ;; Alt+backspace sends <delete> on the Chromebook...
   kill-backward-up-list)
  ("M-R" . raise-sexp)
  ("M-E" . mark-end-of-sentence)
@@ -275,7 +275,7 @@
 (use-package topaz-paste
   :commands topaz-paste-region topaz-paste-buffer)
 
-(use-package isearch-extras 
+(use-package isearch-extras
   :custom
   (search-whitespace-regexp ".*?")
   (isearch-allow-scroll t)
@@ -388,19 +388,14 @@
               ("RET" . icomplete-force-complete-and-exit)
               ("<down>" . icomplete-forward-completions)
               ("C-n" . icomplete-forward-completions)
-	      ("<up>" . icomplete-backward-completions)
-	      ("C-p" . icomplete-backward-completions)
+              ("<up>" . icomplete-backward-completions)
+              ("C-p" . icomplete-backward-completions)
               ("C-M-i" . minibuffer-complete))
   :custom
   (icomplete-show-matches-on-no-input t)
   (icomplete-prospects-height 1)
   (icomplete-separator " ⋮ ")
   (icomplete-hide-common-prefix nil))
-
-(use-package icomplete-vertical
-  :ensure t
-  :bind (:map icomplete-minibuffer-map
-              ("C-v" . icomplete-vertical-toggle)))
 
 (use-package vertico
   :ensure t
@@ -690,7 +685,7 @@ default."
 (use-package paren :init (show-paren-mode))
 
 (use-package text-mode
-  :hook 
+  :hook
   (text-mode . turn-on-visual-line-mode)
   (text-mode . variable-pitch-mode)
   :config
@@ -1010,7 +1005,7 @@ default."
    ("C-c o" . org-open-at-point-global))
   (:map org-mode-map
         ("C-,") ; I use this for embark-dwim
-        ("C-c C-'" . org-cycle-agenda-files) 
+        ("C-c C-'" . org-cycle-agenda-files)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
         ("C-'" . org-emphasize))
