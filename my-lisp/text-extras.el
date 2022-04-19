@@ -85,7 +85,7 @@ times."
 
 ;;; marking things
 
-(defmacro def-thing-marker (fn-name things forward-thing &rest extra)
+(defmacro define-thing-marker (fn-name things forward-thing &rest extra)
   `(defun ,fn-name (&optional arg allow-extend)
      ,(format "Mark ARG %s starting with the current one. If ARG is negative,
 mark -ARG %s ending with the current one.
@@ -109,18 +109,45 @@ marks the next ARG %s after the ones already marked." things things things)
        (push-mark nil t t)
        (,forward-thing (- arg)))))
 
-(def-thing-marker mark-line "lines" forward-line
+(define-thing-marker mark-line "lines" forward-line
   :post (unless (= (preceding-char) ?\n)
           (setq arg (1- arg))))
 
-(def-thing-marker mark-char "characters" forward-char)
+(define-thing-marker mark-char "characters" forward-char)
 
-(def-thing-marker mark-my-word "words" forward-word
+(define-thing-marker mark-my-word "words" forward-word
   :pre (when (and (looking-at "\\>") (> arg 0))
          (forward-word -1)))
 
-(def-thing-marker mark-non-whitespace "vim WORDS"
+(define-thing-marker mark-non-whitespace "vim WORDS"
   forward-to-whitespace)
+
+;;; case change commands
+
+(defmacro define-case-changer (case)
+  "Define a CASE change command that does what I want.
+The defined command will change the case of: the region if
+active, and of the next prefix argument many words, starting with
+the word point is either on or right after (the \"or right
+after\" bit is the only difference with the built-in case-dwim
+commands)."
+  (cl-flet ((case-fn (suffix) (intern (format "%s-%s" case suffix))))
+      `(defun ,(case-fn 'dwiw) (arg)
+     ,(format "%s active region or next ARG words.
+In the non-active region case the first of the (abs ARG) words is
+the full word that point is either on or right after."
+              (upcase (symbol-name case)))
+     (interactive "*p")
+     (if (use-region-p)
+         (,(case-fn 'region) (region-beginning) (region-end)
+                            (region-noncontiguous-p))
+       (when (and (looking-at "\\>") (> arg 0))
+         (forward-word -1))
+       (,(case-fn 'word) arg)))))
+
+(define-case-changer upcase)
+(define-case-changer downcase)
+(define-case-changer capitalize)
 
 ;;; poor man's paredit
 

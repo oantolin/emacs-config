@@ -135,9 +135,6 @@
  ("C-h P" . finder-by-keyword)
  ("C-c l" . find-library)
  ([remap list-buffers] . electric-buffer-list)
- ([remap upcase-word] . upcase-dwim)
- ([remap downcase-word] . downcase-dwim)
- ([remap capitalize-word] . capitalize-dwim)
  ([remap count-words-region] . count-words)
  ("C-M-o" . up-list)
  ("C-o" . split-line)
@@ -262,6 +259,9 @@
   ("M-'" . dabbrev-next)
   ("C-M-'" . dabbrev-complete-next)
   ("C-c e" . text-to-clipboard)
+  ([remap upcase-word] . upcase-dwiw)
+  ([remap downcase-word] . downcase-dwiw)
+  ([remap capitalize-word] . capitalize-dwiw)
   :commands
   force-truncate-lines
   turn-off-visual-line-mode)
