@@ -460,7 +460,6 @@
   :ensure t
   :bind
   ("C-;" . embark-act)
-  ("C-:" . embark-act-quit)
   ("C-," . embark-dwim)
   ("C-h b" . embark-bindings)
   ("C-h B" . embark-bindings-at-point)
@@ -499,13 +498,6 @@
   (embark-cycle-key ";")
   (embark-help-key "?")
   :config
-  (defun embark-act-quit (&optional arg)
-    "Act on target then quit minibuffer.
-This is a version of `embark-act' that quits the minibuffer by
-default."
-    (interactive "P")
-    (let ((embark-quit-after-action t))
-      (embark-act arg)))
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
