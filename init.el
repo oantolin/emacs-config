@@ -75,7 +75,7 @@
 ;;; misc
 
 (when (string= (system-name) "penguin") ; Chromebook
-  (dolist (dir '("~/texlive/bin/x86_64-linux" "~/bin"))
+  (dolist (dir '("~/texlive/2022/bin/x86_64-linux" "~/bin"))
     (let ((full (expand-file-name dir)))
       (setenv "PATH" (concat full ":" (getenv "PATH")))))
   (setq exec-path (split-string (getenv "PATH") ":")))
