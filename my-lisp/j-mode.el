@@ -77,7 +77,7 @@ with one universal argument, or the entire buffer with two."
     (when buffer (setq j-mode-source-buffer buffer))))
 
 (defun j-mode-switch-to-source ()
-  "Switch to associated J mode buffer."
+  "Switch to most recently associated J mode buffer."
   (interactive)
   (if j-mode-source-buffer
       (pop-to-buffer j-mode-source-buffer)
