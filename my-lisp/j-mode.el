@@ -37,6 +37,7 @@
 (define-derived-mode inferior-j-mode comint-mode "Inferior J"
   "Major mode for interacting with an inferior J interpreter."
   ;; LOTS of unbalanced delimiters
+  (setq-local comment-start "NB. ")
   (electric-pair-local-mode -1))
 
 (defun j-mode-load-file ()
