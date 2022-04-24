@@ -143,7 +143,8 @@ the full word that point is either on or right after."
                             (region-noncontiguous-p))
        (when (and (looking-at "\\>") (> arg 0))
          (forward-word -1))
-       (,(case-fn 'word) arg)))))
+       (,(case-fn 'word) arg)
+       (forward-to-word 1)))))
 
 (define-case-changer upcase)
 (define-case-changer downcase)
