@@ -674,8 +674,6 @@
     (transpose-sexps 0))
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
-(use-package elec-pair :init (electric-pair-mode))
-
 (use-package paren :init (show-paren-mode))
 
 (use-package text-mode
