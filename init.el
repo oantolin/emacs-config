@@ -431,7 +431,6 @@
    '((horizontal :candidates-separator " ⋮ ") (vertical)))
   :bind
   (:map selectrum-minibuffer-map
-        ("<C-backspace>" . up-directory)
         ("M-." . consult-dir)
         ("M-j" . consult-dir-jump-file)))
 
