@@ -262,6 +262,7 @@
   ("M-'" . dabbrev-next)
   ("C-M-'" . dabbrev-complete-next)
   ("C-c e" . text-to-clipboard)
+  ("M-s i" . focus-lines)
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)

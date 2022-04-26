@@ -24,6 +24,21 @@ argument, copy the rest of the line."
       (goto-char p)
       (insert (buffer-substring beg (min end lim))))))
 
+(defun focus-lines (&optional regexp)
+  "Focus lines matching REGEXP or reveal all lines if REGEXP is nil or empty."
+  (interactive "sFocus on lines matching regexp: ")
+  (mapc (lambda (ov) (when (overlay-get ov 'out-of-focus) (delete-overlay ov)))
+        (overlays-in (point-min) (point-max)))
+  (when (and regexp (not (equal regexp "")))
+    (goto-char (point-min))
+    (let ((pt (point-min)))
+      (while (search-forward-regexp regexp nil t)
+        (let ((ov (make-overlay pt (line-beginning-position))))
+          (overlay-put ov 'invisible t)
+          (overlay-put ov 'out-of-focus t)
+          (setq pt (1+ (line-end-position)))
+          (forward-line 1))))))
+
 (defun duplicate-line-kill-word ()
   "Duplicate the current line and kill the word at point in the duplicate."
   (interactive)
