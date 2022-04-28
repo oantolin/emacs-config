@@ -578,6 +578,8 @@
   (completion-in-region-function #'consult-completion-in-region)
   (register-preview-function #'consult-register-format)
   (consult-narrow-key "<")
+  (xref-show-xrefs-function #'consult-xref)
+  (xref-show-definitions-function #'consult-xref)
   :hook
   ((embark-collect-mode completion-list-mode)
    . consult-preview-at-point-mode)
