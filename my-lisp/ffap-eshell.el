@@ -1,6 +1,9 @@
-;;; ffap-extras.el --- Extra rules for ffap    -*- lexical-binding: t; -*-
+;;; ffap-eshell.el --- Extra rules for ffap    -*- lexical-binding: t; -*-
 
 ;;; Improved directory guessing in eshell buffers:
+
+(require 'ffap)
+(require 'eshell)
 
 (defun guess-directory-from-face ()
   (save-excursion
@@ -25,4 +28,4 @@
 
 (setf (alist-get 'eshell-mode ffap-alist) #'ffap-eshell-mode)
 
-(provide 'ffap-extras)
+(provide 'ffap-eshell)
