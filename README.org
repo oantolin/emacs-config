@@ -27,6 +27,36 @@ separate packages. So far that is:
 - [[https://github.com/oantolin/restricto][restricto]]
 - [[https://github.com/oantolin/live-completions][live-completions]]
 
+* Tiny packages of interest that live here
+
+Of the packages I haven't published separately, I think these are
+probably the most useful:
+
+- block-undo :: make executions of keyboard macros undo in a single step!
+- eval-region-advice :: have Emacs Lisp evaluation commands like
+  =eval-last-sexp= and =eval-defun= call =eval-region= if the region is
+  active (=eval-region= does not have a key binding by default and with
+  this tiny package it doesn't need one).
+- shr-heading :: commands to move to the next and or previous heading
+  in a shr buffer (shr buffers show rendered HTML and are used by eww
+  and elfeed, for example), as well as imenu support so you can
+  instantly jump to a heading with completion.
+- ffap-eshell :: better directory guessing for file names that happen
+  to be printed out in an eshell buffer.
+- visiting-buffer :: tweak the =delete-file= and =rename-file= commands
+  (as well as their =vc-= counterparts) so that they also delete or
+  rename any open buffer visiting the file, and, in case of renaming
+  an Emacs Lisp library, also adjust the =provide= and the header line
+  if necessary.
+- ecomplete-extras :: commands to add or remove an email address from
+  ecomplete's database.
+- message-extras :: a function to keep you from sending emails without
+  a subject line or without an attachment if you mention one in the
+  email body; also, functons to manage sending email from several
+  different accounts: a command to cycle the from address among your
+  accounts, and a function to set the SMTP server to match the from
+  address.
+
 * Themes
 
 For many years I kept trying Emacs themes and always went back to the
