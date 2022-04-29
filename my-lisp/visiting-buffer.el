@@ -4,9 +4,11 @@
   "Rename buffer visiting FILE to NEWNAME.
 Intended as :after advice for `rename-file'."
   (when (called-interactively-p 'any)
-    (when-let ((buffer (get-file-buffer file)))
-      (with-current-buffer buffer
-        (set-visited-file-name newname nil t)
+    (when-let ((old (get-file-buffer file)))
+      (with-current-buffer old
+        (set-visited-file-name newname nil t)))
+    (when-let ((new (get-file-buffer newname)))
+      (with-current-buffer new
         (when (derived-mode-p 'emacs-lisp-mode)
           (save-excursion
             (let* ((base (file-name-nondirectory file))
@@ -22,6 +24,7 @@ Intended as :after advice for `rename-file'."
                 (replace-match (format "(provide '%s)" newsans))))))))))
 
 (advice-add 'rename-file :after 'visiting-buffer-rename)
+(advice-add 'vc-rename-file :after 'visiting-buffer-rename)
 
 (defun visiting-buffer-kill (file &optional _trash)
   "Kill buffer visiting FILE.
@@ -31,5 +34,6 @@ Intended as :after advice for `delete-file'."
       (kill-buffer buffer))))
 
 (advice-add 'delete-file :after 'visiting-buffer-kill)
-  
+(advice-add 'vc-delete-file :after 'visiting-buffer-kill)
+
 (provide 'visiting-buffer)
