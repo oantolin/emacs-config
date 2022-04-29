@@ -110,7 +110,6 @@
  '(kill-read-only-ok t)
  '(history-delete-duplicates t)
  '(kill-do-not-save-duplicates t)
- '(save-interprogram-paste-before-kill t)
  '(password-cache-expiry 300)
  '(debugger-stack-frame-as-list t)
  '(split-width-threshold 140)
