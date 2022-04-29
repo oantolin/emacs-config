@@ -677,6 +677,11 @@
     (transpose-sexps 0))
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
+(use-package link-hint
+  :ensure t
+  :bind
+  ("C-'" . link-hint-open-link))
+
 (use-package paren :init (show-paren-mode))
 
 (use-package text-mode
