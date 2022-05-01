@@ -325,7 +325,7 @@
         ("F" . consult-focus-lines)
         ("s" . isearch-forward))
   :init
-  (change-completion-ui ?m))
+  (change-completion-ui ?v))
 
 (use-package window-extras
   :bind
