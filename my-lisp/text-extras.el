@@ -149,17 +149,18 @@ commands)."
   (cl-flet ((case-fn (suffix) (intern (format "%s-%s" case suffix))))
       `(defun ,(case-fn 'dwiw) (arg)
      ,(format "%s active region or next ARG words.
-In the non-active region case the first of the (abs ARG) words is
-the full word that point is either on or right after."
-              (upcase (symbol-name case)))
+If called without a prefix argument and no active region with
+point at the end of a word, then %s the previous word.  This is
+the only difference between this command and %s-dwim."
+              (capitalize (symbol-name case)) case case)
      (interactive "*p")
      (if (use-region-p)
          (,(case-fn 'region) (region-beginning) (region-end)
                             (region-noncontiguous-p))
-       (when (and (looking-at "\\>") (> arg 0))
-         (forward-word -1))
-       (,(case-fn 'word) arg)
-       (forward-to-word 1)))))
+       (when (and (looking-at "\\>") (= arg 1)
+                  (not (eq last-command ',(case-fn 'dwiw))))
+           (setq arg -1))
+       (,(case-fn 'word) arg)))))
 
 (define-case-changer upcase)
 (define-case-changer downcase)
