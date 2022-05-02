@@ -921,7 +921,7 @@
         ("M-s"))
   :custom (eshell-hist-ignoredups t))
 
-(use-package ffap-extras :after (eshell ffap))
+(use-package ffap-eshell :after (eshell ffap))
 
 (use-package shell
   :bind (:map shell-mode-map
