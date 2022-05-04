@@ -500,6 +500,7 @@
                        embark-isearch-highlight-indicator))
   (embark-cycle-key ";")
   (embark-help-key "?")
+  (embark-confirm-act-all nil)
   :config
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
