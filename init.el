@@ -928,6 +928,7 @@
 
 (use-package shell
   :bind (:map shell-mode-map
+              ([remap display-local-help] . man)
               ("C-c d" . interactive-cd)
               ("M-r" . consult-history)
               ("M-s")))
