@@ -10,7 +10,7 @@
     ("DLE RAE" . "https://dle.rae.es/")
     ("IMDb" . "https://www.imdb.com/find?q=")
     ("YouTube" . "https://www.youtube.com/results?search_query=")
-    ("Merriam-Webster" . "https://www.merriam-webster.com/dictionary/miserable")
+    ("Merriam-Webster" . "https://www.merriam-webster.com/dictionary/")
     ("Collins" . "https://www.collinsdictionary.com/dictionary/english/"))
   "Search engines to add to `webjump-sites' as `simply-query' sites."
   :group 'webjump
