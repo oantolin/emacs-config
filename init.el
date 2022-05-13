@@ -898,6 +898,12 @@
      (consult-file-externally (dired-get-filename))
      arg)))
 
+(use-package comint
+  :bind
+  (:map comint-mode-map
+        ("M-r" . consult-history)
+        ("M-s")))
+
 (use-package eshell-extras
   :commands
   eshell/in-term
@@ -929,9 +935,7 @@
 (use-package shell
   :bind (:map shell-mode-map
               ([remap display-local-help] . man)
-              ("C-c d" . interactive-cd)
-              ("M-r" . consult-history)
-              ("M-s")))
+              ("C-c d" . interactive-cd)))
 
 (use-package sh-script
   :bind (:map sh-mode-map
