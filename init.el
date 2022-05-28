@@ -153,6 +153,10 @@
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
 
+(bind-keys :prefix-map insert-pair-map
+           :prefix "C-("
+           ([t] . insert-pair))
+           
 (when (string= (system-name)  "penguin")
   ;; Alt+backspace sends <delete> on the Chromebook...
   (bind-key "<delete>" #'backward-kill-word))
@@ -1370,7 +1374,6 @@ the Sage kernel, useful to shut it down, for example."
   (use-package janet-mode :ensure t :defer t))
 
 (use-package j-mode
-  :bind
-  ("C-c j" . run-j)
+  :bind ("C-c j" . run-j)
   :mode "\\.ijs\\'"
   :commands j-mode)
