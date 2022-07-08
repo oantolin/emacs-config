@@ -126,7 +126,6 @@
  ("C-d" . delete-forward-char)
  ("M-K" . kill-paragraph)
  ("M-Z" . zap-to-char)
- ("M-o" . other-window)
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
  ("C-x C-p" . list-packages)
@@ -154,7 +153,7 @@
  ("<XF86Reload>" . revert-buffer))
 
 (bind-keys :prefix-map insert-pair-map
-           :prefix "C-("
+           :prefix "C-S-w"
            ([t] . insert-pair))
            
 (when (string= (system-name)  "penguin")
@@ -222,6 +221,9 @@
   :defer t
   :custom
   (bookmark-fontify nil))
+
+(use-package repeat
+  :init (repeat-mode))
 
 (use-package misc
   :bind
