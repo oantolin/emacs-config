@@ -140,6 +140,7 @@
  ([remap dabbrev-expand] . hippie-expand)
  ("C-M-o" . up-list)
  ("C-o" . split-line)
+ ("M-o" . other-window)
  ((if (string= (system-name) "penguin") "<C-delete>" "<C-M-backspace>") .
   ;; Alt+backspace sends <delete> on the Chromebook...
   kill-backward-up-list)
