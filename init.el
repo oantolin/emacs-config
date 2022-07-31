@@ -1244,12 +1244,12 @@ if `org-store-link' is called from the #+TITLE line."
   :after elfeed
   :bind
   (:map elfeed-search-mode-map
-        ("C" . elfeed-extras-comments)
+        ("c" . elfeed-extras-comments)
         ("l" . elfeed-extras-link)
         ("v" . elfeed-extras-arxiv-pdf)
         ("y" . elfeed-extras-youtube))
   (:map elfeed-show-mode-map
-        ("C" . elfeed-extras-comments)
+        ("c" . elfeed-extras-comments)
         ("l" . elfeed-extras-link)
         ("v" . elfeed-extras-arxiv-pdf)
         ("y" . elfeed-extras-youtube)))
