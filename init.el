@@ -1323,6 +1323,10 @@ everything else, it uses `lisp-indent-function'."
         ([remap pp-macroexpand-expression] . sly-expand-1)
         ([remap pp-eval-expression] . sly-interactive-eval)
         ([remap xref-find-definitions] . sly-edit-definition))
+  (:map sly-prefix-map
+        ("I") ("E") ; C-c LETTER are reserved!
+        ("C-v i" . sly-inspect)
+        ("C-v e" . sly-edit-value))
   :custom
   (inferior-lisp-program "sbcl")
   :hook
@@ -1339,6 +1343,24 @@ everything else, it uses `lisp-indent-function'."
         ([remap pp-macroexpand-expression] . sly-expand-1)
         ([remap pp-eval-expression] . sly-interactive-eval)
         ([remap xref-find-definitions] . sly-edit-definition)))
+
+(use-package sly-package-fu
+  :bind
+  (:map sly-prefix-map
+        ("C-s i" . sly-import-symbol-at-point)
+        ("C-s x" . sly-export-symbol-at-point))
+  :config
+  (defun sly-package-fu-fix-keys () ; C-c LETTER are reserved!
+    (define-key sly-mode-map (kbd "C-c i") nil)
+    (define-key sly-mode-map (kbd "C-c x") nil))
+  (advice-add 'sly-package-fu-init :after #'sly-package-fu-fix-keys))
+
+(use-package sly-trace-dialog
+  :bind
+  (:map sly-trace-dialog-shortcut-mode-map
+        ("C-c T") ; C-c LETTER are reserved!
+        ("C-c M-t" . sly-trace-dialog)
+        ("C-c C-M-t" . sly-toggle-fancy-trace)))
 
 (use-package clojure-mode :ensure t :defer t)
 
