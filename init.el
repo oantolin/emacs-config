@@ -827,6 +827,7 @@
   (cdlatex-math-modify-alist '((?B "\\mathbb" nil t nil nil)
                                (?k "\\mathfrak" nil t nil nil)))
   (cdlatex-math-symbol-alist '((?+ "\\cup" "\\oplus" "\\bigoplus")
+                               (?& "\\wedge" "\\cap")
                                (?* "\\times" "\\otimes")
                                (?o "\\omega" "\\circ")
                                (?x "\\chi" "\\xrightarrow"))))
