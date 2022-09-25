@@ -1395,9 +1395,6 @@ the Sage kernel, useful to shut it down, for example."
      (process-buffer
       (start-process "sage-notebook" "*sage*" "sage" "--notebook=jupyter")))))
 
-(when (executable-find "janet")
-  (use-package janet-mode :ensure t :defer t))
-
 (use-package j-mode
   :bind ("C-c j" . run-j)
   :mode "\\.ijs\\'"
