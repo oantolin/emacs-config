@@ -1388,8 +1388,9 @@ everything else, it uses `lisp-indent-function'."
 
 (when (executable-find "sage")
   (defun sage-notebook ()
-    "Start a Sage notebook. This makes a buffer to communicate with
-the Sage kernel, useful to shut it down, for example."
+    "Start a Sage notebook.
+This makes a buffer to communicate with the Sage kernel, useful
+to shut it down, for example."
     (interactive)
     (bury-buffer
      (process-buffer
