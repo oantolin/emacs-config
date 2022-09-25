@@ -118,7 +118,8 @@
  '(use-short-answers t)
  '(async-shell-command-display-buffer nil)
  '(revert-without-query '(""))
- '(recenter-positions '(top middle bottom)))
+ '(recenter-positions '(top middle bottom))
+ '(display-time-default-load-average nil))
 
 (autoload 'viper-ex "viper")
 
