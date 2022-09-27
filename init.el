@@ -118,7 +118,8 @@
  '(use-short-answers t)
  '(async-shell-command-display-buffer nil)
  '(revert-without-query '(""))
- '(recenter-positions '(top middle bottom)))
+ '(recenter-positions '(top middle bottom))
+ '(display-time-default-load-average nil))
 
 (autoload 'viper-ex "viper")
 
@@ -831,6 +832,7 @@
   (cdlatex-math-modify-alist '((?B "\\mathbb" nil t nil nil)
                                (?k "\\mathfrak" nil t nil nil)))
   (cdlatex-math-symbol-alist '((?+ "\\cup" "\\oplus" "\\bigoplus")
+                               (?& "\\wedge" "\\cap")
                                (?* "\\times" "\\otimes")
                                (?o "\\omega" "\\circ")
                                (?x "\\chi" "\\xrightarrow"))))
@@ -1394,15 +1396,13 @@ everything else, it uses `lisp-indent-function'."
 
 (when (executable-find "sage")
   (defun sage-notebook ()
-    "Start a Sage notebook. This makes a buffer to communicate with
-the Sage kernel, useful to shut it down, for example."
+    "Start a Sage notebook.
+This makes a buffer to communicate with the Sage kernel, useful
+to shut it down, for example."
     (interactive)
     (bury-buffer
      (process-buffer
       (start-process "sage-notebook" "*sage*" "sage" "--notebook=jupyter")))))
-
-(when (executable-find "janet")
-  (use-package janet-mode :ensure t :defer t))
 
 (use-package j-mode
   :bind ("C-c j" . run-j)
