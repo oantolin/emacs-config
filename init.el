@@ -778,7 +778,11 @@
   (eww-mode . shr-heading-setup-imenu)
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
-  (modify-syntax-entry ?\” ")“" eww-mode-syntax-table))
+  (modify-syntax-entry ?\” ")“" eww-mode-syntax-table)
+  (defun pdfs-are-binary (fn &rest args)
+    (let ((buffer-file-coding-system 'binary))
+      (apply fn args)))
+  (advice-add 'eww-display-pdf :around #'pdfs-are-binary))
 
 (use-package latex
   :ensure auctex
@@ -856,7 +860,11 @@
         ("i" . consult-imenu))
   :config
   (add-hook 'TeX-after-compilation-finished-functions
-            #'TeX-revert-document-buffer))
+            #'TeX-revert-document-buffer)
+  (defun default-1-page (fn prop &optional winprops)
+    (or (funcall fn prop winprops)
+        (and (eq prop 'page) 1)))
+  (advice-add 'image-mode-window-get :around #'default-1-page))
 
 (use-package pdf-annot
   :defer t
