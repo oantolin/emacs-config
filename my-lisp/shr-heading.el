@@ -41,4 +41,16 @@ Add this function to appropriate major mode hooks such as
    imenu-prev-index-position-function #'shr-heading-previous
    imenu-extract-index-name-function  #'shr-heading--line-at-point))
 
+(defvar shr-heading-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "n" #'shr-heading-next)
+    (define-key map "\C-n" #'shr-heading-next)
+    (define-key map "p" #'shr-heading-previous)
+    (define-key map "\C-p" #'shr-heading-previous)
+    map)
+  "Keymap used to repeat shr heading key sequences. Used in `repeat-mode'.")
+
+(put 'shr-heading-next 'repeat-map 'shr-heading-repeat-map)
+(put 'shr-heading-previous 'repeat-map 'shr-heading-repeat-map)
+
 (provide 'shr-heading)
