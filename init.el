@@ -1408,3 +1408,7 @@ to shut it down, for example."
   :bind ("C-c j" . run-j)
   :mode "\\.ijs\\'"
   :commands j-mode)
+
+(use-package gap-mode :ensure t)
+
+(use-package gap-config :after gap-mode) ; private package that just sets paths
