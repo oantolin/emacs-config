@@ -119,7 +119,8 @@
  '(async-shell-command-display-buffer nil)
  '(revert-without-query '(""))
  '(recenter-positions '(top middle bottom))
- '(display-time-default-load-average nil))
+ '(display-time-default-load-average nil)
+ '(dictionary-server "dict.org"))
 
 (autoload 'viper-ex "viper")
 
@@ -133,6 +134,7 @@
  ("M-s k" . keep-lines)
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
+ ("M-s d" . dictionary-search)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
  ("C-c l" . find-library)
@@ -502,6 +504,8 @@
   (:map embark-url-map
         ("x" . browse-url-default-browser)
         ("p" . pocket-lib-add-urls))
+  (:map embark-identifier-map
+        ("D" . dictionary-lookup-definition))
   :custom
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
