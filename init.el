@@ -1197,7 +1197,13 @@ if `org-store-link' is called from the #+TITLE line."
   :commands set-smtp-server
   :hook
   (message-send . set-smtp-server)
-  (message-send . message-lint))
+  (message-send . message-lint)
+  :config
+  (defvar cycle-from-address-repeat-map
+    (let ((map (make-sparse-keymap)))
+      (define-key map "f" #'cycle-from-address)
+      map))
+  (put 'cycle-from-address 'repeat-map 'cycle-from-address-repeat-map))
 
 ;;; applications
 
