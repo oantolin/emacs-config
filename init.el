@@ -1008,6 +1008,14 @@
         ("r" . vc-revert)
         ("c" . vc-git-commit)))
 
+(use-package smerge-mode
+  :config
+  (map-keymap
+   (lambda (_key cmd)
+     (when (symbolp cmd)
+       (put cmd 'repeat-map 'smerge-basic-map)))
+   smerge-basic-map))
+
 (use-package magit :ensure t :defer t)
 
 (use-package markdown-mode
