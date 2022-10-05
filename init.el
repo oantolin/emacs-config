@@ -325,21 +325,6 @@
         ("w" . toggle-wrapping)
         ("l" . toggle-ispell-lang)))
 
-(use-package completion-ui
-  :custom
-  (completion-show-help nil)
-  :bind
-  (:map toggle-map
-        ("SPC" . change-completion-ui))
-  (:map completion-list-mode-map
-        ("C-g" . abort-recursive-edit)
-        ("n" . next-line)
-        ("p" . previous-line)
-        ("F" . consult-focus-lines)
-        ("s" . isearch-forward))
-  :init
-  (change-completion-ui ?v))
-
 (use-package window-extras
   :bind
   (:map ctl-x-4-map
@@ -428,34 +413,9 @@
    '((embark-keybinding grid)))
   :init
   (defvar minibuffer--require-match nil)
+  (vertico-mode)
   :config
   (vertico-multiform-mode))
-
-(use-package mct
-  :ensure t
-  :custom
-  (mct-hide-completion-mode-line t)
-  (mct-live-update-delay 0.1)
-  (mct-completion-passlist '(embark-keybinding)))
-
-(use-package selectrum
-  :ensure t
-  :custom
-  (selectrum-complete-in-buffer nil)
-  (selectrum-display-style '(vertical))
-  (selectrum-display-style-cycle-list
-   '((horizontal :candidates-separator " ⋮ ") (vertical)))
-  :bind
-  (:map selectrum-minibuffer-map
-        ("M-." . consult-dir)
-        ("M-j" . consult-dir-jump-file)))
-
-(use-package ivy
-  :ensure t
-  :diminish
-  :defer t
-  :config
-  (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder))))
 
 (use-package marginalia
   :ensure t
