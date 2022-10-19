@@ -1087,7 +1087,9 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :bind
   (:map toggle-map
-        ("m" . org-modern-mode)))
+        ("m" . org-modern-mode))
+  :config
+  (setf (alist-get ?X org-modern-checkbox) "✓"))
 
 (use-package citeproc :ensure t :defer t)
 
