@@ -718,7 +718,6 @@
         ("v")) ; don't override view-source with a useless synonym for RET
   :custom
   (shr-use-colors nil)
-  (shr-max-image-proportion 0.7)
   (shr-image-animate nil))
 
 (use-package shr-heading
