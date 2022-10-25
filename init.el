@@ -498,9 +498,7 @@
       (goto-char (1- (point-max)))
       (embark-act arg))))
 
-(use-package embark-consult
-  :ensure t
-  :after (embark consult))
+(use-package embark-consult :ensure t)
 
 (use-package consult-dir
   :ensure t
