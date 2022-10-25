@@ -627,8 +627,7 @@
 (use-package avy
   :ensure t
   :bind
-  (("M-j" . avy-goto-word-or-subword-1)
-   ("M-i" . avy-goto-char-timer)
+  (("M-j" . avy-goto-char-timer)
    ([remap goto-line] . avy-goto-line))
   (:map isearch-mode-map
         ("C-'" . avy-isearch))
@@ -1132,7 +1131,6 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package gnus-sum
   :bind
   (:map gnus-summary-mode-map
-        ("M-i") ; I use this for avy-goto-char-timer
         ("M-a" . gnus-symbolic-argument)))
 
 (use-package ecomplete
