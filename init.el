@@ -419,7 +419,8 @@
   (vertico-multiform-categories
    '((embark-keybinding grid)))
   :init
-  (defvar minibuffer--require-match nil)
+  (unless (boundp 'minibuffer--require-match)
+    (defvar minibuffer--require-match nil))
   (vertico-mode)
   :config
   (vertico-multiform-mode))
