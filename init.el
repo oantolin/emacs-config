@@ -296,6 +296,7 @@
   (search-whitespace-regexp ".*?")
   (isearch-allow-scroll 'unlimited)
   :bind
+  ("M-r" . isearch-replace-regexp)
   (:map isearch-mode-map
         ("M-c") ; free up for capitalize-dwim, still bound to M-s c
         ("<S-return>" . isearch-exit-at-end)

@@ -35,4 +35,31 @@ Either bind this to a key in `isearch-mode-map' or add it to
       (region-beginning) (region-end)))
     (deactivate-mark)))
 
+(defun isearch-replace-regexp (&optional from-here)
+  "Regexp isearch followed by query-replace.
+A more interactive replacement for `query-replace-regexp': it
+starts with a regexp isearch from the top of the buffer, which
+allows you to verify visually you typed the correct regexp; upon
+exiting the isearch runs a query-replace operation; and finally
+restores point.
+
+If called when the region is active, it first narrows to the
+region.  When FROM-HERE is non-nil (interactively, if called with
+a prefix argument), the search and replacements are done from
+point until the end of the buffer."
+  (interactive "P")
+  (save-excursion
+    (save-restriction
+      (unless from-here (goto-char (point-min)))
+      (when (use-region-p)
+        (narrow-to-region (region-beginning) (region-end))
+        (deactivate-mark))
+      (let ((isearch-mode-end-hook
+             (lambda ()
+               (unless isearch-mode-end-hook-quit
+                 (let (isearch-mode-end-hook)
+                   (unless from-here (isearch-beginning-of-buffer))
+                   (isearch-query-replace-regexp))))))
+        (isearch-forward-regexp)))))
+
 (provide 'isearch-extras)
