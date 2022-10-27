@@ -34,10 +34,15 @@
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
 
-(set-fontset-font "fontset-default" 'symbol
+(set-fontset-font "fontset-default" 'emoji
                   (font-spec :family (if (eq system-type 'windows-nt)
                                          "Segoe UI Emoji"
-                                       "Noto Color Emoji")))
+                                       "Noto Emoji")))
+
+(set-fontset-font "fontset-default" 'symbol
+                  (font-spec :family (if (eq system-type 'windows-nt)
+                                         "Segoe UI Symbol"
+                                       "Noto Emoji")))
 
 ;;; package.el & use-package setup
 
