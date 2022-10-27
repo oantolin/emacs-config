@@ -297,6 +297,7 @@
   (isearch-allow-scroll t)
   :bind
   (:map isearch-mode-map
+        ("M-c") ; free up for capitalize-dwim, still bound to M-s c
         ("<S-return>" . isearch-exit-at-end)
         ([remap isearch-abort] . isearch-cancel)
         ("<C-backspace>" . isearch-delete-wrong)
