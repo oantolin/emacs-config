@@ -1093,9 +1093,11 @@ if `org-store-link' is called from the #+TITLE line."
         ("m" . org-modern-mode))
   :hook
   (org-mode . org-modern-mode)
-  :config
-  (when (string= (system-name) "penguin") ; Chromebook
-    (setf (alist-get ?X org-modern-checkbox) "✓")))
+  :custom
+  (org-modern-checkbox
+   `((?X . ,(if (string= (system-name) "penguin") "✓" "☑"))
+     (?\s . "☐")
+     (?- . #("☐–" 0 2 (composition ((2))))))))
 
 (use-package citeproc :ensure t :defer t)
 
