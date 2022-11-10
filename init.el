@@ -1020,6 +1020,7 @@
   (org-hide-emphasis-markers t)
   (org-hide-leading-stars t)
   (org-pretty-entities t)
+  (org-entities-user '(("newline" "\\newline" nil "<br>" "\n" "\n" "⏎")))
   (org-preview-latex-image-directory "~/.cache/ltximg/")
   (org-tags-column -55)
   (org-use-speed-commands t)
@@ -1078,7 +1079,7 @@ if `org-store-link' is called from the #+TITLE line."
             (when (and (derived-mode-p 'org-mode)
                        (save-excursion
                          (beginning-of-line)
-                         (looking-at "#\\+TITLE:")))
+                         (looking-at "#\\+\\(?:TITLE\\|title\\):")))
               (org-link-store-props
                :type "file"
                :link (concat "file:" (buffer-file-name))
