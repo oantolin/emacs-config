@@ -636,7 +636,7 @@
   (("M-j" . avy-goto-char-timer)
    ([remap goto-line] . avy-goto-line))
   (:map isearch-mode-map
-        ("C-'" . avy-isearch))
+        ("M-j" . avy-isearch))
   :config
   (add-to-list 'avy-dispatch-alist '(?\. . avy-action-goto))
   (defun avy-embark-act (pt)
