@@ -1140,6 +1140,7 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package gnus-sum
   :bind
   (:map gnus-summary-mode-map
+        ("M-i")
         ("M-a" . gnus-symbolic-argument)))
 
 (use-package ecomplete
