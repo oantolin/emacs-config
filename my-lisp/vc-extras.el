@@ -26,7 +26,8 @@ with a prefix argument you are prompted for a message."
    (list (if current-prefix-arg
              (read-from-minibuffer "Commit message: " "Merge")
            "Merge resolving conflicts")))
-  (vc-git-command nil 0 nil "commit" "-m" message))
+  (vc-git-command nil 0 nil "commit" "-m" message)
+  (message "Commited with message: %s" message))
 
 (provide 'vc-extras)
 
