@@ -127,8 +127,6 @@
  '(display-time-default-load-average nil)
  '(dictionary-server "dict.org"))
 
-(autoload 'viper-ex "viper")
-
 (bind-keys
  ("C-d" . delete-forward-char)
  ("M-K" . kill-paragraph)
@@ -158,7 +156,6 @@
  ("M-T" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos)
- ("C-:" . viper-ex) ; the g command is worth having!
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
 
