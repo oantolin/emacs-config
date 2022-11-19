@@ -134,6 +134,8 @@
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
  ("C-x C-p" . list-packages)
+ ("M-r" . kmacro-start-macro-or-insert-counter)
+ ("M-i" . kmacro-end-or-call-macro)
  ("M-s k" . keep-lines)
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
@@ -298,7 +300,6 @@
   (search-whitespace-regexp ".*?")
   (isearch-allow-scroll 'unlimited)
   :bind
-  ("M-r" . isearch-replace-regexp)
   (:map isearch-mode-map
         ("M-c") ; free up for capitalize-dwim, still bound to M-s c
         ("<S-return>" . isearch-exit-at-end)
