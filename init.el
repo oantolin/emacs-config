@@ -1089,16 +1089,18 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package org-modern
   :ensure t
+  :after org
+  :demand t
   :bind
   (:map toggle-map
         ("m" . org-modern-mode))
-  :hook
-  (org-mode . org-modern-mode)
   :custom
   (org-modern-checkbox
    `((?X . ,(if (string= (system-name) "penguin") "✓" "☑"))
      (?\s . "☐")
-     (?- . #("☐–" 0 2 (composition ((2))))))))
+     (?- . #("☐–" 0 2 (composition ((2)))))))
+  :config
+  (global-org-modern-mode))
 
 (use-package citeproc :ensure t :defer t)
 
