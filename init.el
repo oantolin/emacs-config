@@ -175,6 +175,7 @@
            ("c" . column-number-mode)
            ("d" . toggle-debug-on-error)
            ("t" . toggle-truncate-lines)
+           ("f" . follow-mode)
            ("s" . whitespace-mode)
            ("v" . variable-pitch-mode)
            ("i" . visible-mode))
