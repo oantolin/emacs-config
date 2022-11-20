@@ -140,6 +140,7 @@
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
  ("M-s d" . dictionary-search)
+ ("M-#" . dictionary-lookup-definition)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
  ("C-c l" . find-library)
