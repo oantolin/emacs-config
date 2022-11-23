@@ -882,6 +882,8 @@
      arg)))
 
 (use-package comint
+  :custom
+  (comint-prompt-read-only t) 
   :bind
   (:map comint-mode-map
         ("M-r" . consult-history)
