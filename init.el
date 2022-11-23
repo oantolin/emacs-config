@@ -549,8 +549,8 @@
   ("C-`" . consult-register-load)
   ("C-M-`" . consult-register)
   (:map minibuffer-local-map
-        ("M-r" . consult-history)
-        ("M-s"))
+        ("M-h" . consult-history)
+        ("M-r") ("M-s"))
   (:map consult-narrow-map
         ("C-<" . consult-narrow-help))
   :custom
@@ -886,8 +886,8 @@
   (comint-prompt-read-only t) 
   :bind
   (:map comint-mode-map
-        ("M-r" . consult-history)
-        ("M-s")))
+        ("M-h" . consult-history)
+        ("M-r") ("M-s")))
 
 (use-package eshell-extras
   :commands
@@ -911,8 +911,8 @@
 (use-package em-hist
   :bind
   (:map eshell-hist-mode-map
-        ("M-r" . consult-history)
-        ("M-s"))
+        ("M-h" . consult-history)
+        ("M-r") ("M-s"))
   :custom (eshell-hist-ignoredups t))
 
 (use-package ffap-eshell :after (eshell ffap))
@@ -930,12 +930,12 @@
   :bind
   (:map term-mode-map
         ("C-c d" . interactive-cd)
-        ("M-r" . consult-history)
-        ("M-s"))
+        ("M-h" . consult-history)
+        ("M-r") ("M-s"))
   (:map term-raw-map
         ("C-c d" . interactive-cd)
-        ("M-r" . consult-history)
-        ("M-s")))
+        ("M-h" . consult-history)
+        ("M-r") ("M-s")))
 
 (use-package vc-extras
   :commands
@@ -946,8 +946,8 @@
 (use-package log-edit
   :bind
   (:map log-edit-mode-map
-        ("M-r" . consult-history)
-        ("M-s"))
+        ("M-h" . consult-history)
+        ("M-r") ("M-s"))
   :hook
   (log-edit-mode . turn-off-visual-line-mode)
   (log-edit-mode . turn-on-auto-fill)
