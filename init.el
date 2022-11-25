@@ -1135,17 +1135,21 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   ("C-c g" . gnus))
 
+(fset 'goto-map goto-map)
+
 (use-package gnus-art
   :bind
   (:map gnus-article-mode-map
+        ("M-g" . goto-map)
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)))
 
 (use-package gnus-sum
   :bind
   (:map gnus-summary-mode-map
-        ("M-i")
-        ("M-a" . gnus-symbolic-argument)))
+        ("M-i") ; I use this for kmacro-end-or-call-macro
+        ("M-g" . goto-map) ; rescan is also on Z G, and I use that prefix a lot!
+        ("M-a" . gnus-symbolic-argument))) 
 
 (use-package ecomplete
   :defer t
