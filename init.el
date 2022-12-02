@@ -553,6 +553,8 @@
         ("M-r") ("M-s"))
   (:map consult-narrow-map
         ("C-<" . consult-narrow-help))
+  (:map isearch-mode-map
+        ("M-l" . switch-to-consult-line))
   :custom
   (completion-in-region-function #'consult-completion-in-region)
   (register-preview-function #'consult-register-format)
@@ -573,7 +575,12 @@
           (replace-regexp-in-string "\\*" "\\\\*" consult-find-args)))
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
-        'log-edit-comment-ring))
+        'log-edit-comment-ring)
+  (defun switch-to-consult-line ()
+    "Switch from isearch to consult-line."
+    (interactive)
+    (isearch-exit)
+    (consult-line isearch-string)))
 
 (use-package consult-imenu
   :config
