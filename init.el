@@ -1105,9 +1105,6 @@ if `org-store-link' is called from the #+TITLE line."
   (:map toggle-map
         ("m" . org-modern-mode))
   :config
-  (defun disable-point-adjustment (&rest args)
-    (setq disable-point-adjustment t))
-  (advice-add 'org-beginning-of-line :after #'disable-point-adjustment)
   (global-org-modern-mode))
 
 (use-package citeproc :ensure t :defer t)
