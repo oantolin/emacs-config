@@ -864,7 +864,7 @@
     "Open marked or current file in operating system's default application."
     (interactive "P")
     (dired-map-over-marks
-     (consult-file-externally (dired-get-filename))
+     (embark-open-externally (dired-get-filename))
      arg)))
 
 (use-package comint
