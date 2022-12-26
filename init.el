@@ -586,13 +586,13 @@
 
 (use-package webjump
   :bind
-  ("C-x w" . webjump))
+  ("C-c w" . webjump))
 
 (use-package webjump-extras
   :after webjump
   :demand t
   :bind
-  ("C-x W" . webjump-reload)
+  ("C-c W" . webjump-reload)
   :config
   (webjump-reload))
 
@@ -1206,7 +1206,7 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package elfeed
   :ensure t
   :bind
-  ("C-c w" . elfeed)
+  ("C-c E" . elfeed)
   (:map elfeed-search-mode-map
         ("y") ; Wellons is brilliant but he confused yank & save
         ("w" . elfeed-search-yank)
