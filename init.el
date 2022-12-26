@@ -70,7 +70,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters"))
+(dolist (dir '("placeholder" "math-delimiters" "embark"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -1345,7 +1345,8 @@ everything else, it uses `lisp-indent-function'."
         ([remap embark-pp-eval-defun] . sly-compile-defun)
         ([remap pp-macroexpand-expression] . sly-expand-1)
         ([remap pp-eval-expression] . sly-interactive-eval)
-        ([remap xref-find-definitions] . sly-edit-definition)))
+        ([remap xref-find-definitions] . sly-edit-definition)
+        ("M-h" . consult-history)))
 
 (use-package sly-package-fu
   :bind
