@@ -609,22 +609,6 @@
         ("r" . narrow-to-region)
         ("." . narrow-to-point)))
 
-(use-package dot-mode
-  :ensure t
-  :diminish
-  :demand t
-  :config
-  (global-dot-mode)
-  (defvar dot-mode-map (assoc 'dot-mode minor-mode-map-alist))
-  (unbind-key "C-M-." dot-mode-map)
-  (unbind-key "C-c ." dot-mode-map)
-  :hook
-  (minibuffer-setup . dot-mode)
-  :bind
-  (:map dot-mode-map
-        ("C->" . dot-mode-override)
-        ("C-x C-." . dot-mode-copy-to-last-kbd-macro)))
-
 (use-package beginend
   :ensure t
   :diminish beginend-global-mode
