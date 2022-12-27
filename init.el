@@ -70,7 +70,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "embark"))
+(dolist (dir '("placeholder" "math-delimiters"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -414,7 +414,7 @@
         ("M-j" . consult-dir-jump-file)
         ("M-q" . vertico-multiform-grid)
         ("M-a" . vertico-multiform-unobtrusive)
-        ("'" . vertico-quick-jump))
+        ("M-'" . vertico-quick-jump))
   :custom
   (vertico-multiform-categories
    '((embark-keybinding grid)))
