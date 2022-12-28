@@ -37,12 +37,12 @@
 (set-fontset-font "fontset-default" 'emoji
                   (font-spec :family (if (eq system-type 'windows-nt)
                                          "Segoe UI Emoji"
-                                       "Noto Emoji")))
+                                       "Noto Color Emoji")))
 
 (set-fontset-font "fontset-default" 'symbol
                   (font-spec :family (if (eq system-type 'windows-nt)
                                          "Segoe UI Symbol"
-                                       "Noto Emoji")))
+                                       "Noto Sans Symbols2")))
 
 ;;; package.el & use-package setup
 
