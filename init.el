@@ -203,11 +203,9 @@
   (modus-themes-mixed-fonts t)
   (modus-themes-headings '((1 1.3) (2 1.2) (3 1.1)))
   :init
-  (modus-themes-load-themes)
-  :config
   (if (display-graphic-p)
-      (modus-themes-load-operandi)
-    (modus-themes-load-vivendi)))
+      (load-theme 'modus-operandi t)
+    (load-theme 'modus-vivendi t)))
 
 (use-package imenu
   :defer t
