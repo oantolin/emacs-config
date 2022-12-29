@@ -546,6 +546,7 @@
   ("M-`" . consult-register-store)
   ("C-`" . consult-register-load)
   ("C-M-`" . consult-register)
+  ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history
   (:map minibuffer-local-map
         ("M-h" . consult-history)
         ("M-r") ("M-s"))
