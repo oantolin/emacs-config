@@ -457,9 +457,11 @@
   (:map embark-package-map
         ("t" . try))
   (:map embark-identifier-map
-        ("(" . insert-parentheses))
+        ("(" . insert-parenthesis)
+        ("[" . insert-pair-map))
   (:map embark-expression-map
-        ("(" . insert-parentheses))
+        ("(" . insert-parentheses)
+        ("[" . insert-pair-map))
   (:map embark-email-map
         ("+" . add-email-to-ecomplete)
         ("\\" . remove-email-from-ecomplete))
@@ -486,6 +488,7 @@
                        embark-candidate-collectors))
   (dolist (cmd '(comment-dwim
                  insert-parentheses
+                 insert-pair
                  markdown-insert-code
                  markdown-insert-italic
                  markdown-insert-bold
