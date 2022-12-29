@@ -567,8 +567,7 @@
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref)
   :hook
-  ((embark-collect-mode completion-list-mode)
-   . consult-preview-at-point-mode)
+  ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
   (minibuffer-setup . choose-completion-in-region)
   :config
   (defun choose-completion-in-region ()
