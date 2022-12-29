@@ -462,6 +462,9 @@
   (:map embark-expression-map
         ("(" . insert-parentheses)
         ("[" . insert-pair-map))
+  (:map embark-region-map
+        ("(" . insert-parentheses)
+        ("[" . insert-pair-map))
   (:map embark-email-map
         ("+" . add-email-to-ecomplete)
         ("\\" . remove-email-from-ecomplete))
