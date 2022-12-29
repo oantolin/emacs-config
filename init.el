@@ -492,7 +492,7 @@
                  org-emphasize
                  cdlatex-math-modify
                  TeX-font))
-    (push #'embark--mark-target (alist-get cmd embark-pre-action-hooks)))
+    (push #'embark--mark-target (alist-get cmd embark-around-action-hooks)))
   (push #'embark--xref-push-marker
         (alist-get 'find-file embark-pre-action-hooks))
   (defun embark-on-last-message (arg)
