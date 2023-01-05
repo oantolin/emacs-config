@@ -142,9 +142,7 @@ the only difference between this command and %s-dwim."
      (if (use-region-p)
          (,(case-fn 'region)
            (region-beginning) (region-end) (region-noncontiguous-p))
-       (when (and (looking-at "\\>") (= arg 1)
-                  (not (memq last-command
-                             '(upcase-dwiw downcase-dwiw capitalize-dwiw))))
+       (when (and (eolp) (= arg 1))
            (setq arg -1))
        (,(case-fn 'word) arg)))))
 
