@@ -457,7 +457,7 @@
   (:map embark-package-map
         ("t" . try))
   (:map embark-identifier-map
-        ("(" . insert-parenthesis)
+        ("(" . insert-parentheses)
         ("[" . insert-pair-map))
   (:map embark-expression-map
         ("(" . insert-parentheses)
