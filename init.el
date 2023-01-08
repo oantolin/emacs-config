@@ -232,7 +232,9 @@
   (bookmark-fontify nil))
 
 (use-package repeat
-  :init (repeat-mode))
+  :init (repeat-mode)
+  :config
+  (put 'other-window 'repeat-map nil))
 
 (use-package misc
   :bind
