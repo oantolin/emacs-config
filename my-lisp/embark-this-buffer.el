@@ -28,7 +28,7 @@
   ("$" ispell)
   ("!" shell-command)
   ("&" async-shell-command)
-  ("x" consult-file-externally)         ; useful for PDFs
+  ("x" embark-open-externally)         ; useful for PDFs
   ("c" copy-file)
   ("k" kill-buffer)
   ("z" bury-buffer)
