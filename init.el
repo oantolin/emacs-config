@@ -1396,6 +1396,17 @@ to shut it down, for example."
   :mode "\\.ijs\\'"
   :commands j-mode)
 
+(use-package gnu-apl-mode ; only want gnu-apl-input.el
+  :ensure t
+  :bind ("C-c A" . apl-repl)
+  :init
+  (defun apl-repl ()
+    "Open a APL REPL in a buffer."
+    (interactive)
+    (pop-to-buffer (make-comint "APL" "april"))
+    (require 'gnu-apl-input)
+    (set-input-method "APL-Z")))
+
 (use-package gap-mode :ensure t)
 
 (use-package gap-config :after gap-mode) ; private package that just sets paths
