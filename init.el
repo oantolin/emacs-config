@@ -70,7 +70,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters"))
+(dolist (dir '("placeholder" "math-delimiters" "bqn-mode"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -1406,6 +1406,9 @@ to shut it down, for example."
     (pop-to-buffer (make-comint "APL" "april"))
     (require 'gnu-apl-input)
     (set-input-method "APL-Z")))
+
+(use-package bqn-mode
+  :bind ("C-c B" . run-bqn))
 
 (use-package gap-mode :ensure t)
 
