@@ -70,7 +70,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "bqn-mode"))
+(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "bqn-mode"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -550,7 +550,7 @@
   ("M-X" . consult-mode-command)
   ("C-c b" . consult-buffer)
   ("C-c 4 b" . consult-buffer-other-window)
-  ("C-c k" . consult-keep-lines)
+  ("C-c K" . consult-keep-lines)
   ("C-c f" . consult-focus-lines)
   ("M-`" . consult-register-store)
   ("C-`" . consult-register-load)
@@ -1407,8 +1407,9 @@ to shut it down, for example."
     (require 'gnu-apl-input)
     (set-input-method "APL-Z")))
 
-(use-package bqn-mode
-  :bind ("C-c B" . run-bqn))
+(use-package bqn-mode :bind ("C-c B" . run-bqn))
+
+(use-package ngnk-mode :bind ("C-c k" . run-ngnk))
 
 (use-package gap-mode :ensure t)
 
