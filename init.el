@@ -130,6 +130,7 @@
 (bind-keys
  ("C-d" . delete-forward-char)
  ("M-K" . kill-paragraph)
+ ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history  
  ("M-Z" . zap-to-char)
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
@@ -555,7 +556,6 @@
   ("M-`" . consult-register-store)
   ("C-`" . consult-register-load)
   ("C-M-`" . consult-register)
-  ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history
   (:map minibuffer-local-map
         ("M-h" . consult-history)
         ("M-r") ("M-s"))
