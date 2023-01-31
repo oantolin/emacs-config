@@ -11,6 +11,8 @@
 
 (push 'embark--allow-edit (alist-get 'write-file embark-target-injection-hooks))
 
+(declare-function 'transpose-windows "ext:window-extras")
+
 (defvar-keymap this-buffer-map
   :doc "Commands to act on current file or buffer."
   "RET" #'eval-buffer
