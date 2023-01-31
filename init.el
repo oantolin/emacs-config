@@ -116,6 +116,7 @@
 (bind-keys
  ("C-d" . delete-forward-char)
  ("M-K" . kill-paragraph)
+ ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history  
  ("M-Z" . zap-to-char)
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
@@ -266,7 +267,6 @@
   ("M-'" . dabbrev-next)
   ("C-M-'" . dabbrev-complete-next)
   ("C-c e" . text-to-clipboard)
-  ("M-s i" . focus-lines)
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
@@ -532,6 +532,7 @@
   ("M-s g" . consult-grep)
   ("M-s G" . consult-git-grep)
   ("M-s r" . consult-ripgrep)
+  ("M-s i" . consult-info)
   ("M-g f" . consult-find)
   ("M-X" . consult-mode-command)
   ("C-c b" . consult-buffer)
@@ -541,7 +542,6 @@
   ("M-`" . consult-register-store)
   ("C-`" . consult-register-load)
   ("C-M-`" . consult-register)
-  ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history
   (:map minibuffer-local-map
         ("M-h" . consult-history)
         ("M-r") ("M-s"))
