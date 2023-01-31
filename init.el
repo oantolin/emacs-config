@@ -28,26 +28,12 @@
  '(default ((((type w32)) :family "Consolas"))))
 
 (custom-set-faces
- `(variable-pitch ((((type w32)) :family "Verdana")
-                   (t :family "Noto Sans")))
+ `(variable-pitch ((((type w32)) :family "Verdana")))
  '(Info-quoted ((t :inherit fixed-pitch)))
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
 
-(set-fontset-font "fontset-default" 'emoji
-                  (font-spec :family (if (eq system-type 'windows-nt)
-                                         "Segoe UI Emoji"
-                                       "Noto Color Emoji")))
-
-(set-fontset-font "fontset-default" 'symbol
-                  (font-spec :family (if (eq system-type 'windows-nt)
-                                         "Segoe UI Symbol"
-                                       "Noto Sans Symbols2")))
-
 ;;; package.el & use-package setup
-
-(when (version< emacs-version "26.3")
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
