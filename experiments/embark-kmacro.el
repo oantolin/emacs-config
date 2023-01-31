@@ -36,12 +36,12 @@
   (let ((last-kbd-macro (kbd kmacro)))
     (kmacro-bind-to-key nil)))
 
-(embark-define-keymap embark-kmacro-map
-  "Actions on kmacros."
-  ("RET" embark-kmacro-run)
-  ("s" embark-kmacro-save)
-  ("n" embark-kmacro-name)
-  ("b" embark-kmacro-bind))
+(defvar-keymap embark-kmacro-map
+  :doc "Actions on kmacros."
+  "RET" #'embark-kmacro-run
+  "s" #'embark-kmacro-save
+  "n" #'embark-kmacro-name
+  "b" #'embark-kmacro-bind)
 
 (let ((file-tail (cl-member 'file embark-keymap-alist :key #'car)))
   (setcdr file-tail (cons '(kmacro . embark-kmacro-map) (cdr file-tail))))

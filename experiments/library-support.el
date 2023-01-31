@@ -27,14 +27,14 @@
     (when (ffap-el-mode filename)
       `(library ,filename . ,(bounds-of-thing-at-point 'filename)))))
 
-(embark-define-keymap embark-library-map
-  "Keymap for operations on Emacs Lisp libraries."
-  ("RET" find-library)
-  ("l" load-library)
-  ("f" find-library)
-  ("h" finder-commentary)
-  ("a" apropos-library)
-  ("w" locate-library))
+(defvar-keymap embark-library-map
+  :doc "Keymap for operations on Emacs Lisp libraries."
+  "RET" #'find-library
+  "l" #'load-library
+  "f" #'find-library
+  "h" #'finder-commentary
+  "a" #'apropos-library
+  "w" #'locate-library)
 
 (add-to-list 'embark-keymap-alist '(library . embark-library-map))
 

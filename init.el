@@ -1266,8 +1266,8 @@ if `org-store-link' is called from the #+TITLE line."
   (lisp-indent-function #'hybrid-lisp-indent-function)
   :config
   (add-to-list 'lisp-imenu-generic-expression
-               '("Embark Keymaps"
-                 "^\\s-*(embark-define-keymap\\s-+\\(\\(?:\\sw\\|\\s_\\)+\\)"
+               '("Keymaps"
+                 "^\\s-*(defvar-keymap\\s-+\\(\\(?:\\sw\\|\\s_\\)+\\)"
                  1)
                t)
   (defun hybrid-lisp-indent-function (indent-point state)
