@@ -33,6 +33,9 @@
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
 
+(set-fontset-font "fontset-default" 'emoji
+                  (font-spec :family "Noto Color Emoji"))
+
 ;;; package.el & use-package setup
 
 (setq package-archives
