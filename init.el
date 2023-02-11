@@ -463,7 +463,7 @@
   (:map embark-encode-map
         ("p" . topaz-paste-region))
   (:map embark-url-map
-        ("x" . browse-url-default-browser)
+        ("x" . browse-url-generic)
         ("p" . pocket-lib-add-urls))
   (:map embark-identifier-map
         ("D" . dictionary-lookup-definition))
@@ -695,7 +695,9 @@
      ("https?://twitter\\.com" . browse-url-default-browser)
      ("https?://doodle\\.com" . browse-url-default-browser)))
   :config
-  (advice-add 'browse-url-generic :override 'browse-url-default-browser))
+  (if-let ((wslview (executable-find "wslview")))
+      (setq browse-url-generic-program wslview)
+    (advice-add 'browse-url-generic :override 'browse-url-default-browser)))
 
 (use-package shr
   :bind
