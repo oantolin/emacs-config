@@ -844,7 +844,7 @@
 
 (use-package tramp
   :defer t
-  :when (executable-find "plink.exe")
+  :when (and (eq system-type 'windows-nt) (executable-find "plink.exe"))
   :custom (tramp-default-method "plink"))
 
 (use-package dired
