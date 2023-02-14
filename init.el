@@ -688,12 +688,12 @@
   (browse-url-browser-function #'eww-browse-url)
   (browse-url-handlers
    '(("\\`https?://\\(?:youtu\\.be\\|\\(?:www\\.\\)youtube\\.com\\)"
-      . browse-url-default-browser)
-     ("\\`https?://[^/]+zoom\\.us" . browse-url-default-browser)
-     ("https?://meet\\.google\\.com" . browse-url-default-browser)
-     ("https?://bluejeans\\.com" . browse-url-default-browser)
-     ("https?://twitter\\.com" . browse-url-default-browser)
-     ("https?://doodle\\.com" . browse-url-default-browser)))
+      . browse-url-generic)
+     ("\\`https?://[^/]+zoom\\.us" . browse-url-generic)
+     ("https?://meet\\.google\\.com" . browse-url-generic)
+     ("https?://bluejeans\\.com" . browse-url-generic)
+     ("https?://twitter\\.com" . browse-url-generic)
+     ("https?://doodle\\.com" . browse-url-generic)))
   :config
   (if-let ((wslview (executable-find "wslview")))
       (setq browse-url-generic-program wslview)
