@@ -500,7 +500,7 @@
       (goto-char (1- (point-max)))
       (embark-act arg))))
 
-(use-package embark-consult :ensure t)
+(use-package embark-consult :ensure t :defer t)
 
 (use-package consult-dir
   :ensure t
@@ -574,6 +574,7 @@
         'log-edit-comment-ring))
 
 (use-package consult-imenu
+  :defer t
   :config
   (setf
    (alist-get
@@ -1402,6 +1403,6 @@ to shut it down, for example."
 
 (use-package ngnk-mode :bind ("C-c k" . run-ngnk))
 
-(use-package gap-mode :ensure t)
+(use-package gap-mode :ensure t :defer t)
 
 (use-package gap-config :after gap-mode) ; private package that just sets paths
