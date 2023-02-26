@@ -695,6 +695,7 @@
      ("https?://bluejeans\\.com" . browse-url-generic)
      ("https?://twitter\\.com" . browse-url-generic)
      ("https?://doodle\\.com" . browse-url-generic)))
+  (browse-url-secondary-browser-function #'browse-url-generic)
   :config
   (if-let ((wslview (executable-find "wslview")))
       (setq browse-url-generic-program wslview)
