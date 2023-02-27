@@ -401,8 +401,6 @@
         ("DEL" . vertico-directory-delete-char)
         ("M-." . consult-dir)
         ("M-j" . consult-dir-jump-file)
-        ("M-q" . vertico-multiform-grid)
-        ("M-a" . vertico-multiform-unobtrusive)
         ("M-'" . vertico-quick-jump))
   :custom
   (vertico-multiform-categories
