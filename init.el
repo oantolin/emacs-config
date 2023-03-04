@@ -515,11 +515,6 @@
   (:map this-buffer-map
         ("P" . topaz-paste-buffer)))
 
-(use-package embark-extra-indicators
-  :commands
-  embark-which-key-indicator
-  embark-minibuffer-indicator)
-
 (use-package consult
   :ensure t
   :bind
