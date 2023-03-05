@@ -1398,8 +1398,6 @@ to shut it down, for example."
   :ensure t
   :bind ("C-c B" . bqn-comint-run-process))
 
-(use-package bqn-key-prefix :after bqn-comint)
-
 (use-package ngnk-mode :bind ("C-c k" . run-ngnk))
 
 (use-package gap-mode :ensure t :defer t)
