@@ -1396,7 +1396,9 @@ to shut it down, for example."
 
 (use-package bqn-mode
   :ensure t
-  :bind ("C-c B" . run-bqn))
+  :bind ("C-c B" . bqn-comint-run-process))
+
+(use-package bqn-key-prefix :after bqn-comint)
 
 (use-package ngnk-mode :bind ("C-c k" . run-ngnk))
 
