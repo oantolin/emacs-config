@@ -1312,9 +1312,15 @@ everything else, it uses `lisp-indent-function'."
   (inferior-lisp-program "sbcl")
   :hook
   (sly-mode . turn-off-sly-symbol-completion-mode)
+  (sly-connected . increase-elision-length)
   :config
   (defun turn-off-sly-symbol-completion-mode ()
-    (sly-symbol-completion-mode -1)))
+    (sly-symbol-completion-mode -1))
+  (defun increase-elision-length ()
+    (sly-eval
+     '(cl:setf (cl:cdr (cl:assoc 'slynk:*string-elision-length*
+                                 slynk:*slynk-pprint-bindings*))
+               1000))))
 
 (use-package sly-mrepl
   :bind
@@ -1383,16 +1389,21 @@ to shut it down, for example."
   :mode "\\.ijs\\'"
   :commands j-mode)
 
-(use-package gnu-apl-mode ; only want gnu-apl-input.el
-  :ensure t
-  :bind ("C-c A" . apl-repl)
-  :init
-  (defun apl-repl ()
-    "Open a APL REPL in a buffer."
-    (interactive)
-    (pop-to-buffer (make-comint "APL" "april"))
-    (require 'gnu-apl-input)
-    (set-input-method "APL-Z")))
+(use-package gnu-apl-mode :ensure t :defer t) ; only want gnu-apl-input.el
+
+(use-package gnu-apl-input :after aprepl)
+
+(add-to-list 'load-path
+             (car (file-expand-wildcards
+                   "~/quicklisp/dists/quicklisp/software/april*/aprepl")))
+
+(use-package aprepl
+  :bind ("C-c A" . aprepl)
+  :config
+  (defun use-apl-input-method ()
+    (set-input-method "APL-Z"))
+  :hook
+  (april-apl-repl-mode . use-apl-input-method))
 
 (use-package bqn-mode
   :ensure t
