@@ -243,7 +243,8 @@
         ("x" . rectangle-exchange-point-and-mark)
         ("*" . calc-grab-rectangle)
         (":" . calc-grab-sum-down)
-        ("_" . calc-grab-sum-across))
+        ("_" . calc-grab-sum-across)
+        (" " . delete-whitespace-rectangle))
   :init
   (autoload 'calc-grab-sum-down "calc" nil t)
   (autoload 'calc-grab-sum-across "calc" nil t))
