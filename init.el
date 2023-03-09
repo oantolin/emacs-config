@@ -689,7 +689,9 @@
      ("https?://meet\\.google\\.com" . browse-url-generic)
      ("https?://bluejeans\\.com" . browse-url-generic)
      ("https?://twitter\\.com" . browse-url-generic)
-     ("https?://doodle\\.com" . browse-url-generic)))
+     ("https?://doodle\\.com" . browse-url-generic)
+     ("https?://tinyview\\.com" . browse-url-generic)
+     ("https?://gtihub\\.com" . browse-url-generic)))
   (browse-url-secondary-browser-function #'browse-url-generic)
   :config
   (if-let ((wslview (executable-find "wslview")))
