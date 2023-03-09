@@ -1263,6 +1263,19 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package osm-ol :after org :demand t)
 
+(use-package ement
+  :ensure t
+  :bind
+  (:prefix-map global-ement-map :prefix "C-c m"
+               ("c" . ement-connect)
+               ("d" . ement-disconnect)
+               ("l" . ement-room-list)
+               ("r" . ement-view-room)
+               ("n" . ement-notify-switch-to-notifications-buffer)
+               ("m" . ement-notify-switch-to-mentions-buffer))
+  (:map ement-room-mode-map ; One of my keyboards has no <insert>
+        ("e" . ement-room-edit-message)))
+
 ;;; major modes for programming languages
 
 (use-package elisp-mode
