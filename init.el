@@ -1265,6 +1265,8 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package ement
   :ensure t
+  :custom
+  (ement-notify-notification-predicates nil) ; stop DESKTOP notifications
   :bind
   (:prefix-map global-ement-map :prefix "C-c m"
                ("c" . ement-connect)
