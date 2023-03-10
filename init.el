@@ -1278,7 +1278,7 @@ if `org-store-link' is called from the #+TITLE line."
         ("p" . ement-room-goto-prev)
         ("n" . ement-room-goto-next)
         ("{" . backward-paragraph)
-        ("{" . forward-paragraph)))
+        ("}" . forward-paragraph)))
 
 ;;; major modes for programming languages
 
