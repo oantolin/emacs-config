@@ -39,6 +39,7 @@
              (url (elfeed-entry-link entry))
              ((string-match abs url))
              (pdf (format "https://arxiv.org/pdf/%s.pdf" (match-string 1 url))))
+    (unless generic (pdf-tools-install))
     (elfeed-extras--browse pdf generic)))
 
 (defun elfeed-extras-youtube ()
