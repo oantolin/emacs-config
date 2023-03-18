@@ -683,7 +683,7 @@
   :custom
   (browse-url-browser-function #'eww-browse-url)
   (browse-url-handlers
-   '(("\\`https?://\\(?:youtu\\.be\\|\\(?:www\\.\\)youtube\\.com\\)"
+   '(("\\`https?://\\(?:youtu\\.be\\|\\(?:www\\.\\)?youtube\\.com\\)"
       . browse-url-generic)
      ("\\`https?://[^/]+zoom\\.us" . browse-url-generic)
      ("https?://meet\\.google\\.com" . browse-url-generic)
@@ -1209,7 +1209,8 @@ if `org-store-link' is called from the #+TITLE line."
         ("w" . elfeed-search-yank)
         ("P" . pocket-reader-elfeed-search-add-link)
         ("SPC" . scroll-up-command)
-        ("S-SPC" . scroll-down-command))
+        ("S-SPC" . scroll-down-command)
+        ("=" . count-lines-page))
   (:map elfeed-show-mode-map
         ("y") ; Again...
         ("P" . pocket-reader-elfeed-entry-add-link)
