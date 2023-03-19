@@ -31,8 +31,6 @@
   (when-let ((url (elfeed-extras--get-link-by-title "link")))
     (elfeed-extras--browse url generic)))
 
-(declare-function 'pdf-tools-install "ext:pdf-tools")
-
 (defun elfeed-extras-arxiv-pdf (&optional generic)
   "View the PDF corresponing to an arXiv submission in Elfeed."
   (interactive "P")
@@ -41,7 +39,9 @@
              (url (elfeed-entry-link entry))
              ((string-match abs url))
              (pdf (format "https://arxiv.org/pdf/%s.pdf" (match-string 1 url))))
-    (unless generic (pdf-tools-install))
+    (unless generic
+      (require 'pdf-tools)
+      (pdf-tools-install))
     (elfeed-extras--browse pdf generic)))
 
 (defun elfeed-extras-youtube ()
