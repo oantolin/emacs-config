@@ -31,6 +31,8 @@
   (when-let ((url (elfeed-extras--get-link-by-title "link")))
     (elfeed-extras--browse url generic)))
 
+(declare-function 'pdf-tools-install "ext:pdf-tools")
+
 (defun elfeed-extras-arxiv-pdf (&optional generic)
   "View the PDF corresponing to an arXiv submission in Elfeed."
   (interactive "P")
