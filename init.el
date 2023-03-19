@@ -1274,6 +1274,7 @@ if `org-store-link' is called from the #+TITLE line."
                ("d" . ement-disconnect)
                ("l" . ement-room-list)
                ("r" . ement-view-room)
+               ("k" . ement-kill-buffers)
                ("n" . ement-notify-switch-to-notifications-buffer)
                ("m" . ement-notify-switch-to-mentions-buffer))
   (:map ement-room-mode-map ; One of my keyboards has no <insert>
