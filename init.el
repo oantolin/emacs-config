@@ -15,7 +15,7 @@
  '(use-dialog-box nil)
  '(ring-bell-function #'ignore)
  '(cursor-type 'bar)
- '(tab-bar-show 1))
+ '(tab-bar-show nil))
 
 (when (string= (system-name) "penguin") ; Chromebook
   (set-face-attribute 'default nil :height 110)
