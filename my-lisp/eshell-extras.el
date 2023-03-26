@@ -4,7 +4,7 @@
   "Prompt for a directory and cd to it."
   (interactive "Dcd ")
   (let ((inhibit-read-only t))
-    (insert (concat "cd " dir)))
+    (insert (concat "cd " (shell-quote-argument dir))))
   (pcase major-mode
     ('shell-mode (comint-send-input))
     ('eshell-mode (eshell-send-input))
@@ -14,7 +14,7 @@
   "Run command once for each argument."
   (let ((fn (intern cmd))
         (dir default-directory))
-    (dolist (arg (eshell-flatten-list args))
+    (dolist (arg (flatten-tree args))
       (let ((default-directory dir))
         (funcall fn arg)))))
 
