@@ -905,6 +905,9 @@
               ([remap display-local-help] . man)
               ("C-c d" . interactive-cd)))
 
+(use-package apt-progress
+  :after (:any eshell shell))
+
 (use-package sh-script
   :bind (:map sh-mode-map
               ([remap display-local-help] . man)))
