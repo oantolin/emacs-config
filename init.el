@@ -130,6 +130,7 @@
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
  ("M-s d" . dictionary-search)
+ ("C-;" . comment-dwim)
  ("M-#" . dictionary-lookup-definition)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
@@ -231,7 +232,7 @@
   ("M-z" . zap-up-to-char)
   ("M-F" . forward-to-word)
   ("M-B" . backward-to-word)
-  ("M-\"". copy-from-above-command))
+  ("C-S-l". copy-from-above-command))
 
 (use-package rect
   :bind
@@ -254,7 +255,7 @@
 (use-package text-extras
   :bind
   ("M-Q" . unfill-paragraph)
-  ("C-\"" . copy-word-from-above)
+  ("C-S-o" . copy-word-from-above)
   ("M-L" . mark-line)
   ("M-C" . mark-char)
   ("M-@" . mark-my-word)
@@ -268,8 +269,8 @@
   ("C-S-s" . forward-to-whitespace)
   ("C-S-r" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
-  ("M-'" . dabbrev-next)
-  ("C-M-'" . dabbrev-complete-next)
+  ("M-;" . dabbrev-next)
+  ("C-M-;" . dabbrev-complete-next)
   ("C-c e" . text-to-clipboard)
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
@@ -402,7 +403,7 @@
         ("DEL" . vertico-directory-delete-char)
         ("M-." . consult-dir)
         ("M-j" . consult-dir-jump-file)
-        ("M-'" . vertico-quick-jump))
+        ("M-q" . vertico-quick-jump))
   :custom
   (vertico-multiform-categories
    '((embark-keybinding grid)))
@@ -429,8 +430,8 @@
 (use-package embark
   :ensure t
   :bind
-  ("C-;" . embark-act)
-  ("C-," . embark-dwim)
+  ("C-." . embark-act)
+  ("M-." . embark-dwim)
   ("C-h b" . embark-bindings)
   ("C-h B" . embark-bindings-at-point)
   ("C-h M" . embark-bindings-in-keymap)
@@ -440,10 +441,10 @@
   ("M-p" . embark-previous-symbol)
   ("M-s p" . embark-previous-symbol) ; for when M-p is taken
   (:map completion-list-mode-map
-        (";" . embark-act))
+        ("." . embark-act))
   (:map embark-collect-mode-map
         ("a") ; I don't like my own default :)
-        (";" . embark-act)
+        ("." . embark-act)
         ("F" . consult-focus-lines))
   (:map embark-package-map
         ("t" . try))
@@ -537,9 +538,9 @@
   ("C-c 4 b" . consult-buffer-other-window)
   ("C-c K" . consult-keep-lines)
   ("C-c f" . consult-focus-lines)
-  ("M-`" . consult-register-store)
-  ("C-`" . consult-register-load)
-  ("C-M-`" . consult-register)
+  ("C-:" . consult-register-store)
+  ("C-," . consult-register-load)
+  ("C-M-," . consult-register)
   (:map minibuffer-local-map
         ("M-h" . consult-history)
         ("M-r") ("M-s"))
@@ -614,7 +615,7 @@
   (("M-j" . avy-goto-char-timer)
    ([remap goto-line] . avy-goto-line))
   (:map isearch-mode-map
-        ("M-j" . avy-isearch))
+        ("M-q" . avy-isearch))
   :config
   (add-to-list 'avy-dispatch-alist '(?\. . avy-action-goto))
   (defun avy-embark-act (pt)
@@ -740,7 +741,7 @@
   :bind
   (:map LaTeX-mode-map
         ("$" . math-delimiters-insert)
-        ("C-'" . TeX-font)
+        ("C-=" . TeX-font)
         ([remap next-error])
         ([remap previous-error])
         ("M-g M-n" . TeX-next-error)
@@ -973,7 +974,7 @@
   :ensure t
   :bind
   (:map markdown-mode-map
-        ("C-'" . markdown-mode-style-map))
+        ("C-=" . markdown-mode-style-map))
   :custom-face
   (markdown-metadata-key-face ((t (:foreground nil))))
   (markdown-metadata-value-face ((t (:foreground nil))))
@@ -991,10 +992,10 @@
    ("C-c o" . org-open-at-point-global))
   (:map org-mode-map
         ("C-,") ; I use this for embark-dwim
-        ("C-c C-'" . org-cycle-agenda-files)
+        ("C-c C-=" . org-cycle-agenda-files)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
-        ("C-'" . org-emphasize))
+        ("C-=" . org-emphasize))
   :custom
   (org-ellipsis "…")
   (org-refile-use-outline-path 'file)
