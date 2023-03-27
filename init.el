@@ -436,10 +436,6 @@
   ("C-h B" . embark-bindings-at-point)
   ("C-h M" . embark-bindings-in-keymap)
   ("C-h E" . embark-on-last-message)
-  ("M-n" . embark-next-symbol)
-  ("M-s n" . embark-next-symbol) ; for when M-n is taken
-  ("M-p" . embark-previous-symbol)
-  ("M-s p" . embark-previous-symbol) ; for when M-p is taken
   (:map completion-list-mode-map
         ("." . embark-act))
   (:map embark-collect-mode-map
