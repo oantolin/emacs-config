@@ -138,7 +138,6 @@
  ("C-x M-c" . restart-emacs)
  ([remap list-buffers] . electric-buffer-list)
  ([remap count-words-region] . count-words)
- ([remap dabbrev-expand] . hippie-expand)
  ("C-M-o" . up-list)
  ("C-o" . split-line)
  ("M-o" . other-window)
