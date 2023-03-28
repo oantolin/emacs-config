@@ -119,7 +119,8 @@
 (bind-keys
  ("C-d" . delete-forward-char)
  ("M-K" . kill-paragraph)
- ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history  
+ ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history
+ ("M-\\" . cycle-spacing)
  ("M-Z" . zap-to-char)
  ("C-x c" . set-goal-column)
  ("C-x k" . kill-current-buffer)
