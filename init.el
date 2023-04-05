@@ -612,7 +612,7 @@
   (:map isearch-mode-map
         ("M-q" . avy-isearch))
   :config
-  (add-to-list 'avy-dispatch-alist '(?\. . avy-action-goto))
+  (add-to-list 'avy-dispatch-alist '(?\, . avy-action-goto))
   (defun avy-embark-act (pt)
     "Use Embark to act on the completion at PT."
     (unwind-protect
@@ -622,7 +622,7 @@
       (select-window
        (cdr (ring-ref avy-ring 0)))
       t))
-  (add-to-list 'avy-dispatch-alist '(?\; . avy-embark-act))
+  (add-to-list 'avy-dispatch-alist '(?\. . avy-embark-act))
   (defun avy-action-exchange (pt)
     "Exchange sexp at PT with the one at point."
     (set-mark pt)
