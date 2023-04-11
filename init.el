@@ -321,7 +321,7 @@
   (:map toggle-map
         ("w" . toggle-wrapping)
         ("l" . toggle-ispell-lang)
-        ("TAB" . toggle-tab-bar-visibility))
+        ("TAB" . toggle-tab-bar-visibility)))
 
 (use-package window-extras
   :bind
