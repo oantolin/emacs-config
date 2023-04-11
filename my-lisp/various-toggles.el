@@ -19,4 +19,9 @@
      ("english" "español")
      ("español" "english"))))
 
+(defun toggle-tab-bar-visibility ()
+  "Toggle tab-bar visibility."
+  (interactive)
+  (customize-set-variable 'tab-bar-show (not tab-bar-show)))
+
 (provide 'various-toggles)
