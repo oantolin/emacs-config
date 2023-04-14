@@ -25,10 +25,6 @@
   (define-key key-translation-map (kbd "<S-prior>") (kbd "<S-M-up>")))
 
 (custom-set-faces
- '(default ((((type w32)) :family "Consolas"))))
-
-(custom-set-faces
- `(variable-pitch ((((type w32)) :family "Verdana")))
  '(Info-quoted ((t :inherit fixed-pitch)))
  `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
@@ -62,10 +58,6 @@
 (dolist (dir '("placeholder" "math-delimiters" "ngnk-mode"))
   (add-to-list 'load-path (format "~/my-elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
-
-(when (eq system-type 'windows-nt)
-  (cd "~/")
-  (setenv "LANG" "en_US"))
 
 ;;; misc
 
@@ -558,9 +550,6 @@
     "Use default `completion--in-region' unless we are not completing."
     (when minibuffer-completion-table
       (setq-local completion-in-region-function #'completion--in-region)))
-  (when (eq (window-system) 'w32)
-    (setq consult-find-args
-          (replace-regexp-in-string "\\*" "\\\\*" consult-find-args)))
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring))
@@ -837,11 +826,6 @@
                     (car item))
             (cdr item))))
   (advice-add 'pdf-outline-imenu-create-item :around #'pdf-outline-indent))
-
-(use-package tramp
-  :defer t
-  :when (and (eq system-type 'windows-nt) (executable-find "plink.exe"))
-  :custom (tramp-default-method "plink"))
 
 (use-package dired
   :bind
