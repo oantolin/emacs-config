@@ -15,6 +15,7 @@
 
 (defvar-keymap this-buffer-map
   :doc "Commands to act on current file or buffer."
+  :parent embark-general-map
   "RET" #'eval-buffer
   "l" #'load-file
   "b" #'byte-compile-file
