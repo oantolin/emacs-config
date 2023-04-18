@@ -312,7 +312,6 @@
   :bind
   (:map toggle-map
         ("w" . toggle-wrapping)
-        ("l" . toggle-ispell-lang)
         ("TAB" . toggle-tab-bar-visibility)))
 
 (use-package window-extras
@@ -1069,21 +1068,17 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package citeproc :ensure t :defer t)
 
-(use-package ispell
-  :defer t
-  :config
-  (add-to-list 'ispell-dicts-name2locale-equivs-alist
-               '("español" "es_MX"))
-  (defconst ispell-org-skip-alists
-    '(("\\\\\\[" . "\\\\\\]")
-      ("\\\\(" . "\\\\)")
-      ("\\begin{\\(align\\|equation\\)}" . "\\end{\\(align\\|equation\\)}" )
-      ("\\[fn:" . "\\]")
-      ("#\\+BEGIN_SRC". "#\\+END_SRC")))
-  (dolist (reg ispell-org-skip-alists)
-    (add-to-list 'ispell-skip-region-alist reg))
-  (add-to-list 'ispell-tex-skip-alists '(("\\$" . "\\$"))))
-
+(use-package jinx
+  :ensure t
+  :hook
+  (emacs-startup . global-jinx-mode)
+  :custom
+  (jinx-languages "en_US es_MX")
+  :bind
+  ([remap ispell-word] . jinx-correct)
+  (:map toggle-map
+        ("l" . jinx-languages)))
+  
 (use-package try :ensure t :defer t)
 
 (use-package logos
