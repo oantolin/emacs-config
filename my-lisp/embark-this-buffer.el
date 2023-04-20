@@ -38,7 +38,7 @@
   "|" #'embark-shell-command-on-buffer
   "g" #'revert-buffer
   "p" #'pwd
-  "SPC" #'mark-whole-buffer
+  "h" #'mark-whole-buffer
   "<" #'previous-buffer
   ">" #'next-buffer
   "t" #'transpose-windows)
