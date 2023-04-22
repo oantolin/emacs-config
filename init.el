@@ -621,7 +621,7 @@
 (use-package link-hint
   :ensure t
   :bind
-  ("C-^" . link-hint-open-link))
+  ("C-S-j" . link-hint-open-link))
 
 (use-package paren :init (show-paren-mode))
 
