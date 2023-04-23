@@ -559,7 +559,7 @@
   (setf
    (alist-get
     ?k (plist-get (alist-get 'emacs-lisp-mode consult-imenu-config) :types))
-   '("Embark Keymaps" font-lock-variable-name-face)))
+   '("Keymaps" font-lock-variable-name-face)))
 
 (use-package webjump
   :bind
