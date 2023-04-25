@@ -668,20 +668,21 @@
   :custom
   (browse-url-browser-function #'eww-browse-url)
   (browse-url-handlers
-   '(("\\`https?://\\(?:youtu\\.be\\|\\(?:www\\.\\)?youtube\\.com\\)"
-      . browse-url-generic)
-     ("\\`https?://[^/]+zoom\\.us" . browse-url-generic)
-     ("https?://meet\\.google\\.com" . browse-url-generic)
-     ("https?://bluejeans\\.com" . browse-url-generic)
-     ("https?://twitter\\.com" . browse-url-generic)
-     ("https?://doodle\\.com" . browse-url-generic)
-     ("https?://tinyview\\.com" . browse-url-generic)
-     ("https?://github\\.com" . browse-url-generic)))
-  (browse-url-secondary-browser-function #'browse-url-generic)
-  :config
-  (if-let ((wslview (executable-find "wslview")))
-      (setq browse-url-generic-program wslview)
-    (advice-add 'browse-url-generic :override 'browse-url-default-browser)))
+   (mapcar
+    (lambda (regexp) (cons (concat "\\`https?://" regexp) 'browse-url-generic)) 
+    '("\\(?:youtu\\.be\\|\\(?:www\\.\\)?youtube\\.com\\)"
+      "[^/]+zoom\\.us"
+      "meet\\.google\\.com"
+      "bluejeans\\.com"
+      "twitter\\.com"
+      "doodle\\.com"
+      "tinyview\\.com"
+      "github\\.com")))
+    (browse-url-secondary-browser-function #'browse-url-generic)
+    :config
+    (if-let ((wslview (executable-find "wslview")))
+        (setq browse-url-generic-program wslview)
+      (advice-add 'browse-url-generic :override 'browse-url-default-browser)))
 
 (use-package shr
   :bind
