@@ -123,6 +123,7 @@
  ("M-s c" . count-matches)
  ("M-s d" . dictionary-search)
  ("C-;" . comment-dwim)
+ ("C-<" . delete-indentation)
  ("M-#" . dictionary-lookup-definition)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
