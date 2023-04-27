@@ -941,6 +941,8 @@
         ("c" . vc-git-commit)))
 
 (use-package smerge-mode
+  :custom
+  (smerge-command-prefix "C->")
   :config
   (map-keymap
    (lambda (_key cmd)
