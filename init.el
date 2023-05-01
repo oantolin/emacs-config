@@ -393,8 +393,8 @@
   :bind
   (:map vertico-map
         ("DEL" . vertico-directory-delete-char)
-        ("M-." . consult-dir)
-        ("M-j" . consult-dir-jump-file)
+        ("C-M-d" . consult-dir)
+        ("C-M-j" . consult-dir-jump-file)
         ("M-q" . vertico-quick-jump))
   :custom
   (vertico-multiform-categories
