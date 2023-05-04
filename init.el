@@ -604,7 +604,7 @@
   :config
   (add-to-list 'avy-dispatch-alist '(?\, . avy-action-goto))
   (defun avy-embark-act (pt)
-    "Use Embark to act on the completion at PT."
+    "Use Embark to act on the item at PT."
     (unwind-protect
         (save-excursion
           (goto-char pt)
