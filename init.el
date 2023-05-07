@@ -1065,6 +1065,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package jinx
   :ensure t
+  :diminish
   :hook
   (emacs-startup . global-jinx-mode)
   :custom
