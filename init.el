@@ -1069,7 +1069,7 @@ if `org-store-link' is called from the #+TITLE line."
   :hook
   (emacs-startup . global-jinx-mode)
   :custom
-  (jinx-languages "en_US es_MX")
+  (jinx-languages "en es")
   :bind
   ([remap ispell-word] . jinx-correct)
   (:map toggle-map
