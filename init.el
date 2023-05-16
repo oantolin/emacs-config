@@ -285,6 +285,7 @@
   :custom
   (search-whitespace-regexp ".*?")
   (isearch-allow-scroll 'unlimited)
+  (isearch-lazy-count t)
   :bind
   (:map isearch-mode-map
         ("M-c") ; free up for capitalize-dwim, still bound to M-s c
