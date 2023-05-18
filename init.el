@@ -489,7 +489,13 @@
     (interactive "P")
     (with-current-buffer "*Messages*"
       (goto-char (1- (point-max)))
-      (embark-act arg))))
+      (embark-act arg)))
+  (defun embark--smerge-next (&rest _) (push-mark) (smerge-next))
+  (dolist (cmd '(smerge-keep-all   smerge-keep-base
+                 smerge-keep-mine  smerge-keep-lower
+                 smerge-keep-other smerge-keep-upper
+                 smerge-keep-current))
+    (push #'embark--smerge-next (alist-get cmd embark-post-action-hooks))))
 
 (use-package embark-consult :ensure t :defer t)
 
