@@ -1419,6 +1419,14 @@ to shut it down, for example."
 
 (use-package ngnk-mode :bind ("C-c k" . run-ngnk))
 
-(use-package gap-mode :ensure t :defer t)
+(use-package gap-mode
+  :ensure t
+  :defer t
+  :bind (:map gap-mode-map ; C-c letter is *reserved*, damn it!
+              ("C-c e") ("C-c d") ("C-c a") ("C-c l")
+              ("C-c C-x" . gap-eval-defun)
+              ("C-c C-a" . gap-add-local-variable)
+              ("C-c C-l" . gap-insert-local-variables)
+              ("C-c C-d" . gap-insert-debug-print)))
 
 (use-package gap-config :after gap-mode) ; private package that just sets paths
