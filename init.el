@@ -1096,6 +1096,20 @@ if `org-store-link' is called from the #+TITLE line."
   ([remap forward-page] . logos-forward-page-dwim)
   ([remap backward-page] . logos-backward-page-dwim))
 
+(use-package keycast
+  :ensure t
+  :bind (:map toggle-map
+              ("k" . keycast-mode-line-mode))
+  :config
+  (defun store-action-key+cmd (cmd)
+    (force-mode-line-update t)
+    (setq this-command cmd
+          keycast--this-command-keys (this-single-command-keys)
+          keycast--this-command-desc cmd))
+  (advice-add 'embark-keymap-prompter :filter-return #'store-action-key+cmd)
+  (defun force-keycast-update (&rest _) (keycast--update))
+  (advice-add 'embark-act :before #'force-keycast-update))
+
 ;;; email packages
 
 (use-package email-config) ; private package
