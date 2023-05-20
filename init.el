@@ -503,8 +503,8 @@
   :ensure t
   :bind
   (:map minibuffer-local-filename-completion-map
-        ("M-." . consult-dir)
-        ("M-j" . consult-dir-jump-file)))
+        ("C-M-d" . consult-dir)
+        ("C-M-j" . consult-dir-jump-file)))
 
 (use-package embark-this-buffer
   :after embark
