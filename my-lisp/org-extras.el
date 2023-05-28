@@ -10,12 +10,12 @@
     (when (and (memq backend '(latex html))
                (string-match path-regexp path))
       (format (pcase backend
-                ('latex "\\href{%s}{%s}")
+                ((or 'latex 'beamer) "\\href{%s}{%s}")
                 ('html "<a href=\"%s\">%s</a>"))
               (format url-format (match-string 1 path))
               (or description
                   (format (pcase backend
-                            ('latex "\\texttt{%s}")
+                            ((or 'latex 'beamer) "\\texttt{%s}")
                             ('html "<code>%s</code>"))
                           (format (if (match-string 2 path)
                                       title-format-2
@@ -37,9 +37,12 @@
 
 ;;; doi links
 
-(org-link-set-parameters
- "doi" ; already has a sensible :follow
- :export (org-extras--link-exporter "^\\(.*\\)$" "https://doi.org/%s" "doi:%s"))
+(defun beamer-is-latex (args)
+  "Treat Beamer backend same as LaTeX."
+  (pcase-let ((`(,path ,desc ,backend ,info) args))
+    `(,path ,desc ,(if (eq backend 'beamer) 'latex backend) ,info)))
+
+(advice-add 'org-link-doi-export :filter-args #'beamer-is-latex)
 
 ;;; Inline JavaScript
 
