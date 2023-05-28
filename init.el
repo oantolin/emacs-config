@@ -1099,7 +1099,8 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package keycast
   :ensure t
   :bind (:map toggle-map
-              ("k" . keycast-mode-line-mode))
+              ("k" . keycast-mode-line-mode)
+              ("h" . keycast-header-line-mode))
   :config
   (defun store-action-key+cmd (cmd)
     (force-mode-line-update t)
