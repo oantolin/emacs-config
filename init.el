@@ -1084,7 +1084,9 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   ([remap ispell-word] . jinx-correct)
   (:map toggle-map
-        ("l" . jinx-languages)))
+        ("l" . jinx-languages))
+  :config
+  (put 'jinx-overlay 'keymap nil))
   
 (use-package try :ensure t :defer t)
 
