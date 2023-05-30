@@ -427,6 +427,7 @@
   :ensure t
   :bind
   ("C-." . embark-act)
+  ("C-:" . embark-act-all)
   ("M-." . embark-dwim)
   ("C-h b" . embark-bindings)
   ("C-h B" . embark-bindings-at-point)
@@ -536,7 +537,7 @@
   ("C-c 4 b" . consult-buffer-other-window)
   ("C-c K" . consult-keep-lines)
   ("C-c f" . consult-focus-lines)
-  ("C-:" . consult-register-store)
+  ("C->" . consult-register-store)
   ("C-," . consult-register-load)
   ("C-M-," . consult-register)
   (:map minibuffer-local-map
