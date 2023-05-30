@@ -287,6 +287,8 @@
   (isearch-allow-scroll 'unlimited)
   (isearch-lazy-count t)
   :bind
+  ("M-n" . isearch-next)
+  ("M-p" . isearch-previous)
   (:map isearch-mode-map
         ("M-c") ; free up for capitalize-dwim, still bound to M-s c
         ("<S-return>" . isearch-exit-at-end)

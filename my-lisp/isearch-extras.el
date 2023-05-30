@@ -62,4 +62,18 @@ point until the end of the buffer."
                    (isearch-query-replace-regexp))))))
         (isearch-forward-regexp)))))
 
+(defun isearch-next ()
+  "Go to next isearch match."
+  (interactive)
+  (let (isearch-lazy-highlight)
+    (isearch-repeat 'forward))
+  (isearch-exit))
+
+(defun isearch-previous ()
+  "Go to previous isearch match."
+  (interactive)
+  (let (isearch-lazy-highlight)
+    (isearch-repeat 'backward))
+  (isearch-exit))
+
 (provide 'isearch-extras)
