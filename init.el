@@ -1149,7 +1149,8 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package message
   :bind (:map message-mode-map
-              ("C-<tab>" . expand-mail-aliases))
+              ("C-<tab>" . expand-mail-aliases)
+              ("M-n"))
   :custom
   (message-signature nil)
   (message-mail-alias-type 'ecomplete)
