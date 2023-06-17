@@ -396,6 +396,7 @@
   :ensure t
   :bind
   (:map vertico-map
+        ("C-<return>" . vertico-really-exit-input) ; must-match is a tyrant
         ("DEL" . vertico-directory-delete-char)
         ("C-M-d" . consult-dir)
         ("C-M-j" . consult-dir-jump-file)
@@ -406,6 +407,7 @@
   :init
   (vertico-mode)
   :config
+  (defalias 'vertico-really-exit-input #'exit-minibuffer)
   (vertico-multiform-mode))
 
 (use-package marginalia
