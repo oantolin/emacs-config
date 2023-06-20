@@ -809,7 +809,8 @@
   :bind
   (:map pdf-view-mode-map
         ("d" . pdf-view-midnight-minor-mode)
-        ("i" . consult-imenu))
+        ("i" . consult-imenu)
+        ("s n" . "nsbp"))
   :config
   (add-hook 'TeX-after-compilation-finished-functions
             #'TeX-revert-document-buffer)
