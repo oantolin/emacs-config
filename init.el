@@ -980,8 +980,8 @@
   (:map markdown-mode-map
         ("C-=" . markdown-mode-style-map))
   :custom-face
-  (markdown-metadata-key-face ((t (:foreground nil))))
-  (markdown-metadata-value-face ((t (:foreground nil))))
+  (markdown-metadata-key-face ((t (:inherit default))))
+  (markdown-metadata-value-face ((t (:inherit default :foreground nil))))
   :config
   (fset 'markdown-mode-style-map markdown-mode-style-map)
   (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table))
