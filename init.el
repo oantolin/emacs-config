@@ -1266,7 +1266,10 @@ if `org-store-link' is called from the #+TITLE line."
         ("v" . elfeed-extras-arxiv-pdf)
         ("y" . elfeed-extras-youtube)))
 
-(use-package embark-elfeed :after (elfeed embark))
+(use-package embark-elfeed
+  :after (elfeed embark)
+  :config
+  (put 'elfeed-show-mode 'derived-mode-parent 'text-mode))
 
 (use-package elfeed-config :after elfeed) ; private package
 
