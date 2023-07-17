@@ -1316,6 +1316,13 @@ if `org-store-link' is called from the #+TITLE line."
         ("<" . beginning-of-buffer)
         (">" . end-of-buffer)))
 
+
+(use-package mastodon
+  :ensure t
+  :bind ("C-c M" . mastodon))
+
+(use-package mastodon-config :after mastodon) ; private package
+
 ;;; major modes for programming languages
 
 (use-package elisp-mode
