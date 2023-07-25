@@ -21,3 +21,4 @@ tramp
 /eln-cache
 forge-database.sqlite
 nov-places
+persist/
