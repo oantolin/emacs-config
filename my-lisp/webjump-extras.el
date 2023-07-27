@@ -11,7 +11,8 @@
     ("IMDb" . "https://www.imdb.com/find?q=")
     ("YouTube" . "https://www.youtube.com/results?search_query=")
     ("Merriam-Webster" . "https://www.merriam-webster.com/dictionary/")
-    ("Collins" . "https://www.collinsdictionary.com/dictionary/english/"))
+    ("Collins" . "https://www.collinsdictionary.com/dictionary/english/")
+    ("arXiv" . "https://arxiv.org/search/?searchtype=all&query="))
   "Search engines to add to `webjump-sites' as `simply-query' sites."
   :group 'webjump
   :type '(alist :key-type (string :tag "Name")
