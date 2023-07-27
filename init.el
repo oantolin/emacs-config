@@ -1227,52 +1227,6 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package embark-pocket-reader :after (pocket-reader embark))
 
-(use-package elfeed
-  :ensure t
-  :bind
-  ("C-c E" . elfeed)
-  (:map elfeed-search-mode-map
-        ("y") ; Wellons is brilliant but he confused yank & save
-        ("w" . elfeed-search-yank)
-        ("P" . pocket-reader-elfeed-search-add-link)
-        ("SPC" . scroll-up-command)
-        ("S-SPC" . scroll-down-command)
-        ("=" . count-lines-page))
-  (:map elfeed-show-mode-map
-        ("y") ; Again...
-        ("P" . pocket-reader-elfeed-entry-add-link)
-        ("E" . elfeed-show-play-enclosure)
-        ("w" . elfeed-show-yank)
-        ("S-SPC" . scroll-down-command)
-        ("{" . backward-paragraph)
-        ("}" . forward-paragraph)
-        ("C-c C-p" . shr-heading-previous)
-        ("C-c C-n" . shr-heading-next))
-  :hook
-  (elfeed-show-mode . visual-line-mode)
-  (elfeed-show-mode . shr-heading-setup-imenu))
-
-(use-package elfeed-extras
-  :after elfeed
-  :bind
-  (:map elfeed-search-mode-map
-        ("c" . elfeed-extras-comments)
-        ("l" . elfeed-extras-link)
-        ("v" . elfeed-extras-arxiv-pdf)
-        ("y" . elfeed-extras-youtube))
-  (:map elfeed-show-mode-map
-        ("c" . elfeed-extras-comments)
-        ("l" . elfeed-extras-link)
-        ("v" . elfeed-extras-arxiv-pdf)
-        ("y" . elfeed-extras-youtube)))
-
-(use-package embark-elfeed
-  :after (elfeed embark)
-  :config
-  (put 'elfeed-show-mode 'derived-mode-parent 'text-mode))
-
-(use-package elfeed-config :after elfeed) ; private package
-
 (use-package osm
   :ensure t
   :defer t
