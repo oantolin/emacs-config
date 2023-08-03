@@ -1019,7 +1019,6 @@
   (org-auto-align-tags nil)
   (org-use-speed-commands t)
   (org-cycle-emulate-tab 'whitestart)
-  (org-return-follows-link t)
   (org-agenda-skip-timestamp-if-done t)
   (org-agenda-skip-scheduled-if-done t)
   (org-agenda-skip-deadline-if-done t)
