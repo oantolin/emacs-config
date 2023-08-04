@@ -637,7 +637,11 @@
   :bind
   ("C-S-j" . link-hint-open-link))
 
-(use-package paren :init (show-paren-mode))
+(use-package paren
+  :custom
+  (show-paren-context-when-offscreen t)
+  :init
+  (show-paren-mode))
 
 (use-package text-mode
   :hook
