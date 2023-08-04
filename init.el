@@ -1280,25 +1280,12 @@ if `org-store-link' is called from the #+TITLE line."
 ;;; major modes for programming languages
 
 (use-package elisp-mode
-  :custom
-  (lisp-indent-function #'hybrid-lisp-indent-function)
   :config
   (add-to-list 'lisp-imenu-generic-expression
                '("Keymaps"
                  "^\\s-*(defvar-keymap\\s-+\\(\\(?:\\sw\\|\\s_\\)+\\)"
                  1)
-               t)
-  (defun hybrid-lisp-indent-function (indent-point state)
-    "An indent function for Emacs Lisp that handles some cl constructs.
-It handles `cl-labels', `cl-flet' and `cl-macrolet'.
-For those constructs, it uses `common-lisp-indent-function', for
-everything else, it uses `lisp-indent-function'."
-    (if (save-excursion
-          (cl-loop for pt in (nth 9 state)
-                   do (goto-char pt)
-                   thereis (looking-at "(cl-\\(?:label\\|flet\\|macrolet\\)")))
-        (common-lisp-indent-function indent-point state)
-      (lisp-indent-function indent-point state))))
+               t))
 
 (use-package python
   :defer t
