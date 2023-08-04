@@ -128,7 +128,6 @@
  ("M-#" . dictionary-lookup-definition)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
- ("C-c l" . find-library)
  ("C-x M-c" . restart-emacs)
  ([remap list-buffers] . electric-buffer-list)
  ([remap count-words-region] . count-words)
@@ -642,6 +641,10 @@
   (show-paren-context-when-offscreen t)
   :init
   (show-paren-mode))
+
+(use-package find-func
+  :init
+  (find-function-setup-keys))
 
 (use-package text-mode
   :hook
