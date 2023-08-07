@@ -216,7 +216,8 @@
   ("M-z" . zap-up-to-char)
   ("M-F" . forward-to-word)
   ("M-B" . backward-to-word)
-  ("C-S-l". copy-from-above-command))
+  ("C-S-l" . copy-from-above-command)
+  ("C-S-d" . duplicate-dwim))
 
 (use-package rect
   :bind
