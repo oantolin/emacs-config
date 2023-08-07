@@ -522,12 +522,12 @@
   :bind
   ("M-y" . consult-yank-pop)
   ("M-g l" . consult-line)
+  ("M-g L" . consult-line-multi)
   ("M-g i" . consult-imenu)
   ("M-g o" . consult-outline)
   ("M-g I" . consult-imenu-multi)
   ("M-g m" . consult-mark)
   ("M-g k" . consult-global-mark)
-  ("M-s m" . consult-multi-occur)
   ("M-s g" . consult-grep)
   ("M-s G" . consult-git-grep)
   ("M-s r" . consult-ripgrep)
