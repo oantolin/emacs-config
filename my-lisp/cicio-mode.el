@@ -19,23 +19,19 @@
             (2 font-lock-function-name-face nil t)))
     keywords))
 
-(defvar cicio-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c C-l") #'cicio-to-lua)
-    (define-key map (kbd "C-c C-c") #'run-cicio)
-    (define-key map (kbd "C-c C-r") #'cicio-runfile)
-    (define-key map (kbd "C-M-x") #'cicio-eval-defun)
-    (define-key map (kbd "C-M-q") #'indent-pp-sexp)
-    map)
-  "Keymap for Cicio mode.")
+(defvar-keymap cicio-mode-map
+  :doc  "Keymap for Cicio mode."
+  "C-c C-l" #'cicio-to-lua
+  "C-c C-c" #'run-cicio
+  "C-c C-r" #'cicio-runfile
+  "C-M-x" #'cicio-eval-defun
+  "C-M-q" #'indent-pp-sexp)
 
 (defvar inferior-cicio-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c C-r") #'inferior-cicio-runfile)
-    (define-key map (kbd "C-c C-s") #'inferior-cicio-switch-to-source)
-    (define-key map (kbd "C-M-q") #'indent-pp-sexp)
-    map)
-  "Keymap for Inferior Cicio mode.")
+  :doc "Keymap for Inferior Cicio mode."
+  "C-c C-r" #'inferior-cicio-runfile
+  "C-c C-s" #'inferior-cicio-switch-to-source
+  "C-M-q" #'indent-pp-sexp)
 
 (define-derived-mode cicio-mode clojure-mode "Cicio"
   "Major mode for editing Cicio programs.
@@ -105,9 +101,5 @@
   (interactive)
   (switch-to-buffer (make-comint "cicio" "cicio"))
   (inferior-cicio-mode))
-
-(when (featurep 'smartparens)
-  (sp-with-modes '(cicio-mode inferior-cicio-mode)
-    (sp-local-pair "`" "`" :actions nil)))
 
 (provide 'cicio-mode)

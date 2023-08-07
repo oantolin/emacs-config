@@ -11,19 +11,15 @@
   "Buffer from which this inferior J buffer was started.")
 
 (defvar j-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c C-l") #'j-mode-load-file)
-    (define-key map (kbd "C-c C-c") #'j-mode-eval)
-    (define-key map (kbd "C-c C-s") #'run-j)
-    map)
-  "Keymap for J mode")
+  :doc "Keymap for J mode"
+  "C-c C-l" #'j-mode-load-file
+  "C-c C-c" #'j-mode-eval
+  "C-c C-s" #'run-j)
 
 (defvar inferior-j-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c C-l") #'j-mode-load-file)
-    (define-key map (kbd "C-c C-s") #'j-mode-switch-to-source)
-    map)
-  "Keymap for J mode")
+  :doc "Keymap for J mode"
+  "C-c C-l" #'j-mode-load-file
+  "C-c C-s" #'j-mode-switch-to-source)
 
 (define-derived-mode j-mode prog-mode "J"
   "Major mode for editing J programs

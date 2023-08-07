@@ -99,10 +99,10 @@
   tabulated-list-mode "Grid"
   "Grid of completions.")
 
-(let ((map grille-mode-map))
-  (define-key map (kbd "<right>") #'forward-button)
-  (define-key map (kbd "<left>") #'backward-button)
-  (define-key map "s" #'isearch-forward))
+(defvar-keymap grille-mode-map
+ "<right>" #'forward-button
+ "<left>" #'backward-button
+ "s" #'isearch-forward)
 
 (defun grille (&optional columns)
   "Pop up a live-updating grid with current completions."

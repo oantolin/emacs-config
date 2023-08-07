@@ -19,10 +19,10 @@
 
 (when (string= (system-name) "penguin") ; Chromebook
   (set-face-attribute 'default nil :height 110)
-  (define-key key-translation-map (kbd "<next>") (kbd "<M-down>"))
-  (define-key key-translation-map (kbd "<S-next>") (kbd "<S-M-down>"))
-  (define-key key-translation-map (kbd "<prior>") (kbd "<M-up>"))
-  (define-key key-translation-map (kbd "<S-prior>") (kbd "<S-M-up>")))
+  (keymap-set key-translation-map "<next>" "M-<down>")
+  (keymap-set key-translation-map "S-<next>" "M-S-<down>")
+  (keymap-set key-translation-map "<prior>" "M-<up>")
+  (keymap-set key-translation-map "S-<prior>" "M-S-<up>"))
 
 (custom-set-faces
  '(Info-quoted ((t :inherit fixed-pitch)))
@@ -1190,10 +1190,8 @@ if `org-store-link' is called from the #+TITLE line."
   (message-send . set-smtp-server)
   (message-send . message-lint)
   :config
-  (defvar cycle-from-address-repeat-map
-    (let ((map (make-sparse-keymap)))
-      (define-key map "f" #'cycle-from-address)
-      map))
+  (defvar-keymap cycle-from-address-repeat-map
+    "f" #'cycle-from-address)
   (put 'cycle-from-address 'repeat-map 'cycle-from-address-repeat-map))
 
 ;;; applications
@@ -1344,8 +1342,8 @@ if `org-store-link' is called from the #+TITLE line."
         ("C-s x" . sly-export-symbol-at-point))
   :config
   (defun sly-package-fu-fix-keys () ; C-c LETTER are reserved!
-    (define-key sly-mode-map (kbd "C-c i") nil)
-    (define-key sly-mode-map (kbd "C-c x") nil))
+    (keymap-unset sly-mode-map "C-c i")
+    (keymap-unset sly-mode-map "C-c x"))
   (advice-add 'sly-package-fu-init :after #'sly-package-fu-fix-keys))
 
 (use-package sly-trace-dialog

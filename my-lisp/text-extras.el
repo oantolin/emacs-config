@@ -223,10 +223,8 @@ the only difference between this command and %s-dwim."
    (buffer-substring-no-properties (point-min) (point-max)))
   (quit-window :kill))
 
-(defvar text-to-clipboard-minor-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c C-c") #'text-to-clipboard--done)
-    map))
+(defvar-keymap text-to-clipboard-minor-mode-map
+  "C-c C-c" #'text-to-clipboard--done)
 
 (define-minor-mode text-to-clipboard-minor-mode
   "Minor mode binding a key to quit window and copy buffer to clipboard.")
