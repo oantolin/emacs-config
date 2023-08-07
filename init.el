@@ -106,7 +106,8 @@
  '(revert-without-query '(""))
  '(recenter-positions '(top middle bottom))
  '(display-time-default-load-average nil)
- '(dictionary-server "dict.org"))
+ '(dictionary-server "dict.org")
+ '(native-comp-async-report-warnings-errors 'silent))
 
 (bind-keys
  ("C-d" . delete-forward-char)
