@@ -1280,7 +1280,10 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package mastodon
   :ensure t
-  :bind ("C-c M" . mastodon))
+  :bind ("C-c M" . mastodon)
+  :custom-face
+  (mastodon-toot-docs-face
+   ((t :inherit (font-lock-comment-face fixed-pitch)))))
 
 (use-package mastodon-config :after mastodon) ; private package
 
