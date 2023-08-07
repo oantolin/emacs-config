@@ -38,16 +38,6 @@
       '(("melpa" . "https://melpa.org/packages/")
         ("gnu" . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-(require 'package)
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(custom-set-variables
- '(use-package-enable-imenu-support t))
-
-(eval-when-compile (require 'use-package))
 
 (use-package diminish :ensure t :defer t)
 
@@ -81,6 +71,7 @@
 (put 'suspend-frame 'disabled t)
 
 (custom-set-variables
+ '(use-package-enable-imenu-support t)
  '(set-mark-command-repeat-pop t)
  '(tab-always-indent 'complete)
  '(current-language-environment "UTF-8")
