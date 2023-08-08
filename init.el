@@ -80,6 +80,7 @@
  '(scroll-preserve-screen-position t)
  '(make-backup-files nil)
  '(sentence-end-double-space nil)
+ '(cycle-spacing-actions '(delete-all-space just-one-space restore))
  '(words-include-escapes t)
  '(indent-tabs-mode nil)
  '(standard-indent 2)
@@ -117,6 +118,7 @@
  ("M-s d" . dictionary-search)
  ("C-;" . comment-dwim)
  ("C-<" . delete-indentation)
+ ("M-\\" . cycle-spacing)
  ("M-#" . dictionary-lookup-definition)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
