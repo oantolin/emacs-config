@@ -1251,6 +1251,7 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :custom
   (ement-notify-notification-predicates nil) ; stop DESKTOP notifications
+  (ement-room-send-message-filter #'ement-room-send-org-filter)
   :bind
   (:prefix-map global-ement-map :prefix "C-c m"
                ("c" . ement-connect)
