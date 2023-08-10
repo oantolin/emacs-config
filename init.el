@@ -1247,11 +1247,18 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package osm-ol :after org :demand t)
 
+(use-package ement-tweaks
+  :commands
+  ement-tweaks-send-reaction
+  ement-tweaks-quick-send-minor-mode)
+
 (use-package ement
   :ensure t
   :custom
   (ement-notify-notification-predicates nil) ; stop DESKTOP notifications
   (ement-room-send-message-filter #'ement-room-send-org-filter)
+  :config
+  (ement-tweaks-quick-send-minor-mode)
   :bind
   (:prefix-map global-ement-map :prefix "C-c m"
                ("c" . ement-connect)
@@ -1268,7 +1275,8 @@ if `org-store-link' is called from the #+TITLE line."
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)
         ("<" . beginning-of-buffer)
-        (">" . end-of-buffer)))
+        (">" . end-of-buffer)
+        ([remap ement-room-send-reaction] . ement-tweaks-send-reaction)))
 
 (use-package mastodon
   :ensure t
