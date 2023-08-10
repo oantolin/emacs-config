@@ -10,7 +10,7 @@
   :group 'ement
   :prefix "ement-tweaks-")
 
-(defcustom ement-tweaks-initial-emoji-command #'emoji-insert
+(defcustom ement-tweaks-emoji-command #'emoji-insert
   "Command to choose an emoji for a reaction."
   :type '(choice (const emoji-insert)
                  (const emoji-search)
@@ -19,10 +19,20 @@
 
 (defvar-keymap ement-tweaks-emoji-map
   "s" #'emoji-search
-  "i" #'emoji-insert)
+  "i" #'emoji-insert
+  "c" #'insert-char)
 
 (defun ement-tweaks-send-reaction (key position)
-  "Send a reaction."
+  "Send a reaction.
+The user option `ement-tweaks-emoji-command' controls
+which emoji insertion command is used to select the emoji.
+
+You're not forced to stick with that emoji insertion command, you
+can C-g your way out and type the emoji anyway you'd like.  To
+facilitate this, the follow keybindings are enabled in the
+minibuffer:
+
+\\{ement-tweaks-emoji-map}"
   (interactive
    (list (minibuffer-with-setup-hook
              (lambda ()
@@ -31,7 +41,7 @@
                (use-local-map (make-composed-keymap
                                ement-tweaks-emoji-map (current-local-map)))
                (let ((enable-recursive-minibuffers t))
-                 (call-interactively ement-tweaks-initial-emoji-command)))
+                 (call-interactively ement-tweaks-emoji-command)))
            (read-string "Reaction: "))
          (point)))
   (ement-room-send-reaction key position))
