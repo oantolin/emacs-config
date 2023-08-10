@@ -1036,7 +1036,7 @@
   :config
   (defun ediff-with-org-show-all ()
     "Expand all headings prior to ediffing org buffers."
-    (add-hook 'ediff-prepare-buffer-hook #'org-show-all nil t))
+    (add-hook 'ediff-prepare-buffer-hook #'org-fold-show-all nil t))
   (defun add-pretty-entities-hook ()
     "Add `org-toggle-pretty-entities' to local value of `visible-mode-hook'."
     (add-hook 'visible-mode-hook 'org-toggle-pretty-entities nil t))
@@ -1269,10 +1269,10 @@ if `org-store-link' is called from the #+TITLE line."
         ("<" . beginning-of-buffer)
         (">" . end-of-buffer)))
 
-
 (use-package mastodon
   :ensure t
-  :bind ("C-c M" . mastodon)
+  :bind
+  ("C-c M" . mastodon)
   :custom-face
   (mastodon-toot-docs-face
    ((t :inherit (font-lock-comment-face fixed-pitch)))))
