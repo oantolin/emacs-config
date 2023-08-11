@@ -1282,6 +1282,11 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :bind
   ("C-c M" . mastodon)
+  (:map mastodon-mode-map
+        ("{" . backward-paragraph)
+        ("}" . forward-paragraph))
+  :hook
+  (mastodon-mode . mastodon-async-mode)
   :custom-face
   (mastodon-toot-docs-face
    ((t :inherit (font-lock-comment-face fixed-pitch)))))
