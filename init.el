@@ -460,8 +460,6 @@
         ("p" . pocket-lib-add-urls))
   (:map embark-identifier-map
         ("D" . dictionary-lookup-definition))
-  (:map embark-org-link-map
-        ("a" . arXiv-pdf))
   :custom
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
@@ -502,6 +500,11 @@
     (push #'embark--smerge-next (alist-get cmd embark-post-action-hooks))))
 
 (use-package embark-consult :ensure t :defer t)
+
+(use-package embark-org
+  :bind
+  (:map embark-org-link-map
+        ("a" . arXiv-pdf)))
 
 (use-package consult-dir
   :ensure t
