@@ -417,8 +417,10 @@
   add-email-to-ecomplete
   remove-email-from-ecomplete)
 
-(autoload 'pocket-lib-add-urls "pocket-lib")
+(use-package arXiv :commands arXiv-pdf)
 
+(autoload 'pocket-lib-add-urls "pocket-lib")
+  
 (use-package embark
   :ensure t
   :bind
@@ -453,10 +455,13 @@
   (:map embark-encode-map
         ("p" . topaz-paste-region))
   (:map embark-url-map
+        ("a" . arxiv-pdf)
         ("x" . browse-url-generic)
         ("p" . pocket-lib-add-urls))
   (:map embark-identifier-map
         ("D" . dictionary-lookup-definition))
+  (:map embark-org-link-map
+        ("a" . arXiv-pdf))
   :custom
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
