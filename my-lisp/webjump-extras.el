@@ -12,7 +12,8 @@
     ("YouTube" . "https://www.youtube.com/results?search_query=")
     ("Merriam-Webster" . "https://www.merriam-webster.com/dictionary/")
     ("Collins" . "https://www.collinsdictionary.com/dictionary/english/")
-    ("arXiv" . "https://arxiv.org/search/?searchtype=all&query="))
+    ("arXiv" . "https://arxiv.org/search/?searchtype=all&query=")
+    ("math.??" . "https://arxiv.org/list/math. /recent"))
   "Search engines to add to `webjump-sites' as `simply-query' sites."
   :group 'webjump
   :type '(alist :key-type (string :tag "Name")
@@ -29,10 +30,11 @@
                      (cons (plist-get bm :title) (plist-get bm :url)))
                    eww-bookmarks))
          (mapcar (pcase-lambda (`(,name . ,url))
+                   (setq url (split-string url " "))
                    `(,name . [simple-query
-                              ,(when (string-match "^.*://[^/]+" url)
-                                 (match-string 0 url))
-                              ,url ""]))
+                              ,(when (string-match "^.*://[^/]+" (car url))
+                                 (match-string 0 (car url)))
+                              ,(car url) ,(or (cadr url) "")]))
                  webjump-search-engines))))
 
 (provide 'webjump-extras)
