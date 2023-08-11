@@ -669,7 +669,11 @@
 (use-package eldoc :defer t :diminish)
 
 (use-package diff-mode
-  :bind (:map diff-mode-map ("M-o")))
+  :bind
+  (:map diff-mode-map
+        ("M-o")
+        ("v" . vc-next-action)
+        ("/" . diff-split-hunk)))
 
 (use-package ediff
   :defer t
