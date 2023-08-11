@@ -26,7 +26,6 @@
 
 (custom-set-faces
  '(Info-quoted ((t :inherit fixed-pitch)))
- `(fixed-pitch ((t :family ,(face-attribute 'default :family))))
  '(fringe ((t :background nil))))
 
 (set-fontset-font "fontset-default" 'emoji
