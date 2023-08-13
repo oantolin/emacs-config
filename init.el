@@ -1293,6 +1293,7 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :bind
   ("C-c M" . mastodon)
+  ("C-c T" . mastodon-toot)
   (:map mastodon-mode-map
         ("{" . backward-paragraph)
         ("}" . forward-paragraph))
