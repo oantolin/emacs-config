@@ -44,7 +44,8 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "consult-gh"))
+(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "consult-gh"
+               "fedi" "lem/lisp"))
   (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -98,6 +99,7 @@
  '(recenter-positions '(top middle bottom))
  '(display-time-default-load-average nil)
  '(dictionary-server "dict.org")
+ '(epg-pinentry-mode 'loopback)
  '(native-comp-async-report-warnings-errors 'silent))
 
 (bind-keys
@@ -454,7 +456,7 @@
   (:map embark-encode-map
         ("p" . topaz-paste-region))
   (:map embark-url-map
-        ("a" . arxiv-pdf)
+        ("a" . arXiv-pdf)
         ("x" . browse-url-generic)
         ("p" . pocket-lib-add-urls))
   (:map embark-identifier-map
@@ -1303,7 +1305,11 @@ if `org-store-link' is called from the #+TITLE line."
   (mastodon-toot-docs-face
    ((t :inherit (font-lock-comment-face fixed-pitch)))))
 
-(use-package mastodon-config :after mastodon) ; private package
+(use-package lem
+  :bind
+  ("C-c L" . lem))
+  
+(use-package fedi-config :after (:any mastodon lem)) ; private package
 
 ;;; major modes for programming languages
 
