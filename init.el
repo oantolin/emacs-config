@@ -1305,6 +1305,15 @@ if `org-store-link' is called from the #+TITLE line."
   (mastodon-toot-docs-face
    ((t :inherit (font-lock-comment-face fixed-pitch)))))
 
+;; (package-vc-install
+;;  '(fedi :url "https://codeberg.org/martianh/fedi.el"
+;;         :back-end Git))
+
+;; (package-vc-install
+;;  '(lem :url "https://codeberg.org/martianh/lem.el"
+;;        :back-end Git
+;;        :lisp-dir "lisp/"))
+
 (use-package lem
   :bind
   ("C-c L" . lem))
