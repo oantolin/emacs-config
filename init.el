@@ -529,6 +529,7 @@
   ("M-g L" . consult-line-multi)
   ("M-g i" . consult-imenu)
   ("M-g o" . consult-outline)
+  ("M-g a" . consult-org-agenda)
   ("M-g I" . consult-imenu-multi)
   ("M-g m" . consult-mark)
   ("M-g k" . consult-global-mark)
