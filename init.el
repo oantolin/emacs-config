@@ -1161,6 +1161,12 @@ if `org-store-link' is called from the #+TITLE line."
 
 (fset 'goto-map goto-map)
 
+(use-package gnus-group
+  :bind
+  (:map gnus-group-mode-map
+        ("M-g" . goto-map)
+        ("T" . gnus-group-get-new-news-this-group)))
+
 (use-package gnus-art
   :bind
   (:map gnus-article-mode-map
