@@ -1308,6 +1308,10 @@ if `org-store-link' is called from the #+TITLE line."
         ("}" . forward-paragraph))
   :hook
   (mastodon-mode . mastodon-async-mode)
+  (mastodon-mode . mastodon-recnter-positions)
+  :config
+  (defun mastodon-recnter-positions ()
+    (setq-local recenter-positions '(bottom middle top)))
   :custom-face
   (mastodon-toot-docs-face
    ((t :inherit (font-lock-comment-face fixed-pitch)))))
