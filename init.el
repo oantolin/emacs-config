@@ -45,7 +45,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
 (dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "consult-gh"
-               "fedi" "lem/lisp"))
+               "lem.el/lisp"))
   (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
