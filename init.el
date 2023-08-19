@@ -895,7 +895,10 @@
 (use-package eshell
   :bind
   ("C-!" . eshell)
-  :config (setenv "PAGER" "cat"))
+  :config
+  (setenv "PAGER" "cat")
+  :custom
+  (eshell-banner-message ""))
 
 (use-package esh-mode
   :bind
