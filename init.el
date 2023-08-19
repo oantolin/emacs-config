@@ -157,6 +157,7 @@
            ("d" . toggle-debug-on-error)
            ("t" . toggle-truncate-lines)
            ("f" . follow-mode)
+           ("r" . visual-line-mode) ; r for reflow
            ("s" . whitespace-mode)
            ("v" . variable-pitch-mode)
            ("i" . visible-mode))
