@@ -140,6 +140,8 @@
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
 
+(bind-key "8" [?∞] iso-transl-ctl-x-8-map)
+
 (bind-keys :prefix-map insert-pair-map
            :prefix "C-S-w"
            ([t] . insert-pair))
