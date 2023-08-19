@@ -897,8 +897,7 @@
   ("C-!" . eshell)
   :config
   (setenv "PAGER" "cat")
-  :custom
-  (eshell-banner-message ""))
+  (setq eshell-modules-list (delq 'eshell-banner eshell-modules-list)))
 
 (use-package esh-mode
   :bind
