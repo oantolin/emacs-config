@@ -1308,9 +1308,9 @@ if `org-store-link' is called from the #+TITLE line."
         ("}" . forward-paragraph))
   :hook
   (mastodon-mode . mastodon-async-mode)
-  (mastodon-mode . mastodon-recnter-positions)
+  (mastodon-mode . mastodon-recenter-positions)
   :config
-  (defun mastodon-recnter-positions ()
+  (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top)))
   :custom-face
   (mastodon-toot-docs-face
