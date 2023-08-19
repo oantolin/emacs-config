@@ -10,13 +10,13 @@
 (defvar-local j-mode-source-buffer nil
   "Buffer from which this inferior J buffer was started.")
 
-(defvar j-mode-map
+(defvar-keymap j-mode-map
   :doc "Keymap for J mode"
   "C-c C-l" #'j-mode-load-file
   "C-c C-c" #'j-mode-eval
   "C-c C-s" #'run-j)
 
-(defvar inferior-j-mode-map
+(defvar-keymap inferior-j-mode-map
   :doc "Keymap for J mode"
   "C-c C-l" #'j-mode-load-file
   "C-c C-s" #'j-mode-switch-to-source)
