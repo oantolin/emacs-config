@@ -1427,8 +1427,8 @@ if `org-store-link' is called from the #+TITLE line."
 (when (executable-find "julia")
   (use-package julia-mode
     :ensure t
-    :defer t
-    :config
+    :bind ("C-c J" . run-julia)
+    :init
     (defun run-julia ()
       "Just run julia in a term buffer."
       (interactive)
