@@ -26,6 +26,8 @@ If GENERIC is non-nil use `url-browse-generic' rather than
 
 (defvar url-http-end-of-headers)
 
+(require 'dom)
+
 (defun arXiv--with-metadata (paper fn)
   "Download and parse arXiv metadata for PAPER.
 Call FN on an alist with keys `title', `authors', `url', `id' and
@@ -59,8 +61,8 @@ A ragtag bunch of ad hoc formats are recognized for PAPER."
 
 (defun arXiv-capture (paper)
   "Capture Org entry for arXiv PAPER at point.
-(This depends on the `org-capture' template 'a' just inserting the
-kill ring head. 😬)"
+(This depends on the `org-capture' template \"a\" just inserting
+the kill ring head. 😬)"
   (interactive "sarXiv paper: ")
   (arXiv--with-metadata
    paper
