@@ -54,8 +54,8 @@
 (when (string= (system-name) "penguin") ; Chromebook
   (dolist (dir '("~/texlive/2022/bin/x86_64-linux" "~/bin"))
     (let ((full (expand-file-name dir)))
-      (setenv "PATH" (concat full ":" (getenv "PATH")))))
-  (setq exec-path (split-string (getenv "PATH") ":")))
+      (setenv "PATH" (concat full ":" (getenv "PATH")))
+      (push full exec-path))))
 
 (dolist (cmd '(narrow-to-region
                upcase-region
