@@ -156,8 +156,10 @@
            ("c" . column-number-mode)
            ("d" . toggle-debug-on-error)
            ("t" . toggle-truncate-lines)
+           ("b" . toggle-frame-tab-bar)
            ("f" . follow-mode)
-           ("r" . visual-line-mode) ; r for reflow
+           ("r" . visual-line-mode)     ; r for reflow
+           ("w" . auto-fill-mode)       ; w for wrap
            ("s" . whitespace-mode)
            ("v" . variable-pitch-mode)
            ("i" . visible-mode))
@@ -310,12 +312,6 @@
   :bind
   ("C-h h" . show-help)
   :commands cotd)
-
-(use-package various-toggles
-  :bind
-  (:map toggle-map
-        ("w" . toggle-wrapping)
-        ("TAB" . toggle-tab-bar-visibility)))
 
 (use-package window-extras
   :bind
