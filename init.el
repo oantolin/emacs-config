@@ -421,7 +421,14 @@
   add-email-to-ecomplete
   remove-email-from-ecomplete)
 
-(autoload 'arXiv-map "arXiv.el")
+(use-package arXiv
+  :commands arXiv-pdf arXiv-show arXiv-capture
+  :init
+  (defvar-keymap arXiv-map
+    "p" #'arXiv-pdf
+    "s" #'arXiv-show
+    "c" #'arXiv-capture)
+  (fset 'arXiv-map arXiv-map))
 
 (autoload 'pocket-lib-add-urls "pocket-lib")
   

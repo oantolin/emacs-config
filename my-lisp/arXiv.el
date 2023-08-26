@@ -72,11 +72,4 @@ the kill ring head. 😬)"
                          .url .title (string-join .authors ", ") .abstract)))
      (org-capture nil "a"))))
 
-(defvar-keymap arXiv-map
-  "p" #'arXiv-pdf
-  "s" #'arXiv-show
-  "c" #'arXiv-capture)
-
-(fset 'arXiv-map arXiv-map)
-
 (provide 'arXiv)
