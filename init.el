@@ -414,7 +414,13 @@
   (:map minibuffer-local-map
         ("M-A" . marginalia-cycle))
   :init
-  (marginalia-mode))
+  (marginalia-mode)
+  :config
+  (defun marginalia--file-owner (attrs) ; Only display UID
+    "Return file owner given ATTRS."
+    (let ((uid (file-attribute-user-id attrs)))
+      (when (/= (user-uid) uid)
+        (or (user-login-name uid) uid)))))
 
 (use-package ecomplete-extras
   :commands
