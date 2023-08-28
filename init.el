@@ -155,13 +155,13 @@
            :prefix-docstring "Keymap for commands that toggle settings."
            ("c" . column-number-mode)
            ("d" . toggle-debug-on-error)
-           ("t" . toggle-truncate-lines)
-           ("b" . toggle-frame-tab-bar)
+           ("l" . toggle-truncate-lines)
+           ("t" . toggle-frame-tab-bar)
            ("f" . follow-mode)
-           ("r" . visual-line-mode)     ; r for reflow
-           ("w" . auto-fill-mode)       ; w for wrap
-           ("s" . whitespace-mode)
-           ("v" . variable-pitch-mode)
+           ("v" . visual-line-mode)
+           ("a" . auto-fill-mode)
+           ("w" . whitespace-mode)
+           ("p" . variable-pitch-mode)
            ("i" . visible-mode))
 
 (bind-keys :prefix-map time-map
@@ -1136,7 +1136,7 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   ([remap ispell-word] . jinx-correct)
   (:map toggle-map
-        ("l" . jinx-languages))
+        ("s" . jinx-languages))
   :config
   (put 'jinx-overlay 'keymap nil))
   
