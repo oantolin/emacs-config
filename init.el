@@ -44,7 +44,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "consult-gh"
+(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode"
                "lem.el/lisp"))
   (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
@@ -133,14 +133,34 @@
   ;; Alt+backspace sends <delete> on the Chromebook...
   kill-backward-up-list)
  ("M-R" . raise-sexp)
- ("M-E" . mark-end-of-sentence)
- ("M-T" . transpose-sentences)
+ ("M-T" . transpose-lines)
+ ("C-x C-t" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos)
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
 
-(bind-key "8" [?∞] iso-transl-ctl-x-8-map)
+(bind-keys ;; math
+ ("C-z" . iso-transl-ctl-x-8-map)
+ :map iso-transl-ctl-x-8-map
+ ("g a" . [?α]) ("g b" . [?β]) ("g g" . [?γ]) ("g d" . [?δ]) ("g e" . [?ϵ])
+ ("g z" . [?ζ]) ("g h" . [?η]) ("g q" . [?θ]) ("g i" . [?ι]) ("g k" . [?κ])
+ ("g l" . [?λ]) ("g m" . [?μ]) ("g n" . [?ν]) ("g x" . [?ξ]) ("g p" . [?π])
+ ("g r" . [?ρ]) ("g s" . [?σ]) ("g t" . [?τ]) ("g f" . [?ϕ]) ("g c" . [?χ])  
+ ("g y" . [?ψ]) ("g w" . [?ω])
+ ("g G" . [?Γ]) ("g D" . [?Δ]) ("g Q" . [?Θ]) ("g L" . [?Λ]) ("g X" . [?Ξ])
+ ("g P" . [?Π]) ("g S" . [?Σ]) ("g F" . [?Φ]) ("g Y" . [?Ψ]) ("g O" . [?Ω])
+ ("\\ s" . [?∑]) ("\\ p" . [?∏]) ("\\ a" . [?⊣]) ("\\ t" . [?⊢])
+ ("\\ O" . [?⨁]) ("\\ o" . [?⊕]) ("\\ X" . [?⨂]) ("\\ x" . [?⊗])
+ ("\\ U" . [?⋃]) ("\\ u" . [?∪]) ("\\ I" . [?⋂]) ("\\ i" . [?∩])
+ ("\\ S" . [?∫]) ("\\ w" . [?∧]) ("\\ v" . [?∨])  ("8" . [?∞])
+ ("a v" . [?↓]) ("a ^" . [?↑]) ("A >" . [?⟶]) ("A <" . [?⟵])
+ ("l f" . [?⌊]) ("r f" . [?⌋]) ("l c" . [?⌈]) ("r c" . [?⌉])
+ ("_ i" . [?ᵢ]) ("_ j" . [?ⱼ]) ("_ k" . [?ₖ]) ("_ m" . [?ₘ])  ("_ n" . [?ₙ])
+ ("^ i" . [?ⁱ]) ("^ j" . [?ʲ]) ("^ k" . [?ᵏ]) ("^ m" . [?ᵐ])  ("^ n" . [?ⁿ])
+ ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–])  ("(" . [?⟨]) (")" . [?⟩])
+ ("e" . emoji-insert) ("f" . emoji-recent) ("s" . emoji-search)
+ ("i" . insert-char))
 
 (bind-keys :prefix-map insert-pair-map
            :prefix "C-S-w"
@@ -249,6 +269,7 @@
   :bind
   ("M-Q" . unfill-paragraph)
   ("C-S-o" . copy-word-from-above)
+  ("C-S-K" . duplicate-line-kill-word)
   ("M-L" . mark-line)
   ("M-C" . mark-char)
   ("M-@" . mark-my-word)
@@ -268,6 +289,8 @@
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
+  (:map minibuffer-local-map
+        ("M-i" . insert-completion-candidate))
   :commands
   force-truncate-lines
   turn-off-visual-line-mode)
@@ -334,11 +357,14 @@
   (enable-recursive-minibuffers t)
   (minibuffer-eldef-shorten-default t)
   (resize-mini-windows t)
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt))
   :init
   (minibuffer-depth-indicate-mode)
   (minibuffer-electric-default-mode)
   :hook
   (completion-list-mode . force-truncate-lines)
+  (minibuffer-setup . cursor-intangible-mode)
   :config
   (defun stealthily (fn &rest args)
     "Apply FN to ARGS while inhibiting modification hooks."
@@ -397,7 +423,9 @@
         ("M-q" . vertico-quick-jump))
   :custom
   (vertico-multiform-categories
-   '((embark-keybinding grid)))
+   '((embark-keybinding grid)
+     (command flat)
+     (file grid)))
   :init
   (vertico-mode)
   :config
@@ -419,6 +447,8 @@
         (or (user-login-name uid) uid)))))
 
 (use-package ecomplete-extras
+  :bind
+  ("C-c E" . compose-mail-to)
   :commands
   add-email-to-ecomplete
   remove-email-from-ecomplete)
@@ -986,23 +1016,6 @@
         ("c" . vc-git-commit)))
 
 (use-package magit :ensure t :defer t)
-
-(use-package consult-gh
-  :commands (consult-gh-orgs
-             consult-gh-repo-clone
-             consult-gh-search-repos
-             consult-gh-search-issues)
-  :custom
-  (consult-gh-default-clone-directory "~/elisp-packages")
-  (consult-gh-show-preview t)
-  (consult-gh-preview-key "C-l")
-  (consult-gh-issue-action #'consult-gh--issue-view-action)
-  (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
-  (consult-gh-file-action #'consult-gh--files-view-action)
-  (consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa")))
-
-(use-package consult-gh-embark
-  :after (consult-gh embark))
 
 (use-package markdown-mode
   :ensure t

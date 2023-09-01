@@ -237,7 +237,14 @@ and quit the window, killing the buffer."
   (interactive)
   (pop-to-buffer (generate-new-buffer "*clipboard*"))
   (markdown-mode)
-  (activate-input-method "TeX")
   (text-to-clipboard-minor-mode))
+
+(autoload 'embark--act "embark")
+(autoload 'embark--targets "embark")
+
+(defun insert-completion-candidate ()
+  "Insert the current completion candidate and quit the minibuffer."
+  (interactive)
+  (embark--act 'embark-insert (car (embark--targets)) t))
 
 (provide 'misc-text)
