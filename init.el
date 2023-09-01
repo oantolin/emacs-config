@@ -422,7 +422,9 @@
         ("M-q" . vertico-quick-jump))
   :custom
   (vertico-multiform-categories
-   '((embark-keybinding grid)))
+   '((embark-keybinding grid)
+     (command flat)
+     (file grid)))
   :init
   (vertico-mode)
   :config
