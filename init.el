@@ -133,7 +133,6 @@
   ;; Alt+backspace sends <delete> on the Chromebook...
   kill-backward-up-list)
  ("M-R" . raise-sexp)
- ("M-E" . mark-end-of-sentence)
  ("M-T" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos)
