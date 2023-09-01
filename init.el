@@ -991,23 +991,6 @@
 
 (use-package magit :ensure t :defer t)
 
-(use-package consult-gh
-  :commands (consult-gh-orgs
-             consult-gh-repo-clone
-             consult-gh-search-repos
-             consult-gh-search-issues)
-  :custom
-  (consult-gh-default-clone-directory "~/elisp-packages")
-  (consult-gh-show-preview t)
-  (consult-gh-preview-key "C-l")
-  (consult-gh-issue-action #'consult-gh--issue-view-action)
-  (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
-  (consult-gh-file-action #'consult-gh--files-view-action)
-  (consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa")))
-
-(use-package consult-gh-embark
-  :after (consult-gh embark))
-
 (use-package markdown-mode
   :ensure t
   :bind
