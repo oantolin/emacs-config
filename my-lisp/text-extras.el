@@ -242,6 +242,24 @@ and quit the window, killing the buffer."
 (autoload 'embark--act "embark")
 (autoload 'embark--targets "embark")
 
+(defvar-keymap insertion-map
+  :doc "Short cuts to common types of insertion commands"  
+  "/" #'find-file
+  "v" #'describe-variable
+  "f" #'describe-function
+  "x" #'execute-extended-command
+  "s" #'describe-symbol
+  "k" #'describe-keymap
+  "F" #'describe-face
+  "u" #'insert-char
+  "i" #'set-input-method
+  "m" #'man
+  "L" #'find-library
+  "p" #'describe-package
+  "b" #'switch-to-buffer
+  "l" 'consult-line
+  "e" 'compose-mail-to) 
+
 (defun insert-completion-candidate ()
   "Rewire next command so that RET inserts the candidate."
   (interactive)
@@ -256,6 +274,7 @@ and quit the window, killing the buffer."
                         (interactive)
                         (embark--act 'embark-insert (car (embark--targets)) t)))
               (current-local-map)))))
-    (add-hook 'minibuffer-setup-hook ret-inserts)))
+    (add-hook 'minibuffer-setup-hook ret-inserts)
+    (set-transient-map insertion-map)))
 
 (provide 'misc-text)
