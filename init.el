@@ -356,11 +356,14 @@
   (enable-recursive-minibuffers t)
   (minibuffer-eldef-shorten-default t)
   (resize-mini-windows t)
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt))
   :init
   (minibuffer-depth-indicate-mode)
   (minibuffer-electric-default-mode)
   :hook
   (completion-list-mode . force-truncate-lines)
+  (minibuffer-setup . cursor-intangible-mode)
   :config
   (defun stealthily (fn &rest args)
     "Apply FN to ARGS while inhibiting modification hooks."
