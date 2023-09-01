@@ -446,6 +446,8 @@
         (or (user-login-name uid) uid)))))
 
 (use-package ecomplete-extras
+  :bind
+  ("C-c E" . compose-mail-to)
   :commands
   add-email-to-ecomplete
   remove-email-from-ecomplete)

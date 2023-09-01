@@ -35,4 +35,11 @@
           (remove entry (cdr (assq 'mail ecomplete-database))))
     (ecomplete-save)))
 
+(defun compose-mail-to (address)
+  "Compose email to ADDRESS from ecomplete's database."
+  (interactive
+   (list (completing-read "Email address: "
+                          (ecomplete-completion-table 'mail))))
+  (compose-mail address))
+
 (provide 'ecomplete-extras)
