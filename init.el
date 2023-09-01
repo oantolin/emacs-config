@@ -286,10 +286,11 @@
   ("M-;" . dabbrev-next)
   ("C-M-;" . dabbrev-complete-next)
   ("C-c e" . text-to-clipboard)
-  ("C-`" . insert-completion-candidate)
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
+  (:map minibuffer-local-map
+        ("M-i" . insert-completion-candidate))
   :commands
   force-truncate-lines
   turn-off-visual-line-mode)
