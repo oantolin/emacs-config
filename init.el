@@ -268,6 +268,7 @@
   :bind
   ("M-Q" . unfill-paragraph)
   ("C-S-o" . copy-word-from-above)
+  ("C-S-K" . duplicate-line-kill-word)
   ("M-L" . mark-line)
   ("M-C" . mark-char)
   ("M-@" . mark-my-word)
