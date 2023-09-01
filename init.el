@@ -44,7 +44,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "consult-gh"
+(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode"
                "lem.el/lisp"))
   (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
@@ -140,7 +140,7 @@
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
 
-(bind-keys
+(bind-keys ;; math
  ("C-z" . iso-transl-ctl-x-8-map)
  :map iso-transl-ctl-x-8-map
  ("g a" . [?α]) ("g b" . [?β]) ("g g" . [?γ]) ("g d" . [?δ]) ("g e" . [?ϵ])
@@ -154,12 +154,11 @@
  ("\\ O" . [?⨁]) ("\\ o" . [?⊕]) ("\\ X" . [?⨂]) ("\\ x" . [?⊗])
  ("\\ U" . [?⋃]) ("\\ u" . [?∪]) ("\\ I" . [?⋂]) ("\\ i" . [?∩])
  ("\\ S" . [?∫]) ("\\ w" . [?∧]) ("\\ v" . [?∨])  ("8" . [?∞])
- ("(" . [?⟨]) (")" . [?⟩])
+ ("a v" . [?↓]) ("a ^" . [?↑]) ("A >" . [?⟶]) ("A <" . [?⟵])
  ("l f" . [?⌊]) ("r f" . [?⌋]) ("l c" . [?⌈]) ("r c" . [?⌉])
  ("_ i" . [?ᵢ]) ("_ j" . [?ⱼ]) ("_ k" . [?ₖ]) ("_ m" . [?ₘ])  ("_ n" . [?ₙ])
  ("^ i" . [?ⁱ]) ("^ j" . [?ʲ]) ("^ k" . [?ᵏ]) ("^ m" . [?ᵐ])  ("^ n" . [?ⁿ])
- ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–])
- ("e" . emoji-insert) ("s" . emoji-search) ("i" . insert-char))
+ ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–])  ("(" . [?⟨]) (")" . [?⟩]))
 
 (bind-keys :prefix-map insert-pair-map
            :prefix "C-S-w"
