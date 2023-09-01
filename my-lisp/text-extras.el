@@ -239,4 +239,23 @@ and quit the window, killing the buffer."
   (markdown-mode)
   (text-to-clipboard-minor-mode))
 
+(autoload 'embark--act "embark")
+(autoload 'embark--targets "embark")
+
+(defun insert-completion-candidate ()
+  "Rewire next command so that RET inserts the candidate."
+  (interactive)
+  (let ((ret-inserts (make-symbol "ret-inserts")))
+    (fset ret-inserts
+          (lambda ()
+            (remove-hook 'minibuffer-setup-hook ret-inserts)
+            (use-local-map
+             (make-composed-keymap
+              (define-keymap
+                "RET" (lambda ()
+                        (interactive)
+                        (embark--act 'embark-insert (car (embark--targets)) t)))
+              (current-local-map)))))
+    (add-hook 'minibuffer-setup-hook ret-inserts)))
+
 (provide 'misc-text)

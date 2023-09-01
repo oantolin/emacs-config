@@ -286,6 +286,7 @@
   ("M-;" . dabbrev-next)
   ("C-M-;" . dabbrev-complete-next)
   ("C-c e" . text-to-clipboard)
+  ("C-`" . insert-completion-candidate)
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
