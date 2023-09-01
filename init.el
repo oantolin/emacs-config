@@ -133,7 +133,8 @@
   ;; Alt+backspace sends <delete> on the Chromebook...
   kill-backward-up-list)
  ("M-R" . raise-sexp)
- ("M-T" . transpose-sentences)
+ ("M-T" . transpose-lines)
+ ("C-x C-t" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos)
  ;; The Chromebook has a pretty reload key!
@@ -157,7 +158,8 @@
  ("l f" . [?⌊]) ("r f" . [?⌋]) ("l c" . [?⌈]) ("r c" . [?⌉])
  ("_ i" . [?ᵢ]) ("_ j" . [?ⱼ]) ("_ k" . [?ₖ]) ("_ m" . [?ₘ])  ("_ n" . [?ₙ])
  ("^ i" . [?ⁱ]) ("^ j" . [?ʲ]) ("^ k" . [?ᵏ]) ("^ m" . [?ᵐ])  ("^ n" . [?ⁿ])
- ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–]))
+ ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–])
+ ("e" . emoji-insert) ("s" . emoji-search) ("i" . insert-char))
 
 (bind-keys :prefix-map insert-pair-map
            :prefix "C-S-w"
