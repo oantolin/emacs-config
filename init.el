@@ -139,7 +139,12 @@
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
 
-(bind-key "8" [?∞] iso-transl-ctl-x-8-map)
+(bind-keys :map iso-transl-ctl-x-8-map
+           ("\\a" . [?α]) ("\\b" . [?β]) ("\\g" . [?γ]) ("\\d" . [?δ])
+           ("\\e" . [?ϵ]) ("\\p" . [?π]) ("\\r" . [?ρ]) ("\\s" . [?σ])
+           ("\\l" . [?λ]) ("\\m" . [?μ]) ("\\t" . [?τ]) ("\\f" . [?ϕ])
+           ("\\D" . [?Δ]) ("\\L" . [?Λ]) ("\\P" . [?Π]) ("\\G" . [?Γ])
+           ("\\O" . [?Ω]) ("\\S" . [?Σ]) ("8" . [?∞]))
 
 (bind-keys :prefix-map insert-pair-map
            :prefix "C-S-w"
