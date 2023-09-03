@@ -141,7 +141,6 @@
  ("<XF86Reload>" . revert-buffer))
 
 (bind-keys ;; math
- ("C-z" . iso-transl-ctl-x-8-map)
  :map iso-transl-ctl-x-8-map
  ("g a" . [?α]) ("g b" . [?β]) ("g g" . [?γ]) ("g d" . [?δ]) ("g e" . [?ϵ])
  ("g z" . [?ζ]) ("g h" . [?η]) ("g q" . [?θ]) ("g i" . [?ι]) ("g k" . [?κ])
@@ -158,9 +157,7 @@
  ("l f" . [?⌊]) ("r f" . [?⌋]) ("l c" . [?⌈]) ("r c" . [?⌉])
  ("_ i" . [?ᵢ]) ("_ j" . [?ⱼ]) ("_ k" . [?ₖ]) ("_ m" . [?ₘ])  ("_ n" . [?ₙ])
  ("^ i" . [?ⁱ]) ("^ j" . [?ʲ]) ("^ k" . [?ᵏ]) ("^ m" . [?ᵐ])  ("^ n" . [?ⁿ])
- ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–])  ("(" . [?⟨]) (")" . [?⟩])
- ("e" . emoji-insert) ("f" . emoji-recent) ("s" . emoji-search)
- ("i" . insert-char))
+ ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–])  ("(" . [?⟨]) (")" . [?⟩]))
 
 (bind-keys :prefix-map insert-pair-map
            :prefix "C-S-w"
