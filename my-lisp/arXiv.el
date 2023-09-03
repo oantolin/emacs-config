@@ -4,10 +4,11 @@
   "Return the arXiv id of PAPER.
 A ragtag bunch of ad hoc formats are recognized for PAPER."
   (setq paper (replace-regexp-in-string "_" "." paper)) ; Mastodon
-  (cl-loop for pattern in '("^%s$"
-                            "^arXiv:%s\\(?:/.*\\)?$"
-                            "^https?://arxiv.org/abs/%s$" 
-                            "^https://mathstodon.xyz/tags/arXiv.%s$")
+  (cl-loop for pattern in
+           '("^%s$"
+             "^arXiv:%s\\(?:/.*\\)?$"
+             "^https?://arxiv.org/\\(?:abs\\|pdf\\)/%s\\(?:\\.pdf\\)?$" 
+             "^https://mathstodon.xyz/tags/arXiv.%s$")
            when (string-match (format pattern "\\([0-9v.]+\\)") paper)
            return (match-string 1 paper)))
 
