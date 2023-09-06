@@ -27,7 +27,8 @@ with a prefix argument you are prompted for a message."
              (read-from-minibuffer "Commit message: " "Merge")
            "Merge resolving conflicts")))
   (vc-git-command nil 0 nil "commit" "-m" message)
-  (message "Commited with message: %s" message))
+  (message "Commited with message: %s" message)
+  (when (derived-mode-p 'vc-dir-mode)
+    (revert-buffer)))
 
 (provide 'vc-extras)
-
