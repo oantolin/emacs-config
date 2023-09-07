@@ -1119,6 +1119,10 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package org-config :after org) ; private package
 
+(use-package org-ql
+  :ensure t
+  :bind ("M-s q" . org-ql-find))
+
 (use-package org-modern
   :ensure t
   :after org
