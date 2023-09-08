@@ -88,6 +88,7 @@
  '(kill-whole-line t)
  '(history-delete-duplicates t)
  '(kill-do-not-save-duplicates t)
+ '(default-input-method "TeX")
  '(password-cache-expiry 300)
  '(debugger-stack-frame-as-list t)
  '(split-width-threshold 140)
