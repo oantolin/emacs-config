@@ -239,6 +239,8 @@
   ("M-z" . zap-up-to-char)
   ("M-F" . forward-to-word)
   ("M-B" . backward-to-word)
+  ("C-M-<" . mark-beginning-of-buffer)
+  ("C-M->" . mark-end-of-buffer)
   ("C-S-l" . copy-from-above-command)
   ("C-S-d" . duplicate-dwim))
 
