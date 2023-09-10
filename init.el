@@ -179,7 +179,7 @@
            ("a" . auto-fill-mode)
            ("w" . whitespace-mode)
            ("p" . variable-pitch-mode)
-           ("i" . visible-mode))
+           ("r" . visible-mode))
 
 (bind-keys :prefix-map time-map
            :prefix "C-c t"
@@ -1125,6 +1125,11 @@ if `org-store-link' is called from the #+TITLE line."
   ("M-s q" . org-ql-find)
   ("M-s s" . org-ql-search)
   ("M-s v" . org-ql-view))
+
+(use-package org-indent
+  :bind
+  (:map toggle-map
+        ("i" . org-indent-mode)))
 
 (use-package org-modern
   :ensure t
