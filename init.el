@@ -1123,7 +1123,10 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package org-ql
   :ensure t
-  :bind ("M-s q" . org-ql-find))
+  :bind
+  ("M-s q" . org-ql-find)
+  ("M-s s" . org-ql-search)
+  ("M-s v" . org-ql-view))
 
 (use-package org-modern
   :ensure t
