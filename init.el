@@ -253,10 +253,7 @@
         ("*" . calc-grab-rectangle)
         (":" . calc-grab-sum-down)
         ("_" . calc-grab-sum-across)
-        (" " . delete-whitespace-rectangle))
-  :init
-  (autoload 'calc-grab-sum-down "calc" nil t)
-  (autoload 'calc-grab-sum-across "calc" nil t))
+        (" " . delete-whitespace-rectangle)))
 
 (use-package visiting-buffer)
 
