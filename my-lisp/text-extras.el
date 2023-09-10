@@ -1,6 +1,6 @@
 ;;; text-extras.el --- Miscellaneous text editing commands    -*- lexical-binding: t; -*-
 
-;;; the most micellaneous commands of all
+;;; the most miscellaneous commands of all
 
 (defun unfill-paragraph ()
   "Join a paragraph into a single line."
@@ -246,5 +246,13 @@ and quit the window, killing the buffer."
   "Insert the current completion candidate and quit the minibuffer."
   (interactive)
   (embark--act 'embark-insert (car (embark--targets)) t))
+
+(defun apply-macro-to-rest-of-paragraph ()
+  "Apply last keyboard macro to each line in the rest of the current paragraph."
+  (interactive)
+  (when defining-kbd-macro (kmacro-end-macro nil))
+  (apply-macro-to-region-lines
+   (line-beginning-position 2)
+   (save-excursion (end-of-paragraph-text) (point))))
 
 (provide 'misc-text)
