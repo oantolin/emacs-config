@@ -513,13 +513,9 @@
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
                        embark-candidate-collectors))
-  (dolist (cmd '(comment-dwim
-                 insert-parentheses
-                 insert-pair
-                 markdown-insert-code
+  (dolist (cmd '(markdown-insert-code
                  markdown-insert-italic
                  markdown-insert-bold
-                 org-emphasize
                  cdlatex-math-modify
                  TeX-font))
     (push #'embark--mark-target (alist-get cmd embark-around-action-hooks)))
