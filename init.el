@@ -440,7 +440,7 @@
     (let ((uid (file-attribute-user-id attrs)))
       (when (/= (user-uid) uid)
         (or (user-login-name uid) uid))))
-  (push '(org-ql-find . org-heading) marginalia-command-categories))
+  (add-to-list 'marginalia-command-categories '(org-ql-find . org-heading)))
 
 (use-package ecomplete-extras
   :bind
