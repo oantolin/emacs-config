@@ -854,6 +854,7 @@
 
 (use-package pdf-tools
   :ensure t
+  :defer 3
   :custom
   (pdf-view-midnight-colors '("#ffffff" . "#000000"))
   :bind
@@ -875,9 +876,6 @@
   (pdf-annot-minor-mode-map-prefix "a")
   (pdf-annot-list-format '((page . 3) (type . 7) (contents . 200)))
   (pdf-annot-activate-created-annotations t))
-
-(use-package pdf-loader
-  :init (pdf-loader-install))
 
 (use-package pdf-outline
   :defer t
