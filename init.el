@@ -1208,7 +1208,7 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package gnus-sum
   :bind
   (:map gnus-summary-mode-map
-        ("M-i") ; I use this for kmacro-end-or-call-macro
+        ("M-i") ; I use this for back-to-indentation
         ("M-g" . goto-map) ; rescan is also on Z G, and I use that prefix a lot!
         ("M-a" . gnus-symbolic-argument))) 
 
