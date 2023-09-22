@@ -163,7 +163,7 @@
  ("^ i" . [?ⁱ]) ("^ j" . [?ʲ]) ("^ k" . [?ᵏ]) ("^ m" . [?ᵐ])  ("^ n" . [?ⁿ])
  ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–])  ("(" . [?⟨]) (")" . [?⟩])
  ("i" . emoji-insert) ("s" . emoji-search) ("z 0" . emoji-zoom-reset)
- ("z +" . emoji-zoom-increase) ("z +" . emoji-zoom-increase)
+ ("z +" . emoji-zoom-increase) ("z -" . emoji-zoom-decrease)
  ("w" . emoji-recent))
 
 (bind-keys :prefix-map insert-pair-map
