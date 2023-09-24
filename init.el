@@ -1045,6 +1045,7 @@
   (org-refile-use-outline-path 'file)
   (org-outline-path-complete-in-steps nil)
   (org-refile-allow-creating-parent-nodes 'confirm)
+  (org-startup-indented t)
   (org-highlight-latex-and-related '(latex script entities))
   (org-export-with-smart-quotes t)
   (org-confirm-babel-evaluate nil)
