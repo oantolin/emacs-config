@@ -546,7 +546,9 @@
 (use-package embark-org
   :bind
   (:map embark-org-link-map
-        ("a" . arXiv-map)))
+        ("a" . arXiv-map))
+  (:map embark-org-src-block-map
+        ("e" . org-edit-special)))
 
 (use-package consult-dir
   :ensure t
