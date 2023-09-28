@@ -446,8 +446,7 @@
     "Return file owner given ATTRS."
     (let ((uid (file-attribute-user-id attrs)))
       (when (/= (user-uid) uid)
-        (or (user-login-name uid) uid))))
-  (add-to-list 'marginalia-command-categories '(org-ql-find . org-heading)))
+        (or (user-login-name uid) uid)))))
 
 (use-package ecomplete-extras
   :bind
