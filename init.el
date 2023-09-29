@@ -1022,7 +1022,8 @@
         ("C-=" . markdown-mode-style-map))
   :custom-face
   (markdown-metadata-key-face ((t (:inherit default))))
-  (markdown-metadata-value-face ((t (:inherit default :foreground nil))))
+  (markdown-metadata-value-face
+   ((t (:inherit default :foreground unspecified))))
   :config
   (fset 'markdown-mode-style-map markdown-mode-style-map)
   (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table))
@@ -1267,7 +1268,7 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (sx-cache-directory "~/.private/sx")
   :custom-face
-  (sx-question-mode-content-face ((t (:background nil)))))
+  (sx-question-mode-content-face ((t (:background unspecified)))))
 
 (use-package nov :ensure t :mode ("\\.epub\\'" . nov-mode))
 
