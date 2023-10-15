@@ -5,7 +5,8 @@
 (defun unfill-paragraph ()
   "Join a paragraph into a single line."
   (interactive)
-  (let ((fill-column (point-max)))
+  (let ((fill-column (point-max))
+        (emacs-lisp-docstring-fill-column t))
     (fill-paragraph nil t)))
 
 (defun copy-word-from-above (arg)
