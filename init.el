@@ -316,6 +316,7 @@
   ("M-p" . isearch-previous)
   (:map isearch-mode-map
         ("M-c") ; free up for capitalize-dwim, still bound to M-s c
+        ("M-r") ; free up for recording kmacros, still bound to M-s r
         ("<S-return>" . isearch-exit-at-end)
         ([remap isearch-abort] . isearch-cancel)
         ("<C-backspace>" . isearch-delete-wrong)
