@@ -44,7 +44,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode"))
+(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "lem.el/lisp"))
   (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -1362,7 +1362,10 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package lem
   :ensure t
   :bind
-  ("C-c L" . lem))
+  ("C-c L" . lem)
+  (:map lem-mode-map
+        ("{" . backward-paragraph)
+        ("}" . forward-paragraph)))
   
 (use-package fedi-config :after (:any mastodon lem)) ; private package
 
