@@ -702,13 +702,16 @@
 
 (use-package outline
   :defer t
+  :diminish outline-minor-mode
+  :hook (prog-mode . outline-minor-mode))
+
+(use-package emacs-news-view-mode
+  :defer t
   :config
   ;; NEWS files use single quotes around elisp symbols. I think those
   ;; are the only files I view in outline-mode, but if I find others
   ;; then I might modify the syntax only locally in NEWS files.
-  (modify-syntax-entry ?' "\"" outline-mode-syntax-table)
-  :diminish outline-minor-mode
-  :hook (prog-mode . outline-minor-mode))
+  (modify-syntax-entry ?' "\"" emacs-news-view-mode-syntax-table))
 
 (use-package eldoc :defer t :diminish)
 
