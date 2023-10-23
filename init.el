@@ -1136,7 +1136,7 @@ if `org-store-link' is called from the #+TITLE line."
   ("M-s q" . org-ql-find)
   ("M-s s" . org-ql-search)
   ("M-s v" . org-ql-view)
-  ;; What follows is a work around for https://github.com/alphapapa/org-ql#380
+  ;; Work around for https://github.com/alphapapa/org-ql/issues/380
   :custom
   (embark-quit-after-action
    '((embark-org-heading-default-action . t) (t . nil)))
