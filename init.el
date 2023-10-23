@@ -216,6 +216,12 @@
   :defer t
   :custom (imenu-space-replacement nil))
 
+(use-package info
+  :bind
+  (:map Info-mode-map
+        ("{" . backward-paragraph)
+        ("}" . forward-paragraph)))
+
 (use-package custom
   :hook
   (Custom-mode . configure-imenu-Custom)
