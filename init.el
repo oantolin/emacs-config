@@ -1375,6 +1375,11 @@ if `org-store-link' is called from the #+TITLE line."
   :config
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top)))
+  (defun mastodon-bookmark-no-prompt (fn &rest args)
+    (cl-letf (((symbol-function 'y-or-n-p) (lambda (_) t)))
+      (apply fn args)))
+  (advice-add #'mastodon-toot--toggle-bookmark
+              :around #'mastodon-bookmark-no-prompt)
   :custom-face
   (mastodon-toot-docs-face
    ((t :inherit (font-lock-comment-face fixed-pitch)))))
