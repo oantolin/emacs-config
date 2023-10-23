@@ -529,6 +529,13 @@
   (embark-help-key "?")
   (embark-confirm-act-all nil)
   :config
+  ;; want sentence and paragraph targets in more modes
+  (embark-define-thingatpt-target sentence
+    text-mode help-mode Info-mode man-common mastodon-mode
+    lem-mode emacs-news-view-mode)
+  (embark-define-thingatpt-target paragraph
+    text-mode help-mode Info-mode man-common mastodon-mode
+    lem-mode emacs-news-view-mode)
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
