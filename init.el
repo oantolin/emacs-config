@@ -312,6 +312,13 @@
 (use-package topaz-paste
   :commands topaz-paste-region topaz-paste-buffer)
 
+(use-package lingva
+  :ensure t
+  :bind
+  ("C-c l" . lingva-translate)
+  :custom
+  (lingva-instance "https://lingva.lunar.icu"))
+
 (use-package isearch-extras
   :custom
   (search-whitespace-regexp ".*?")
@@ -522,6 +529,13 @@
   (embark-help-key "?")
   (embark-confirm-act-all nil)
   :config
+  ;; want sentence and paragraph targets in more modes
+  (embark-define-thingatpt-target sentence
+    text-mode help-mode Info-mode man-common mastodon-mode
+    lem-mode emacs-news-view-mode)
+  (embark-define-thingatpt-target paragraph
+    text-mode help-mode Info-mode man-common mastodon-mode
+    lem-mode emacs-news-view-mode)
   (setq embark-candidate-collectors
         (cl-substitute 'embark-sorted-minibuffer-candidates
                        'embark-minibuffer-candidates
@@ -709,13 +723,16 @@
 
 (use-package outline
   :defer t
+  :diminish outline-minor-mode
+  :hook (prog-mode . outline-minor-mode))
+
+(use-package emacs-news-view-mode
+  :defer t
   :config
   ;; NEWS files use single quotes around elisp symbols. I think those
   ;; are the only files I view in outline-mode, but if I find others
   ;; then I might modify the syntax only locally in NEWS files.
-  (modify-syntax-entry ?' "\"" outline-mode-syntax-table)
-  :diminish outline-minor-mode
-  :hook (prog-mode . outline-minor-mode))
+  (modify-syntax-entry ?' "\"" emacs-news-view-mode-syntax-table))
 
 (use-package eldoc :defer t :diminish)
 
