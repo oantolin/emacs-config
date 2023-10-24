@@ -1152,20 +1152,7 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   ("M-s q" . org-ql-find)
   ("M-s s" . org-ql-search)
-  ("M-s v" . org-ql-view)
-  ;; Work around for https://github.com/alphapapa/org-ql/issues/380
-  :custom
-  (embark-quit-after-action
-   '((embark-org-heading-default-action . t) (t . nil)))
-  :config
-  (defun org-ql-find-RET (fn &rest args)
-    (minibuffer-with-setup-hook
-        (lambda ()
-          (use-local-map (make-composed-keymap
-                          (define-keymap "RET" #'embark-dwim)
-                          (current-local-map))))
-      (apply fn args)))
-  (advice-add #'org-ql-find :around #'org-ql-find-RET))
+  ("M-s v" . org-ql-view))
 
 (use-package org-indent
   :bind
