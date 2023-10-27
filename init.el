@@ -894,7 +894,9 @@
   (:map pdf-view-mode-map
         ("d" . pdf-view-midnight-minor-mode)
         ("i" . consult-imenu)
-        ("s n" . "nsbp"))
+        ("s n" . "nsbp")
+        ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
+        ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page))
   :config
   (add-hook 'TeX-after-compilation-finished-functions
             #'TeX-revert-document-buffer)
