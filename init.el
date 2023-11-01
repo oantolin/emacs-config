@@ -86,6 +86,7 @@
  '(view-read-only t)
  '(kill-read-only-ok t)
  '(kill-whole-line t)
+ '(word-wrap t)
  '(history-delete-duplicates t)
  '(kill-do-not-save-duplicates t)
  '(default-input-method "TeX")
