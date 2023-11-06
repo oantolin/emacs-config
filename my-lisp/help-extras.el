@@ -5,7 +5,9 @@
   (interactive)
   (let (commands)
     (mapatoms (lambda (s) (when (commandp s) (push s commands))))
-    (describe-function (nth (random (length commands)) commands))))
+    (describe-function (nth (random (length commands)) commands))
+    (with-current-buffer "*Help*"
+      (setq help-xref-stack-item '(command-of-the-day)))))
 
 (defalias 'cotd #'command-of-the-day)
 
