@@ -1155,6 +1155,8 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :bind
   ("M-s q" . org-ql-find)
+  ("M-s a" . org-ql-find-in-agenda)
+  ("M-s n" . org-ql-find-in-org-directory)
   ("M-s s" . org-ql-search)
   ("M-s v" . org-ql-view)
   ("M-s l" . org-ql-open-link))
