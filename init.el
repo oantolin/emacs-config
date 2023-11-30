@@ -517,7 +517,6 @@
         ("p" . topaz-paste-region))
   (:map embark-url-map
         ("a" . arXiv-map)
-        ("x" . browse-url-generic)
         ("p" . pocket-lib-add-urls))
   (:map embark-identifier-map
         ("D" . dictionary-lookup-definition))
