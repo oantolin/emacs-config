@@ -1336,8 +1336,6 @@ if `org-store-link' is called from the #+TITLE line."
             (json-key-type nil))
         (json-read-from-string string)))))
 
-(use-package osm-ol :after org :demand t)
-
 (use-package ement-tweaks
   :commands
   ement-tweaks-send-reaction
