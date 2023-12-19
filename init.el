@@ -757,6 +757,8 @@
 
 (use-package olivetti
   :ensure t
+  :custom-face
+  (olivetti-fringe ((t :background nil)))
   :bind
   ("C-c x o" . olivetti-mode))
 
