@@ -1512,7 +1512,7 @@ to shut it down, for example."
 
 (use-package j-mode
   :bind ("C-c j" . run-j)
-  :mode "\\.ijs\\'"
+  :mode ("\\.j\\'" "\\.ijs\\'")
   :commands j-mode)
 
 (use-package gnu-apl-mode :ensure t :defer t) ; only want gnu-apl-input.el
