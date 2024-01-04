@@ -1380,8 +1380,6 @@ if `org-store-link' is called from the #+TITLE line."
   :hook
   (mastodon-mode . mastodon-async-mode)
   (mastodon-mode . mastodon-recenter-positions)
-  (mastodon-mode . variable-pitch-mode)
-  (mastodon-mode . olivetti-mode)
   :config
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top)))
