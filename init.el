@@ -1162,6 +1162,11 @@ if `org-store-link' is called from the #+TITLE line."
   ("M-s v" . org-ql-view)
   ("M-s l" . org-ql-open-link))
 
+(use-package org-ql-completing-read
+  :bind
+  (:map org-ql-completing-read-map
+        ([remap embark-collect])))
+
 (use-package org-indent
   :bind
   (:map toggle-map
