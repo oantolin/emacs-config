@@ -1543,7 +1543,7 @@ to shut it down, for example."
     (interactive)
     (pop-to-buffer (bqn-comint-buffer))))
 
-(use-package ngnk-mode :bind ("C-c k" . run-ngnk))
+(use-package ngnk-cli :bind ("C-c k" . run-ngnk))
 
 (use-package gap-mode
   :ensure t
