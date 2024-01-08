@@ -1313,6 +1313,7 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :bind
   ("C-c p" . pocket-reader)
+  ("C-c P" . pocket-reader-add-link)
   (:map pocket-reader-mode-map
         ("c") ; the default binding of c is "unemacsy"
         ("w" . pocket-reader-copy-url))
