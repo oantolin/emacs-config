@@ -27,10 +27,12 @@
 (defun set-smtp-server ()
   "Set the stmp server according to the from field.
 Add to `message-send-hook'."
-  (let ((from (cadr
-               (mail-extract-address-components
-                (message-field-value "From")))))
-    (setq smtpmail-smtp-server (cdr (assoc from all-user-mail-addresses)))))
+  (when-let* ((from (cadr
+                     (mail-extract-address-components
+                      (message-field-value "From"))))
+              (server (assoc from all-user-mail-addresses)))
+    (setq smtpmail-smtp-server (cadr server)
+          smtpmail-stream-type (caddr server))))
 
 (defun message-lint ()
   "Check for missing subject or attachments.
