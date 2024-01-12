@@ -17,7 +17,14 @@
  '(cursor-type 'bar)
  '(tab-bar-show nil))
 
-(when (string= (system-name) "penguin") ; Chromebook
+(when (string= (system-name) "localhost") ; new Chromebook
+  ;; TODO: check that WSL doesn't also report "localhost"
+  (keymap-set key-translation-map "S-<next>" "M-<next>")
+  (keymap-set key-translation-map "M-<next>" "M-<down>")
+  (keymap-set key-translation-map "S-<prior>" "M-<prior>")
+  (keymap-set key-translation-map "M-<prior>" "M-<up>"))
+
+(when (string= (system-name) "penguin") ; old Chromebook
   (set-face-attribute 'default nil :height 110)
   (keymap-set key-translation-map "<next>" "M-<down>")
   (keymap-set key-translation-map "S-<next>" "M-S-<down>")
