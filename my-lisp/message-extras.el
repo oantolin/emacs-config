@@ -5,7 +5,8 @@
 
 ;; The functions here depend on the following variable, which should
 ;; be set to an alist associating each user mail address with its smtp
-;; server. I set mine in a private configuration package.
+;; data (a plist with keys :server, :type and :port). I set mine in a
+;; private configuration package.
 (defvar all-user-mail-addresses)
 
 (defun cycle-from-address ()
@@ -30,9 +31,10 @@ Add to `message-send-hook'."
   (when-let* ((from (cadr
                      (mail-extract-address-components
                       (message-field-value "From"))))
-              (server (assoc from all-user-mail-addresses)))
-    (setq smtpmail-smtp-server (cadr server)
-          smtpmail-stream-type (caddr server))))
+              (server (cdr (assoc from all-user-mail-addresses))))
+    (setq smtpmail-smtp-server  (plist-get server :server)
+          smtpmail-stream-type  (plist-get server :type)
+          smtpmail-smtp-service (plist-get server :port))))
 
 (defun message-lint ()
   "Check for missing subject or attachments.
