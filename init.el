@@ -424,20 +424,6 @@
      dispatch:initialism dispatch:flex dispatch:prefixes))
   (orderless-component-separator #'orderless-escapable-split-on-space))
 
-(use-package icomplete
-  :bind (:map icomplete-minibuffer-map
-              ("RET" . icomplete-force-complete-and-exit)
-              ("<down>" . icomplete-forward-completions)
-              ("C-n" . icomplete-forward-completions)
-              ("<up>" . icomplete-backward-completions)
-              ("C-p" . icomplete-backward-completions)
-              ("C-M-i" . minibuffer-complete))
-  :custom
-  (icomplete-show-matches-on-no-input t)
-  (icomplete-prospects-height 1)
-  (icomplete-separator " ⋮ ")
-  (icomplete-hide-common-prefix nil))
-
 (use-package vertico
   :ensure t
   :bind
