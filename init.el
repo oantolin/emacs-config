@@ -18,7 +18,6 @@
  '(tab-bar-show nil))
 
 (when (string= (system-name) "localhost") ; new Chromebook
-  ;; TODO: check that WSL doesn't also report "localhost"
   (keymap-set key-translation-map "S-<next>" "M-<next>")
   (keymap-set key-translation-map "M-<next>" "M-<down>")
   (keymap-set key-translation-map "S-<prior>" "M-<prior>")
