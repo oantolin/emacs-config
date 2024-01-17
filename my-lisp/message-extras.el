@@ -32,7 +32,8 @@ Add to `message-send-hook'."
                      (mail-extract-address-components
                       (message-field-value "From"))))
               (server (cdr (assoc from all-user-mail-addresses))))
-    (setq smtpmail-smtp-server  (plist-get server :server)
+    (setq smtpmail-smtp-user    (or (plist-get server :user) from)
+          smtpmail-smtp-server  (plist-get server :server)
           smtpmail-stream-type  (plist-get server :type)
           smtpmail-smtp-service (plist-get server :port))))
 
