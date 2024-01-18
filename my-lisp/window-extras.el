@@ -23,16 +23,17 @@
     (set-window-buffer next-window this-buffer)
     (select-window next-window)))
 
-;; Written by alphapapa, https://www.reddit.com/r/emacs/comments/idz35e/emacs_27_can_take_svg_screenshots_of_itself/g2c2c6y
-(defun screenshot-svg ()
-  "Save a screenshot of the current frame as an SVG image.
-Saves to a temp file and puts the filename in the kill ring."
-  (interactive)
-  (let* ((filename (make-temp-file "Emacs" nil ".svg"))
-         (data (x-export-frames nil 'svg)))
-    (with-temp-file filename
-      (insert data))
+;; Modified slightly from alphapapa's original at:
+;; https://www.reddit.com/r/emacs/comments/idz35e/emacs_27_can_take_svg_screenshots_of_itself/g2c2c6y
+(defun screenshot (arg)
+  "Save a screenshot of the current frame to ~/Downloads.
+By default save a PNG, but with a prefix argument, save a an SVG."
+  (interactive "P")
+  (let* ((type (if arg 'svg 'png))
+         (filename (make-temp-file
+                    "~/Downloads/Emacs" nil (format ".%s" type)
+                    (x-export-frames nil type))))
     (kill-new filename)
-    (message filename)))
+    (message "Saved %s" filename)))
 
 (provide 'window-extras)

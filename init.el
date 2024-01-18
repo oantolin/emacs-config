@@ -366,7 +366,9 @@
   :bind
   (:map ctl-x-4-map
         ("s" . toggle-window-split)
-        ("t" . transpose-windows)))
+        ("t" . transpose-windows))
+  (:map ctl-x-5-map
+        ("s" . screenshot)))
 
 (use-package minibuffer
   :bind
