@@ -122,6 +122,7 @@
  ("C-x C-p" . list-packages)
  ("M-r" . kmacro-start-macro-or-insert-counter)
  ("M-m" . kmacro-end-or-call-macro)
+ ("C-x C-k i" . insert-kbd-macro)
  ("M-i" . back-to-indentation)
  ("M-s k" . keep-lines)
  ("M-s f" . flush-lines)
