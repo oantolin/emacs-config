@@ -1131,6 +1131,9 @@
   (defun org-tweak-syntax-table ()
     (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'") (?' "'"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
+  (defun when-in-org-do-as-the-organs-do (fn)
+    (if (derived-mode-p 'org-mode) (org-open-at-point) (funcall fn)))
+  (advice-add 'org-open-at-point-global :around #'when-in-org-do-as-the-organs-do)
   (org-link-set-parameters
    "org-title"
    :store (defun store-org-title-link ()
