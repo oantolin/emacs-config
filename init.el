@@ -121,6 +121,7 @@
  ("C-x C-p" . list-packages)
  ("M-r" . kmacro-start-macro-or-insert-counter)
  ("M-m" . kmacro-end-or-call-macro)
+ ("C-x C-k i" . insert-kbd-macro)
  ("M-i" . back-to-indentation)
  ("M-s k" . keep-lines)
  ("M-s f" . flush-lines)
@@ -365,7 +366,9 @@
   :bind
   (:map ctl-x-4-map
         ("s" . toggle-window-split)
-        ("t" . transpose-windows)))
+        ("t" . transpose-windows))
+  (:map ctl-x-5-map
+        ("s" . screenshot)))
 
 (use-package minibuffer
   :bind
@@ -1127,6 +1130,9 @@
   (defun org-tweak-syntax-table ()
     (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'") (?' "'"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
+  (defun when-in-org-do-as-the-organs-do (fn)
+    (if (derived-mode-p 'org-mode) (org-open-at-point) (funcall fn)))
+  (advice-add 'org-open-at-point-global :around #'when-in-org-do-as-the-organs-do)
   (org-link-set-parameters
    "org-title"
    :store (defun store-org-title-link ()
