@@ -762,16 +762,18 @@
   :custom
   (browse-url-browser-function #'eww-browse-url)
   (browse-url-handlers
-   (mapcar
-    (lambda (regexp) (cons (concat "\\`https?://" regexp) 'browse-url-generic)) 
-    '("\\(?:youtu\\.be\\|\\(?:www\\.\\)?youtube\\.com\\)"
-      "[^/]+zoom\\.us"
-      "meet\\.google\\.com"
-      "bluejeans\\.com"
-      "twitter\\.com"
-      "doodle\\.com"
-      "tinyview\\.com"
-      "github\\.com")))
+   (cons
+    '("\\`https?://emacs.stackexchange.com" . sx-open-link)
+    (mapcar (lambda (regexp)
+              (cons (concat "\\`https?://" regexp) 'browse-url-generic))
+            '("\\(?:youtu\\.be\\|\\(?:www\\.\\)?youtube\\.com\\)"
+              "[^/]+zoom\\.us"
+              "meet\\.google\\.com"
+              "bluejeans\\.com"
+              "twitter\\.com"
+              "doodle\\.com"
+              "tinyview\\.com"
+              "github\\.com"))))
     (browse-url-secondary-browser-function #'browse-url-generic)
     :config
     (if-let ((wslview (executable-find "wslview")))
