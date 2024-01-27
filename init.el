@@ -1100,6 +1100,7 @@
   (org-mode . turn-off-visual-line-mode)
   (org-mode . org-tweak-syntax-table)
   (org-mode . add-pretty-entities-hook)
+  (org-mode . echo-area-tooltips)
   :config
   (defun ediff-with-org-show-all ()
     "Expand all headings prior to ediffing org buffers."
@@ -1107,6 +1108,12 @@
   (defun add-pretty-entities-hook ()
     "Add `org-toggle-pretty-entities' to local value of `visible-mode-hook'."
     (add-hook 'visible-mode-hook 'org-toggle-pretty-entities nil t))
+  (defun echo-area-tooltips ()
+  "Show tooltips in the echo area automatically for current buffer."
+  (setq-local help-at-pt-display-when-idle t
+              help-at-pt-timer-delay 0)
+  (help-at-pt-cancel-timer)
+  (help-at-pt-set-timer))
   (customize-set-variable
    'org-structure-template-alist
    (append org-structure-template-alist
@@ -1345,6 +1352,8 @@ if `org-store-link' is called from the #+TITLE line."
         (json-read-from-string string)))))
 
 (use-package ement-tweaks
+  :custom
+  (ement-tweaks-emoji-command #'emoji-search)
   :commands
   ement-tweaks-send-reaction
   ement-tweaks-quick-send-minor-mode)
