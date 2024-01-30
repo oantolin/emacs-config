@@ -115,7 +115,6 @@
  ("M-K" . kill-paragraph)
  ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history  
  ("M-Z" . zap-to-char)
- ("C-x c" . compile)
  ("C-x C" . set-goal-column)
  ("C-x k" . kill-current-buffer)
  ("C-x C-p" . list-packages)
