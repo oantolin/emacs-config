@@ -255,7 +255,19 @@
 (use-package repeat
   :init (repeat-mode)
   :config
-  (put 'other-window 'repeat-map nil))
+  (put 'other-window 'repeat-map nil)
+  (defun keymap-commands (keymap)
+    (let (cmds)
+      (map-keymap (lambda (_key cmd)
+                    (cond
+                     ((commandp cmd) (push cmd cmds))
+                     ((keymapp cmd)
+                      (setq cmds (append cmds (keymap-commands cmd))))))
+                  keymap)
+      cmds))
+  (defun repeatify (keymap)
+    (dolist (cmd (keymap-commands (symbol-value keymap)))
+      (put cmd 'repeat-map keymap))))
 
 (use-package misc
   :bind
@@ -550,13 +562,7 @@
     (interactive "P")
     (with-current-buffer "*Messages*"
       (goto-char (1- (point-max)))
-      (embark-act arg)))
-  (defun embark--smerge-next (&rest _) (push-mark) (smerge-next))
-  (dolist (cmd '(smerge-keep-all   smerge-keep-base
-                 smerge-keep-mine  smerge-keep-lower
-                 smerge-keep-other smerge-keep-upper
-                 smerge-keep-current))
-    (push #'embark--smerge-next (alist-get cmd embark-post-action-hooks))))
+      (embark-act arg))))
 
 (use-package embark-consult :ensure t :defer t)
 
@@ -1038,6 +1044,11 @@
   (:map vc-dir-mode-map
         ("r" . vc-revert)
         ("c" . vc-git-commit)))
+
+(use-package smerge-mode
+  :defer t
+  :config
+  (repeatify 'smerge-basic-map))
 
 (use-package magit :ensure t :defer t)
 
