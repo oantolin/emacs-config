@@ -256,19 +256,15 @@
   :init (repeat-mode)
   :config
   (put 'other-window 'repeat-map nil)
-  (defun keymap-commands (keymap)
-    (let (cmds)
-      (map-keymap (lambda (_key cmd)
-                    (cond
-                     ((commandp cmd) (push cmd cmds))
-                     ((keymapp cmd)
-                      (setq cmds (append cmds (keymap-commands cmd))))))
-                  keymap)
-      cmds))
-  (defun repeatify (keymap)
-    (dolist (cmd (keymap-commands (symbol-value keymap)))
-      (put cmd 'repeat-map keymap))))
-
+  (defun repeatify (repeat-map)
+    (named-let process ((keymap (symbol-value repeat-map)))
+      (map-keymap
+       (lambda (_key cmd)
+         (cond
+          ((symbolp cmd) (put cmd 'repeat-map repeat-map))
+          ((keymapp cmd) (process cmd))))
+       keymap))))
+                   
 (use-package misc
   :bind
   ("M-z" . zap-up-to-char)
