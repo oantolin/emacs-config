@@ -257,6 +257,7 @@
   :config
   (put 'other-window 'repeat-map nil)
   (defun repeatify (repeat-map)
+    "Set the `repeat-map' property on all commands bound in REPEAT-MAP."
     (named-let process ((keymap (symbol-value repeat-map)))
       (map-keymap
        (lambda (_key cmd)
