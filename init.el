@@ -1069,7 +1069,7 @@
    ("C-c C" . org-clock-goto)
    ("C-c o" . org-open-at-point-global))
   (:map org-mode-map
-        ("C-,") ; I use this for embark-dwim
+        ("C-,") ; I use this for consult-register-load
         ("C-c C-=" . org-cycle-agenda-files)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
