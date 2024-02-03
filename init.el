@@ -1374,6 +1374,10 @@ if `org-store-link' is called from the #+TITLE line."
   (ement-room-send-message-filter #'ement-room-send-org-filter)
   :config
   (ement-tweaks-quick-send-minor-mode)
+  (defun dumb-quotes (fn &rest args)
+    (let (org-export-with-smart-quotes)
+      (apply fn args)))
+  (advice-add #'ement-room-send-org-filter :around #'dumb-quotes)
   :bind
   (:prefix-map global-ement-map :prefix "C-c m"
                ("c" . ement-connect)
