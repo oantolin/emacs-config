@@ -10,7 +10,7 @@
   :group 'ement
   :prefix "ement-tweaks-")
 
-(defcustom ement-tweaks-emoji-command #'emoji-insert
+(defcustom ement-tweaks-emoji-command #'emoji-search
   "Command to choose an emoji for a reaction."
   :type '(choice (const emoji-insert)
                  (const emoji-search)
