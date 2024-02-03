@@ -1043,6 +1043,8 @@
 
 (use-package smerge-mode
   :defer t
+  :custom
+  (smerge-command-prefix "\C-xc")
   :config
   (repeatify 'smerge-basic-map))
 
