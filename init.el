@@ -220,7 +220,7 @@
   (modus-themes-italic-constructs t)
   (modus-themes-bold-constructs t)
   (modus-themes-mixed-fonts t)
-  (modus-themes-headings '((1 1.3) (2 1.2) (3 1.1)))
+  (modus-themes-headings '((0 1.4) (1 1.3) (2 1.2) (3 1.1)))
   :init
   (load-theme (if (display-graphic-p) 'modus-operandi 'modus-vivendi) t))
 
