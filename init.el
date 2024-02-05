@@ -18,6 +18,9 @@
  '(tab-bar-show nil))
 
 (when (string= (system-name) "localhost") ; new Chromebook
+  (set-face-attribute 'variable-pitch nil :family "C059")
+  (set-face-attribute 'default nil :family "Courier 10 Pitch")
+  (set-face-attribute 'fixed-pitch nil :family "Courier 10 Pitch")
   (keymap-set key-translation-map "S-<next>" "M-<next>")
   (keymap-set key-translation-map "M-<next>" "M-<down>")
   (keymap-set key-translation-map "S-<prior>" "M-<prior>")
