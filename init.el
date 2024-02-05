@@ -257,16 +257,7 @@
 (use-package repeat
   :init (repeat-mode)
   :config
-  (put 'other-window 'repeat-map nil)
-  (defun repeatify (repeat-map)
-    "Set the `repeat-map' property on all commands bound in REPEAT-MAP."
-    (named-let process ((keymap (symbol-value repeat-map)))
-      (map-keymap
-       (lambda (_key cmd)
-         (cond
-          ((symbolp cmd) (put cmd 'repeat-map repeat-map))
-          ((keymapp cmd) (process cmd))))
-       keymap))))
+  (put 'other-window 'repeat-map nil))
                    
 (use-package misc
   :bind
@@ -1049,7 +1040,13 @@
   :custom
   (smerge-command-prefix "\C-xc")
   :config
-  (repeatify 'smerge-basic-map))
+  (named-let process ((keymap smerge-basic-map))
+    (map-keymap
+     (lambda (_key cmd)
+       (cond
+        ((symbolp cmd) (put cmd 'repeat-map 'smerge-basic-map))
+        ((keymapp cmd) (process cmd))))
+     keymap)))
 
 (use-package magit :ensure t :defer t)
 
