@@ -17,21 +17,15 @@
  '(cursor-type 'bar)
  '(tab-bar-show nil))
 
-(when (string= (system-name) "localhost") ; new Chromebook
-  (set-face-attribute 'variable-pitch nil :family "URW Bookman")
+(set-face-attribute 'variable-pitch nil :family "URW Bookman")
+
+(when (string= (system-name) "localhost") ; Chromebook
   (set-face-attribute 'default nil :family "Courier 10 Pitch")
   (set-face-attribute 'fixed-pitch nil :family "Courier 10 Pitch")
   (keymap-set key-translation-map "S-<next>" "M-<next>")
   (keymap-set key-translation-map "M-<next>" "M-<down>")
   (keymap-set key-translation-map "S-<prior>" "M-<prior>")
   (keymap-set key-translation-map "M-<prior>" "M-<up>"))
-
-(when (string= (system-name) "penguin") ; old Chromebook
-  (set-face-attribute 'default nil :height 110)
-  (keymap-set key-translation-map "<next>" "M-<down>")
-  (keymap-set key-translation-map "S-<next>" "M-S-<down>")
-  (keymap-set key-translation-map "<prior>" "M-<up>")
-  (keymap-set key-translation-map "S-<prior>" "M-S-<up>"))
 
 (custom-set-faces
  '(Info-quoted ((t :inherit fixed-pitch)))
@@ -58,12 +52,6 @@
 (add-to-list 'load-path "~/.private/")
 
 ;;; misc
-
-(when (string= (system-name) "penguin") ; Chromebook
-  (dolist (dir '("~/texlive/2022/bin/x86_64-linux" "~/bin"))
-    (let ((full (expand-file-name dir)))
-      (setenv "PATH" (concat full ":" (getenv "PATH")))
-      (push full exec-path))))
 
 (dolist (cmd '(narrow-to-region
                upcase-region
@@ -142,9 +130,6 @@
  ("C-M-o" . up-list)
  ("C-o" . split-line)
  ("M-o" . other-window)
- ((if (string= (system-name) "penguin") "<C-delete>" "<C-M-backspace>") .
-  ;; Alt+backspace sends <delete> on the Chromebook...
-  kill-backward-up-list)
  ("M-R" . raise-sexp)
  ("M-T" . transpose-lines)
  ("C-x C-t" . transpose-sentences)
