@@ -18,6 +18,9 @@
  '(tab-bar-show nil))
 
 (when (string= (system-name) "localhost") ; new Chromebook
+  (set-face-attribute 'variable-pitch nil :family "URW Bookman")
+  (set-face-attribute 'default nil :family "Courier 10 Pitch")
+  (set-face-attribute 'fixed-pitch nil :family "Courier 10 Pitch")
   (keymap-set key-translation-map "S-<next>" "M-<next>")
   (keymap-set key-translation-map "M-<next>" "M-<down>")
   (keymap-set key-translation-map "S-<prior>" "M-<prior>")
@@ -216,7 +219,7 @@
   (modus-themes-italic-constructs t)
   (modus-themes-bold-constructs t)
   (modus-themes-mixed-fonts t)
-  (modus-themes-headings '((1 1.3) (2 1.2) (3 1.1)))
+  (modus-themes-headings '((0 1.4) (1 1.3) (2 1.2) (3 1.1)))
   :init
   (load-theme (if (display-graphic-p) 'modus-operandi 'modus-vivendi) t))
 
@@ -253,16 +256,7 @@
 (use-package repeat
   :init (repeat-mode)
   :config
-  (put 'other-window 'repeat-map nil)
-  (defun repeatify (repeat-map)
-    "Set the `repeat-map' property on all commands bound in REPEAT-MAP."
-    (named-let process ((keymap (symbol-value repeat-map)))
-      (map-keymap
-       (lambda (_key cmd)
-         (cond
-          ((symbolp cmd) (put cmd 'repeat-map repeat-map))
-          ((keymapp cmd) (process cmd))))
-       keymap))))
+  (put 'other-window 'repeat-map nil))
                    
 (use-package misc
   :bind
@@ -1042,8 +1036,19 @@
 
 (use-package smerge-mode
   :defer t
+  :custom
+  (smerge-command-prefix "\C-xc")
   :config
-  (repeatify 'smerge-basic-map))
+  (named-let process ((keymap smerge-basic-map))
+    (map-keymap
+     (lambda (_key cmd)
+       (if (keymapp cmd)
+           (process cmd)
+         (when (consp cmd)
+           (setq cmd (cdr cmd)))
+         (when (symbolp cmd)
+           (put cmd 'repeat-map 'smerge-basic-map))))
+     keymap)))
 
 (use-package magit :ensure t :defer t)
 
@@ -1371,6 +1376,10 @@ if `org-store-link' is called from the #+TITLE line."
   (ement-room-send-message-filter #'ement-room-send-org-filter)
   :config
   (ement-tweaks-quick-send-minor-mode)
+  (defun dumb-quotes (fn &rest args)
+    (let (org-export-with-smart-quotes)
+      (apply fn args)))
+  (advice-add #'ement-room-send-org-filter :around #'dumb-quotes)
   :bind
   (:prefix-map global-ement-map :prefix "C-c m"
                ("c" . ement-connect)

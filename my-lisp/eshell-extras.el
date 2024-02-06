@@ -24,4 +24,11 @@
   (term-mode)
   (term-char-mode))
 
+;; The built-in version of the following function doesn't ensure you
+;; get an eshell buffer in the right directory!
+(defun eshell-bookmark-jump (bookmark)
+  "Default bookmark handler for Eshell buffers."
+  (let ((default-directory (bookmark-prop-get bookmark 'location)))
+    (eshell '(4))))
+
 (provide 'eshell-extras)
