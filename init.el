@@ -1043,9 +1043,12 @@
   (named-let process ((keymap smerge-basic-map))
     (map-keymap
      (lambda (_key cmd)
-       (cond
-        ((symbolp cmd) (put cmd 'repeat-map 'smerge-basic-map))
-        ((keymapp cmd) (process cmd))))
+       (if (keymapp cmd)
+           (process cmd)
+         (when (consp cmd)
+           (setq cmd (cdr cmd)))
+         (when (symbolp cmd)
+           (put cmd 'repeat-map 'smerge-basic-map))))
      keymap)))
 
 (use-package magit :ensure t :defer t)
