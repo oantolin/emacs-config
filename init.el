@@ -710,6 +710,7 @@
 (use-package text-mode
   :hook
   (text-mode . turn-on-visual-line-mode)
+  (text-mode . variable-pitch-mode)
   :config
   (modify-syntax-entry ?\" "\"" text-mode-syntax-table))
 
@@ -1411,12 +1412,12 @@ if `org-store-link' is called from the #+TITLE line."
   :hook
   (mastodon-mode . mastodon-async-mode)
   (mastodon-mode . mastodon-recenter-positions)
+  :custom
+  (mastodon-toot--proportional-fonts-compose t)
+  (mastodon-tl--enable-proportional-fonts t)
   :config
   (defun mastodon-recenter-positions ()
-    (setq-local recenter-positions '(bottom middle top)))
-  :custom-face
-  (mastodon-toot-docs-face
-   ((t :inherit (font-lock-comment-face fixed-pitch)))))
+    (setq-local recenter-positions '(bottom middle top))))
 
 (use-package lem
   :ensure t
