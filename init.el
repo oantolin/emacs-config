@@ -201,6 +201,7 @@
   :bind
   ("C-c x b" . modus-themes-toggle)
   :custom
+  (modus-themes-variable-pitch-ui t)
   (modus-themes-italic-constructs t)
   (modus-themes-bold-constructs t)
   (modus-themes-mixed-fonts t)
