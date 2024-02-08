@@ -1397,9 +1397,7 @@ if `org-store-link' is called from the #+TITLE line."
   :hook
   (mastodon-mode . mastodon-async-mode)
   (mastodon-mode . mastodon-recenter-positions)
-  :custom
-  (mastodon-toot--proportional-fonts-compose t)
-  (mastodon-tl--enable-proportional-fonts t)
+  (mastodon-mode . variable-pitch-mode)
   :config
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top))))
