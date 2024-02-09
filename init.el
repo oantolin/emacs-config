@@ -138,7 +138,7 @@
  ;; The Chromebook has a pretty reload key!
  ("<XF86Reload>" . revert-buffer))
 
-(bind-keys ;; math
+(bind-keys ;; math and emojis
  ("C-z" . iso-transl-ctl-x-8-map)
  :map iso-transl-ctl-x-8-map
  ("g a" . [?α]) ("g b" . [?β]) ("g g" . [?γ]) ("g d" . [?δ]) ("g e" . [?ϵ])
@@ -163,7 +163,7 @@
  ("w" . emoji-recent))
 
 (bind-keys :prefix-map insert-pair-map
-           :prefix "C-S-w"
+           :prefix "M-["
            ([t] . insert-pair))
            
 (when (string= (system-name)  "penguin")
@@ -278,14 +278,13 @@
   ("M-C" . mark-char)
   ("M-@" . mark-my-word)
   ("M-g r" . goto-random-line)
-  ("M-g M-r" . goto-random-line)
   ("C-M--" . kill-inside-sexp)
   ("C-M-=" . mark-inside-sexp)
   ("M-U" . unwrap-sexp)
   ("M-S" . unwrap-mark-sexp)
   ("C-|" . pipe-region)
-  ("C-S-s" . forward-to-whitespace)
-  ("C-S-r" . backward-to-whitespace)
+  ("C-S-f" . forward-to-whitespace)
+  ("C-S-b" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
   ("M-M" . apply-macro-to-rest-of-paragraph)
   ("M-;" . dabbrev-next)
@@ -471,6 +470,7 @@
   ("C-." . embark-act)
   ("C-:" . embark-act-all)
   ("M-." . embark-dwim)
+  ("S-SPC" . embark-select)
   ("C-h b" . embark-bindings)
   ("C-h B" . embark-bindings-at-point)
   ("C-h M" . embark-bindings-in-keymap)
