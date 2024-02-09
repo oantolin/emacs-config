@@ -1091,6 +1091,7 @@
   (org-agenda-skip-deadline-if-done t)
   (org-agenda-start-on-weekday nil)
   (org-log-into-drawer t)
+  (org-agenda-use-time-grid nil)
   :hook
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
