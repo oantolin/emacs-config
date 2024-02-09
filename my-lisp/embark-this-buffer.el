@@ -2,15 +2,6 @@
 
 (require 'embark)
 
-(defun embark-target-this-buffer ()
-  (cons 'this-buffer (buffer-name)))
-
-(add-to-list 'embark-target-finders #'embark-target-this-buffer t)
-
-(add-to-list 'embark-keymap-alist '(this-buffer . this-buffer-map))
-
-(push 'embark--allow-edit (alist-get 'write-file embark-target-injection-hooks))
-
 (declare-function 'transpose-windows "ext:window-extras")
 
 (defvar-keymap this-buffer-map
@@ -43,8 +34,17 @@
   ">" #'next-buffer
   "t" #'transpose-windows)
 
-(add-to-list 'embark-repeat-actions #'previous-buffer)
-(add-to-list 'embark-repeat-actions #'next-buffer)
-(add-to-list 'embark-repeat-actions #'transpose-windows)
+(push 'embark--allow-edit (alist-get 'write-file embark-target-injection-hooks))
+
+(dolist (cmd '(previous-buffer next-buffer transpose-windows))
+  (add-to-list 'embark-repeat-actions cmd))
+
+(defun embark-on-this-buffer ()
+  "Run `embark-act' on the current buffer."
+  (interactive)
+  (let ((embark-target-finders
+         (list (lambda () (cons 'this-buffer (buffer-name)))))
+        (embark-keymap-alist '((this-buffer . this-buffer-map))))
+    (embark-act)))
 
 (provide 'embark-this-buffer)

@@ -559,6 +559,7 @@
   :after embark
   :demand t
   :bind
+  ("M-]" . embark-on-this-buffer)
   (:map this-buffer-map
         ("P" . topaz-paste-buffer)))
 
