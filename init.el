@@ -556,8 +556,6 @@
         ("C-M-j" . consult-dir-jump-file)))
 
 (use-package embark-this-buffer
-  :after embark
-  :demand t
   :bind
   ("M-]" . embark-on-this-buffer)
   (:map this-buffer-map
