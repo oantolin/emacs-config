@@ -234,11 +234,6 @@
   :init
   (recentf-mode))
 
-(use-package bookmark
-  :defer t
-  :custom
-  (bookmark-fontify nil))
-
 (use-package repeat
   :init (repeat-mode)
   :config
