@@ -45,6 +45,12 @@ argument, copy the rest of the line."
   (goto-char (point-min))
   (forward-line (random (count-lines (point-min) (point-max)))))
 
+(defvar-keymap random-line-map
+  :doc "Repeat map for `goto-random-line'"
+  "r" #'goto-random-line)
+
+(put 'goto-random-line 'repeat-map 'random-line-map)
+
 (defun pipe-region (start end command)
   "Pipe region through shell command. If the mark is inactive,
 pipe whole buffer."
