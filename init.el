@@ -1484,69 +1484,10 @@ if `org-store-link' is called from the #+TITLE line."
         ("C-c M-t" . sly-trace-dialog)
         ("C-c C-M-t" . sly-toggle-fancy-trace)))
 
-(use-package clojure-mode :ensure t :defer t)
-
-(use-package cicio-mode :mode "\\.ci\\'" :commands run-cicio)
-
-(when (or (executable-find "lua") (executable-find "luajit"))
-  (use-package lua-mode
-    :ensure t
-    :defer t
-    :custom
-    (lua-indent-level 2)
-    (lua-default-application "luajit")))
-
-(when (executable-find "julia")
-  (use-package julia-mode
-    :ensure t
-    :bind ("C-c J" . run-julia)
-    :init
-    (defun run-julia ()
-      "Just run julia in a term buffer."
-      (interactive)
-      (switch-to-buffer (make-term "julia" "julia"))
-      (term-mode)
-      (term-char-mode))))
-
-(when (executable-find "sage")
-  (defun sage-notebook ()
-    "Start a Sage notebook.
-This makes a buffer to communicate with the Sage kernel, useful
-to shut it down, for example."
-    (interactive)
-    (bury-buffer
-     (process-buffer
-      (start-process "sage-notebook" "*sage*" "sage" "--notebook=jupyter")))))
-
 (use-package j-mode
   :bind ("C-c j" . run-j)
   :mode ("\\.j\\'" "\\.ijs\\'")
   :commands j-mode)
-
-(use-package gnu-apl-mode :ensure t :defer t) ; only want gnu-apl-input.el
-
-(use-package gnu-apl-input :after aprepl)
-
-(add-to-list 'load-path
-             (car (file-expand-wildcards
-                   "~/quicklisp/dists/quicklisp/software/april*/aprepl")))
-
-(use-package aprepl
-  :bind ("C-c A" . aprepl)
-  :config
-  (defun use-apl-input-method ()
-    (set-input-method "APL-Z"))
-  :hook
-  (april-apl-repl-mode . use-apl-input-method))
-
-(use-package bqn-mode
-  :ensure t
-  :bind ("C-c B" . run-bqn)
-  :config
-  (defun run-bqn ()
-    "Pop up a BQN REPL."
-    (interactive)
-    (pop-to-buffer (bqn-comint-buffer))))
 
 (use-package ngnk-cli :bind ("C-c k" . run-ngnk))
 
