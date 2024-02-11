@@ -1422,6 +1422,11 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (python-shell-interpreter "python3"))
 
+(use-package scheme
+  :defer t
+  :custom
+  (scheme-program-name "guile"))
+
 (use-package cperl-mode
   :mode "\\.\\([pP]\\([Llm]\\|erl\\|od\\)\\|al\\)\\'"
   :interpreter "\\(mini\\)?perl5?"
