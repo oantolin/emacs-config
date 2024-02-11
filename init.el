@@ -1411,11 +1411,10 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package elisp-mode
   :config
-  (add-to-list 'lisp-imenu-generic-expression
-               '("Keymaps"
-                 "^\\s-*(defvar-keymap\\s-+\\(\\(?:\\sw\\|\\s_\\)+\\)"
-                 1)
-               t))
+  (add-to-list
+   'lisp-imenu-generic-expression
+   '("Keymaps" "^\\s-*(defvar-keymap\\s-+\\(\\(?:\\sw\\|\\s_\\)+\\)" 1)
+   t))
 
 (use-package python
   :defer t
