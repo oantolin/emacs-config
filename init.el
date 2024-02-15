@@ -47,7 +47,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode"))
+(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "orderless"))
   (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -385,26 +385,14 @@
   :ensure t
   :demand t
   :config
-  (defmacro dispatch: (regexp style)
-    (cl-flet ((symcat (a b) (intern (concat a (symbol-name b)))))
-      `(defun ,(symcat "dispatch:" style) (pattern _index _total)
-         (when (string-match ,regexp pattern)
-           (cons ',(symcat "orderless-" style) (match-string 1 pattern))))))
-  (cl-flet ((pre/post (str) (format "^%s\\(.*\\)$\\|^\\(?1:.*\\)%s$" str str)))
-    (dispatch: (pre/post "=") literal)
-    (dispatch: (pre/post "`") regexp)
-    (dispatch: (pre/post (if (or minibuffer-completing-file-name
-                                 (derived-mode-p 'eshell-mode))
-                             "%" "[%.]"))
-               initialism))
-  (dispatch: "^{\\(.*\\)}$" flex)
-  (dispatch: "^\\([^][^\\+*]*[./-][^][\\+*$]*\\)$" prefixes)
-  (dispatch: "^!\\(.+\\)$" without-literal)
+  (defun prefixes-for-separators (pattern _index _total)
+    (when (string-match-p "^[^][^\\+*]*[./-][^][\\+*$]*$" pattern)
+      (cons 'orderless-prefixes pattern)))
+  (cl-pushnew '(?` . orderless-regexp) orderless-affix-dispatch-alist)
   :custom
   (orderless-matching-styles 'orderless-regexp)
   (orderless-style-dispatchers
-   '(dispatch:literal dispatch:regexp dispatch:without-literal
-     dispatch:initialism dispatch:flex dispatch:prefixes))
+   '(orderless-affix-dispatch prefixes-for-separators))
   (orderless-component-separator #'orderless-escapable-split-on-space))
 
 (use-package vertico
