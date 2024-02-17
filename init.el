@@ -47,7 +47,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "orderless"))
+(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode"))
   (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -1144,11 +1144,14 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :bind
   ("M-s q" . org-ql-find)
-  ("M-s a" . org-ql-find-in-agenda)
   ("M-s n" . org-ql-find-in-org-directory)
   ("M-s s" . org-ql-search)
-  ("M-s v" . org-ql-view)
-  ("M-s l" . org-ql-open-link))
+  ("M-s v" . org-ql-view))
+
+(use-package org-ql-usual-files
+  :bind
+  ("M-s a" . org-ql-usual-files-find)
+  ("M-s l" . org-ql-usual-files-open-link))
 
 (use-package org-ql-completing-read
   :bind
