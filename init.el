@@ -1150,7 +1150,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package org-ql-usual-files
   :bind
-  ("M-s a" . org-ql-usual-files-find)
+  ("M-s u" . org-ql-usual-files-find)
   ("M-s l" . org-ql-usual-files-open-link))
 
 (use-package org-ql-completing-read
