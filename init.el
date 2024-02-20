@@ -721,29 +721,6 @@
   :bind
   ("C-c x o" . olivetti-mode))
 
-(use-package browse-url
-  :defer t
-  :custom
-  (browse-url-browser-function #'eww-browse-url)
-  (browse-url-handlers
-   (cons
-    '("\\`https?://emacs.stackexchange.com" . sx-open-link)
-    (mapcar (lambda (regexp)
-              (cons (concat "\\`https?://" regexp) 'browse-url-generic))
-            '("\\(?:youtu\\.be\\|\\(?:www\\.\\)?youtube\\.com\\)"
-              "[^/]+zoom\\.us"
-              "meet\\.google\\.com"
-              "bluejeans\\.com"
-              "twitter\\.com"
-              "doodle\\.com"
-              "tinyview\\.com"
-              "github\\.com"))))
-    (browse-url-secondary-browser-function #'browse-url-generic)
-    :config
-    (if-let ((wslview (executable-find "wslview")))
-        (setq browse-url-generic-program wslview)
-      (advice-add 'browse-url-generic :override 'browse-url-default-browser)))
-
 (use-package shr
   :bind
   (:map shr-map
