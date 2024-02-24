@@ -1024,7 +1024,8 @@
         ("C-c C-=" . org-cycle-agenda-files)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
-        ("C-=" . org-emphasize))
+        ("C-=" . org-emphasize)
+        ("M-g o" . consult-org-heading))
   :custom
   (org-ellipsis "…")
   (org-refile-use-outline-path 'file)
