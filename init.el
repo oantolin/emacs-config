@@ -196,6 +196,15 @@
 
 ;;; packages
 
+(use-package modus-themes
+  :ensure t
+  :custom
+  (modus-themes-variable-pitch-ui t)
+  (modus-themes-mixed-fonts t)
+  (modus-themes-bold-constructs t)
+  (modus-themes-italic-constructs t)
+  (modus-themes-headings '((0 1.4) (1 1.3) (2 1.2) (3 1.1))))
+
 (use-package ef-themes
   :ensure t
   :bind
