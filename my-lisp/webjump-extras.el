@@ -37,4 +37,11 @@
                               ,(car url) ,(or (cadr url) "")]))
                  webjump-search-engines))))
 
+(defun webjump-in-eww (fn &rest args)
+  (let ((browse-url-browser-function
+         (if current-prefix-arg #'browse-url-default-browser #'eww)))
+    (apply fn args)))
+
+(advice-add 'webjump :around #'webjump-in-eww)
+
 (provide 'webjump-extras)
