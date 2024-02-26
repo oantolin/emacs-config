@@ -217,6 +217,10 @@
   :init
   (load-theme (if (display-graphic-p) 'ef-summer 'ef-winter) t))
 
+(use-package spacious-padding
+  :ensure t
+  :init (spacious-padding-mode))
+
 (use-package imenu
   :defer t
   :custom (imenu-space-replacement nil))
@@ -1175,7 +1179,7 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   ([remap ispell-word] . jinx-correct)
   (:map toggle-map
-        ("s" . jinx-languages))
+        ("j" . jinx-languages))
   :config
   (put 'jinx-overlay 'keymap nil))
   
