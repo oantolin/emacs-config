@@ -1177,11 +1177,10 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (jinx-languages "en es")
   :bind
-  ([remap ispell-word] . jinx-correct)
-  (:map toggle-map
-        ("j" . jinx-languages))
-  :config
-  (put 'jinx-overlay 'keymap nil))
+  ("M-$" . jinx-correct)
+  ("C-M-$" . jinx-languages)
+  (:map jinx-overlay-map ; I use M-n & M-p for isearch-{next/previous}
+        ("M-n") ("M-p")))
   
 (use-package try :ensure t :defer t)
 
