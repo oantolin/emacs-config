@@ -12,18 +12,17 @@ A ragtag bunch of ad hoc formats are recognized for PAPER."
            when (string-match (format pattern "\\([0-9v.]+\\)") paper)
            return (match-string 1 paper)))
 
-(defun arXiv-pdf (paper &optional generic)
-  "Open the PDF version of PAPER from the arXiv.
+(defun arXiv-pdf (paper &optional external)
+  "Open the PDF version of PAPER from the arXiv in Emacs.
 A ragtag bunch of ad hoc formats are recognized for PAPER.
-If GENERIC is non-nil use `url-browse-generic' rather than
-`browse-url'."
+If EXTERNAL is non-nil use an external browser."
   (interactive "sarXiv paper: \nP")
-  (when (and (not generic) (fboundp 'pdf-tools-install))
+  (when (and (not external) (fboundp 'pdf-tools-install))
     (pdf-tools-install))
   (let ((pdf (format "https://arxiv.org/pdf/%s.pdf" (arXiv--id paper))))
-    (if generic
-        (browse-url-generic pdf)
-      (browse-url pdf))))
+    (if external
+        (browse-url pdf)
+      (eww pdf))))
 
 (defvar url-http-end-of-headers)
 
