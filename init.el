@@ -30,7 +30,7 @@
 
 (custom-set-faces
  '(Info-quoted ((t :inherit fixed-pitch)))
- '(fringe ((t :background nil))))
+ '(fringe ((t :background unspecified))))
 
 (set-fontset-font "fontset-default" 'emoji
                   (font-spec :family "Noto Color Emoji"))
@@ -729,7 +729,7 @@
 (use-package olivetti
   :ensure t
   :custom-face
-  (olivetti-fringe ((t :background nil)))
+  (olivetti-fringe ((t :background unspecified)))
   :bind
   ("C-c x o" . olivetti-mode))
 
