@@ -3,11 +3,15 @@
 ;; I usually want to search both agenda files and refile targets
 
 (require 'org-ql-find)
+(require 'org-capture)
 
 (defcustom org-ql-usual-files
   (seq-union
-   org-agenda-files
-   (mapcan #'seq-copy (mapcar #'car org-refile-targets)))
+   (seq-union (mapcan #'seq-copy (mapcar #'car org-refile-targets))
+              org-agenda-files)
+   (cl-loop for (_ _ _ (type file . _) . _) in org-capture-templates
+            when (string-prefix-p "file" (symbol-name type))
+            collect (file-name-concat org-directory file)))
   "Org files I usually want to search with `org-ql-find'."
   :type '(repeat file)
   :group 'org-ql)
