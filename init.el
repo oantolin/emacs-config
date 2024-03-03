@@ -401,6 +401,7 @@
     (when (string-match-p "^[^][^\\+*]*[./-][^][\\+*$]*$" pattern)
       (cons 'orderless-prefixes pattern)))
   (cl-pushnew '(?` . orderless-regexp) orderless-affix-dispatch-alist)
+  (setf (car (rassq 'orderless-annotation orderless-affix-dispatch-alist)) ?&)
   :custom
   (orderless-matching-styles 'orderless-regexp)
   (orderless-style-dispatchers
