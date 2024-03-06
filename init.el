@@ -166,7 +166,12 @@
 (bind-keys :prefix-map insert-pair-map
            :prefix "M-["
            ([t] . insert-pair))
-           
+
+(defun insert-pair-numeric-prefix (args)
+  (cons (prefix-numeric-value (car args)) (cdr args)))
+
+(advice-add 'insert-pair :filter-args #'insert-pair-numeric-prefix)
+
 (when (string= (system-name)  "penguin")
   ;; Alt+backspace sends <delete> on the Chromebook...
   (bind-key "<delete>" #'backward-kill-word))
