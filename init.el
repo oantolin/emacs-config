@@ -795,14 +795,16 @@
     "Guess a name for the current header line."
     (save-excursion
       (search-forward "{" nil t)
-      (let ((beg (point)))
-        (forward-char -1)
+      (let ((start (point)))
+        (backward-char)
         (condition-case nil
-            (progn
-              (forward-sexp 1)
-              (forward-char -1))
-          (error (forward-sentence 1)))
-        (buffer-substring beg (point)))))
+            (with-syntax-table (TeX-search-syntax-table ?\{ ?\})
+              (forward-sexp)
+              (backward-char))
+          (error (forward-sentence)))
+        (replace-regexp-in-string
+         "[\n\r][ ]+" " "
+         (buffer-substring start (point))))))
   (defun make-backslash-a-prefix-in-LaTeX ()
     "Set the syntax class of \\ to ' in LaTeX buffers."
     (modify-syntax-entry ?\\ "'" LaTeX-mode-syntax-table))
