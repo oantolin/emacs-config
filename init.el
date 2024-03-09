@@ -409,8 +409,7 @@
   :custom
   (orderless-matching-styles 'orderless-regexp)
   (orderless-style-dispatchers
-   '(orderless-affix-dispatch prefixes-for-separators))
-  (orderless-component-separator #'orderless-escapable-split-on-space))
+   '(orderless-affix-dispatch prefixes-for-separators)))
 
 (use-package vertico
   :ensure t
