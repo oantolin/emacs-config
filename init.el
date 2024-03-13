@@ -407,7 +407,6 @@
       (cons 'orderless-prefixes pattern)))
   (cl-pushnew '(?` . orderless-regexp) orderless-affix-dispatch-alist)
   :custom
-  (orderless-matching-styles 'orderless-regexp)
   (orderless-style-dispatchers
    '(orderless-affix-dispatch prefixes-for-separators)))
 
