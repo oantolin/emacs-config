@@ -472,8 +472,6 @@
   ("C-h B" . embark-bindings-at-point)
   ("C-h M" . embark-bindings-in-keymap)
   ("C-h E" . embark-on-last-message)
-  (:map minibuffer-local-map
-        ("S-SPC" . embark-select))
   (:map completion-list-mode-map
         ("." . embark-act))
   (:map embark-collect-mode-map
