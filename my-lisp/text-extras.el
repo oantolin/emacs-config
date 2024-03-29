@@ -262,4 +262,11 @@ and quit the window, killing the buffer."
    (line-beginning-position 2)
    (save-excursion (end-of-paragraph-text) (point))))
 
-(provide 'misc-text)
+(defun echo-area-tooltips ()
+  "Show tooltips in the echo area automatically for current buffer."
+  (setq-local help-at-pt-display-when-idle t
+              help-at-pt-timer-delay 0)
+  (help-at-pt-cancel-timer)
+  (help-at-pt-set-timer))
+
+(provide 'text-extras)

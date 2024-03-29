@@ -309,7 +309,8 @@
         ("M-i" . insert-completion-candidate))
   :commands
   force-truncate-lines
-  turn-off-visual-line-mode)
+  turn-off-visual-line-mode
+  echo-area-tooltips)
 
 (use-package placeholder
   :bind
@@ -764,6 +765,7 @@
   (eww-bookmarks-directory "~/.private/")
   :hook
   (eww-mode . shr-heading-setup-imenu)
+  (eww-mode . echo-area-tooltips)
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
   (modify-syntax-entry ?\” ")“" eww-mode-syntax-table)
@@ -1083,12 +1085,6 @@
   (defun add-pretty-entities-hook ()
     "Add `org-toggle-pretty-entities' to local value of `visible-mode-hook'."
     (add-hook 'visible-mode-hook 'org-toggle-pretty-entities nil t))
-  (defun echo-area-tooltips ()
-  "Show tooltips in the echo area automatically for current buffer."
-  (setq-local help-at-pt-display-when-idle t
-              help-at-pt-timer-delay 0)
-  (help-at-pt-cancel-timer)
-  (help-at-pt-set-timer))
   (customize-set-variable
    'org-structure-template-alist
    (append org-structure-template-alist
