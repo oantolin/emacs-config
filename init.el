@@ -847,7 +847,7 @@
   :ensure t
   :defer 3
   :custom
-  (pdf-view-midnight-colors '("#ffffff" . "#000000"))
+  (pdf-view-midnight-colors '("white smoke" . "dark slate gray"))
   :bind
   (:map pdf-view-mode-map
         ("d" . pdf-view-midnight-minor-mode)
