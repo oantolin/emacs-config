@@ -76,6 +76,7 @@
  '(column-number-indicator-zero-based nil)
  '(scroll-preserve-screen-position t)
  '(make-backup-files nil)
+ '(save-interprogram-paste-before-kill t)
  '(sentence-end-double-space nil)
  '(cycle-spacing-actions '(delete-all-space just-one-space restore))
  '(words-include-escapes t)
