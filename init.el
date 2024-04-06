@@ -172,10 +172,6 @@
 
 (advice-add 'insert-pair :filter-args #'insert-pair-numeric-prefix)
 
-(when (string= (system-name)  "penguin")
-  ;; Alt+backspace sends <delete> on the Chromebook...
-  (bind-key "<delete>" #'backward-kill-word))
-
 (bind-keys :prefix-map toggle-map
            :prefix "C-c x"
            :prefix-docstring "Keymap for commands that toggle settings."
