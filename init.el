@@ -298,7 +298,7 @@
   ("M-M" . apply-macro-to-rest-of-paragraph)
   ("M-;" . dabbrev-next)
   ("C-M-;" . dabbrev-complete-next)
-  ("C-c e" . text-to-clipboard)
+  ("C-c u" . text-to-clipboard)
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
@@ -444,7 +444,7 @@
 
 (use-package ecomplete-extras
   :bind
-  ("C-c E" . compose-mail-to)
+  ("C-x M" . compose-mail-to)
   :commands
   add-email-to-ecomplete
   remove-email-from-ecomplete)
@@ -576,7 +576,7 @@
   ("M-X" . consult-mode-command)
   ("C-c b" . consult-buffer)
   ("C-c 4 b" . consult-buffer-other-window)
-  ("C-c K" . consult-keep-lines)
+  ("M-s K" . consult-keep-lines)
   ("C-c f" . consult-focus-lines)
   ("C->" . consult-register-store)
   ("C-," . consult-register-load)
@@ -1340,7 +1340,7 @@ if `org-store-link' is called from the #+TITLE line."
       (apply fn args)))
   (advice-add #'ement-room-send-org-filter :around #'dumb-quotes)
   :bind
-  (:prefix-map global-ement-map :prefix "C-c m"
+  (:prefix-map global-ement-map :prefix "C-c e"
                ("c" . ement-connect)
                ("d" . ement-disconnect)
                ("l" . ement-room-list)
@@ -1361,8 +1361,13 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package mastodon
   :ensure t
   :bind
-  ("C-c M" . mastodon)
-  ("C-c T" . mastodon-toot)
+  (:prefix-map global-mastodon-map :prefix "C-c m"
+               ("h" . mastodon)
+               ("t" . mastodon-toot)
+               ("n" . mastodon-notifications-get)
+               ("k" . mastodon-profile--view-bookmarks)
+               ("o" . mastodon-profile--my-profile)
+               ("@" . mastodon-notifications--get-mentions))
   (:map mastodon-mode-map
         ("{" . backward-paragraph)
         ("}" . forward-paragraph))
