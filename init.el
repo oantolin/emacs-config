@@ -1322,20 +1322,13 @@ if `org-store-link' is called from the #+TITLE line."
             (json-key-type nil))
         (json-read-from-string string)))))
 
-(use-package ement-tweaks
-  :custom
-  (ement-tweaks-emoji-command #'emoji-search)
-  :commands
-  ement-tweaks-send-reaction
-  ement-tweaks-quick-send-minor-mode)
-
 (use-package ement
   :ensure t
   :custom
   (ement-notify-notification-predicates nil) ; stop DESKTOP notifications
   (ement-room-send-message-filter #'ement-room-send-org-filter)
+  (ement-room-compose-method 'compose-buffer) 
   :config
-  (ement-tweaks-quick-send-minor-mode)
   (defun dumb-quotes (fn &rest args)
     (let (org-export-with-smart-quotes)
       (apply fn args)))
@@ -1356,8 +1349,7 @@ if `org-store-link' is called from the #+TITLE line."
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)
         ("<" . beginning-of-buffer)
-        (">" . end-of-buffer)
-        ([remap ement-room-send-reaction] . ement-tweaks-send-reaction)))
+        (">" . end-of-buffer)))
 
 (use-package mastodon
   :ensure t
