@@ -1226,6 +1226,7 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package gnus-art
   :bind
   (:map gnus-article-mode-map
+        ("C-h b") ; come on Gnus, that key binding is sacred!
         ("M-g" . goto-map)
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)))
