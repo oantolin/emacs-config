@@ -1158,6 +1158,8 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   (:map toggle-map
         ("m" . org-modern-mode))
+  :custom
+  (org-modern-star 'replace)
   :custom-face
   (org-modern-label
    ((t :height 0.8 :width condensed :weight regular
