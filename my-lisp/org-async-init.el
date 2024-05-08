@@ -19,4 +19,4 @@
 (add-to-list 'load-path "~/.private/")
 (add-to-list 'load-path "~/.emacs.d/my-lisp")
 
-(require 'my-website)
+(require 'org-config)
