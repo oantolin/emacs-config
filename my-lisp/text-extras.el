@@ -242,7 +242,11 @@ The pop up buffer is in `markdown-mode' and uses the TeX input
 method.  Use \\<text-to-clipboard-minor-mode-map>\\[text-to-clipboard--done] to send the buffer contents to the clipboard
 and quit the window, killing the buffer."
   (interactive)
-  (pop-to-buffer (generate-new-buffer "*clipboard*"))
+  (let ((region (when (use-region-p)
+                  (buffer-substring-no-properties
+                   (region-beginning) (region-end)))))
+    (pop-to-buffer (generate-new-buffer "*clipboard*"))
+    (when region (insert region)))
   (markdown-mode)
   (text-to-clipboard-minor-mode))
 
