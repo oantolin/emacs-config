@@ -1041,7 +1041,9 @@
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
         ("C-=" . org-emphasize)
-        ("M-g o" . consult-org-heading))
+        ("M-g o" . consult-org-heading)
+        ("C-M-<return>" . org-insert-subheading)
+        ("C-M-S-<return>" . org-insert-todo-subheading))
   :custom
   (org-ellipsis "…")
   (org-refile-use-outline-path 'file)
