@@ -487,7 +487,8 @@
   (:map embark-region-map
         ("(" . insert-parentheses)
         ("[" . insert-pair-map)
-        ("D" . dictionary-search))
+        ("D" . dictionary-search)
+        ("=" . quick-calc)) 
   (:map embark-email-map
         ("+" . add-email-to-ecomplete)
         ("\\" . remove-email-from-ecomplete))
