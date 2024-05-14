@@ -792,6 +792,7 @@
   :hook
   (LaTeX-mode . make-backslash-a-prefix-in-LaTeX)
   (LaTeX-mode . turn-on-cdlatex)
+  (LaTeX-mode . prettify-symbols-mode)
   :config
   (defun LaTeX-outline-name ()
     "Guess a name for the current header line."
