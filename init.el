@@ -1332,7 +1332,8 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (ement-notify-notification-predicates nil) ; stop DESKTOP notifications
   (ement-room-send-message-filter #'ement-room-send-org-filter)
-  (ement-room-compose-method 'compose-buffer) 
+  (ement-room-compose-method 'compose-buffer)
+  (ement-room-compose-buffer-window-auto-height-min 5)
   :config
   (defun dumb-quotes (fn &rest args)
     (let (org-export-with-smart-quotes)
