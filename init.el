@@ -1351,7 +1351,7 @@ if `org-store-link' is called from the #+TITLE line."
                ("n" . ement-notify-switch-to-notifications-buffer)
                ("m" . ement-notify-switch-to-mentions-buffer))
   (:map ement-room-mode-map ; One of my keyboards has no <insert>
-        ("e" . ement-room-edit-message)
+        ("e" . ement-room-dispatch-edit-message)
         ("p" . ement-room-goto-prev)
         ("n" . ement-room-goto-next)
         ("{" . backward-paragraph)
