@@ -1391,7 +1391,10 @@ if `org-store-link' is called from the #+TITLE line."
   
 (use-package fedi-config :after (:any mastodon lem)) ; private package
 
-(use-package telega :pin manual)
+(use-package telega
+  :pin manual
+  :custom
+  (telega-server-libs-prefix "~/code/td/tdlib"))
 
 ;;; major modes for programming languages
 
