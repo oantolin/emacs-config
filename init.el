@@ -1397,6 +1397,9 @@ if `org-store-link' is called from the #+TITLE line."
   (telega-server-libs-prefix "~/code/td/tdlib")
   (telega-chat-input-markups '("org" nil "markdown2"))
   (telega-completing-read-function #'completing-read)
+  (vertico-multiform-commands
+   '((telega-chatbuf-attach flat)
+     (telega-msg-add-reaction flat)))
   :hook
   (telega-chat-mode . company-mode))
 
