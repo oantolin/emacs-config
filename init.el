@@ -1394,7 +1394,11 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package telega
   :pin manual
   :custom
-  (telega-server-libs-prefix "~/code/td/tdlib"))
+  (telega-server-libs-prefix "~/code/td/tdlib")
+  (telega-chat-input-markups '("org" nil "markdown2"))
+  (telega-completing-read-function #'completing-read)
+  :hook
+  (telega-chat-mode . company-mode))
 
 ;;; major modes for programming languages
 
