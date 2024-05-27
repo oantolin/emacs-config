@@ -204,12 +204,12 @@
   :bind
   ("C-c x b" . ef-themes-toggle)
   :custom
-  (ef-themes-to-toggle '(ef-summer ef-winter))
+  (ef-themes-to-toggle '(ef-day ef-night))
   (ef-themes-variable-pitch-ui t)
   (ef-themes-mixed-fonts t)
   (ef-themes-headings '((0 1.4) (1 1.3) (2 1.2) (3 1.1)))
   :init
-  (load-theme (if (display-graphic-p) 'ef-summer 'ef-winter) t))
+  (load-theme (if (display-graphic-p) 'ef-day 'ef-night) t))
 
 (use-package spacious-padding
   :ensure t
