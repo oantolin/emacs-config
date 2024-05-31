@@ -793,6 +793,7 @@
   (LaTeX-mode . make-backslash-a-prefix-in-LaTeX)
   (LaTeX-mode . turn-on-cdlatex)
   (LaTeX-mode . prettify-symbols-mode)
+  (LaTeX-mode . add-prettify-symbols-hook)
   :config
   (defun LaTeX-outline-name ()
     "Guess a name for the current header line."
@@ -811,6 +812,12 @@
   (defun make-backslash-a-prefix-in-LaTeX ()
     "Set the syntax class of \\ to ' in LaTeX buffers."
     (modify-syntax-entry ?\\ "'" LaTeX-mode-syntax-table))
+  (defun toggle-prettify-symbols ()
+    "Toggle `prettify-symbols-mode'."
+    (prettify-symbols-mode 'toggle))
+  (defun add-prettify-symbols-hook ()
+    "Add toggling `prettify-symbols-mode' to local value of `visible-mode-hook'."
+    (add-hook 'visible-mode-hook 'toggle-prettify-symbols nil t))
   (setcdr (assq 'output-pdf TeX-view-program-selection)
           '("PDF Tools")))
 
