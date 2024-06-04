@@ -223,6 +223,10 @@
       :scroll-bar-width 8))
   :init (spacious-padding-mode))
 
+(use-package face-remap
+  :defer t
+  :diminish buffer-face-mode)
+
 (use-package imenu
   :defer t
   :custom (imenu-space-replacement nil))
