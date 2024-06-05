@@ -546,6 +546,8 @@
   :bind
   (:map embark-org-link-map
         ("a" . arXiv-map))
+  (:map embark-org-heading-map
+        ("a" . org-archive-subtree-default)) ; skip confirmation
   (:map embark-org-src-block-map
         ("e" . org-edit-special)))
 
