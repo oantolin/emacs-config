@@ -223,6 +223,10 @@
       :scroll-bar-width 8))
   :init (spacious-padding-mode))
 
+(use-package face-remap
+  :defer t
+  :diminish buffer-face-mode)
+
 (use-package imenu
   :defer t
   :custom (imenu-space-replacement nil))
@@ -542,6 +546,8 @@
   :bind
   (:map embark-org-link-map
         ("a" . arXiv-map))
+  (:map embark-org-heading-map
+        ("a" . org-archive-subtree-default)) ; skip confirmation
   (:map embark-org-src-block-map
         ("e" . org-edit-special)))
 
