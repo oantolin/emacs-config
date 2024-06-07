@@ -853,8 +853,6 @@
 (use-package pdf-tools
   :ensure t
   :defer 3
-  :custom
-  (pdf-view-midnight-colors '("white smoke" . "dark slate gray"))
   :bind
   (:map pdf-view-mode-map
         ("d" . pdf-view-midnight-minor-mode)
@@ -862,6 +860,8 @@
         ("s n" . "nsbp")
         ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
         ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page))
+  :hook
+  pdf-view-themed-minor-mode
   :config
   (add-hook 'TeX-after-compilation-finished-functions
             #'TeX-revert-document-buffer)
