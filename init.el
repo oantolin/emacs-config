@@ -1393,7 +1393,6 @@ if `org-store-link' is called from the #+TITLE line."
   (mastodon-mode . mastodon-recenter-positions)
   (mastodon-mode . variable-pitch-mode)
   :config
-  (defalias 'emojify-mode 'ignore) ; "install" useless emojify package 😜
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top))))
 
