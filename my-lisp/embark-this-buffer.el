@@ -26,6 +26,7 @@
   "c" #'copy-file
   "k" #'kill-buffer
   "z" #'bury-buffer
+  "q" #'quit-window
   "|" #'embark-shell-command-on-buffer
   "g" #'revert-buffer
   "p" #'pwd
@@ -34,10 +35,10 @@
   ">" #'next-buffer
   "t" #'transpose-windows)
 
-(push 'embark--allow-edit (alist-get 'write-file embark-target-injection-hooks))
+(cl-pushnew 'embark--allow-edit (alist-get 'write-file embark-target-injection-hooks))
 
 (dolist (cmd '(previous-buffer next-buffer transpose-windows))
-  (add-to-list 'embark-repeat-actions cmd))
+  (cl-pushnew cmd embark-repeat-actions))
 
 (defun embark-on-this-buffer ()
   "Run `embark-act' on the current buffer."
