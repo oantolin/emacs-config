@@ -24,7 +24,7 @@
   "&" #'async-shell-command
   "x" #'embark-open-externally         ; useful for PDFs
   "c" #'copy-file
-  "k" #'kill-buffer
+  "k" #'kill-current-buffer
   "z" #'bury-buffer
   "q" #'quit-window
   "|" #'embark-shell-command-on-buffer
