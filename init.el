@@ -1380,8 +1380,10 @@ if `org-store-link' is called from the #+TITLE line."
                ("h" . mastodon)
                ("t" . mastodon-toot)
                ("n" . mastodon-notifications-get)
-               ("k" . mastodon-profile--view-bookmarks)
-               ("o" . mastodon-profile--my-profile)
+               ("b" . mastodon-profile--view-bookmarks)
+               ("p" . mastodon-profile--my-profile)
+               ("l" . mastodon-views--view-list-timeline)
+               ("L" . mastodon-views--view-lists)
                ("@" . mastodon-notifications--get-mentions))
   (:map mastodon-mode-map
         ("{" . backward-paragraph)
