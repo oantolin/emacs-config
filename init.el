@@ -108,6 +108,8 @@
  ("M-K" . kill-paragraph)
  ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history  
  ("M-Z" . zap-to-char)
+ ("C-x k" . kill-current-buffer)
+ ("C-x q" . quit-window)
  ("C-x C-p" . list-packages)
  ("M-r" . kmacro-start-macro-or-insert-counter)
  ("M-m" . kmacro-end-or-call-macro)
