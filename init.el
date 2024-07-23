@@ -463,6 +463,14 @@
     "c" #'arXiv-capture)
   (fset 'arXiv-map arXiv-map))
 
+(use-package omnivore
+  :bind
+  ("C-c o" . omnivore-add-kill)
+  :commands
+  omnivore-add-url
+  omnivore-add-eww-url
+  omnivore-add-shr-url)
+
 (use-package embark
   :ensure t
   :bind
@@ -498,7 +506,8 @@
   (:map embark-encode-map
         ("p" . topaz-paste-region))
   (:map embark-url-map
-        ("a" . arXiv-map))
+        ("a" . arXiv-map)
+        ("o" . omnivore-add-url))
   (:map embark-identifier-map
         ("D" . dictionary-lookup-definition))
   :custom
@@ -741,7 +750,9 @@
 
 (use-package shr
   :bind
-  (:map shr-map ("v")) ; don't override view-source with a useless synonym for RET
+  (:map shr-map
+        ("o" . omnivore-add-shr-url)
+        ("v")) ; don't override view-source with a useless synonym for RET
   :custom
   (shr-use-colors nil)
   (shr-image-animate nil))
@@ -758,7 +769,8 @@
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)
         ("C-c C-p" . shr-heading-previous)
-        ("C-c C-n" . shr-heading-next))
+        ("C-c C-n" . shr-heading-next)
+        ("o" . omnivore-add-eww-url))
   :custom
   (eww-bookmarks-directory "~/.private/")
   :hook
@@ -1040,8 +1052,7 @@
   (("C-c c" . org-capture)
    ("C-c a" . org-agenda)
    ("C-c s" . org-store-link)
-   ("C-c C" . org-clock-goto)
-   ("C-c o" . org-open-at-point-global))
+   ("C-c C" . org-clock-goto))
   (:map org-mode-map
         ("C-,") ; I use this for consult-register-load
         ("C-c C-=" . org-cycle-agenda-files)
