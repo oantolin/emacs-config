@@ -463,8 +463,6 @@
     "c" #'arXiv-capture)
   (fset 'arXiv-map arXiv-map))
 
-(autoload 'pocket-lib-add-urls "pocket-lib")
-  
 (use-package embark
   :ensure t
   :bind
@@ -500,8 +498,7 @@
   (:map embark-encode-map
         ("p" . topaz-paste-region))
   (:map embark-url-map
-        ("a" . arXiv-map)
-        ("p" . pocket-lib-add-urls))
+        ("a" . arXiv-map))
   (:map embark-identifier-map
         ("D" . dictionary-lookup-definition))
   :custom
@@ -744,9 +741,7 @@
 
 (use-package shr
   :bind
-  (:map shr-map
-        ("P" . pocket-reader-shr-add-link)
-        ("v")) ; don't override view-source with a useless synonym for RET
+  (:map shr-map ("v")) ; don't override view-source with a useless synonym for RET
   :custom
   (shr-use-colors nil)
   (shr-image-animate nil))
@@ -757,12 +752,9 @@
   shr-heading-next
   shr-heading-previous)
 
-(autoload 'pocket-reader-eww-add-page "pocket-reader-extras")
-
 (use-package eww
   :bind
   (:map eww-mode-map
-        ("P" . pocket-reader-eww-add-page)
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)
         ("C-c C-p" . shr-heading-previous)
@@ -1308,22 +1300,6 @@ if `org-store-link' is called from the #+TITLE line."
   (sx-question-mode-content-face ((t (:background unspecified)))))
 
 (use-package nov :ensure t :mode ("\\.epub\\'" . nov-mode))
-
-(use-package pocket-reader
-  :ensure t
-  :bind
-  ("C-c p" . pocket-reader)
-  ("C-c P" . pocket-reader-add-link)
-  (:map pocket-reader-mode-map
-        ("c") ; the default binding of c is "unemacsy"
-        ("w" . pocket-reader-copy-url))
-  :custom
-  (pocket-reader-open-url-default-function #'eww)
-  (pocket-reader-pop-to-url-default-function #'eww))
-
-(use-package pocket-reader-extras :after pocket-reader)
-
-(use-package embark-pocket-reader :after (pocket-reader embark))
 
 (use-package osm
   :ensure t
