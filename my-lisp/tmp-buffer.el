@@ -7,6 +7,7 @@
     (?l . lisp-interaction-mode)
     (?x . LaTeX-mode)
     (?f . fundamental-mode)
+    (?= . tmp-buffer-current-mode)
     (?? . tmp-buffer-prompt-for-mode))
   "List of major modes for temporary buffers and their hotkeys."
   :type '(alist :key-type character :value-type symbol)
@@ -39,6 +40,8 @@
     (let ((mode (cdr (assoc spec tmp-buffer-mode-alist))))
       (if (not mode)
           (user-error "Unknown mode for temporary buffer.")
+        (when (eq mode 'tmp-buffer-current-mode)
+          (setq mode major-mode))
         (pop-to-buffer (generate-new-buffer "*tmp*"))
         (funcall mode)))))
 
