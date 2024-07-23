@@ -1185,9 +1185,7 @@ if `org-store-link' is called from the #+TITLE line."
    ((t :height 0.8 :width condensed :weight regular
        :underline nil :inherit fixed-pitch)))
   :config
-  (global-org-modern-mode)
-  (setq org-modern--table-sp '((space :width 1)
-                               (space :width 1))))
+  (global-org-modern-mode))
 
 (use-package citeproc :ensure t :defer t)
 
