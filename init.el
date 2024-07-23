@@ -565,12 +565,6 @@
         ("C-M-d" . consult-dir)
         ("C-M-j" . consult-dir-jump-file)))
 
-(use-package embark-this-buffer
-  :bind
-  ("M-]" . embark-on-this-buffer)
-  (:map this-buffer-map
-        ("P" . topaz-paste-buffer)))
-
 (use-package consult
   :ensure t
   :bind
