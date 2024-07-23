@@ -13,7 +13,7 @@ For simplicity, this uses your browser cookie to authenticate."
   (interactive)
   (omnivore-add-url (current-kill 0)))
 
-(declare-function 'eww-current-url "eww")
+(declare-function eww-current-url "eww")
 
 (defun omnivore-add-eww-url ()
   "Add URL shown in current eww buffer to Omnivore's reading list."
