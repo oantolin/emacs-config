@@ -52,7 +52,7 @@ For simplicity, this uses your browser cookie to authenticate."
              (input
               (clientRequestId . ,(omnivore--uuid))
               (source . api)
-              (url . ,url)))))))
+              (url . ,(url-encode-url url))))))))
     (url-retrieve
      "https://api-prod.omnivore.app/api/graphql"
      (lambda (_) (message "Added %s" url)))))
