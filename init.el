@@ -1387,18 +1387,6 @@ if `org-store-link' is called from the #+TITLE line."
   
 (use-package fedi-config :after (:any mastodon lem)) ; private package
 
-(use-package telega
-  :pin manual
-  :custom
-  (telega-server-libs-prefix "~/code/td/tdlib")
-  (telega-chat-input-markups '("org" nil "markdown2"))
-  (telega-completing-read-function #'completing-read)
-  (vertico-multiform-commands
-   '((telega-chatbuf-attach flat)
-     (telega-msg-add-reaction flat)))
-  :hook
-  (telega-chat-mode . company-mode))
-
 ;;; major modes for programming languages
 
 (use-package elisp-mode
