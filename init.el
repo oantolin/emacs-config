@@ -13,7 +13,7 @@
  '(tool-bar-mode nil)
  '(scroll-bar-mode nil)
  '(use-dialog-box nil)
- '(ring-bell-function #'ignore)
+ '(ring-bell-function #'ignore)g
  '(cursor-type 'bar)
  '(tab-bar-show nil)
  '(tab-bar-close-button-show nil))
@@ -161,7 +161,7 @@
  ("l f" . [?⌊]) ("r f" . [?⌋]) ("l c" . [?⌈]) ("r c" . [?⌉])
  ("_ i" . [?ᵢ]) ("_ j" . [?ⱼ]) ("_ k" . [?ₖ]) ("_ m" . [?ₘ])  ("_ n" . [?ₙ])
  ("^ i" . [?ⁱ]) ("^ j" . [?ʲ]) ("^ k" . [?ᵏ]) ("^ m" . [?ᵐ])  ("^ n" . [?ⁿ])
- ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–])
+ ("-") ("- -" . [?­]) ("- m" . [?—]) ("- n" . [?–]) ("d" . "🖥️")
  ("i" . emoji-insert) ("s" . emoji-search) ("z 0" . emoji-zoom-reset)
  ("z +" . emoji-zoom-increase) ("z -" . emoji-zoom-decrease)
  ("w" . emoji-recent))
