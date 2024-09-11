@@ -13,7 +13,7 @@
  '(tool-bar-mode nil)
  '(scroll-bar-mode nil)
  '(use-dialog-box nil)
- '(ring-bell-function #'ignore)g
+ '(ring-bell-function #'ignore)
  '(cursor-type 'bar)
  '(tab-bar-show nil)
  '(tab-bar-close-button-show nil))
