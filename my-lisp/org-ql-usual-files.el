@@ -11,7 +11,8 @@
               org-agenda-files)
    (cl-loop for (_ _ _ (type file . _) _) in org-capture-templates
              when (string-prefix-p "file" (symbol-name type))
-             collect (file-name-concat org-directory file)))
+             collect (abbreviate-file-name
+                      (expand-file-name file org-directory))))
   "Org files I usually want to search with `org-ql-find'."
   :type '(repeat file)
   :group 'org-ql)
