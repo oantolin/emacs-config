@@ -240,7 +240,10 @@ the only difference between this command and %s-dwim."
   "Pop up a temporary buffer to collect text to send to the clipboard.
 The pop up buffer is in `markdown-mode' and uses the TeX input
 method.  Use \\<text-to-clipboard-minor-mode-map>\\[text-to-clipboard--done] to send the buffer contents to the clipboard
-and quit the window, killing the buffer."
+and quit the window, killing the buffer.
+
+If the region is active, use the region as the initial contents
+for the pop up buffer."
   (interactive)
   (let ((region (when (use-region-p)
                   (buffer-substring-no-properties
