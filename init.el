@@ -370,7 +370,9 @@
         ("s" . toggle-window-split)
         ("t" . transpose-windows))
   (:map ctl-x-5-map
-        ("s" . screenshot)))
+        ("s" . screenshot))
+  (:map toggle-map
+        ("s" . toggle-mode-line)))
 
 (use-package minibuffer
   :bind
