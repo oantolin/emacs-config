@@ -42,7 +42,13 @@
   (pcase-let ((`(,path ,desc ,backend ,info) args))
     `(,path ,desc ,(if (eq backend 'beamer) 'latex backend) ,info)))
 
+(defun default-doi-desc (args)
+  "If no description is given use doi:... format."
+  (pcase-let ((`(,path ,desc ,backend ,info) args))
+    `(,path ,(or desc (concat "doi:" path)) ,backend ,info)))
+  
 (advice-add 'org-link-doi-export :filter-args #'beamer-is-latex)
+(advice-add 'org-link-doi-export :filter-args #'default-doi-desc)
 
 ;;; Inline JavaScript
 
