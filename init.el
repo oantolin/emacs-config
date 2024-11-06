@@ -466,14 +466,6 @@
     "c" #'arXiv-capture)
   (fset 'arXiv-map arXiv-map))
 
-(use-package omnivore
-  :bind
-  ("C-c o" . omnivore-add-kill)
-  :commands
-  omnivore-add-url
-  omnivore-add-eww-url
-  omnivore-add-shr-url)
-
 (use-package embark
   :ensure t
   :bind
