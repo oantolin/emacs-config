@@ -199,6 +199,15 @@
            ("p" . org-timer-pause-or-continue)
            ("s" . org-timer-stop))
 
+(use-package package
+  :defer t
+  :config
+  (defun just-package-names (fn &rest args)
+    (cl-letf (((symbol-function 'package-desc-full-name)
+               (lambda (pkg) (symbol-name (package-desc-name pkg)))))
+      (apply fn args)))
+  (advice-add 'package-menu--list-to-prompt :around 'just-package-names))
+
 ;;; packages
 
 (use-package ef-themes
