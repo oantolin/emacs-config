@@ -11,7 +11,7 @@
 DAY and YEAR default to today during December, but outside
 December, or with a prefix argument you are prompted for them."
   (interactive
-   (let ((today (decode-time)))
+   (let ((today (decode-time nil "EST")))
      (if (or current-prefix-arg
              (not (= (decoded-time-month today) 12)))
          (mapcar #'read-number '("Year: " "Day: "))
