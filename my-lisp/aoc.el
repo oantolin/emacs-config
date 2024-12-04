@@ -7,9 +7,10 @@
 ;; reading that!
 
 (defun aoc (year day)
-  "Download AoC input for DAY of YEAR, and open the puzzle in `eww'.
-DAY and YEAR default to today during December, but outside
-December, or with a prefix argument you are prompted for them."
+  "Download AoC input for DAY of YEAR; open the puzzle in a browser.
+DAY and YEAR default to the current date during December, but
+outside December, or with a prefix argument, you are prompted for
+them."
   (interactive
    (let ((today (decode-time nil "EST")))
      (if (or current-prefix-arg
@@ -26,6 +27,6 @@ December, or with a prefix argument you are prompted for them."
         (url (format "https://adventofcode.com/%d/day/%d" year day)))
     (with-temp-file (format "~/code/advent-of-code/%d/day%02d.txt" year day)
       (url-insert-file-contents (concat url "/input")))
-    (eww url)))
+    (browse-url url)))
 
 (provide 'aoc)
