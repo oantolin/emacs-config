@@ -6,6 +6,8 @@
 ;; In particular, I had no idea what a session cookie was before
 ;; reading that!
 
+(require 'url)
+
 (defun aoc (year day)
   "Download AoC input for DAY of YEAR; open the puzzle in a browser.
 DAY and YEAR default to the current date during December, but
