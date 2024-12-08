@@ -1477,7 +1477,11 @@ if `org-store-link' is called from the #+TITLE line."
   (:map j-mode-map
         ([remap display-local-help] . j-help-lookup-symbol)))
 
-(use-package ngnk-cli :bind ("C-c k" . run-ngnk))
+(use-package ngnk-cli
+  :bind ("C-c k" . run-ngnk)
+  :commands ngnk-send)
+
+(use-package ngnk-mode :mode "\\.k\\'")
 
 (use-package gap-mode
   :ensure t
