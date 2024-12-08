@@ -1471,9 +1471,11 @@ if `org-store-link' is called from the #+TITLE line."
         ("C-c C-M-t" . sly-toggle-fancy-trace)))
 
 (use-package j-mode
-  :bind ("C-c j" . run-j)
-  :mode ("\\.j\\'" "\\.ijs\\'")
-  :commands j-mode)
+  :ensure t
+  :bind
+  ("C-c j" . j-console)
+  (:map j-mode-map
+        ([remap display-local-help] . j-help-lookup-symbol)))
 
 (use-package ngnk-cli :bind ("C-c k" . run-ngnk))
 
