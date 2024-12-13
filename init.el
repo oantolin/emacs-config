@@ -1472,6 +1472,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package j-mode
   :ensure t
+  :mode "\\.j\\'"
   :bind
   ("C-c j" . j-console)
   (:map j-mode-map
@@ -1482,6 +1483,15 @@ if `org-store-link' is called from the #+TITLE line."
   :commands ngnk-send)
 
 (use-package ngnk-mode :mode "\\.k\\'")
+
+(use-package bqn-mode
+  :ensure t
+  :bind ("C-c B" . run-bqn)
+  :config
+  (defun run-bqn ()
+    "Pop up a BQN REPL."
+    (interactive)
+    (pop-to-buffer (bqn-comint-buffer))))
 
 (use-package gap-mode
   :ensure t
