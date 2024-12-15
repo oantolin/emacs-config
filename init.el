@@ -1486,8 +1486,11 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package bqn-mode
   :ensure t
-  :bind ("C-c B" . run-bqn)
+  :bind
+  ("C-c B" . run-bqn)
   :config
+  (set-face-attribute 'bqn-default nil
+                      :family (face-attribute 'default :family))
   (defun run-bqn ()
     "Pop up a BQN REPL."
     (interactive)
