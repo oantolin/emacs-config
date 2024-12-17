@@ -868,6 +868,8 @@
         ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page))
   :hook
   (pdf-view-mode . pdf-view-themed-minor-mode)
+  :init
+  (pdf-loader-install)
   :config
   (add-hook 'TeX-after-compilation-finished-functions
             #'TeX-revert-document-buffer)
