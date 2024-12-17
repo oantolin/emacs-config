@@ -860,7 +860,6 @@
 
 (use-package pdf-tools
   :ensure t
-  :defer 3
   :bind
   (:map pdf-view-mode-map
         ("i" . consult-imenu)
@@ -1489,8 +1488,6 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   ("C-c B" . run-bqn)
   :config
-  (set-face-attribute 'bqn-default nil
-                      :family (face-attribute 'default :family))
   (defun run-bqn ()
     "Pop up a BQN REPL."
     (interactive)
