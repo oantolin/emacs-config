@@ -510,8 +510,7 @@
   (:map embark-encode-map
         ("p" . topaz-paste-region))
   (:map embark-url-map
-        ("a" . arXiv-map)
-        ("o" . omnivore-add-url))
+        ("a" . arXiv-map))
   (:map embark-identifier-map
         ("D" . dictionary-lookup-definition))
   :custom
@@ -748,7 +747,6 @@
 (use-package shr
   :bind
   (:map shr-map
-        ("o" . omnivore-add-shr-url)
         ("v")) ; don't override view-source with a useless synonym for RET
   :custom
   (shr-use-colors nil)
@@ -766,8 +764,7 @@
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)
         ("C-c C-p" . shr-heading-previous)
-        ("C-c C-n" . shr-heading-next)
-        ("o" . omnivore-add-eww-url))
+        ("C-c C-n" . shr-heading-next))
   :custom
   (eww-bookmarks-directory "~/.private/")
   :hook
