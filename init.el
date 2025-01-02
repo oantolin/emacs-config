@@ -860,6 +860,7 @@
   :bind
   (:map pdf-view-mode-map
         ("i" . consult-imenu)
+        ("t" . pdf-view-themed-minor-mode)
         ("s n" . "nsbp")
         ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
         ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page))
