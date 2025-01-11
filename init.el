@@ -1481,7 +1481,13 @@ if `org-store-link' is called from the #+TITLE line."
   :bind ("C-c k" . run-ngnk)
   :commands ngnk-send)
 
-(use-package ngnk-mode :mode "\\.k\\'")
+(use-package ngnk-mode
+  :mode "\\.k\\'"
+  :hook
+  (ngnk-mode . require-final-newline)
+  :config
+  (defun require-final-newline ()
+    (setq-local require-final-newline t)))
 
 (use-package bqn-mode
   :ensure t
