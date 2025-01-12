@@ -1475,7 +1475,13 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   ("C-c j" . j-console)
   (:map j-mode-map
-        ([remap display-local-help] . j-help-lookup-symbol)))
+        ([remap display-local-help] . j-help-lookup-symbol))
+  :custom-face
+  (j-verb-face ((t (:foreground nil :inherit font-lock-function-name-face))))
+  (j-other-face ((t (:foreground nil :inherit font-lock-keyword-face))))
+  (j-adverb-face ((t (:foreground nil :inherit font-lock-type-face))))
+  (j-conjunction-face
+   ((t (:foreground nil :inherit font-lock-preprocessor-face)))))
 
 (use-package ngnk-cli
   :bind ("C-c k" . run-ngnk)
