@@ -1282,14 +1282,14 @@ if `org-store-link' is called from the #+TITLE line."
   :after message
   :bind
   (:map message-mode-map
-        ("C-c x f" . cycle-from-address))
+        ("C-c x e" . cycle-from-address))
   :commands set-smtp-server
   :hook
   (message-send . set-smtp-server)
   (message-send . message-lint)
   :config
   (defvar-keymap cycle-from-address-repeat-map
-    "f" #'cycle-from-address)
+    "e" #'cycle-from-address)
   (put 'cycle-from-address 'repeat-map 'cycle-from-address-repeat-map))
 
 ;;; applications
