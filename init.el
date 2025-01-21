@@ -1501,6 +1501,7 @@ if `org-store-link' is called from the #+TITLE line."
   ("C-c B" . bqn-comint-bring)
   (:map bqn-mode-map
         ("C-c C-c" . bqn-comint-eval-dwim)
+        ("C-c C-b" . bqn-comint-eval-buffer)
         ("C-c C-s" . bqn-comint-send-dwim)
         ("C-c C-q" . bqn-glyph-mode-show-glyphs)
         ("C-c C-k" . bqn-keymap-mode-show-keyboard)
