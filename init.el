@@ -1498,12 +1498,16 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package bqn-mode
   :ensure t
   :bind
-  ("C-c B" . run-bqn)
-  :config
-  (defun run-bqn ()
-    "Pop up a BQN REPL."
-    (interactive)
-    (pop-to-buffer (bqn-comint-buffer))))
+  ("C-c B" . bqn-comint-bring)
+  (:map bqn-mode-map
+        ("C-c C-c" . bqn-comint-eval-dwim)
+        ("C-c C-s" . bqn-comint-send-dwim)
+        ("C-c C-q" . bqn-glyph-mode-show-glyphs)
+        ("C-c C-k" . bqn-keymap-mode-show-keyboard)
+        ([remap display-local-help] . bqn-help-symbol-info-at-point))
+  (:map bqn-comint-mode-map
+        ("C-c C-q" . bqn-glyph-mode-show-glyphs)
+        ("C-c C-k" . bqn-keymap-mode-show-keyboard)))
 
 (use-package gap-mode
   :ensure t
