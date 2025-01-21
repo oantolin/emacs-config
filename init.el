@@ -1507,7 +1507,14 @@ if `org-store-link' is called from the #+TITLE line."
         ([remap display-local-help] . bqn-help-symbol-info-at-point))
   (:map bqn-comint-mode-map
         ("C-c C-q" . bqn-glyph-mode-show-glyphs)
-        ("C-c C-k" . bqn-keymap-mode-show-keyboard)))
+        ("C-c C-k" . bqn-keymap-mode-show-keyboard)
+        ([remap display-local-help] . bqn-help-symbol-info-at-point))
+  :hook
+  (bqn-comint-mode . use-bqn--eldoc)
+  (bqn-comint-mode . turn-on-eldoc-mode)
+  :config
+  (defun use-bqn--eldoc ()
+    (setq-local eldoc-documentation-function #'bqn--eldoc)))
 
 (use-package gap-mode
   :ensure t
