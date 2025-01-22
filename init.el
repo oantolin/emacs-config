@@ -1239,12 +1239,16 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   (:map gnus-group-mode-map
         ("M-g" . goto-map)
+        ("M-&") ("M-n") ("M-p") ; Gnus taking over useful keybindings
+        ("C-&" . gnus-group-universal-argument)
         ("T" . gnus-group-get-new-news-this-group)))
 
 (use-package gnus-art
   :bind
   (:map gnus-article-mode-map
         ("C-h b") ; come on Gnus, that key binding is sacred!
+        ("M-&")   ; also pretty important
+        ("C-&" . gnus-summary-universal-argument)
         ("M-g" . goto-map)
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)))
