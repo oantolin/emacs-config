@@ -121,6 +121,7 @@
  ("M-s c" . count-matches)
  ("M-s d" . dictionary-search)
  ("C-;" . comment-dwim)
+ ("C-z" . query-replace-regexp)
  ("C-<" . delete-indentation)
  ("M-\\" . cycle-spacing)
  ("M-#" . dictionary-lookup-definition)
@@ -143,7 +144,7 @@
  ("<XF86Reload>" . revert-buffer))
 
 (bind-keys ;; math and emojis
- ("C-z" . iso-transl-ctl-x-8-map)
+ ("M-]" . iso-transl-ctl-x-8-map)
  :map iso-transl-ctl-x-8-map
  ("g a" . [?α]) ("g b" . [?β]) ("g g" . [?γ]) ("g d" . [?δ]) ("g e" . [?ϵ])
  ("g z" . [?ζ]) ("g h" . [?η]) ("g q" . [?θ]) ("g i" . [?ι]) ("g k" . [?κ])
@@ -351,6 +352,7 @@
   (:map isearch-mode-map
         ("M-c") ; free up for capitalize-dwim, still bound to M-s c
         ("M-r") ; free up for recording kmacros, still bound to M-s r
+        ("C-z" . isearch-query-replace)
         ("<S-return>" . isearch-exit-at-end)
         ([remap isearch-abort] . isearch-cancel)
         ("<C-backspace>" . isearch-delete-wrong)
