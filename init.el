@@ -366,7 +366,9 @@
   math-delimiters-no-dollars
   math-delimiters-insert)
 
-(use-package block-undo)
+(use-package block-undo
+  :config
+  (advice-add 'message-insert-signature :around #'block-undo))
 
 (use-package help-extras
   :bind
