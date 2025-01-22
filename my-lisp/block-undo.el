@@ -2,6 +2,7 @@
 
 (defun block-undo (fn &rest args)
   "Apply FN to ARGS in such a way that it can be undone in a single step."
+  (undo-boundary)
   (with-undo-amalgamate
     (apply fn args)))
 
