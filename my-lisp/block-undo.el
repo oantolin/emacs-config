@@ -2,9 +2,8 @@
 
 (defun block-undo (fn &rest args)
   "Apply FN to ARGS in such a way that it can be undone in a single step."
-  (let ((marker (prepare-change-group)))
-    (unwind-protect (apply fn args)
-      (undo-amalgamate-change-group marker))))
+  (with-undo-amalgamate
+    (apply fn args)))
 
 (dolist (fn '(kmacro-call-macro
               kmacro-exec-ring-item
