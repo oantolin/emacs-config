@@ -20,14 +20,6 @@
 
 (set-face-attribute 'variable-pitch nil :family "URW Bookman")
 
-(when (string= (system-name) "localhost") ; Chromebook
-  (set-face-attribute 'default nil :family "Courier 10 Pitch")
-  (set-face-attribute 'fixed-pitch nil :family "Courier 10 Pitch")
-  (keymap-set key-translation-map "S-<next>" "M-<next>")
-  (keymap-set key-translation-map "M-<next>" "M-<down>")
-  (keymap-set key-translation-map "S-<prior>" "M-<prior>")
-  (keymap-set key-translation-map "M-<prior>" "M-<up>"))
-
 (custom-set-faces
  '(Info-quoted ((t :inherit fixed-pitch)))
  '(fringe ((t :background unspecified))))
@@ -139,9 +131,7 @@
  ("M-T" . transpose-lines)
  ("C-x C-t" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
- ([remap apropos-command] . apropos)
- ;; The Chromebook has a pretty reload key!
- ("<XF86Reload>" . revert-buffer))
+ ([remap apropos-command] . apropos))
 
 (bind-keys ;; math and emojis
  ("M-]" . iso-transl-ctl-x-8-map)
