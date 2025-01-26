@@ -331,6 +331,28 @@
   :custom
   (lingva-instance "https://lingva.lunar.icu"))
 
+(use-package gptel
+  :ensure t
+  :bind
+  ("C-c q" . gptel-send)
+  ("C-c r" . gptel-rewrite)
+  :config
+  (pop gptel--known-backends) ; remove the default ChatGPT backend
+  (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
+  (setq gptel-model 'llama-3.3-70b-versatile
+        gptel-backend
+        (gptel-make-openai "Groq"
+          :host "api.groq.com"
+          :endpoint "/openai/v1/chat/completions"
+          :stream t
+          :key gptel-api-key
+          :models '(llama-3.3-70b-versatile
+                    llama-3.1-8b-instant
+                    llama3-70b-8192
+                    llama3-8b-8192
+                    mixtral-8x7b-32768
+                    gemma2-9b-it))))
+  
 (use-package isearch-extras
   :custom
   (search-whitespace-regexp ".*?")
@@ -1475,15 +1497,18 @@ if `org-store-link' is called from the #+TITLE line."
   (:map j-mode-map
         ([remap display-local-help] . j-help-lookup-symbol))
   :custom-face
-  (j-verb-face ((t (:foreground nil :inherit font-lock-function-name-face))))
-  (j-other-face ((t (:foreground nil :inherit font-lock-keyword-face))))
-  (j-adverb-face ((t (:foreground nil :inherit font-lock-type-face))))
+  (j-verb-face
+   ((t (:foreground unspecified :inherit font-lock-function-name-face))))
+  (j-other-face ((t (:foreground unspecified :inherit font-lock-keyword-face))))
+  (j-adverb-face ((t (:foreground unspecified :inherit font-lock-type-face))))
   (j-conjunction-face
-   ((t (:foreground nil :inherit font-lock-preprocessor-face)))))
+   ((t (:foreground unspecified :inherit font-lock-preprocessor-face)))))
 
 (use-package ngnk-cli
-  :bind ("C-c k" . run-ngnk)
-  :commands ngnk-send)
+  :bind
+  ("C-c k" . run-ngnk)
+  :custom
+  (ngnk-mark-line-continuations t))
 
 (use-package ngnk-mode
   :mode "\\.k\\'"
