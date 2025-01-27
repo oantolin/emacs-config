@@ -1533,6 +1533,12 @@ if `org-store-link' is called from the #+TITLE line."
         ("C-c C-q" . bqn-glyph-mode-show-glyphs)
         ("C-c C-k" . bqn-keymap-mode-show-keyboard)
         ([remap display-local-help] . bqn-help-symbol-info-at-point))
+  :custom
+  (bqn-interpreter-arguments
+   (list "-e"
+         (format "BQNLib ⇐ •Import·%S⊸•file.At∾⟜%S"
+                 (expand-file-name "~/code/bqn-libs") ".bqn")
+         "-r"))
   :hook
   (bqn-comint-mode . use-bqn--eldoc)
   (bqn-comint-mode . turn-on-eldoc-mode)
