@@ -1183,6 +1183,9 @@ if `org-store-link' is called from the #+TITLE line."
         ("m" . org-modern-mode))
   :custom
   (org-modern-star 'replace)
+  (org-modern-checkbox '((?X . "☑")
+                         (?- . #("☐–" 0 2 (composition ((2)))))
+                         (?  . "☐")))
   :custom-face
   (org-modern-label
    ((t :height 0.8 :width condensed :weight regular
@@ -1527,10 +1530,10 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (bqn-interpreter-arguments
    (list "-e"
-         (format "BQNLib⇐•Import·%S⊸•file.At ∾⟜%S"
+         (format "BQNLib ⇐ •Import·%S⊸•file.At∾⟜%S"
                  (expand-file-name "~/code/bqn-libs") ".bqn")
          "-r"))
- :hook
+  :hook
   (bqn-comint-mode . use-bqn--eldoc)
   (bqn-comint-mode . turn-on-eldoc-mode)
   :config
