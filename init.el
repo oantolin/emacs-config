@@ -27,6 +27,8 @@
 (set-fontset-font "fontset-default" 'emoji
                   (font-spec :family "Noto Color Emoji"))
 
+(load-theme 'modus-operandi)
+
 ;;; package.el & use-package setup
 
 (setq package-archives
@@ -169,6 +171,7 @@
 (bind-keys :prefix-map toggle-map
            :prefix "C-c x"
            :prefix-docstring "Keymap for commands that toggle settings."
+           ("b" . modus-themes-toggle)
            ("c" . column-number-mode)
            ("d" . toggle-debug-on-error)
            ("l" . toggle-truncate-lines)
@@ -200,18 +203,6 @@
   (advice-add 'package-menu--list-to-prompt :around 'just-package-names))
 
 ;;; packages
-
-(use-package ef-themes
-  :ensure t
-  :bind
-  ("C-c x b" . ef-themes-toggle)
-  :custom
-  (ef-themes-to-toggle '(ef-day ef-night))
-  (ef-themes-variable-pitch-ui t)
-  (ef-themes-mixed-fonts t)
-  (ef-themes-headings '((0 1.4) (1 1.3) (2 1.2) (3 1.1)))
-  :init
-  (load-theme (if (display-graphic-p) 'ef-day 'ef-night) t))
 
 (use-package spacious-padding
   :ensure t
@@ -1533,7 +1524,13 @@ if `org-store-link' is called from the #+TITLE line."
         ("C-c C-q" . bqn-glyph-mode-show-glyphs)
         ("C-c C-k" . bqn-keymap-mode-show-keyboard)
         ([remap display-local-help] . bqn-help-symbol-info-at-point))
-  :hook
+  :custom
+  (bqn-interpreter-arguments
+   (list "-e"
+         (format "BQNLib⇐•Import·%S⊸•file.At ∾⟜%S"
+                 (expand-file-name "~/code/bqn-libs") ".bqn")
+         "-r"))
+ :hook
   (bqn-comint-mode . use-bqn--eldoc)
   (bqn-comint-mode . turn-on-eldoc-mode)
   :config
