@@ -1266,9 +1266,11 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package gnus-sum
   :bind
   (:map gnus-summary-mode-map
+        ("M-&")   ; also pretty important
+        ("C-&" . gnus-summary-universal-argument)
         ("M-i") ; I use this for back-to-indentation
         ("M-g" . goto-map) ; rescan is also on Z G, and I use that prefix a lot!
-        ("M-a" . gnus-symbolic-argument))) 
+        ("M-a" . gnus-symbolic-argument)))
 
 (use-package ecomplete
   :defer t
