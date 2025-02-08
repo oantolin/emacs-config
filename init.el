@@ -17,7 +17,9 @@
  '(cursor-type 'bar)
  '(tab-bar-show nil)
  '(tab-bar-close-button-show nil)
- '(modus-themes-mixed-fonts t))
+ '(modus-themes-mixed-fonts t)
+ '(modus-themes-bold-constructs t)
+ '(modus-themes-italic-constructs t))
 
 (set-face-attribute 'variable-pitch nil :family "URW Bookman")
 
