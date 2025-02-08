@@ -16,7 +16,8 @@
  '(ring-bell-function #'ignore)
  '(cursor-type 'bar)
  '(tab-bar-show nil)
- '(tab-bar-close-button-show nil))
+ '(tab-bar-close-button-show nil)
+ '(modus-themes-mixed-fonts t))
 
 (set-face-attribute 'variable-pitch nil :family "URW Bookman")
 
