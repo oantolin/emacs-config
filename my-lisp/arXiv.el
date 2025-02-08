@@ -24,6 +24,11 @@ If EXTERNAL is non-nil use an external browser."
         (browse-url pdf)
       (eww pdf))))
 
+(defun arXiv-copy-url (paper)
+  "Copy PAPER's URL to the kill-ring."
+  (interactive "sarXiv paper: ")
+  (kill-new (format "https://arxiv.org/abs/%s" (arXiv--id paper))))
+
 (defvar url-http-end-of-headers)
 
 (require 'dom)

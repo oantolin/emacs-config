@@ -479,6 +479,7 @@
   (defvar-keymap arXiv-map
     "p" #'arXiv-pdf
     "s" #'arXiv-show
+    "w" #'arXiv-copy-url
     "c" #'arXiv-capture)
   (fset 'arXiv-map arXiv-map))
 
