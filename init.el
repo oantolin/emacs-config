@@ -332,20 +332,20 @@
   ("C-c r" . gptel-rewrite)
   :config
   (pop gptel--known-backends) ; remove the default ChatGPT backend
-  (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
-  (setq gptel-model 'llama-3.3-70b-versatile
+  (gptel-make-openai "Groq"
+    :host "api.groq.com"
+    :endpoint "/openai/v1/chat/completions"
+    :stream t
+    :key gptel-api-key
+    :models '(llama-3.3-70b-versatile
+              llama-3.1-8b-instant
+              llama3-70b-8192
+              llama3-8b-8192
+              mixtral-8x7b-32768
+              gemma2-9b-it))
+  (setq gptel-model 'gemini-2.0-flash
         gptel-backend
-        (gptel-make-openai "Groq"
-          :host "api.groq.com"
-          :endpoint "/openai/v1/chat/completions"
-          :stream t
-          :key gptel-api-key
-          :models '(llama-3.3-70b-versatile
-                    llama-3.1-8b-instant
-                    llama3-70b-8192
-                    llama3-8b-8192
-                    mixtral-8x7b-32768
-                    gemma2-9b-it))))
+        (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)))
   
 (use-package isearch-extras
   :custom
