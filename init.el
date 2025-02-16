@@ -1051,6 +1051,8 @@
   :bind
   (:map markdown-mode-map
         ("C-=" . markdown-mode-style-map))
+  :custom
+  (markdown-hide-markup t)
   :custom-face
   (markdown-metadata-key-face ((t (:inherit default))))
   (markdown-metadata-value-face
