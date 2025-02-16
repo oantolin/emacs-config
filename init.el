@@ -334,6 +334,8 @@
   :bind
   ("C-c q" . gptel-send)
   ("C-c r" . gptel-rewrite)
+  :custom
+  (gptel-org-branching-context t)
   :config
   (pop gptel--known-backends) ; remove the default ChatGPT backend
   (gptel-make-openai "Groq"
