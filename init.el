@@ -253,10 +253,6 @@
   :config
   (put 'other-window 'repeat-map nil))
 
-(use-package transient
-  :defer t
-  :hook (transient-setup-buffer . force-truncate-lines))
-
 (use-package misc
   :bind
   ("M-z" . zap-up-to-char)
@@ -312,6 +308,10 @@
   force-truncate-lines
   turn-off-visual-line-mode
   echo-area-tooltips)
+
+(use-package transient
+  :defer t
+  :hook (transient-setup-buffer . force-truncate-lines))
 
 (use-package placeholder
   :bind
