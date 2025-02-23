@@ -1544,7 +1544,7 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (bqn-interpreter-arguments
    (list "-e"
-         (format "BQNLib ⇐ •Import⟜(%S⊸•file.At∾⟜%S)"
+         (format "BQNLib ⇐ {𝕨•Import%S•file.At𝕩∾%S}"
                  (expand-file-name "~/code/bqn-libs") ".bqn")
          "-r"))
   :hook
