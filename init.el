@@ -98,7 +98,8 @@
  '(display-time-default-load-average nil)
  '(dictionary-server "dict.org")
  '(epg-pinentry-mode 'loopback)
- '(native-comp-async-report-warnings-errors 'silent))
+ '(native-comp-async-report-warnings-errors 'silent)
+ '(grep-use-headings t))
 
 (bind-keys
  ("C-d" . delete-forward-char)
