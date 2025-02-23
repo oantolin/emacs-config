@@ -1402,7 +1402,7 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package lem
   :ensure t
   :bind
-  ("C-c L" . lem)
+  ("C-c l" . lem)
   (:map lem-mode-map
         ("{" . backward-paragraph)
         ("}" . forward-paragraph)))
