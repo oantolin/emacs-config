@@ -322,13 +322,6 @@
 (use-package topaz-paste
   :commands topaz-paste-region topaz-paste-buffer)
 
-(use-package lingva
-  :ensure t
-  :bind
-  ("C-c l" . lingva-translate)
-  :custom
-  (lingva-instance "https://lingva.lunar.icu"))
-
 (use-package gptel
   :ensure t
   :bind
