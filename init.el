@@ -108,6 +108,7 @@
  ("C-x k" . kill-current-buffer)
  ("C-x q" . quit-window)
  ("C-x /" . pwd)
+ ("C-x C-/" . cd)
  ("C-x C-p" . list-packages)
  ("M-r" . kmacro-start-macro-or-insert-counter)
  ("M-m" . kmacro-end-or-call-macro)
