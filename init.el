@@ -341,6 +341,8 @@
               llama3-70b-8192
               llama3-8b-8192
               mixtral-8x7b-32768
+              deepseek-r1-distill-llama-70b
+              deepseek-r1-distill-qwen-32b
               gemma2-9b-it))
   (setq gptel-model 'gemini-2.0-flash
         gptel-backend
