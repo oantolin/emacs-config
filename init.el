@@ -326,6 +326,7 @@
 (use-package gptel
   :ensure t
   :bind
+  ("C-c i" . gptel)
   ("C-c q" . gptel-send)
   ("C-c r" . gptel-rewrite)
   :custom
