@@ -326,6 +326,7 @@
 (use-package gptel
   :ensure t
   :bind
+  ("C-c i" . gptel)
   ("C-c q" . gptel-send)
   ("C-c r" . gptel-rewrite)
   :custom
@@ -342,6 +343,8 @@
               llama3-70b-8192
               llama3-8b-8192
               mixtral-8x7b-32768
+              deepseek-r1-distill-llama-70b
+              deepseek-r1-distill-qwen-32b
               gemma2-9b-it))
   (setq gptel-model 'gemini-2.0-flash
         gptel-backend
@@ -1560,11 +1563,4 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package gap-mode
   :ensure t
   :custom
-  (gap-executable "/usr/bin/gap")
-  :bind
-  (:map gap-mode-map ; C-c letter is *reserved*, damn it!
-        ("C-c e") ("C-c d") ("C-c a") ("C-c l")
-        ("C-c C-x" . gap-eval-defun)
-        ("C-c C-a" . gap-add-local-variable)
-        ("C-c C-l" . gap-insert-local-variables)
-        ("C-c C-d" . gap-insert-debug-print)))
+  (gap-executable "/usr/bin/gap"))
