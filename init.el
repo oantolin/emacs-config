@@ -1336,20 +1336,7 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :defer t
   :custom
-  (osm-tile-directory "~/.cache/osm")
-  :config
-  (unless (fboundp 'json-parse-string)
-    (cl-defun json-parse-string (string &key
-                                        (object-type 'hash-table)
-                                        (array-type 'array)
-                                        (null-object :null)
-                                        (false-object :false))
-      (let ((json-object-type object-type)
-            (json-array-type (if (eq array-type 'array) 'vector array-type))
-            (json-null null-object)
-            (json-false false-object)
-            (json-key-type nil))
-        (json-read-from-string string)))))
+  (osm-tile-directory "~/.cache/osm"))
 
 (use-package ement
   :ensure t
