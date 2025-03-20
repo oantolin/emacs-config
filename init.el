@@ -326,9 +326,13 @@
 (use-package gptel
   :ensure t
   :bind
-  ("C-c i" . gptel)
-  ("C-c q" . gptel-send)
-  ("C-c r" . gptel-rewrite)
+  (:prefix-map global-gptel-map :prefix "C-c i"
+               ("c" . gptel)
+               ("s" . gptel-send)
+               ("r" . gptel-rewrite)
+               ("q" . gptel-mini)
+               ("a" . gptel-add)
+               ("m" . gptel-mode))
   :custom
   (gptel-org-branching-context t)
   :config
@@ -348,7 +352,36 @@
               gemma2-9b-it))
   (setq gptel-model 'gemini-2.0-flash
         gptel-backend
-        (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)))
+        (gptel-make-gemini "Gemini" :key gptel-api-key :stream t))
+  (defun gptel-mini (prompt &optional start end)
+    "Display the LLM's response to PROMPT.
+If the region is active, it is included as context. If the response is
+short, it is shown in the echo area; otherwise, it is displayed in a
+side window."
+    (interactive "sAsk LLM: \nr")
+    (when (string= prompt "") (user-error "A prompt is required."))
+    (when (use-region-p)
+      (gptel-context--add-region (current-buffer) start end))
+    (gptel-request
+        prompt
+      :callback
+      (lambda (response info)
+        (cond
+         ((not response)
+          (message "gptel-mini failed with message: %s"
+                   (plist-get info :status)))
+         ((< (length response) 250)
+          (message "%s" response))
+         (t (with-current-buffer (get-buffer-create "*gptel-mini*")
+              (let ((inhibit-read-only t))
+                (erase-buffer)
+                (insert response))
+              (special-mode)
+              (display-buffer
+               (current-buffer)
+               `((display-buffer-in-side-window)
+                 (side . bottom)
+                 (window-height . ,#'fit-window-to-buffer))))))))))
   
 (use-package isearch-extras
   :custom
