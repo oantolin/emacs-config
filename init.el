@@ -353,15 +353,17 @@
   (setq gptel-model 'gemini-2.0-flash
         gptel-backend
         (gptel-make-gemini "Gemini" :key gptel-api-key :stream t))
-  (defun gptel-mini (prompt &optional start end)
+  (autoload 'gptel-context--add-region "gptel-context")
+  (defun gptel-mini (prompt)
     "Display the LLM's response to PROMPT.
 If the region is active, it is included as context. If the response is
 short, it is shown in the echo area; otherwise, it is displayed in a
 side window."
-    (interactive "sAsk LLM: \nr")
+    (interactive "sAsk LLM: ")
     (when (string= prompt "") (user-error "A prompt is required."))
     (when (use-region-p)
-      (gptel-context--add-region (current-buffer) start end))
+      (gptel-context--add-region
+       (current-buffer) (region-beginning) (region-end)))
     (gptel-request
         prompt
       :callback
