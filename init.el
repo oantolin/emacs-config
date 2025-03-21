@@ -96,7 +96,6 @@
  '(revert-without-query '(""))
  '(recenter-positions '(top middle bottom))
  '(display-time-default-load-average nil)
- '(dictionary-server "dict.org")
  '(native-comp-async-report-warnings-errors 'silent)
  '(grep-use-headings t))
 
@@ -117,12 +116,10 @@
  ("M-s k" . keep-lines)
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
- ("M-s d" . dictionary-search)
  ("C-;" . comment-dwim)
  ("C-z" . query-replace-regexp)
  ("C-<" . delete-indentation)
  ("M-\\" . cycle-spacing)
- ("M-#" . dictionary-lookup-definition)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
  ("C-\\" . activate-transient-input-method) ; swap these two, too
@@ -330,7 +327,6 @@
                ("c" . gptel)
                ("s" . gptel-send)
                ("r" . gptel-rewrite)
-               ("q" . gptel-mini)
                ("a" . gptel-add)
                ("m" . gptel-mode))
   :custom
@@ -352,33 +348,14 @@
               gemma2-9b-it))
   (setq gptel-model 'gemini-2.0-flash
         gptel-backend
-        (gptel-make-gemini "Gemini" :key gptel-api-key :stream t))
-  (autoload 'gptel-context--add-region "gptel-context")
-  (defun gptel-mini (prompt)
-    "Display the LLM's response to PROMPT.
-If the region is active, it is included as context. If the response is
-short, it is shown in the echo area; otherwise, it is displayed in a
-buffer."
-    (interactive "sAsk LLM: ")
-    (when (string= prompt "") (user-error "A prompt is required."))
-    (when (use-region-p)
-      (gptel-context--add-region
-       (current-buffer) (region-beginning) (region-end)))
-    (gptel-request
-     prompt
-     :callback
-     (lambda (response info)
-       (cond ((not response)
-              (message "gptel-mini failed with message: %s"
-                       (plist-get info :status)))
-             ((< (length response) 250)
-              (message "%s" response))
-             (t (pop-to-buffer (get-buffer-create "*gptel-mini*"))
-                (let ((inhibit-read-only t))
-                  (erase-buffer)
-                  (insert response))
-                (special-mode)))))))
-  
+        (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)))
+
+(use-package gptel-extras
+  :bind
+  (:map global-gptel-map
+        ("q" . gptel-extras-mini)
+        ("d" . gptel-extras-define)))
+
 (use-package isearch-extras
   :custom
   (search-whitespace-regexp ".*?")
@@ -545,7 +522,6 @@ buffer."
   (:map embark-region-map
         ("(" . insert-parentheses)
         ("[" . insert-pair-map)
-        ("D" . dictionary-search)
         ("=" . quick-calc)) 
   (:map embark-email-map
         ("+" . add-email-to-ecomplete)
@@ -554,8 +530,8 @@ buffer."
         ("p" . topaz-paste-region))
   (:map embark-url-map
         ("a" . arXiv-map))
-  (:map embark-identifier-map
-        ("D" . dictionary-lookup-definition))
+  (:map embark-general-map
+        ("D" . gptel-extras-define))
   :custom
   (embark-quit-after-action nil)
   (prefix-help-command #'embark-prefix-help-command)
