@@ -1047,7 +1047,9 @@
            (put cmd 'repeat-map 'smerge-basic-map))))
      keymap)))
 
-(use-package magit :ensure t :defer t)
+(use-package magit
+  :ensure t
+  :bind ("C-x v b d" . magit-branch-delete))
 
 (use-package markdown-mode
   :ensure t
