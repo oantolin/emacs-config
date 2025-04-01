@@ -958,7 +958,6 @@
 (use-package esh-mode
   :bind
   (:map eshell-mode-map
-        ("<home>" . eshell-bol)
         ("C-c d" . interactive-cd)
         ("M-q" . quit-window)
         ([remap display-local-help] . man)))
