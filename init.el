@@ -1552,7 +1552,8 @@ if `org-store-link' is called from the #+TITLE line."
          (format ".\\{%d\\}" fill-column) "\\&⮐\n⮑ " s)
       s))
   (defun comint-breakup-long-lines ()
-    (add-to-list 'comint-preoutput-filter-functions #'breakup-long-lines)))
+    (make-local-variable 'comint-preoutput-filter-functions)
+    (cl-pushnew #'breakup-long-lines comint-preoutput-filter-functions)))
 
 (use-package gap-mode
   :ensure t
