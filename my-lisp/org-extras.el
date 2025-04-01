@@ -28,7 +28,7 @@
   (org-link-set-parameters
    "arXiv"
    :face 'org-link
-   :follow (lambda (path)
+   :follow (lambda (path _)
              (when (string-match arxiv-regexp path)
                (browse-url
                 (format arxiv-url-format (match-string 1 path)))))
