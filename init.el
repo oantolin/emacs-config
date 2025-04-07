@@ -6,20 +6,20 @@
 
 ;;; GUI
 
-(custom-set-variables
- '(inhibit-startup-screen t)
- '(initial-scratch-message nil)
- '(menu-bar-mode nil)
- '(tool-bar-mode nil)
- '(scroll-bar-mode nil)
- '(use-dialog-box nil)
- '(ring-bell-function #'ignore)
- '(cursor-type 'bar)
- '(tab-bar-show nil)
- '(tab-bar-close-button-show nil)
- '(modus-themes-mixed-fonts t)
- '(modus-themes-bold-constructs t)
- '(modus-themes-italic-constructs t))
+(setopt
+ inhibit-startup-screen t
+ initial-scratch-message nil
+ menu-bar-mode nil
+ tool-bar-mode nil
+ scroll-bar-mode nil
+ use-dialog-box nil
+ ring-bell-function #'ignore
+ cursor-type 'bar
+ tab-bar-show nil
+ tab-bar-close-button-show nil
+ modus-themes-mixed-fonts t
+ modus-themes-bold-constructs t
+ modus-themes-italic-constructs t)
 
 (set-face-attribute 'variable-pitch nil :family "URW Bookman")
 
@@ -64,40 +64,40 @@
   (put cmd 'disabled nil))
 (put 'suspend-frame 'disabled t)
 
-(custom-set-variables
- '(use-package-enable-imenu-support t)
- '(set-mark-command-repeat-pop t)
- '(tab-always-indent 'complete)
- '(current-language-environment "UTF-8")
- '(after-save-hook '(executable-make-buffer-file-executable-if-script-p))
- '(column-number-indicator-zero-based nil)
- '(scroll-preserve-screen-position t)
- '(make-backup-files nil)
- '(save-interprogram-paste-before-kill t)
- '(sentence-end-double-space nil)
- '(cycle-spacing-actions '(delete-all-space just-one-space restore))
- '(words-include-escapes t)
- '(indent-tabs-mode nil)
- '(standard-indent 2)
- '(view-read-only t)
- '(kill-read-only-ok t)
- '(kill-whole-line t)
- '(word-wrap t)
- '(history-delete-duplicates t)
- '(kill-do-not-save-duplicates t)
- '(default-input-method "TeX")
- '(default-transient-input-method "TeX")
- '(password-cache-expiry 300)
- '(debugger-stack-frame-as-list t)
- '(split-width-threshold 140)
- '(y-or-n-p-use-read-key t)
- '(use-short-answers t)
- '(async-shell-command-display-buffer nil)
- '(revert-without-query '(""))
- '(recenter-positions '(top middle bottom))
- '(display-time-default-load-average nil)
- '(native-comp-async-report-warnings-errors 'silent)
- '(grep-use-headings t))
+(setopt
+ use-package-enable-imenu-support t
+ set-mark-command-repeat-pop t
+ tab-always-indent 'complete
+ current-language-environment "UTF-8"
+ after-save-hook '(executable-make-buffer-file-executable-if-script-p)
+ column-number-indicator-zero-based nil
+ scroll-preserve-screen-position t
+ make-backup-files nil
+ save-interprogram-paste-before-kill t
+ sentence-end-double-space nil
+ cycle-spacing-actions '(delete-all-space just-one-space restore)
+ words-include-escapes t
+ indent-tabs-mode nil
+ standard-indent 2
+ view-read-only t
+ kill-read-only-ok t
+ kill-whole-line t
+ word-wrap t
+ history-delete-duplicates t
+ kill-do-not-save-duplicates t
+ default-input-method "TeX"
+ default-transient-input-method "TeX"
+ password-cache-expiry 300
+ debugger-stack-frame-as-list t
+ split-width-threshold 140
+ y-or-n-p-use-read-key t
+ use-short-answers t
+ async-shell-command-display-buffer nil
+ revert-without-query '("")
+ recenter-positions '(top middle bottom)
+ display-time-default-load-average nil
+ native-comp-async-report-warnings-errors 'silent
+ grep-use-headings t)
 
 (bind-keys
  ("C-d" . delete-forward-char)
@@ -1122,28 +1122,25 @@
   (defun add-pretty-entities-hook ()
     "Add `org-toggle-pretty-entities' to local value of `visible-mode-hook'."
     (add-hook 'visible-mode-hook 'org-toggle-pretty-entities nil t))
-  (customize-set-variable
-   'org-structure-template-alist
-   (append org-structure-template-alist
-           '(("thm"  . "theorem")
-             ("pf"   . "proof")
-             ("lem"  . "lemma")
-             ("cor"  . "corollary")
-             ("def"  . "definition")
-             ("rem"  . "remark")
-             ("exer" . "exercise")
-             ("prop" . "proposition")
-             ("el"   . "src emacs-lisp"))))
-  (customize-set-variable
-   'org-latex-default-packages-alist
-   (cl-set-difference org-latex-default-packages-alist
-                      '("fontenc" "textcomp")
-                      :test #'equal))
-  (customize-set-variable
-   'org-latex-packages-alist
-   (cons '("AUTO" "babel" t ("pdflatex")) org-latex-packages-alist))
+  (setopt org-structure-template-alist
+          (append org-structure-template-alist
+                  '(("thm"  . "theorem")
+                    ("pf"   . "proof")
+                    ("lem"  . "lemma")
+                    ("cor"  . "corollary")
+                    ("def"  . "definition")
+                    ("rem"  . "remark")
+                    ("exer" . "exercise")
+                    ("prop" . "proposition")
+                    ("el"   . "src emacs-lisp"))))
+  (setopt org-latex-default-packages-alist
+          (cl-set-difference org-latex-default-packages-alist
+                             '("fontenc" "textcomp")
+                             :test #'equal))
+  (setopt org-latex-packages-alist
+          (cons '("AUTO" "babel" t ("pdflatex")) org-latex-packages-alist))
   (when (executable-find "latexmk")
-    (customize-set-variable 'org-latex-pdf-process '("latexmk -pdf %f")))
+    (setopt org-latex-pdf-process '("latexmk -pdf %f")))
   (defun org-tweak-syntax-table ()
     (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'") (?' "'"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
