@@ -607,7 +607,7 @@
   ("C-c b" . consult-buffer)
   ("C-c 4 b" . consult-buffer-other-window)
   ("M-s K" . consult-keep-lines)
-  ("C-c f" . consult-focus-lines)
+  ("M-s F" . consult-focus-lines)
   ("C->" . consult-register-store)
   ("C-," . consult-register-load)
   ("C-M-," . consult-register)
