@@ -499,7 +499,6 @@
   :ensure t
   :bind
   ("C-." . embark-act)
-  ("C-:" . embark-act-all)
   ("M-." . embark-dwim)
   ("C-h b" . embark-bindings)
   ("C-h B" . embark-bindings-at-point)
