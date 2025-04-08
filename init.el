@@ -82,7 +82,7 @@
  view-read-only t
  kill-read-only-ok t
  kill-whole-line t
- word-wrap t
+ truncate-lines t
  history-delete-duplicates t
  kill-do-not-save-duplicates t
  default-input-method "TeX"
@@ -175,13 +175,10 @@
            ("b" . modus-themes-toggle)
            ("c" . column-number-mode)
            ("d" . toggle-debug-on-error)
-           ("l" . toggle-truncate-lines)
            ("t" . toggle-frame-tab-bar)
            ("f" . follow-mode)
-           ("v" . visual-line-mode)
-           ("a" . auto-fill-mode)
            ("w" . whitespace-mode)
-           ("p" . variable-pitch-mode)
+           ("v" . variable-pitch-mode)
            ("r" . visible-mode))
 
 (bind-keys :prefix-map time-map
@@ -303,13 +300,7 @@
   (:map minibuffer-local-map
         ("M-i" . insert-completion-candidate))
   :commands
-  force-truncate-lines
-  turn-off-visual-line-mode
   echo-area-tooltips)
-
-(use-package transient
-  :defer t
-  :hook (transient-setup-buffer . force-truncate-lines))
 
 (use-package placeholder
   :bind
@@ -423,7 +414,6 @@
   (minibuffer-depth-indicate-mode)
   (minibuffer-electric-default-mode)
   :hook
-  (completion-list-mode . force-truncate-lines)
   (minibuffer-setup . cursor-intangible-mode)
   :config
   (defun stealthily (fn &rest args)
@@ -725,7 +715,6 @@
 
 (use-package text-mode
   :hook
-  (text-mode . turn-on-visual-line-mode)
   (text-mode . variable-pitch-mode)
   :config
   (modify-syntax-entry ?\" "\"" text-mode-syntax-table))
@@ -758,10 +747,6 @@
   (ediff-merge-split-window-function 'split-window-horizontally)
   (ediff-split-window-function 'split-window-horizontally)
   (ediff-window-setup-function 'ediff-setup-windows-plain))
-
-(use-package occur
-  :defer t
-  :hook (occur-mode . force-truncate-lines))
 
 (use-package olivetti
   :ensure t
@@ -930,7 +915,6 @@
   (dired-dwim-target t)
   (dired-listing-switches "-alGh")
   :hook
-  (dired-mode . force-truncate-lines)
   (dired-mode . dired-hide-details-mode)
   :config
   (defun dired-open-externally (&optional arg)
@@ -1012,7 +996,6 @@
         ("M-h" . consult-history)
         ("M-r") ("M-s"))
   :hook
-  (log-edit-mode . turn-off-visual-line-mode)
   (log-edit-mode . turn-on-auto-fill)
   :config
   (advice-add 'consult-history :before #'clear-log-edit-buffer)
@@ -1117,7 +1100,6 @@
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
   (org-mode . turn-on-auto-fill)
-  (org-mode . turn-off-visual-line-mode)
   (org-mode . org-tweak-syntax-table)
   (org-mode . add-pretty-entities-hook)
   (org-mode . echo-area-tooltips)
@@ -1310,8 +1292,8 @@ if `org-store-link' is called from the #+TITLE line."
   (message-expand-name-standard-ui t)
   ;; all-user-mail-addresses-regexp is defined in email-config
   (message-alternative-emails all-user-mail-addresses-regexp)
+  (message-fill-column nil)
   :hook
-  (message-mode . turn-off-auto-fill)
   (message-mode . turn-on-visual-line-mode))
 
 (use-package message-extras
