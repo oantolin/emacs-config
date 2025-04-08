@@ -462,6 +462,9 @@
    '((embark-keybinding grid)
      (command flat)
      (file grid)))
+  (vertico-multiform-commands
+   '((org-set-tags-command grid)
+     (org-agenda-set-tags grid)))
   :init
   (vertico-mode)
   :config
