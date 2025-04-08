@@ -453,6 +453,10 @@
         ("C-M-d" . consult-dir)
         ("C-M-j" . consult-dir-jump-file)
         ("M-q" . vertico-quick-jump))
+  (:map vertico-multiform-map
+        ("M-B") ("M-F") ; I use these for text editing!
+        ("M-H" . vertico-multiform-flat)    ; H for horizontal
+        ("M-P" . vertico-multiform-buffer)) ; P for panoramic
   :custom
   (vertico-multiform-categories
    '((embark-keybinding grid)
