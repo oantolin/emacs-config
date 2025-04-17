@@ -195,16 +195,6 @@ the only difference between this command and %s-dwim."
   (unwrap-sexp)
   (setq deactivate-mark nil))
 
-;;; functions for hooks
-
-(defun force-truncate-lines ()
-  "Force line truncation. For use in hooks."
-  (setq truncate-lines t))
-
-(defun turn-off-visual-line-mode ()
-  "Turn off `visual-line-mode'.  For use in hooks."
-  (visual-line-mode -1))
-
 ;;; Continue dabbreving with the greatest of ease
 
 (defun dabbrev-next (arg)
@@ -251,6 +241,7 @@ for the pop up buffer."
     (pop-to-buffer (generate-new-buffer "*clipboard*"))
     (when region (insert region)))
   (markdown-mode)
+  (visual-line-mode)
   (text-to-clipboard-minor-mode))
 
 (defun apply-macro-to-rest-of-paragraph ()

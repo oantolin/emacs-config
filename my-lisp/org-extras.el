@@ -82,4 +82,13 @@
    (prefix-all-lines "#+HTML_HEAD_EXTRA: " body)
    "\n#+HTML_HEAD_EXTRA: \\)</div>\n"))
 
+(defun no-short-tags (tags)
+  "Do not offer very short tags as completion candidates.
+Use as `:filter-return' advice for `org-get-buffer-tags'."
+  (mapcar (lambda (group)
+            (seq-filter (lambda (tag) (> (length tag) 2)) group))
+          tags))
+
+(advice-add 'org-get-buffer-tags :filter-return #'no-short-tags)
+
 (provide 'org-extras)
