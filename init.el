@@ -480,6 +480,8 @@
 
 (use-package corfu
   :ensure t
+  :bind
+  (:map corfu-map ("SPC" . corfu-insert-separator))
   :init
   (global-corfu-mode))
 
