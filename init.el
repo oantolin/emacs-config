@@ -1116,6 +1116,7 @@
   (org-mode . add-pretty-entities-hook)
   (org-mode . echo-area-tooltips)
   :config
+  (cl-pushnew 'org-habit org-modules)
   (defun ediff-with-org-show-all ()
     "Expand all headings prior to ediffing org buffers."
     (add-hook 'ediff-prepare-buffer-hook #'org-fold-show-all nil t))
