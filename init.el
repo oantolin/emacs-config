@@ -478,6 +478,11 @@
       (when (/= (user-uid) uid)
         (or (user-login-name uid) uid)))))
 
+(use-package corfu
+  :ensure t
+  :init
+  (global-corfu-mode))
+
 (use-package ecomplete-extras
   :bind
   ("C-x M" . compose-mail-to)
@@ -620,19 +625,13 @@
   (:map isearch-mode-map
         ("M-g l" . consult-line))
   :custom
-  (completion-in-region-function #'consult-completion-in-region)
   (register-preview-function #'consult-register-format)
   (consult-narrow-key "<")
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref)
   :hook
   ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
-  (minibuffer-setup . choose-completion-in-region)
   :config
-  (defun choose-completion-in-region ()
-    "Use default `completion--in-region' unless we are not completing."
-    (when minibuffer-completion-table
-      (setq-local completion-in-region-function #'completion--in-region)))
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring))
