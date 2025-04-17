@@ -253,14 +253,6 @@ for the pop up buffer."
   (markdown-mode)
   (text-to-clipboard-minor-mode))
 
-(autoload 'embark--act "embark")
-(autoload 'embark--targets "embark")
-
-(defun insert-completion-candidate ()
-  "Insert the current completion candidate and quit the minibuffer."
-  (interactive)
-  (embark--act 'embark-insert (car (embark--targets)) t))
-
 (defun apply-macro-to-rest-of-paragraph ()
   "Apply last keyboard macro to each line in the rest of the current paragraph."
   (interactive)

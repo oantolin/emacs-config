@@ -300,8 +300,6 @@
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
-  (:map minibuffer-local-map
-        ("M-i" . insert-completion-candidate))
   :commands
   force-truncate-lines
   turn-off-visual-line-mode
@@ -484,6 +482,14 @@
   (:map corfu-map ("SPC" . corfu-insert-separator))
   :init
   (global-corfu-mode))
+
+(use-package cape
+  :ensure t
+  :bind ("C-<tab>" . cape-prefix-map)
+  :init
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block))
 
 (use-package ecomplete-extras
   :bind
