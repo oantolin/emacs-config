@@ -240,8 +240,7 @@ for the pop up buffer."
                    (region-beginning) (region-end)))))
     (pop-to-buffer (generate-new-buffer "*clipboard*"))
     (when region (insert region)))
-  (markdown-mode)
-  (visual-line-mode)
+  (if (fboundp 'markdown-mode) (markdown-mode) (text-mode))
   (text-to-clipboard-minor-mode))
 
 (defun apply-macro-to-rest-of-paragraph ()

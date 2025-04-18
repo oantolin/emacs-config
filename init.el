@@ -1028,6 +1028,8 @@
   :bind
   (:map markdown-mode-map
         ("C-=" . markdown-mode-style-map))
+  :hook
+  (markdown-mode . turn-on-visual-line-mode)
   :custom
   (markdown-hide-markup t)
   :custom-face
@@ -1364,6 +1366,7 @@ if `org-store-link' is called from the #+TITLE line."
   (mastodon-mode . mastodon-async-mode)
   (mastodon-mode . mastodon-recenter-positions)
   (mastodon-mode . variable-pitch-mode)
+  (mastodon-toot-mode . turn-on-visual-line-mode)
   :config
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top))))
