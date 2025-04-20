@@ -42,7 +42,11 @@
           (user-error "Unknown mode for temporary buffer.")
         (when (eq mode 'tmp-buffer-current-mode)
           (setq mode major-mode))
-        (pop-to-buffer (generate-new-buffer "*tmp*"))
+        (let ((region (when (use-region-p)
+                        (buffer-substring-no-properties
+                         (region-beginning) (region-end)))))
+          (pop-to-buffer (generate-new-buffer "*tmp*"))
+          (when region (insert region)))
         (funcall mode)))))
 
 (provide 'tmp-buffer)
