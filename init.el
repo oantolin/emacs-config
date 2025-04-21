@@ -1269,9 +1269,7 @@ if `org-store-link' is called from the #+TITLE line."
   (setq completion-category-defaults nil))
 
 (use-package message
-  :bind (:map message-mode-map
-              ("C-<tab>" . expand-mail-aliases)
-              ("M-n"))
+  :bind (:map message-mode-map ("M-n"))
   :custom
   (message-signature nil)
   (message-mail-alias-type 'ecomplete)
