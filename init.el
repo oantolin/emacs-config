@@ -416,7 +416,7 @@
         ("DEL" . vertico-directory-delete-char)
         ("C-M-d" . consult-dir)
         ("C-M-j" . consult-dir-jump-file)
-        ("M-q" . vertico-quick-jump))
+        ("M-q" . vertico-quick-exit))
   (:map vertico-multiform-map
         ("M-B") ("M-F") ; I use these for text editing!
         ("M-H" . vertico-multiform-flat)    ; H for horizontal
