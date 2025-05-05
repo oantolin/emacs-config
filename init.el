@@ -864,8 +864,6 @@
         ("s n" . "nsbp")
         ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
         ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page))
-  :hook
-  (pdf-view-mode . pdf-view-themed-minor-mode)
   :init
   (pdf-loader-install)
   :config
