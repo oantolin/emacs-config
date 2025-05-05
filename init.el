@@ -45,7 +45,7 @@
   :bind ("C-h y" . describe-personal-keybindings))
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode"))
+(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "scimago"))
   (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
@@ -480,6 +480,11 @@
     "w" #'arXiv-copy-url
     "c" #'arXiv-capture)
   (fset 'arXiv-map arXiv-map))
+
+(use-package scimago
+  :commands scimago-copy-quartiles scimago-show-quartiles
+  :bind
+  ("C-c q" . scimago-copy-quartiles))
 
 (use-package embark
   :ensure t
