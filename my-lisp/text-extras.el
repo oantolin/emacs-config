@@ -202,7 +202,8 @@ the only difference between this command and %s-dwim."
   (interactive "p")
   (dotimes (_ arg)
     (insert " ")
-    (dabbrev-expand 1)))
+    (dabbrev-expand 1))
+  (setq this-command 'dabbrev-expand))
 
 (defun dabbrev-complete-next ()
   "Choose a continuation for the previous expansion with completion."
