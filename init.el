@@ -1516,18 +1516,9 @@ if `org-store-link' is called from the #+TITLE line."
   :hook
   (bqn-comint-mode . use-bqn--eldoc)
   (bqn-comint-mode . turn-on-eldoc-mode)
-  (bqn-comint-mode . comint-breakup-long-lines)
   :config
   (defun use-bqn--eldoc ()
-    (setq-local eldoc-documentation-function #'bqn--eldoc))
-  (defun breakup-long-lines (s)
-    (if (string-match-p (format ".\\{%d\\}" (* 2 fill-column)) s)
-        (replace-regexp-in-string
-         (format ".\\{%d\\}" fill-column) "\\&⮐\n⮑ " s)
-      s))
-  (defun comint-breakup-long-lines ()
-    (make-local-variable 'comint-preoutput-filter-functions)
-    (cl-pushnew #'breakup-long-lines comint-preoutput-filter-functions)))
+    (setq-local eldoc-documentation-function #'bqn--eldoc)))
 
 (use-package gap-mode
   :ensure t
