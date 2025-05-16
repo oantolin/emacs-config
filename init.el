@@ -427,7 +427,8 @@
      (file grid)))
   (vertico-multiform-commands
    '((org-set-tags-command grid)
-     (org-agenda-set-tags grid)))
+     (org-agenda-set-tags grid)
+     (TeX-command-master flat)))
   :init
   (vertico-mode)
   :config
