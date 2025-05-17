@@ -32,7 +32,7 @@ it's in `org-mode'."
 (defun org-ql-usual-files-find ()
   "Call `org-ql-find' on current buffer and `org-ql-usual-files'."
   (interactive)
-  (org-ql-find (org-ql-usual-files)))
+  (org-ql-find (org-ql-usual-files) :widen t))
 
 (defun org-ql-usual-files-open-link ()
   "Call `org-ql-open-link' on current buffer and `org-ql-usual-files'."
