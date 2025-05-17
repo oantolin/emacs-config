@@ -418,7 +418,6 @@
         ("C-M-j" . consult-dir-jump-file)
         ("M-q" . vertico-quick-exit))
   (:map vertico-multiform-map
-        ("M-B") ("M-F") ; I use these for text editing!
         ("M-H" . vertico-multiform-flat)    ; H for horizontal
         ("M-P" . vertico-multiform-buffer)) ; P for panoramic
   :custom
@@ -428,12 +427,15 @@
      (file grid)))
   (vertico-multiform-commands
    '((org-set-tags-command grid)
-     (org-agenda-set-tags grid)))
+     (org-agenda-set-tags grid)
+     (TeX-command-master flat)))
   :init
   (vertico-mode)
   :config
   (defalias 'vertico-really-exit-input #'exit-minibuffer)
-  (vertico-multiform-mode))
+  (vertico-multiform-mode) ; I use these for text editing
+  (keymap-unset vertico-multiform-map "M-F")
+  (keymap-unset vertico-multiform-map "M-B"))
 
 (use-package marginalia
   :ensure t
