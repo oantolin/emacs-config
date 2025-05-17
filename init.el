@@ -1119,8 +1119,8 @@
                              :test #'equal))
   (setopt org-latex-packages-alist
           (cons '("AUTO" "babel" t ("pdflatex")) org-latex-packages-alist))
-  (when (executable-find "latexmk")
-    (setopt org-latex-pdf-process '("latexmk -pdf %f")))
+  (when (executable-find "texi2pdf")
+    (setopt org-latex-pdf-process '("texi2pdf %f")))
   (defun org-tweak-syntax-table ()
     (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'") (?' "'"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
