@@ -1361,6 +1361,7 @@ if `org-store-link' is called from the #+TITLE line."
                ("p" . mastodon-profile-my-profile)
                ("l" . mastodon-views-view-list-timeline)
                ("s" . mastodon-search-query)
+               ("u" . mastodon-url-lookup)
                ("L" . mastodon-views-view-lists)
                ("@" . mastodon-notifications-get-mentions))
   (:map mastodon-mode-map
