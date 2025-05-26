@@ -921,6 +921,8 @@
         ("M-h" . consult-history)
         ("M-r") ("M-s")))
 
+(use-package man-help)
+
 (use-package eshell-extras
   :commands
   eshell/in-term
