@@ -16,10 +16,7 @@
  ring-bell-function #'ignore
  cursor-type 'bar
  tab-bar-show nil
- tab-bar-close-button-show nil
- modus-themes-mixed-fonts t
- modus-themes-bold-constructs t
- modus-themes-italic-constructs t)
+ tab-bar-close-button-show nil)
 
 (set-face-attribute 'variable-pitch nil :family "URW Bookman")
 
@@ -29,8 +26,6 @@
 
 (set-fontset-font "fontset-default" 'emoji
                   (font-spec :family "Noto Color Emoji"))
-
-(load-theme 'modus-operandi)
 
 ;;; package.el & use-package setup
 
@@ -148,7 +143,6 @@
 (bind-keys :prefix-map toggle-map
            :prefix "C-c x"
            :prefix-docstring "Keymap for commands that toggle settings."
-           ("b" . modus-themes-toggle)
            ("c" . column-number-mode)
            ("d" . toggle-debug-on-error)
            ("t" . toggle-frame-tab-bar)
@@ -177,6 +171,15 @@
   (advice-add 'package-menu--list-to-prompt :around 'just-package-names))
 
 ;;; packages
+
+(use-package doric-themes
+  :ensure t
+  :bind
+  ("C-c x b" . doric-themes-toggle)
+  :custom
+  (doric-themes-to-toggle '(doric-wind doric-water))
+  :init
+  (doric-themes-select 'doric-wind))
 
 (use-package spacious-padding
   :ensure t
