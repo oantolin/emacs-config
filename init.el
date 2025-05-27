@@ -180,7 +180,7 @@
   (doric-themes-to-toggle '(doric-wind doric-water))
   :init
   (doric-themes-select 'doric-wind))
-  
+
 (use-package spacious-padding
   :ensure t
   :custom
