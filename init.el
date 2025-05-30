@@ -39,9 +39,9 @@
 (use-package bind-key
   :bind ("C-h y" . describe-personal-keybindings))
 
+(setopt use-package-vc-prefer-newest t)
+
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
-(dolist (dir '("placeholder" "math-delimiters" "ngnk-mode" "scimago"))
-  (add-to-list 'load-path (format "~/elisp-packages/%s/" dir)))
 (add-to-list 'load-path "~/.private/")
 
 ;;; misc
@@ -280,6 +280,7 @@
   echo-area-tooltips)
 
 (use-package placeholder
+  :vc (:url "https://github.com/oantolin/placeholder.git")
   :bind
   ("M-_" . placeholder-insert)
   ("C-S-n" . placeholder-forward)
@@ -344,6 +345,7 @@
   (isearch-mode-end . isearch-exit-at-start))
 
 (use-package math-delimiters
+  :vc (:url "https://github.com/oantolin/math-delimiters.git")
   :bind
   (:map toggle-map
         ("$" . math-delimiters-toggle))
@@ -487,6 +489,7 @@
   (fset 'arXiv-map arXiv-map))
 
 (use-package scimago
+  :vc (:url "https://github.com/oantolin/scimago.git")
   :commands scimago-copy-quartiles scimago-show-quartiles
   :bind
   ("C-c q" . scimago-copy-quartiles))
@@ -1490,12 +1493,14 @@ if `org-store-link' is called from the #+TITLE line."
    ((t (:foreground unspecified :inherit font-lock-preprocessor-face)))))
 
 (use-package ngnk-cli
+  :vc (:url "https://github.com/oantolin/ngnk-mode.git")
   :bind
   ("C-c k" . run-ngnk)
   :custom
   (ngnk-mark-line-continuations t))
 
 (use-package ngnk-mode
+  :vc (:url "https://github.com/oantolin/ngnk-mode.git")
   :mode "\\.k\\'"
   :hook
   (ngnk-mode . require-final-newline)
