@@ -8,7 +8,9 @@
 For use as a `:callback' with `gptel-request'."
   (cond
    ((not response)
-    (message "gptel-mini failed with message: %s" (plist-get info :status)))
+    (message "gptel failed with status %s and error message:\n%S"
+             (plist-get info :status)
+             (plist-get (plist-get info :error) :message)))
    ((< (length response) 250)
     (message "%s" response))
    (t (pop-to-buffer (get-buffer-create "*gptel-mini*"))
@@ -29,13 +31,15 @@ buffer."
   (when (use-region-p)
     (gptel-context--add-region
      (current-buffer) (region-beginning) (region-end)))
-  (gptel-request prompt :callback #'gptel-extras--show-response))
+  (let (gptel-include-reasoning)
+    (gptel-request prompt :callback #'gptel-extras--show-response)))
 
 (defun gptel-extras-define (term)
   "Use an LLM to define a TERM."
   (interactive "sLookup: ")
   (when (string= term "") (user-error "A term to define is required."))
-  (gptel-request (format "Explain this very briefly: %S" term)
-                 :callback #'gptel-extras--show-response))
+  (let (gptel-include-reasoning)
+    (gptel-request (format "Explain this very briefly: %S" term)
+      :callback #'gptel-extras--show-response)))
 
 (provide 'gptel-extras)
