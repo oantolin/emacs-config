@@ -297,7 +297,8 @@
                ("s" . gptel-send)
                ("r" . gptel-rewrite)
                ("a" . gptel-add)
-               ("m" . gptel-mode))
+               ("m" . gptel-mode)
+               ("x" . gptel-context-remove-all))
   :custom
   (gptel-org-branching-context t)
   :config
