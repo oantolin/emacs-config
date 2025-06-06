@@ -302,6 +302,7 @@
   (gptel-org-branching-context t)
   :config
   (pop gptel--known-backends) ; remove the default ChatGPT backend
+  (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
   (gptel-make-openai "Groq"
     :host "api.groq.com"
     :endpoint "/openai/v1/chat/completions"
@@ -314,10 +315,10 @@
               mixtral-8x7b-32768
               deepseek-r1-distill-llama-70b
               deepseek-r1-distill-qwen-32b
+              meta-llama/llama-4-maverick-17b-128e-instruct
               gemma2-9b-it))
-  (setq gptel-model 'gemini-2.0-flash
-        gptel-backend
-        (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)))
+  (setq gptel-model 'gemini-2.5-flash-preview-05-20
+        gptel-backend (cdr (assoc "Gemini" gptel--known-backends))))
 
 (use-package gptel-extras
   :bind
