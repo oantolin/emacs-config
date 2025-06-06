@@ -315,7 +315,7 @@
               deepseek-r1-distill-llama-70b
               deepseek-r1-distill-qwen-32b
               gemma2-9b-it))
-  (setq gptel-model 'gemini-2.0-flash
+  (setq gptel-model 'gemini-2.5-flash-preview-05-20
         gptel-backend
         (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)))
 
