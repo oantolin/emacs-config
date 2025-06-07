@@ -28,11 +28,13 @@ short, it is shown in the echo area; otherwise, it is displayed in a
 buffer."
   (interactive "sAsk LLM: ")
   (when (string= prompt "") (user-error "A prompt is required."))
-  (when (use-region-p)
-    (gptel-context--add-region
-     (current-buffer) (region-beginning) (region-end)))
   (let (gptel-include-reasoning)
-    (gptel-request prompt :callback #'gptel-extras--show-response)))
+    (gptel-request
+        (if (use-region-p)
+            (concat prompt "\n\n" (buffer-substring-no-properties
+                                   (region-beginning) (region-end)))
+          prompt)
+      :callback #'gptel-extras--show-response)))
 
 (defun gptel-extras-define (term)
   "Use an LLM to define a TERM."
