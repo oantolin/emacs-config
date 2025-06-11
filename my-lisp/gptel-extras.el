@@ -34,6 +34,7 @@ buffer."
             (concat prompt "\n\n" (buffer-substring-no-properties
                                    (region-beginning) (region-end)))
           prompt)
+      :transforms '(gptel--transform-add-context)
       :callback #'gptel-extras--show-response)))
 
 (defun gptel-extras-define (term)
