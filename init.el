@@ -301,6 +301,7 @@
                ("x" . gptel-context-remove-all))
   :custom
   (gptel-org-branching-context t)
+  (gptel-include-reasoning nil)
   :config
   (pop gptel--known-backends) ; remove the default ChatGPT backend
   (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
