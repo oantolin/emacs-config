@@ -112,7 +112,7 @@
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
  ("C-;" . comment-dwim)
- ("C-z" . query-replace-regexp)
+ ("C-S-r" . query-replace-regexp)
  ("C-<" . delete-indentation)
  ("M-\\" . cycle-spacing)
  ("C-h p" . describe-package)  ; swap these two
@@ -171,7 +171,7 @@
   (advice-add 'package-menu--list-to-prompt :around 'just-package-names))
 
 ;;; packages
-
+  
 (use-package doric-themes
   :ensure t
   :bind
@@ -339,7 +339,7 @@
   (:map isearch-mode-map
         ("M-c") ; free up for capitalize-dwim, still bound to M-s c
         ("M-r") ; free up for recording kmacros, still bound to M-s r
-        ("C-z" . isearch-query-replace)
+        ("C-S-r" . isearch-query-replace)
         ("<S-return>" . isearch-exit-at-end)
         ([remap isearch-abort] . isearch-cancel)
         ("<C-backspace>" . isearch-delete-wrong)
@@ -468,7 +468,7 @@
 
 (use-package cape
   :ensure t
-  :bind ("C-<tab>" . cape-prefix-map)
+  :bind ("C-z" . cape-prefix-map)
   :init
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
