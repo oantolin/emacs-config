@@ -45,4 +45,15 @@ buffer."
     (gptel-request (format "Explain this very briefly: %S" term)
       :callback #'gptel-extras--show-response)))
 
+(gptel-make-tool
+ :name "run_python_code"
+ :function (lambda (code)
+             (let ((command (format "python3 -c %S" code)))
+               (shell-command-to-string command)))
+ :description "Run some Python code and capture its standard output"
+ :args (list '(:name "code"
+               :type string
+               :description "the Python program to run"))
+ :category "computation")
+
 (provide 'gptel-extras)

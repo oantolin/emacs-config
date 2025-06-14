@@ -1413,7 +1413,8 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package python
   :defer t
   :custom
-  (python-shell-interpreter "python3"))
+  (python-shell-interpreter "python3")
+  (python-interpreter "python3"))
 
 (use-package scheme
   :defer t
