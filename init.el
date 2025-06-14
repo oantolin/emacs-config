@@ -100,7 +100,8 @@
  ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history  
  ("M-Z" . zap-to-char)
  ("C-x k" . kill-current-buffer)
- ("C-x q" . quit-window)
+ ("C-/" . mark-whole-buffer) ; GTK uses this
+ ("C-z" . undo)              ; GTK uses this
  ("C-x /" . pwd)
  ("C-x C-/" . cd)
  ("C-x C-p" . list-packages)
@@ -468,7 +469,7 @@
 
 (use-package cape
   :ensure t
-  :bind ("C-z" . cape-prefix-map)
+  :bind ("C-'" . cape-prefix-map)
   :init
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
