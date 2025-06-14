@@ -100,8 +100,6 @@
  ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history  
  ("M-Z" . zap-to-char)
  ("C-x k" . kill-current-buffer)
- ("C-/" . mark-whole-buffer) ; GTK uses this
- ("C-z" . undo)              ; GTK uses this
  ("C-x /" . pwd)
  ("C-x C-/" . cd)
  ("C-x C-p" . list-packages)
@@ -303,6 +301,8 @@
                ("x" . gptel-context-remove-all))
   :custom
   (gptel-org-branching-context t)
+  (gptel-prompt-prefix-alist
+   '((markdown-mode . "> ") (org-mode . "> ") (text-mode . "> ")))
   (gptel-include-reasoning nil)
   :config
   (pop gptel--known-backends) ; remove the default ChatGPT backend
