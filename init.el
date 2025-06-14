@@ -299,6 +299,7 @@
                ("r" . gptel-rewrite)
                ("a" . gptel-add)
                ("m" . gptel-mode)
+               ("p" . gptel-menu)
                ("x" . gptel-context-remove-all))
   :custom
   (gptel-org-branching-context t)
