@@ -1069,6 +1069,7 @@
    ("C-c C" . org-clock-goto))
   (:map org-mode-map
         ("C-,") ; I use this for consult-register-load
+        ("C-'") ; I use this as a prefix for cape
         ("C-c C-=" . org-cycle-agenda-files)
         ("$" . math-delimiters-insert)
         ("C-$" . ispell-complete-word)
