@@ -16,10 +16,10 @@ For use as a `:callback' with `gptel-request'."
    (t (pop-to-buffer (get-buffer-create "*gptel-mini*"))
       (let ((inhibit-read-only t))
         (erase-buffer)
-        (insert response)
-        (fill-region (point-min) (point-max)))
+        (insert response))
       (goto-char (point-min))
-      (special-mode))))
+      (when (fboundp 'markdown-mode) (markdown-mode))
+      (view-mode))))
 
 (defun gptel-extras-mini (prompt)
   "Display the LLM's response to PROMPT.
