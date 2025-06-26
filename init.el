@@ -726,7 +726,7 @@
   :hook (prog-mode . outline-minor-mode))
 
 (use-package emacs-news-view-mode
-  :defer t
+  :mode "\\`NEWS"
   :config
   ;; NEWS files use single quotes around elisp symbols. I think those
   ;; are the only files I view in outline-mode, but if I find others
