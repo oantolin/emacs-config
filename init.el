@@ -60,6 +60,7 @@
 (put 'suspend-frame 'disabled t)
 
 (setopt
+ use-package-compute-statistics t
  use-package-enable-imenu-support t
  set-mark-command-repeat-pop t
  tab-always-indent 'complete
@@ -111,7 +112,7 @@
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
  ("C-;" . comment-dwim)
- ("C-S-r" . query-replace-regexp)
+ ("C-z" . query-replace-regexp)
  ("C-<" . delete-indentation)
  ("M-\\" . cycle-spacing)
  ("C-h p" . describe-package)  ; swap these two
@@ -341,7 +342,7 @@
   (:map isearch-mode-map
         ("M-c") ; free up for capitalize-dwim, still bound to M-s c
         ("M-r") ; free up for recording kmacros, still bound to M-s r
-        ("C-S-r" . isearch-query-replace)
+        ("C-z" . isearch-query-replace)
         ("<S-return>" . isearch-exit-at-end)
         ([remap isearch-abort] . isearch-cancel)
         ("<C-backspace>" . isearch-delete-wrong)
