@@ -1204,6 +1204,13 @@ if `org-store-link' is called from the #+TITLE line."
   :config
   (global-org-modern-mode))
 
+(use-package ox-rss
+  :ensure t
+  :config
+  ;; org-rss-final-function uses indent-region to format the XML file
+  ;; and it is ridiculously slow! Nobody wants to see the XML anyway.
+  (setf (org-export-backend-filters (org-export-get-backend 'rss)) nil))
+  
 (use-package citeproc :ensure t :defer t)
 
 (use-package jinx
