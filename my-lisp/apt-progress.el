@@ -2,7 +2,8 @@
 
 (require 'ansi-color)
 
-(defun apt-progress-fix (begin end &optional _)
+(define-advice ansi-color-apply-on-region
+    (:before (begin end &optional _) fix-apt-progress)
   (let ((end (copy-marker end)))
     (save-excursion
       (goto-char begin)
@@ -11,8 +12,6 @@
           (replace-match "")
           (when (string-match "Progress: \\[ *[0-9]+%\\]" text)
             (message "%s" (match-string 0 text))))))))
-
-(advice-add 'ansi-color-apply-on-region :before 'apt-progress-fix)
   
 (provide 'apt-progress)
 

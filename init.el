@@ -135,10 +135,8 @@
            :prefix "M-["
            ([t] . insert-pair))
 
-(defun insert-pair-numeric-prefix (args)
+(define-advice insert-pair (:filter-args (args) numeric-prefix)
   (cons (prefix-numeric-value (car args)) (cdr args)))
-
-(advice-add 'insert-pair :filter-args #'insert-pair-numeric-prefix)
 
 (bind-keys :prefix-map toggle-map
            :prefix "C-c x"
@@ -164,11 +162,11 @@
 (use-package package
   :defer t
   :config
-  (defun just-package-names (fn &rest args)
+  (define-advice package-menu--list-to-prompt
+      (:around (fn &rest args) just-package-names)
     (cl-letf (((symbol-function 'package-desc-full-name)
                (lambda (pkg) (symbol-name (package-desc-name pkg)))))
-      (apply fn args)))
-  (advice-add 'package-menu--list-to-prompt :around 'just-package-names))
+      (apply fn args))))
 
 ;;; packages
   
@@ -401,11 +399,11 @@
   :hook
   (minibuffer-setup . cursor-intangible-mode)
   :config
-  (defun stealthily (fn &rest args)
+  (define-advice minibuf-eldef-setup-minibuffer
+      (:around (fn &rest args) stealthily)
     "Apply FN to ARGS while inhibiting modification hooks."
     (let ((inhibit-modification-hooks t))
-      (apply fn args)))
-  (advice-add 'minibuf-eldef-setup-minibuffer :around #'stealthily))
+      (apply fn args))))
 
 (use-package orderless
   :ensure t
@@ -786,10 +784,9 @@
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
   (modify-syntax-entry ?\” ")“" eww-mode-syntax-table)
-  (defun pdfs-are-binary (fn &rest args)
+  (define-advice eww-display-pdf (:around (fn &rest args) pdfs-are-binary)
     (let ((buffer-file-coding-system 'binary))
-      (apply fn args)))
-  (advice-add 'eww-display-pdf :around #'pdfs-are-binary))
+      (apply fn args))))
 
 (use-package latex
   :ensure auctex
@@ -885,10 +882,10 @@
   :config
   (add-hook 'TeX-after-compilation-finished-functions
             #'TeX-revert-document-buffer)
-  (defun default-1-page (fn prop &optional winprops)
+  (define-advice image-mode-window-get
+      (:around (fn prop &optional winprops) default-1-page)
     (or (funcall fn prop winprops)
-        (and (eq prop 'page) 1)))
-  (advice-add 'image-mode-window-get :around #'default-1-page))
+        (and (eq prop 'page) 1))))
 
 (use-package pdf-annot
   :defer t
@@ -902,13 +899,13 @@
   :custom
   (pdf-outline-imenu-use-flat-menus t)
   :config
-  (defun pdf-outline-indent (fn link &optional labels)
+  (define-advice pdf-outline-imenu-create-item
+      (:around (fn link &optional labels) indent)
     (let ((item (funcall fn link labels))
           (indent pdf-outline-buffer-indent))
       (cons (concat (make-string (* indent (1- (alist-get 'depth link))) ?\s)
                     (car item))
-            (cdr item))))
-  (advice-add 'pdf-outline-imenu-create-item :around #'pdf-outline-indent))
+            (cdr item)))))
 
 (use-package dired
   :bind
@@ -1003,7 +1000,9 @@
   :hook
   (log-edit-mode . turn-on-auto-fill)
   :config
-  (advice-add 'consult-history :before #'clear-log-edit-buffer)
+  (define-advice consult-history (:before (&optional _) clear-log-edit-buffer)
+    (when (derived-mode-p 'log-edit-mode)
+      (erase-buffer)))
   (remove-hook 'log-edit-hook #'log-edit-show-files))
 
 (use-package log-view
@@ -1141,10 +1140,9 @@
   (defun org-tweak-syntax-table ()
     (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'") (?' "'"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
-  (defun when-in-org-do-as-the-organs-do (fn)
+  (define-advice org-open-at-point-global
+      (:around (fn) when-in-org-do-as-the-organs-do)
     (if (derived-mode-p 'org-mode) (org-open-at-point) (funcall fn)))
-  (advice-add 'org-open-at-point-global
-              :around #'when-in-org-do-as-the-organs-do)
   (org-link-set-parameters
    "org-title"
    :store (defun store-org-title-link ()
@@ -1244,14 +1242,14 @@ if `org-store-link' is called from the #+TITLE line."
               ("k" . keycast-mode-line-mode)
               ("h" . keycast-header-line-mode))
   :config
-  (defun store-action-key+cmd (cmd)
+  (define-advice embark-keymap-prompter
+      (:filter-return (cmd) store-action-key+cmd)
     (force-mode-line-update t)
     (setq this-command cmd
           keycast--this-command-keys (this-single-command-keys)
           keycast--this-command-desc cmd))
-  (advice-add 'embark-keymap-prompter :filter-return #'store-action-key+cmd)
-  (defun force-keycast-update (&rest _) (keycast--update))
-  (advice-add 'embark-act :before #'force-keycast-update))
+  (define-advice embark-act (:before (&rest _) force-keycast-update)
+    (keycast--update)))
 
 ;;; email packages
 
@@ -1352,10 +1350,10 @@ if `org-store-link' is called from the #+TITLE line."
   (ement-room-compose-method 'compose-buffer)
   (ement-room-compose-buffer-window-auto-height-min 5)
   :config
-  (defun dumb-quotes (fn &rest args)
+  (define-advice ement-room-send-org-filter
+      (:around (fn &rest args) dumb-quotes)
     (let (org-export-with-smart-quotes)
       (apply fn args)))
-  (advice-add #'ement-room-send-org-filter :around #'dumb-quotes)
   :bind
   (:prefix-map global-ement-map :prefix "C-c e"
                ("c" . ement-connect)
@@ -1484,10 +1482,10 @@ if `org-store-link' is called from the #+TITLE line."
         ("C-s i" . sly-import-symbol-at-point)
         ("C-s x" . sly-export-symbol-at-point))
   :config
-  (defun sly-package-fu-fix-keys () ; C-c LETTER are reserved!
+  (define-advice sly-package-fu-init (:after () fix-keys)
+    ;; C-c LETTER are reserved!
     (keymap-unset sly-mode-map "C-c i")
-    (keymap-unset sly-mode-map "C-c x"))
-  (advice-add 'sly-package-fu-init :after #'sly-package-fu-fix-keys))
+    (keymap-unset sly-mode-map "C-c x")))
 
 (use-package sly-trace-dialog
   :bind

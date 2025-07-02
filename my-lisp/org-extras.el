@@ -37,18 +37,15 @@
 
 ;;; doi links
 
-(defun beamer-is-latex (args)
+(define-advice org-link-doi-export (:filter-args (args) beamer-is-latex)
   "Treat Beamer backend same as LaTeX."
   (pcase-let ((`(,path ,desc ,backend ,info) args))
     `(,path ,desc ,(if (eq backend 'beamer) 'latex backend) ,info)))
 
-(defun default-doi-desc (args)
+(define-advice org-link-doi-export (:filter-args (args) default-doi-desc)
   "If no description is given use doi:... format."
   (pcase-let ((`(,path ,desc ,backend ,info) args))
     `(,path ,(or desc (concat "doi:" path)) ,backend ,info)))
-  
-(advice-add 'org-link-doi-export :filter-args #'beamer-is-latex)
-(advice-add 'org-link-doi-export :filter-args #'default-doi-desc)
 
 ;;; Inline JavaScript
 
@@ -82,13 +79,11 @@
    (prefix-all-lines "#+HTML_HEAD_EXTRA: " body)
    "\n#+HTML_HEAD_EXTRA: \\)</div>\n"))
 
-(defun no-short-tags (tags)
+(define-advice org-get-buffer-tags (:filter-return (tags) no-short-tags)
   "Do not offer very short tags as completion candidates.
 Use as `:filter-return' advice for `org-get-buffer-tags'."
   (mapcar (lambda (group)
             (seq-filter (lambda (tag) (> (length tag) 2)) group))
           tags))
-
-(advice-add 'org-get-buffer-tags :filter-return #'no-short-tags)
 
 (provide 'org-extras)

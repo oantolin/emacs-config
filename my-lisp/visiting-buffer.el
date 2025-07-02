@@ -23,8 +23,8 @@ Intended as :after advice for `rename-file'."
                   (search-backward-regexp (format "^(provide '%s)" sans) nil t)
                 (replace-match (format "(provide '%s)" newsans))))))))))
 
-(advice-add 'rename-file :after 'visiting-buffer-rename)
-(advice-add 'vc-rename-file :after 'visiting-buffer-rename)
+(dolist (fn '(rename-file vc-rename-file))
+  (advice-add fn :after 'visiting-buffer-rename))
 
 (defun visiting-buffer-kill (file &optional _trash)
   "Kill buffer visiting FILE.
@@ -33,7 +33,7 @@ Intended as :after advice for `delete-file'."
     (when-let ((buffer (get-file-buffer file)))
       (kill-buffer buffer))))
 
-(advice-add 'delete-file :after 'visiting-buffer-kill)
-(advice-add 'vc-delete-file :after 'visiting-buffer-kill)
+(dolist (fn '(delete-file vc-delete-file))
+  (advice-add fn :after 'visiting-buffer-kill))
 
 (provide 'visiting-buffer)
