@@ -530,7 +530,8 @@
   (:map embark-encode-map
         ("p" . topaz-paste-region))
   (:map embark-url-map
-        ("a" . arXiv-map))
+        ("a" . arXiv-map)
+        ("m" . mastodon-url-lookup))
   (:map embark-general-map
         ("D" . gptel-extras-define))
   :custom
