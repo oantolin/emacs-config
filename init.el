@@ -1196,20 +1196,7 @@ if `org-store-link' is called from the #+TITLE line."
   :config
   (global-org-modern-mode))
 
-(use-package ox-rss
-  :ensure t
-  :defer t
-  :config
-  (let ((rss (org-export-get-backend 'rss)))
-    (setf
-     ;; org-rss-final-function uses indent-region to format the XML file
-     ;; and it is ridiculously slow! Nobody wants to see the XML anyway.
-     (alist-get :filter-final-output (org-export-backend-filters rss) nil t)
-     nil
-     ;; For some reason ox-rss just strips out timestamps by default,
-     ;; despite having a function to transcode them
-     (alist-get 'timestamp (org-export-backend-transcoders rss))
-     #'org-rss-timestamp)))
+(use-package ox-rss :ensure t :defer t)
   
 (use-package citeproc :ensure t :defer t)
 
