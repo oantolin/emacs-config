@@ -175,9 +175,9 @@
   :bind
   ("C-c x b" . doric-themes-toggle)
   :custom
-  (doric-themes-to-toggle '(doric-wind doric-water))
+  (doric-themes-to-toggle '(doric-cherry doric-plum))
   :init
-  (doric-themes-select 'doric-wind))
+  (doric-themes-select 'doric-cherry))
 
 (use-package spacious-padding
   :ensure t
