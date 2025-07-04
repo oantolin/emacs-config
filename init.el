@@ -60,7 +60,6 @@
 (put 'suspend-frame 'disabled t)
 
 (setopt
- use-package-compute-statistics t
  use-package-enable-imenu-support t
  set-mark-command-repeat-pop t
  tab-always-indent 'complete
@@ -1174,6 +1173,7 @@ if `org-store-link' is called from the #+TITLE line."
   ("M-s l" . org-ql-usual-files-open-link))
 
 (use-package org-ql-completing-read
+  :defer t
   :bind
   (:map org-ql-completing-read-map
         ([remap embark-collect])))
@@ -1197,6 +1197,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package ox-rss
   :ensure t
+  :defer t
   :config
   (let ((rss (org-export-get-backend 'rss)))
     (setf
