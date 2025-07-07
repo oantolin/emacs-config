@@ -1379,6 +1379,8 @@ if `org-store-link' is called from the #+TITLE line."
   (:map mastodon-mode-map
         ("{" . backward-paragraph)
         ("}" . forward-paragraph))
+  :custom
+  (mastodon-group-notifications t)
   :hook
   (mastodon-mode . mastodon-async-mode)
   (mastodon-mode . mastodon-recenter-positions)
