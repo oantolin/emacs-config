@@ -27,7 +27,8 @@ If the region is active, it is included as context. If the response is
 short, it is shown in the echo area; otherwise, it is displayed in a
 buffer."
   (interactive "sAsk LLM: ")
-  (when (string= prompt "") (user-error "A prompt is required."))
+  (when (and (string= prompt "") (not (use-region-p)))
+    (user-error "A prompt is required."))
   (let (gptel-include-reasoning)
     (gptel-request
         (if (use-region-p)
