@@ -177,7 +177,7 @@
   :custom
   (doric-themes-to-toggle '(doric-cherry doric-plum))
   :init
-  (doric-themes-select 'doric-cherry))
+  (doric-themes-select (car doric-themes-to-toggle)))
 
 (use-package spacious-padding
   :ensure t
