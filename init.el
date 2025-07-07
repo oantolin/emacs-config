@@ -1374,6 +1374,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package mastodon
   :ensure t
+  :diminish mastodon-async-mode
   :bind
   (:prefix-map global-mastodon-map :prefix "C-c m"
                ("h" . mastodon)
