@@ -1193,6 +1193,8 @@ if `org-store-link' is called from the #+TITLE line."
         ("m" . org-modern-mode))
   :custom
   (org-modern-star 'replace)
+  (org-modern-checkbox
+   '((?X . "🞕") (?- . "⧄") (?\s . "🞎")))
   :config
   (global-org-modern-mode))
 
