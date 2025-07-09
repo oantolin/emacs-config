@@ -737,7 +737,7 @@
 (use-package diff-mode
   :bind
   (:map diff-mode-map
-        ("M-o")
+        ("M-o") ; diff-goto-source is also bound to o
         ("v" . vc-next-action)
         ("/" . diff-split-hunk)))
 
