@@ -2,7 +2,7 @@
 
 ;;; Customize thinks it knows better than me
 
-(setq custom-file (make-temp-file "emacs-custom-"))
+(setq custom-file null-device)
 
 ;;; GUI
 
