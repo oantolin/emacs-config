@@ -133,16 +133,14 @@ marks the next ARG %s after the ones already marked." things things things)
 
 (defmacro define-case-changer (case)
   "Define a CASE change command that does what I want.
-The defined command will change the case of: the region if
-active, and of the next prefix argument many words, starting with
-the word point is either on or right after (the \"or right
-after\" bit is the only difference with the built-in case-dwim
-commands)."
+The command defined is similar to CASE-dwim expect that if called
+without a prefix argument and with point at the end of the line, it
+changes the case of the previous word."
   (cl-flet ((case-fn (suffix) (intern (format "%s-%s" case suffix))))
       `(defun ,(case-fn 'dwiw) (arg)
-     ,(format "%s active region or next ARG words.
+     ,(format "%s active region, previous word or next ARG words.
 If called without a prefix argument and no active region with
-point at the end of a word, then %s the previous word.  This is
+point at the end of a line, then %s the previous word.  This is
 the only difference between this command and %s-dwim."
               (capitalize (symbol-name case)) case case)
      (interactive "*p")
