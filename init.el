@@ -125,8 +125,7 @@
  ("C-o" . split-line)
  ("M-o" . other-window)
  ("M-R" . raise-sexp)
- ("M-T" . transpose-lines)
- ("C-x C-t" . transpose-sentences)
+ ("M-T" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos))
 
