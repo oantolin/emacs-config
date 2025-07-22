@@ -1548,6 +1548,13 @@ if `org-store-link' is called from the #+TITLE line."
   (defun use-bqn--eldoc ()
     (setq-local eldoc-documentation-function #'bqn--eldoc)))
 
+(defun run-goal ()
+  "Run an inferior Goal interpreter."
+  (interactive)
+  (pop-to-buffer (make-comint "Goal" "goal")))
+
+(keymap-global-set "C-c G" #'run-goal)
+
 (use-package gap-mode
   :ensure t
   :custom
