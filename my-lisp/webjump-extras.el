@@ -14,7 +14,7 @@
     ("Collins" . "https://www.collinsdictionary.com/dictionary/english/")
     ("arXiv" . "https://arxiv.org/search/?searchtype=all&query=")
     ("math.??" . "https://arxiv.org/list/math. /recent"))
-  "Search engines to add to `webjump-sites' as `simply-query' sites."
+  "Search engines to add to `webjump-sites' as `simple-query' sites."
   :group 'webjump
   :type '(alist :key-type (string :tag "Name")
                 :value-type (string :tag "URL")))
