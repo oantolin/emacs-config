@@ -1176,7 +1176,18 @@ if `org-store-link' is called from the #+TITLE line."
   :defer t
   :bind
   (:map org-ql-completing-read-map
-        ([remap embark-collect])))
+        ([remap embark-collect])
+        :prefix "C-:"
+        :prefix-map org-ql-syntax-map
+        ("t" . "todo:")
+        ("C" . "clocked:")
+        ("h" . "heading:")
+        (":" . "tags:")
+        ("s" . "src:")
+        ("T" . "ts:")
+        ("p" . "priority:")
+        ("c" . "category:")
+        ("l" . "level:")))
 
 (use-package org-indent
   :bind
