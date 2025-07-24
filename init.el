@@ -1205,6 +1205,7 @@ if `org-store-link' is called from the #+TITLE line."
   (org-modern-star 'replace)
   (org-modern-checkbox
    '((?X . "🞕") (?- . "⧄") (?\s . "🞎")))
+  (org-modern-replace-stars "⓵⓶⓷⓸⓹⓺")
   :config
   (global-org-modern-mode))
 
