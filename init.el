@@ -1202,10 +1202,10 @@ if `org-store-link' is called from the #+TITLE line."
   (:map toggle-map
         ("m" . org-modern-mode))
   :custom
-  (org-modern-star 'replace)
+  (org-modern-star 'stars)
   (org-modern-checkbox
    '((?X . "🞕") (?- . "⧄") (?\s . "🞎")))
-  (org-modern-replace-stars "⓵⓶⓷⓸⓹⓺")
+  (org-modern-replace-stars "🟌🟋🟊🟉🟆🟄🟂🟀")
   :config
   (global-org-modern-mode))
 
