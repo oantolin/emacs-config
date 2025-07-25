@@ -70,7 +70,6 @@
  make-backup-files nil
  save-interprogram-paste-before-kill t
  sentence-end-double-space nil
- cycle-spacing-actions '(delete-all-space just-one-space restore)
  words-include-escapes t
  indent-tabs-mode nil
  standard-indent 2
@@ -107,24 +106,22 @@
  ("M-m" . kmacro-end-or-call-macro)
  ("C-x C-k i" . insert-kbd-macro)
  ("M-i" . back-to-indentation)
+ ("M-'" . delete-indentation)
  ("M-s k" . keep-lines)
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
  ("C-;" . comment-dwim)
  ("C-z" . query-replace-regexp)
- ("C-<" . delete-indentation)
- ("M-\\" . cycle-spacing)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
  ("C-\\" . activate-transient-input-method) ; swap these two, too
  ("C-x \\" . toggle-input-method)
  ("C-x M-c" . restart-emacs)
- ([remap list-buffers] . electric-buffer-list)
  ([remap count-words-region] . count-words)
  ("C-M-o" . up-list)
  ("C-o" . split-line)
  ("M-o" . other-window)
- ("M-R" . raise-sexp)
+ ("M-R" . kill-backward-up-list)
  ("M-T" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos))
