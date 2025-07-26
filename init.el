@@ -18,7 +18,7 @@
  tab-bar-show nil
  tab-bar-close-button-show nil)
 
-(set-face-attribute 'variable-pitch nil :family "URW Bookman")
+(set-face-attribute 'variable-pitch nil :family "Noto Sans")
 
 (custom-set-faces
  '(Info-quoted ((t :inherit fixed-pitch)))
