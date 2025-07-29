@@ -1413,7 +1413,10 @@ if `org-store-link' is called from the #+TITLE line."
   (:map lem-mode-map
         ("{" . backward-paragraph)
         ("}" . forward-paragraph))
+  :hook
+  (lem-mode . variable-pitch-mode)
   :custom
+  (lem-highlight-current-item nil)
   (lem-default-listing-type "Subscribed"))
   
 (use-package fedi-config :after (:any mastodon lem)) ; private package
