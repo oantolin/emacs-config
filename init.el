@@ -123,6 +123,7 @@
  ("M-o" . other-window)
  ("M-R" . kill-backward-up-list)
  ("M-T" . transpose-sentences)
+ ("C-c r" . comint-run)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos))
 
@@ -269,6 +270,7 @@
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
+  ("C-:" . send-to-comint-window)
   :commands
   echo-area-tooltips)
 
@@ -1517,57 +1519,6 @@ if `org-store-link' is called from the #+TITLE line."
   (j-adverb-face ((t (:foreground unspecified :inherit font-lock-type-face))))
   (j-conjunction-face
    ((t (:foreground unspecified :inherit font-lock-preprocessor-face)))))
-
-(use-package ngnk-cli
-  :vc (:url "https://github.com/oantolin/ngnk-mode.git")
-  :bind
-  ("C-c K" . run-ngnk)
-  :custom
-  (ngnk-mark-line-continuations t))
-
-(use-package ngnk-mode
-  :vc (:url "https://github.com/oantolin/ngnk-mode.git")
-  :mode "\\.k\\'"
-  :hook
-  (ngnk-mode . require-final-newline)
-  :config
-  (defun require-final-newline ()
-    (setq-local require-final-newline t)))
-
-(use-package bqn-mode
-  :ensure t
-  :bind
-  ("C-c B" . bqn-comint-bring)
-  (:map bqn-mode-map
-        ("C-c C-c" . bqn-comint-eval-dwim)
-        ("C-c C-b" . bqn-comint-eval-buffer)
-        ("C-c C-s" . bqn-comint-send-dwim)
-        ("C-c C-q" . bqn-glyph-mode-show-glyphs)
-        ("C-c C-k" . bqn-keymap-mode-show-keyboard)
-        ([remap display-local-help] . bqn-help-symbol-info-at-point))
-  (:map bqn-comint-mode-map
-        ("C-c C-q" . bqn-glyph-mode-show-glyphs)
-        ("C-c C-k" . bqn-keymap-mode-show-keyboard)
-        ([remap display-local-help] . bqn-help-symbol-info-at-point))
-  :custom
-  (bqn-interpreter-arguments
-   (list "-e"
-         (format "BQNLib ⇐ {𝕨•Import%S•file.At𝕩∾%S}"
-                 (expand-file-name "~/code/bqn-libs") ".bqn")
-         "-r"))
-  :hook
-  (bqn-comint-mode . use-bqn--eldoc)
-  (bqn-comint-mode . turn-on-eldoc-mode)
-  :config
-  (defun use-bqn--eldoc ()
-    (setq-local eldoc-documentation-function #'bqn--eldoc)))
-
-(defun run-goal ()
-  "Run an inferior Goal interpreter."
-  (interactive)
-  (pop-to-buffer (make-comint "Goal" "goal")))
-
-(keymap-global-set "C-c G" #'run-goal)
 
 (use-package gap-mode
   :ensure t
