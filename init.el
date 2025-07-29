@@ -1507,7 +1507,7 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :mode "\\.j\\'"
   :bind
-  ("C-c j" . j-console)
+  ("C-c J" . j-console)
   (:map j-mode-map
         ([remap display-local-help] . j-help-lookup-symbol))
   :custom-face
@@ -1521,7 +1521,7 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package ngnk-cli
   :vc (:url "https://github.com/oantolin/ngnk-mode.git")
   :bind
-  ("C-c k" . run-ngnk)
+  ("C-c K" . run-ngnk)
   :custom
   (ngnk-mark-line-continuations t))
 
