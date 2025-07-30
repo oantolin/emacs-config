@@ -270,7 +270,7 @@
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
-  ("C-:" . send-to-comint-window)
+  ("C-:" . send-to-comint)
   :commands
   echo-area-tooltips)
 
@@ -1524,3 +1524,8 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :custom
   (gap-executable "/usr/bin/gap"))
+
+(use-package bqn-mode
+  :mode "\\.bqn\\'"
+  :bind
+  ("C-c B" . run-bqn))

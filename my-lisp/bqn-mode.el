@@ -1,8 +1,9 @@
-;; bqn-input.el --- BQN input method     -*- lexical-binding: t; -*-
+;; bqn-mode.el --- BQN input method     -*- lexical-binding: t; -*-
 
 ;;; Input method extracted from Marshall's bqn-mode.
 
 (require 'quail)
+(require 'comint)
 
 (defconst bqn--glyph-prefix-table
   '(("\\\\" . 92) ("\\ " . 8255) ("\\?" . 8656) ("\\/" . 8800)
@@ -26,12 +27,33 @@
     ("\\3" . 8316) ("\\@" . 9863) ("\\2" . 168) ("\\!" . 9097)
     ("\\1" . 728) ("\\~" . 172) ("\\`" . 732)))
 
-(quail-define-package "BQN-Z" "UTF-8" "⍉"
+(quail-define-package "BQN" "UTF-8" "⍉"
                       t "Input mode for BQN" '(("\t" . quail-completion))
                       t nil nil t nil nil nil nil nil t)
 
-(quail-select-package "BQN-Z")
+(quail-select-package "BQN")
 
 (quail-install-map (quail-map-from-table '((default bqn--glyph-prefix-table))))
 
-(provide 'bqn-input)
+;;; run bqn with comint
+
+(defun bqn-comint-send (process input)
+  (thread-last
+    input
+    (substring-no-properties)
+    (format ")escaped %S")
+    (replace-regexp-in-string "\n" "\\\\n")
+    (comint-simple-send process)))
+
+(defun run-bqn ()
+  (interactive)
+  (pop-to-buffer (make-comint "bqn" "bqn"))
+  (set-input-method "BQN")
+  (setq-local comint-input-sender #'bqn-comint-send))
+
+;;; a simple bqn-mode
+
+(define-derived-mode bqn-mode prog-mode "BQN"
+  (set-input-method "BQN"))
+
+(provide 'bqn-mode)

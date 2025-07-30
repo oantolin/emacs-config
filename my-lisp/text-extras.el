@@ -254,19 +254,18 @@ for the pop up buffer."
   (help-at-pt-cancel-timer)
   (help-at-pt-set-timer))
 
-(defun send-to-comint-window ()
+(defun send-to-comint ()
   "Send active region or current line to a process in some window."
   (interactive)
   (require 'comint)
   (if-let* ((process (cl-loop for w in (window-list)
                               thereis (get-buffer-process (window-buffer w))))
-            (bounds (if (use-region-p)
-                        (car (region-bounds))
-                      (cons (pos-bol) (pos-eol)))))
-      (progn
-        (comint-send-region process (car bounds) (cdr bounds))
-        (unless (= (char-before (cdr bounds)) 10)
-          (comint-send-string process "\n")))
+            (input (buffer-substring-no-properties
+                    (if (use-region-p) (region-beginning) (pos-bol))
+                    (if (use-region-p) (region-end) (pos-eol)))))
+      (funcall
+       (buffer-local-value 'comint-input-sender (process-buffer process))
+       process input)
     (user-error "No process found")))
 
 (provide 'text-extras)
