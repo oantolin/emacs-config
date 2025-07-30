@@ -46,6 +46,7 @@
     (comint-simple-send process)))
 
 (defun run-bqn ()
+  "Run an inferior bqn process."
   (interactive)
   (pop-to-buffer (make-comint "bqn" "bqn"))
   (set-input-method "BQN")
