@@ -2,8 +2,13 @@
 
 ;;; Input method extracted from Marshall's bqn-mode.
 
-(require 'quail)
 (require 'comint)
+(require 'quail)
+
+(defcustom bqn-arguments nil
+  "Arguments to BQN intepreter."
+  :type '(repeat string)
+  :group 'bqn-mode)
 
 (defconst bqn--glyph-prefix-table
   '(("\\\\" . 92) ("\\ " . 8255) ("\\?" . 8656) ("\\/" . 8800)
@@ -48,7 +53,7 @@
 (defun run-bqn ()
   "Run an inferior bqn process."
   (interactive)
-  (pop-to-buffer (make-comint "bqn" "bqn"))
+  (pop-to-buffer (apply #'make-comint "bqn" "bqn" nil bqn-arguments))
   (set-input-method "BQN")
   (setq-local comint-input-sender #'bqn-comint-send))
 

@@ -270,7 +270,6 @@
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw)
-  ("C-:" . send-to-comint)
   :commands
   echo-area-tooltips)
 
@@ -1527,5 +1526,21 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package bqn-mode
   :mode "\\.bqn\\'"
+  :custom
+  (bqn-arguments (list "-e"
+                       (format "BQNLib ⇐ {𝕨•Import%S•file.At𝕩∾%S}"
+                               (expand-file-name "~/code/bqn-libs") ".bqn")
+                       "-r"))
   :bind
   ("C-c B" . run-bqn))
+
+(use-package comint-extras
+  :bind
+  ("C-:" . send-to-comint)
+  ("C-c J" . run-j)
+  ("C-c K" . run-k)
+  ("C-c G" . run-goal)
+  :config
+  (define-run-command "j" "jc")
+  (define-run-command "goal" "goal")
+  (define-run-command "k" "k" (expand-file-name "~/code/growlerk/repl.k")))
