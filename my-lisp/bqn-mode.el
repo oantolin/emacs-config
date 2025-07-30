@@ -10,6 +10,11 @@
   :type '(repeat string)
   :group 'bqn-mode)
 
+(defface bqn-face
+  '((t (:family "BQN386 Unicode")))
+  "Face for BQN source and inferior-process buffers."
+  :group 'bqn-mode)
+
 (defconst bqn--glyph-prefix-table
   '(("\\\\" . 92) ("\\ " . 8255) ("\\?" . 8656) ("\\/" . 8800)
     ("\\>" . 8805) ("\\." . 8781) ("\\<" . 8804) ("\\," . 8766)
@@ -50,16 +55,21 @@
     (replace-regexp-in-string "\n" "\\\\n")
     (comint-simple-send process)))
 
+(defun bqn--setup ()
+  "Use BQN input method and face in current buffer."
+  (set-input-method "BQN")
+  (buffer-face-set 'bqn-face))
+
 (defun run-bqn ()
   "Run an inferior bqn process."
   (interactive)
-  (pop-to-buffer (apply #'make-comint "bqn" "bqn" nil bqn-arguments))
-  (set-input-method "BQN")
-  (setq-local comint-input-sender #'bqn-comint-send))
+  (pop-to-buffer (apply #'make-comint "bqn" "bqn" nil bqn-arguments))  
+  (setq-local comint-input-sender #'bqn-comint-send)
+  (bqn--setup))
 
 ;;; a simple bqn-mode
 
 (define-derived-mode bqn-mode prog-mode "BQN"
-  (set-input-method "BQN"))
+  (bqn--setup))
 
 (provide 'bqn-mode)
