@@ -760,6 +760,7 @@
   (shr-use-colors nil)
   (shr-image-animate nil)
   :custom-face
+  (shr-text ((t (:inherit variable-pitch))))
   (shr-code ((t (:inherit fixed-pitch)))))
 
 (use-package shr-heading
