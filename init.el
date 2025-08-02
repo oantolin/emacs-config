@@ -758,7 +758,9 @@
         ("v")) ; don't override view-source with a useless synonym for RET
   :custom
   (shr-use-colors nil)
-  (shr-image-animate nil))
+  (shr-image-animate nil)
+  :custom-face
+  (shr-code ((t (:inherit fixed-pitch)))))
 
 (use-package shr-heading
   :commands
@@ -778,6 +780,7 @@
   :hook
   (eww-mode . shr-heading-setup-imenu)
   (eww-mode . echo-area-tooltips)
+  (eww-mode . variable-pitch-mode)
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
   (modify-syntax-entry ?\” ")“" eww-mode-syntax-table)
@@ -1351,6 +1354,9 @@ if `org-store-link' is called from the #+TITLE line."
   (ement-room-send-message-filter #'ement-room-send-org-filter)
   (ement-room-compose-method 'compose-buffer)
   (ement-room-compose-buffer-window-auto-height-min 5)
+  (ement-room-use-variable-pitch t)
+  :hook
+  (ement-room-mode . variable-pitch-mode)
   :config
   (define-advice ement-room-send-org-filter
       (:around (fn &rest args) dumb-quotes)
