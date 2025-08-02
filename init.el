@@ -777,6 +777,7 @@
         ("C-c C-n" . shr-heading-next))
   :custom
   (eww-bookmarks-directory "~/.private/")
+  (eww-auto-rename-buffer 'title)
   :hook
   (eww-mode . shr-heading-setup-imenu)
   (eww-mode . echo-area-tooltips)
@@ -1138,7 +1139,8 @@
   (when (executable-find "texi2pdf")
     (setopt org-latex-pdf-process '("texi2pdf %f")))
   (defun org-tweak-syntax-table ()
-    (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'") (?' "'"))
+    (cl-loop for (ch cl) in '((?< ".") (?> ".") (?\\ "'")
+                              (?' "'") (?« "(»") (?» ")«"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
   (define-advice org-open-at-point-global
       (:around (fn) when-in-org-do-as-the-organs-do)
