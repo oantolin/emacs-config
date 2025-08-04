@@ -782,7 +782,6 @@
   :hook
   (eww-mode . shr-heading-setup-imenu)
   (eww-mode . echo-area-tooltips)
-  (eww-mode . variable-pitch-mode)
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
   (modify-syntax-entry ?\” ")“" eww-mode-syntax-table)
