@@ -1552,4 +1552,4 @@ if `org-store-link' is called from the #+TITLE line."
   :config
   (define-run-command "j" "jc")
   (define-run-command "goal" "goal")
-  (define-run-command "k" "k" (expand-file-name "~/code/growlerk/repl.k")))
+  (define-run-command "k" "k" (expand-file-name "~/code/k/repl.k")))
