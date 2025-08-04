@@ -123,7 +123,6 @@
  ("M-o" . other-window)
  ("M-R" . kill-backward-up-list)
  ("M-T" . transpose-sentences)
- ("C-c r" . comint-run)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos))
 
