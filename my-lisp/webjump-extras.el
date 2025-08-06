@@ -13,7 +13,8 @@
     ("Merriam-Webster" . "https://www.merriam-webster.com/dictionary/")
     ("Collins" . "https://www.collinsdictionary.com/dictionary/english/")
     ("arXiv" . "https://arxiv.org/search/?searchtype=all&query=")
-    ("math.??" . "https://arxiv.org/list/math. /recent"))
+    ("math.??" . "https://arxiv.org/list/math. /recent")
+    ("Scimago" . "https://www.scimagojr.com/journalsearch.php?q="))
   "Search engines to add to `webjump-sites' as `simple-query' sites."
   :group 'webjump
   :type '(alist :key-type (string :tag "Name")
