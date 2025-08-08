@@ -1511,21 +1511,6 @@ if `org-store-link' is called from the #+TITLE line."
         ("C-c M-t" . sly-trace-dialog)
         ("C-c C-M-t" . sly-toggle-fancy-trace)))
 
-(use-package j-mode
-  :ensure t
-  :mode "\\.j\\'"
-  :bind
-  ("C-c J" . j-console)
-  (:map j-mode-map
-        ([remap display-local-help] . j-help-lookup-symbol))
-  :custom-face
-  (j-verb-face
-   ((t (:foreground unspecified :inherit font-lock-function-name-face))))
-  (j-other-face ((t (:foreground unspecified :inherit font-lock-keyword-face))))
-  (j-adverb-face ((t (:foreground unspecified :inherit font-lock-type-face))))
-  (j-conjunction-face
-   ((t (:foreground unspecified :inherit font-lock-preprocessor-face)))))
-
 (use-package gap-mode
   :ensure t
   :custom
