@@ -1425,7 +1425,8 @@ if `org-store-link' is called from the #+TITLE line."
   (lem-mode . variable-pitch-mode)
   :custom
   (lem-highlight-current-item nil)
-  (lem-default-listing-type "Subscribed"))
+  (lem-default-listing-type "Subscribed")
+  (lem-compose-autocomplete nil))
   
 (use-package fedi-config :after (:any mastodon lem)) ; private package
 
