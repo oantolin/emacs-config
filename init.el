@@ -1537,3 +1537,13 @@ if `org-store-link' is called from the #+TITLE line."
   (define-run-command "j" "jc")
   (define-run-command "goal" "goal")
   (define-run-command "k" "k" (expand-file-name "~/code/k/repl.k")))
+
+(use-package treesit
+  :defer t
+  :custom
+  (treesit-language-source-alist
+   '((haskell "https://github.com/tree-sitter/tree-sitter-haskell"))))
+
+(use-package haskell-ts-mode
+  :ensure t
+  :mode "\\.hs\\'")
