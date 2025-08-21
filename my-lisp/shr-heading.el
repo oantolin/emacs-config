@@ -1,5 +1,7 @@
 ;;; shr-heading.el --- Navigation by heading   -*- lexical-binding: t; -*-
 
+(require 'text-property-search)
+
 (defun shr-heading-next (&optional arg)
   "Move forward by ARG headings (any h1-h4).
 If ARG is negative move backwards, ARG defaults to 1."
