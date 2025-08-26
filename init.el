@@ -1550,3 +1550,13 @@ if `org-store-link' is called from the #+TITLE line."
 
 (when (executable-find "agda")
   (load-file (shell-command-to-string "agda --emacs-mode locate")))
+
+(use-package gnu-apl-mode :ensure t :defer t)
+
+(let ((aprepl-path "/home/omar/quicklisp/dists/quicklisp/software/april-20241012-git/aprepl/aprepl.el"))
+  (when (file-exists-p aprepl-path)
+    (autoload 'aprepl aprepl-path
+      "Interactively evaluate April APL expressions.
+Switches to the buffer named BUF-NAME if provided (`*aprepl*' by default),
+or creates it if it does not exist."
+      t)))
