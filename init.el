@@ -1548,5 +1548,5 @@ if `org-store-link' is called from the #+TITLE line."
   :ensure t
   :mode "\\.hs\\'")
 
-(load-file (let ((coding-system-for-read 'utf-8))
-             (shell-command-to-string "agda --emacs-mode locate")))
+(when (executable-find "agda")
+  (load-file (shell-command-to-string "agda --emacs-mode locate")))
