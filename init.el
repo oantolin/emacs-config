@@ -170,7 +170,7 @@
   :bind
   ("C-c x b" . doric-themes-toggle)
   :custom
-  (doric-themes-to-toggle '(doric-light doric-dark))
+  (doric-themes-to-toggle '(doric-beach doric-valley))
   :init
   (doric-themes-select (car doric-themes-to-toggle)))
 
