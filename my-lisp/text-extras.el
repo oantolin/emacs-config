@@ -239,13 +239,15 @@ for the pop up buffer."
   (if (fboundp 'markdown-mode) (markdown-mode) (text-mode))
   (text-to-clipboard-minor-mode))
 
-(defun apply-macro-to-rest-of-paragraph ()
-  "Apply last keyboard macro to each line in the rest of the current paragraph."
+(defun apply-macro-to-lines-of-paragraph ()
+  "Apply last keyboard macro to each line in the current paragraph.
+If a macro is being recorded, it is ended and then applied to the
+remaining lines of the paragraph."
   (interactive)
-  (when defining-kbd-macro (kmacro-end-macro nil))
-  (apply-macro-to-region-lines
-   (line-beginning-position 2)
-   (save-excursion (end-of-paragraph-text) (point))))
+  (let ((skip (if (not defining-kbd-macro) 1 (kmacro-end-macro nil) 2)))
+    (apply-macro-to-region-lines
+     (line-beginning-position skip)
+     (save-excursion (end-of-paragraph-text) (point)))))
 
 (defun echo-area-tooltips ()
   "Show tooltips in the echo area automatically for current buffer."

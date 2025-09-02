@@ -262,7 +262,7 @@
   ("C-S-f" . forward-to-whitespace)
   ("C-S-b" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
-  ("M-M" . apply-macro-to-rest-of-paragraph)
+  ("M-M" . apply-macro-to-lines-of-paragraph)
   ("M-;" . dabbrev-next)
   ("C-M-;" . dabbrev-complete-next)
   ("C-c u" . text-to-clipboard)
