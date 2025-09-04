@@ -1308,8 +1308,6 @@ if `org-store-link' is called from the #+TITLE line."
   (message-mail-alias-type 'ecomplete)
   (message-self-insert-commands nil)
   (message-expand-name-standard-ui t)
-  ;; all-user-mail-addresses-regexp is defined in email-config
-  (message-alternative-emails all-user-mail-addresses-regexp)
   (message-fill-column nil)
   :hook
   (message-mode . turn-on-visual-line-mode))
