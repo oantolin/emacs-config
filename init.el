@@ -1319,7 +1319,7 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   (:map message-mode-map
         ("C-c x e" . cycle-from-address))
-  :commands set-smtp-server
+  :commands (set-smtp-server message-lint)
   :hook
   (message-send . set-smtp-server)
   (message-send . message-lint)
