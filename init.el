@@ -308,15 +308,17 @@
     :key gptel-api-key
     :models '(llama-3.3-70b-versatile
               llama-3.1-8b-instant
-              llama3-70b-8192
-              llama3-8b-8192
-              mixtral-8x7b-32768
+              openai/gpt-oss-120b
+              openai/gpt-oss-20b
+              qwen/qwen3-32b
+              groq/compound
+              groq/compound-mini
               deepseek-r1-distill-llama-70b
-              deepseek-r1-distill-qwen-32b
+              meta-llama/llama-4-scout-17b-16e-instruct
               meta-llama/llama-4-maverick-17b-128e-instruct
               gemma2-9b-it))
-  (setq gptel-model 'gemini-2.5-flash-preview-05-20
-        gptel-backend (cdr (assoc "Gemini" gptel--known-backends))))
+  (setq gptel-model 'deepseek-r1-distill-llama-70b
+        gptel-backend (cdr (assoc "Groq" gptel--known-backends))))
 
 (use-package gptel-extras
   :bind
