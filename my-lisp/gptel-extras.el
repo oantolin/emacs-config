@@ -1,53 +1,31 @@
 ;;; gptel-extras.el --- Other commands to use LLMs   -*- lexical-binding: t; -*-
 
 (require 'gptel-context)
+(require 'gptel-transient)
 
-(defun gptel-extras--show-response (response info)
-  "Display RESPONSE in the echo area or a buffer, depending on length.
-
-For use as a `:callback' with `gptel-request'."
-  (cond
-   ((not response)
-    (message "gptel failed with status %s and error message:\n%S"
-             (plist-get info :status)
-             (plist-get (plist-get info :error) :message)))
-   ((< (length response) 250)
-    (message "%s" response))
-   (t (pop-to-buffer (get-buffer-create "*gptel-mini*"))
-      (let ((inhibit-read-only t))
-        (erase-buffer)
-        (insert response))
-      (goto-char (point-min))
-      (when (fboundp 'markdown-mode) (markdown-mode))
-      (view-mode))))
-
-(defun gptel-extras-mini (prompt)
-  "Display the LLM's response to PROMPT.
-If the region is active, it is included as context. If the response is
-short, it is shown in the echo area; otherwise, it is displayed in a
-buffer."
-  (interactive "sAsk LLM: ")
-  (when (and (string= prompt "") (not (use-region-p)))
-    (user-error "A prompt is required."))
-  (let (gptel-include-reasoning)
-    (gptel-request
-        (if (use-region-p)
-            (concat prompt "\n\n" (buffer-substring-no-properties
-                                   (region-beginning) (region-end)))
-          prompt)
-      :transforms '(gptel--transform-add-context)
-      :callback #'gptel-extras--show-response)))
+(defun gptel-extras-mini ()
+  "Display the LLM's response to PROMPT in echo area."
+  (interactive)
+  (gptel--suffix-send '("m" "e")))
 
 (defun gptel-extras-define (term)
   "Use an LLM to define a TERM."
   (interactive "sLookup: ")
   (when (string= term "") (user-error "A term to define is required."))
-  (let (gptel-include-reasoning)
-    (gptel-request (format "Explain this very briefly: %S" term)
-      :callback #'gptel-extras--show-response)))
+  (gptel-request (format "Explain this very briefly: %S" term)
+    :callback
+    (lambda (response info &optional _raw)
+      (pcase response
+        ((pred stringp) (message "%s" response))
+        (`(tool-call . ,calls) (gptel--display-tool-calls calls info t))
+        (`(tool-result . ,results) (gptel--display-tool-results results info))
+        (`(reasoning . ,step) (gptel--display-reasoning-stream step info))
+        (_ (when (and (null response) (plist-get info :error))
+             (message "response error: %s" (plist-get info :status))))))))
 
 (gptel-make-tool
  :name "run_python_code"
+ :confirm t
  :function (lambda (code)
              (let ((command (format "python3 -c %S" code)))
                (shell-command-to-string command)))
@@ -56,5 +34,15 @@ buffer."
                :type string
                :description "the Python program to run"))
  :category "computation")
+
+(gptel-make-preset "translate"
+  :system (concat
+           "Please translate the text; include the name of the "
+           "original language in the format "
+           "'[ORIGINAL_LANGUAGE] TRANSLATION'."))
+
+(gptel-make-preset "python"
+  :system "If necessary, please write and run a Python script to answer this."
+  :tools '("run_python_code"))
 
 (provide 'gptel-extras)
