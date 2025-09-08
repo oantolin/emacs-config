@@ -65,15 +65,19 @@ point until the end of the buffer."
 (defun isearch-next ()
   "Go to next isearch match."
   (interactive)
-  (let (isearch-lazy-highlight)
-    (isearch-repeat 'forward))
-  (isearch-exit))
+  (if (equal isearch-string "")
+      (user-error "No previous search.")
+    (let (isearch-lazy-highlight)
+      (isearch-repeat 'forward))
+    (isearch-exit)))
 
 (defun isearch-previous ()
   "Go to previous isearch match."
   (interactive)
-  (let (isearch-lazy-highlight)
-    (isearch-repeat 'backward))
-  (isearch-exit))
+  (if (equal isearch-string "")
+      (user-error "No previous search.")
+    (let (isearch-lazy-highlight)
+      (isearch-repeat 'backward))
+    (isearch-exit)))
 
 (provide 'isearch-extras)
