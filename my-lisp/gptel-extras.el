@@ -11,8 +11,13 @@
 (defun gptel-extras-define (term)
   "Use an LLM to define a TERM."
   (interactive "sLookup: ")
-  (when (string= term "") (user-error "A term to define is required."))
+  (when (and (string= term "") (null gptel-context--alist))
+    (if (use-region-p)
+        (setq term (buffer-substring-no-properties
+                    (region-beginning) (region-end)))
+      (user-error "A term to define is required.")))
   (gptel-request (format "Explain this very briefly: %S" term)
+    :transforms gptel-prompt-transform-functions
     :callback
     (lambda (response info &optional _raw)
       (pcase response
