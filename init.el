@@ -1270,31 +1270,31 @@ if `org-store-link' is called from the #+TITLE line."
 (fset 'goto-map goto-map)
 
 (use-package gnus-group
-  :bind
-  (:map gnus-group-mode-map
-        ("M-g" . goto-map)
-        ("M-&") ("M-n") ("M-p") ; Gnus taking over useful keybindings
-        ("C-&" . gnus-group-universal-argument)
-        ("T" . gnus-group-get-new-news-this-group)))
+  :config
+  (define-keymap :keymap gnus-group-mode-map
+    "M-g" #'goto-map
+    "M-&" nil "M-n" nil "M-p" nil       ; I use these a lot!
+    "C-&" #'gnus-group-universal-argument
+    "T" #'gnus-group-get-new-news-this-group))
 
 (use-package gnus-art
-  :bind
-  (:map gnus-article-mode-map
-        ("C-h b") ; come on Gnus, that key binding is sacred!
-        ("M-&")   ; also pretty important
-        ("C-&" . gnus-summary-universal-argument)
-        ("M-g" . goto-map)
-        ("{" . backward-paragraph)
-        ("}" . forward-paragraph)))
+  :config
+  (define-keymap :keymap gnus-article-mode-map
+    "C-h b" nil            ; come on Gnus, that key binding is sacred!
+    "M-&" nil              ; also pretty important
+    "C-&" #'gnus-summary-universal-argument
+    "M-g" #'goto-map
+    "{" #'backward-paragraph
+    "}" #'forward-paragraph))
 
 (use-package gnus-sum
-  :bind
-  (:map gnus-summary-mode-map
-        ("M-&")   ; also pretty important
-        ("C-&" . gnus-summary-universal-argument)
-        ("M-i") ; I use this for back-to-indentation
-        ("M-g" . goto-map) ; rescan is also on Z G, and I use that prefix a lot!
-        ("M-a" . gnus-symbolic-argument)))
+  :config
+  (define-keymap :keymap gnus-summary-mode-map
+    "M-&" nil        ; also pretty important
+    "C-&" #'gnus-summary-universal-argument
+    "M-i" nil        ; I use this for back-to-indentation
+    "M-g" #'goto-map ; rescan is also on Z G, and I use that prefix a lot!
+    "M-a" #'gnus-symbolic-argument))
 
 (use-package ecomplete
   :defer t
