@@ -170,7 +170,7 @@
   :bind
   ("C-c x b" . doric-themes-toggle)
   :custom
-  (doric-themes-to-toggle '(doric-wind doric-fire))
+  (doric-themes-to-toggle '(doric-siren doric-mermaid))
   :init
   (doric-themes-select (car doric-themes-to-toggle)))
 
