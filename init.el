@@ -172,6 +172,7 @@
   ("C-c x b" . modus-themes-toggle)
   :config
   (setq modus-themes-italic-constructs t
+        modus-themes-mixed-fonts t
         modus-themes-bold-constructs nil)
   (modus-themes-load-theme 'modus-operandi))
 
