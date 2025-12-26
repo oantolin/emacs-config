@@ -164,15 +164,16 @@
       (apply fn args))))
 
 ;;; packages
-  
-(use-package doric-themes
-  :ensure t
-  :bind
-  ("C-c x b" . doric-themes-toggle)
-  :custom
-  (doric-themes-to-toggle '(doric-siren doric-mermaid))
+
+(use-package emacs
   :init
-  (doric-themes-select (car doric-themes-to-toggle)))
+  (require-theme 'modus-themes)
+  :bind
+  ("C-c x b" . modus-themes-toggle)
+  :config
+  (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs nil)
+  (modus-themes-load-theme 'modus-operandi))
 
 (use-package spacious-padding
   :ensure t
