@@ -10,9 +10,11 @@
             (input (buffer-substring-no-properties
                     (if (use-region-p) (region-beginning) (pos-bol))
                     (if (use-region-p) (region-end) (pos-eol)))))
-      (funcall
-       (buffer-local-value 'comint-input-sender (process-buffer process))
-       process input)
+      (progn
+        (setq deactivate-mark t)
+        (funcall
+         (buffer-local-value 'comint-input-sender (process-buffer process))
+         process input))
     (user-error "No process found")))
 
 (defmacro define-run-command (name cmd &rest args)
