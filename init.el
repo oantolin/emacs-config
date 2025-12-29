@@ -124,7 +124,8 @@
  ("M-R" . kill-backward-up-list)
  ("M-T" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
- ([remap apropos-command] . apropos))
+ ([remap apropos-command] . apropos)
+ ("C-x t s" . toggle-frame-tab-bar))
 
 (bind-keys :prefix-map insert-pair-map
            :prefix "M-["
@@ -138,7 +139,6 @@
            :prefix-docstring "Keymap for commands that toggle settings."
            ("c" . column-number-mode)
            ("d" . toggle-debug-on-error)
-           ("t" . toggle-frame-tab-bar)
            ("f" . follow-mode)
            ("w" . whitespace-mode)
            ("v" . variable-pitch-mode)
