@@ -2,7 +2,7 @@
 
 ;;; Input method extracted from Marshall's bqn-mode.
 
-(require 'comint)
+(require 'comint-extras)
 (require 'quail)
 
 (defcustom bqn-arguments nil
@@ -60,10 +60,7 @@
   (set-input-method "BQN")
   (buffer-face-set 'bqn-face))
 
-(defun run-bqn ()
-  "Run an inferior bqn process."
-  (interactive)
-  (pop-to-buffer (apply #'make-comint "bqn" "bqn" nil bqn-arguments))  
+(define-run-command "bqn" "bqn" :args bqn-arguments
   (setq-local comint-input-sender #'bqn-comint-send)
   (bqn--setup))
 

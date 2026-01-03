@@ -1546,7 +1546,7 @@ if `org-store-link' is called from the #+TITLE line."
       (comint-simple-send process)))
   (define-run-command "j" "jc")
   (define-run-command "goal" "goal")
-  (define-run-command "k" "k" ((expand-file-name "~/code/k/repl.k"))
+  (define-run-command "k" "k" :args (list (expand-file-name "~/code/k/repl.k"))
     (setq-local comint-input-sender #'k-comint-send)))
 
 (use-package treesit
