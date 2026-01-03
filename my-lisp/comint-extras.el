@@ -17,11 +17,13 @@
          process input))
     (user-error "No process found")))
 
-(defmacro define-run-command (name cmd &rest args)
+(defmacro define-run-command (name cmd &optional args &rest body)
   "Define run-NAME as a command that pops to a comint buffer running CMD."
+  (declare (indent 3))
   `(defun ,(intern (format "run-%s" name)) ()
      (interactive)
      ,(format "Run an inferior %s process." cmd)
-     (pop-to-buffer (make-comint ,name ,cmd nil ,@args))))
+     (pop-to-buffer (make-comint ,name ,cmd nil ,@args))
+     ,@body))
 
 (provide 'comint-extras)

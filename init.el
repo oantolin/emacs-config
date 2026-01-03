@@ -1538,9 +1538,16 @@ if `org-store-link' is called from the #+TITLE line."
   ("C-c K" . run-k)
   ("C-c G" . run-goal)
   :config
+  (defun k-comint-send (process input)
+    (thread-last
+      input
+      (substring-no-properties)
+      (replace-regexp-in-string "\n" "\a\n")
+      (comint-simple-send process)))
   (define-run-command "j" "jc")
   (define-run-command "goal" "goal")
-  (define-run-command "k" "k" (expand-file-name "~/code/k/repl.k")))
+  (define-run-command "k" "k" ((expand-file-name "~/code/k/repl.k"))
+    (setq-local comint-input-sender #'k-comint-send)))
 
 (use-package treesit
   :defer t
