@@ -47,22 +47,15 @@
 
 ;;; run bqn with comint
 
-(defun bqn-comint-send (process input)
-  (thread-last
-    input
-    (substring-no-properties)
-    (format ")escaped %S")
-    (replace-regexp-in-string "\n" "\\\\n")
-    (comint-simple-send process)))
-
 (defun bqn--setup ()
   "Use BQN input method and face in current buffer."
   (set-input-method "BQN")
   (buffer-face-set 'bqn-face))
 
-(define-run-command "bqn" "bqn" :args bqn-arguments
-  (setq-local comint-input-sender #'bqn-comint-send)
-  (bqn--setup))
+(define-run-command "bqn" "bqn"
+  :args bqn-arguments
+  :sender (")escaped %S" "\\\\n")
+  :setup (bqn--setup))
 
 ;;; a simple bqn-mode
 
