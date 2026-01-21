@@ -142,6 +142,7 @@
            ("f" . follow-mode)
            ("w" . whitespace-mode)
            ("v" . variable-pitch-mode)
+           ("l" . visual-line-mode)
            ("r" . visible-mode))
 
 (bind-keys :prefix-map time-map
