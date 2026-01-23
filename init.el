@@ -125,7 +125,8 @@
  ("M-T" . transpose-sentences)
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos)
- ("C-x t s" . toggle-frame-tab-bar))
+ ("C-x t s" . toggle-frame-tab-bar)
+ ("C-x x #" . recover-this-file))
 
 (bind-keys :prefix-map insert-pair-map
            :prefix "M-["
