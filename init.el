@@ -527,7 +527,9 @@
   (:map embark-region-map
         ("(" . insert-parentheses)
         ("[" . insert-pair-map)
-        ("=" . quick-calc)) 
+        ("=" . quick-calc))
+  (:map embark-heading-map
+        ("@" . outline-mark-subtree) ("C-SPC"))        
   (:map embark-email-map
         ("+" . add-email-to-ecomplete)
         ("\\" . remove-email-from-ecomplete))
@@ -537,6 +539,7 @@
         ("a" . arXiv-map)
         ("m" . mastodon-url-lookup))
   (:map embark-general-map
+        ("@" . mark) ("C-SPC")
         ("D" . gptel-extras-define))
   :custom
   (embark-quit-after-action nil)
@@ -584,6 +587,7 @@
   (:map embark-org-heading-map
         ("a" . org-archive-subtree-default)) ; skip confirmation
   (:map embark-org-src-block-map
+        ("@" . org-babel-mark-block) ("C-SPC")
         ("e" . org-edit-special)))
 
 (use-package consult-dir
