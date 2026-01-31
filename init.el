@@ -335,8 +335,8 @@
 (use-package whisper
   :vc (:url "https://github.com/natrys/whisper.el" :branch "master")
   :bind
-  ("C-c v" . whisper-run)
-  ("C-c V" . whisper-select-language))
+  ("<insert>" . whisper-run)
+  ("C-x C-l" . whisper-select-language))
 
 (use-package isearch-extras
   :custom
