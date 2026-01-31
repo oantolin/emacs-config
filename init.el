@@ -332,6 +332,12 @@
         ("q" . gptel-extras-mini)
         ("d" . gptel-extras-define)))
 
+(use-package whisper
+  :vc (:url "https://github.com/natrys/whisper.el" :branch "master")
+  :bind
+  ("C-c v" . whisper-run)
+  ("C-c V" . whisper-select-language))
+
 (use-package isearch-extras
   :custom
   (search-whitespace-regexp ".*?")

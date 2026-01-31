@@ -27,3 +27,4 @@ request/
 .org-id-locations
 /tree-sitter
 org-social-mentions
+/.cache/
