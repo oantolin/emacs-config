@@ -15,10 +15,16 @@
                              (`(:var . (,var . ,val))
                               (format "%s:%s\n" var (ob-goal-value val)))
                              (_ "")))
-                         params)))
+                         params))
+        (value (eq (alist-get :result-type params) 'value)))
     (with-temp-buffer
-      (insert (format "say {%s%s} 0" vars body))
+      (insert (format (if value
+                          "say {l:{\"(\"+(\" \"/x)+\")\"}
+?[\"d\"=@x;l(o@!x;\"hline\"),o'+.x;(@x)=_@x;$x;l@o'x]}{%s%s}0"
+                        "%s%s")
+                      vars body))
       (shell-command-on-region (point-min) (point-max) "goal -q" nil t)
-      (buffer-string))))
+      (goto-char (point-min))
+      (if value (read (current-buffer)) (buffer-string)))))
 
 (provide 'ob-goal)
