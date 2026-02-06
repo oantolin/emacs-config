@@ -1,6 +1,6 @@
 ;; ob-goal --- Babel support for Goal  -*- lexical-binding: t; -*-
 
-(define-derived-mode goal-mode prog-mode "Goal")
+(define-derived-mode goal-mode prog-mode "Goal") ; org insists I have a mode…
 
 (defun ob-goal-value (value)
   "Return a string of Goal code evaluating to the given Lisp VALUE."
@@ -10,6 +10,7 @@
    ((listp value) (format "(%s)" (mapconcat #'ob-goal-value value ";")))))
 
 (defun org-babel-execute:goal (body params)
+  "Execute Goal code BODY according to PARAMS."
   (let ((vars (mapconcat (lambda (param)
                            (pcase param
                              (`(:var . (,var . ,val))
