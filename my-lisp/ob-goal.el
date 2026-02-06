@@ -1,13 +1,24 @@
 ;; ob-goal --- Babel support for Goal  -*- lexical-binding: t; -*-
 
-(require 'org-babel)
-
 (define-derived-mode goal-mode prog-mode "Goal")
 
+(defun ob-goal-value (value)
+  "Return a string of Goal code evaluating to the given Lisp VALUE."
+  (cond
+   ((numberp value) (number-to-string value))
+   ((stringp value) (format "%S" value))
+   ((listp value) (format "(%s)" (mapconcat #'ob-goal-value value ";")))))
+
 (defun org-babel-execute:goal (body params)
-  (with-temp-buffer
-    (insert (format "say {%s} 0" body))
-    (shell-command-on-region (point-min) (point-max) "goal -q" nil t)
-    (buffer-string)))
+  (let ((vars (mapconcat (lambda (param)
+                           (pcase param
+                             (`(:var . (,var . ,val))
+                              (format "%s:%s\n" var (ob-goal-value val)))
+                             (_ "")))
+                         params)))
+    (with-temp-buffer
+      (insert (format "say {%s%s} 0" vars body))
+      (shell-command-on-region (point-min) (point-max) "goal -q" nil t)
+      (buffer-string))))
 
 (provide 'ob-goal)
