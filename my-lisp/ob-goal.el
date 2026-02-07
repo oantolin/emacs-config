@@ -11,24 +11,27 @@
 
 (defun org-babel-execute:goal (body params)
   "Execute Goal code BODY according to PARAMS."
-  (let ((lines (split-string body "\n"))
-        (vars (mapconcat (lambda (param)
-                           (pcase param
-                             (`(:var . (,var . ,val))
-                              (format "%s:%s\n" var (ob-goal-value val)))))
-                         params))
-        (value (eq (alist-get :result-type params) 'value))
-        (raw (member "raw" (alist-get :result-params params))))
+  (let* ((lines (split-string body "\n"))
+         (tables (mapcar #'intern (split-string (alist-get :table params ""))))
+         (vars (mapconcat (lambda (param)
+                            (pcase param
+                              (`(:var . (,var . ,val))
+                               (format (if (member var tables)
+                                           "%s:{(*x)!+1_x}%s\n"
+                                         "%s:%s\n")
+                                       var (ob-goal-value val)))))
+                          params))
+         (value (eq (alist-get :result-type params) 'value))
+         (raw (member "raw" (alist-get :result-params params))))
     (with-temp-buffer
-      (insert (format
-               (cond
-                ((and value raw) "%s%s\nsay %s")
-                (value "%s%s\nsay {l:{\"(\"+(\" \"/x)+\")\"}
+      (insert (format (cond
+                       ((and value raw) "%s%s\nsay %s")
+                       (value "%s%s\nsay {l:{\"(\"+(\" \"/x)+\")\"}
 ?[\"d\"=@x;l(o@!x;\"hline\"),o'+.x;(@x)=_@x;$x;l@o'x]}[%s]")
-                (t "%s%s\n%s"))
-               vars
-               (string-join (butlast lines) "\n")
-               (car (last lines))))
+                       (t "%s%s\n%s"))
+                      vars
+                      (string-join (butlast lines) "\n")
+                      (car (last lines))))
       (shell-command-on-region (point-min) (point-max) "goal -q" nil t)
       (goto-char (point-min))
       (if (and value (not raw)) (read (current-buffer)) (buffer-string)))))
