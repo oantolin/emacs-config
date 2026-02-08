@@ -1413,6 +1413,7 @@ if `org-store-link' is called from the #+TITLE line."
                ("x" . mastodon-views-view-lists)
                ("@" . mastodon-notifications-get-mentions))
   (:map mastodon-mode-map
+        ("C-:")
         ("{" . backward-paragraph)
         ("}" . forward-paragraph))
   :custom
