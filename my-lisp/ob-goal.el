@@ -26,7 +26,7 @@
     (with-temp-buffer
       (insert (format (cond
                        ((and value raw) "%s%s\nsay %s")
-                       (value "%s%s\nsay {l:{\"(\"+(\" \"/x)+\")\"}
+                       (value "%s%s\nsay {l:{\"(\"+(\" \"//x)+\")\"}
 ?[\"d\"=@x;l(o@!x;\"hline\"),o'+.x;(@x)=_@x;$x;l@o'x]}[%s]")
                        (t "%s%s\n%s"))
                       vars
