@@ -323,7 +323,7 @@
               meta-llama/llama-4-scout-17b-16e-instruct
               meta-llama/llama-4-maverick-17b-128e-instruct
               gemma2-9b-it))
-  (setq gptel-model 'openai/gpt-oss-120b
+  (setq gptel-model 'qwen/qwen3-32b
         gptel-backend (cdr (assoc "Groq" gptel--known-backends))))
 
 (use-package gptel-extras
