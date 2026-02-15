@@ -1177,6 +1177,11 @@ if `org-store-link' is called from the #+TITLE line."
                :link (concat "file:" (buffer-file-name))
                :description (cadar (org-collect-keywords '("TITLE"))))))))
 
+(use-package ob-python
+  :defer t
+  :custom                      ; Why is the following not the default?
+  (org-babel-python-command-nonsession python-shell-interpreter))
+
 (use-package org-config :after org) ; private package
 
 (use-package org-ql
