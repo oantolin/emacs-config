@@ -6,7 +6,8 @@
   "Return a string of K code evaluating to the given Lisp VALUE."
   (cond
    ((numberp value) (number-to-string value))
-   ((stringp value) (format (if (= (length value) 1) ",%S""%S") value))
+   ((stringp value) (let ((print-escape-newlines t))
+                      (format (if (= (length value) 1) ",%S" "%S") value)))
    ((listp value) (format "(%s)" (mapconcat #'ob-k-value value ";")))))
 
 (defun org-babel-execute:k (body params)
