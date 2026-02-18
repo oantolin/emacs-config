@@ -508,8 +508,7 @@
   ("C-c q" . scimago-copy-quartiles))
 
 (use-package embark
-  :load-path "~/code/embark"
-  ;; :ensure t
+  :ensure t
   :bind
   ("C-." . embark-act)
   ("M-." . embark-dwim)
@@ -586,7 +585,7 @@
       (embark-act arg))))
 
 (use-package embark-consult
-  :load-path "~/code/embark"
+  :ensure t
   :defer t)
 
 (use-package embark-org
