@@ -1062,7 +1062,8 @@
 
 (use-package magit
   :ensure t
-  :bind ("C-x v b d" . magit-branch-delete))
+  :bind ("C-x v b d" . magit-branch-delete)
+  :custom (magit-diff-refine-hunk 'all))
 
 (use-package markdown-mode
   :ensure t
