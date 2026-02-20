@@ -1407,6 +1407,7 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package mastodon
   :ensure t
+  :vc (:url "https://codeberg.org/martianh/mastodon.el.git" :branch "develop")
   :diminish mastodon-async-mode
   :bind
   (:prefix-map global-mastodon-map :prefix "C-c m"
