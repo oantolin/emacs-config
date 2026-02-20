@@ -1,5 +1,7 @@
 ;; ob-bqn --- Babel support for BQN  -*- lexical-binding: t; -*-
 
+(defvar org-babel-error-buffer-name)
+
 (defun ob-bqn-value (value)
   "Return a string of BQN code evaluating to the given Lisp VALUE."
   (cond
@@ -40,7 +42,8 @@ Lisp } {𝕎𝕩} %s")
                        vars
                        (string-join (butlast lines) "\n")
                        (car (last lines))))
-       t)
+       (current-buffer)
+       org-babel-error-buffer-name)
       (goto-char (point-min))
       (message "OUT«\n%s»" (buffer-string))
       (if (and value (not raw)) (read (current-buffer)) (buffer-string)))))

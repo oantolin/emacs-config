@@ -1,5 +1,7 @@
 ;; ob-k --- Babel support for ngn|growler/k  -*- lexical-binding: t; -*-
 
+(defvar org-babel-error-buffer-name)
+
 (define-derived-mode k-mode prog-mode "K") ; org insists I have a mode…
 
 (defun ob-k-value (value)
@@ -34,8 +36,10 @@ o@+(!x;.x);(@x)=_@x;$x;`C=@x;`k@x;l@o'x]}[%s]\n")
                       vars
                       (string-join (butlast lines) "\n")
                       (car (last lines))))
-      (shell-command-on-region (point-min) (point-max) "k" nil t)
-      (goto-char (point-min))
-      (if convert (read (current-buffer)) (buffer-string)))))
+      (when (zerop (shell-command-on-region
+                    (point-min) (point-max)
+                    "k" nil t org-babel-error-buffer-name t))
+        (goto-char (point-min))
+        (if convert (read (current-buffer)) (buffer-string))))))
 
 (provide 'ob-k)

@@ -1,5 +1,7 @@
 ;; ob-goal --- Babel support for Goal  -*- lexical-binding: t; -*-
 
+(defvar org-babel-error-buffer-name)
+
 (define-derived-mode goal-mode prog-mode "Goal") ; org insists I have a mode…
 
 (defun ob-goal-value (value)
@@ -32,8 +34,10 @@
                       vars
                       (string-join (butlast lines) "\n")
                       (car (last lines))))
-      (shell-command-on-region (point-min) (point-max) "goal -q" nil t)
-      (goto-char (point-min))
-      (if (and value (not raw)) (read (current-buffer)) (buffer-string)))))
+      (when (zerop (shell-command-on-region
+                    (point-min) (point-max)
+                    "goal -q" nil t org-babel-error-buffer-name t))
+        (goto-char (point-min))
+        (if (and value (not raw)) (read (current-buffer)) (buffer-string))))))
 
 (provide 'ob-goal)
