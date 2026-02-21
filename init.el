@@ -111,7 +111,7 @@
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
  ("C-;" . comment-dwim)
- ("C-z" . query-replace-regexp)
+ ("C-z" . repeat)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
  ("C-\\" . activate-transient-input-method) ; swap these two, too
