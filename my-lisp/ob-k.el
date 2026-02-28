@@ -1,6 +1,6 @@
 ;; ob-k --- Babel support for ngn|growler/k  -*- lexical-binding: t; -*-
 
-(defvar org-babel-error-buffer-name)
+(require 'ob-eval)
 
 (define-derived-mode k-mode prog-mode "K") ; org insists I have a mode…
 
@@ -14,32 +14,30 @@
 
 (defun org-babel-execute:k (body params)
   "Execute K code BODY according to PARAMS."
-  (let* ((lines (split-string body "\n"))
-         (tables (mapcar #'intern (split-string (alist-get :table params ""))))
-         (vars (mapconcat (lambda (param)
-                            (pcase param
-                              (`(:var . (,var . ,val))
-                               (format (if (member var tables)
-                                           "%s:{+(`$*x)!+1_x}%s\n"
-                                         "%s:%s\n")
-                                       var (ob-k-value val)))))
-                          params))
-         (value (eq (alist-get :result-type params) 'value))
-         (raw (member "raw" (alist-get :result-params params)))
-         (convert (and value (not raw))))
-    (with-temp-buffer
-      (insert (format (cond
-                       (convert "%s%s\n`0:{l:{\"(\",(\" \"/x),\")\"};\
+  (save-match-data
+    (string-match "\\`\\([^z-a]*\n\\)?\\(.*\\)\\'" body)
+    (let* ((tables (split-string (alist-get :table params "")))
+           (vars (mapconcat (lambda (param)
+                              (pcase param
+                                (`(:var . (,var . ,val))
+                                 (format (if (member (symbol-name var) tables)
+                                             "%s:{+(`$*x)!+1_x}%s\n"
+                                           "%s:%s\n")
+                                         var (ob-k-value val)))))
+                            params))
+           (convert
+            (and (eq (alist-get :result-type params) 'value)
+                 (not (member "raw" (alist-get :result-params params)))))
+           (result (org-babel-eval
+                    "k"
+                    (format (if convert
+                                "%s%s`0:{l:{\"(\",(\" \"/x),\")\"};\
 $[`M=@x;l(l@$!x;\"hline\"),o'+.x;`m=@x;\
-o@+(!x;.x);(@x)=_@x;$x;`C=@x;`k@x;l@o'x]}[%s]\n")
-                       (t "%s%s\n%s\n"))
-                      vars
-                      (string-join (butlast lines) "\n")
-                      (car (last lines))))
-      (when (zerop (shell-command-on-region
-                    (point-min) (point-max)
-                    "k" nil t org-babel-error-buffer-name t))
-        (goto-char (point-min))
-        (if convert (read (current-buffer)) (buffer-string))))))
+o@+(!x;.x);(@x)=_@x;$x;`C=@x;`k@x;l@o'x]}[%s]\n"
+                              "%s%s%s\n")
+                            vars
+                            (or (match-string 1 body) "")
+                            (match-string 2 body)))))
+      (if convert (car (read-from-string result)) result))))
 
 (provide 'ob-k)

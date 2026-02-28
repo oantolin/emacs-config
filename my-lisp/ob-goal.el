@@ -1,6 +1,6 @@
 ;; ob-goal --- Babel support for Goal  -*- lexical-binding: t; -*-
 
-(defvar org-babel-error-buffer-name)
+(require 'ob-eval)
 
 (define-derived-mode goal-mode prog-mode "Goal") ; org insists I have a mode…
 
@@ -13,31 +13,30 @@
 
 (defun org-babel-execute:goal (body params)
   "Execute Goal code BODY according to PARAMS."
-  (let* ((lines (split-string body "\n"))
-         (tables (mapcar #'intern (split-string (alist-get :table params ""))))
-         (vars (mapconcat (lambda (param)
-                            (pcase param
-                              (`(:var . (,var . ,val))
-                               (format (if (member var tables)
-                                           "%s:{(*x)!+1_x}%s\n"
-                                         "%s:%s\n")
-                                       var (ob-goal-value val)))))
-                          params))
-         (value (eq (alist-get :result-type params) 'value))
-         (raw (member "raw" (alist-get :result-params params))))
-    (with-temp-buffer
-      (insert (format (cond
-                       ((and value raw) "%s%s\nsay %s")
-                       (value "%s%s\nsay {l:{\"(\"+(\" \"//x)+\")\"}
+  (save-match-data
+    (string-match "\\`\\([^z-a]*\n\\)?\\(.*\\)\\'" body)
+    (let* ((tables (split-string (alist-get :table params "")))
+           (vars (mapconcat (lambda (param)
+                              (pcase param
+                                (`(:var . (,var . ,val))
+                                 (format (if (member (symbol-name var) tables)
+                                             "%s:{(*x)!+1_x}%s\n"
+                                           "%s:%s\n")
+                                         var (ob-goal-value val)))))
+                            params))
+           (value (eq (alist-get :result-type params) 'value))
+           (raw (member "raw" (alist-get :result-params params)))
+           (result
+            (org-babel-eval
+             "goal -q"
+             (format (cond
+                      ((and value raw) "%s%ssay %s")
+                      (value "%s%ssay {l:{\"(\"+(\" \"//x)+\")\"}
 ?[\"d\"=@x;l(o@!x;\"hline\"),o'+.x;(@x)=_@x;$x;l@o'x]}[%s]")
-                       (t "%s%s\n%s"))
-                      vars
-                      (string-join (butlast lines) "\n")
-                      (car (last lines))))
-      (when (zerop (shell-command-on-region
-                    (point-min) (point-max)
-                    "goal -q" nil t org-babel-error-buffer-name t))
-        (goto-char (point-min))
-        (if (and value (not raw)) (read (current-buffer)) (buffer-string))))))
+                      (t "%s%s\n%s"))
+                     vars
+                     (or (match-string 1 body) "")
+                     (match-string 2 body)))))
+      (if (or raw (not value)) result (car (read-from-string result))))))
 
 (provide 'ob-goal)
