@@ -301,7 +301,6 @@
    '((markdown-mode . "> ") (org-mode . "> ") (text-mode . "> ")))
   (gptel-include-reasoning nil)
   :config
-  (pop gptel--known-backends) ; remove the default ChatGPT backend
   (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
   (gptel-make-openai "Groq"
     :host "api.groq.com"
