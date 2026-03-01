@@ -1106,7 +1106,6 @@
   (org-highlight-latex-and-related '(latex script entities))
   (org-export-with-smart-quotes t)
   (org-confirm-babel-evaluate nil)
-  (org-export-allow-bind-keywords t)
   (org-export-async-init-file "~/.emacs.d/my-lisp/org-async-init.el")
   (org-special-ctrl-a/e t)
   (org-hide-emphasis-markers t)
