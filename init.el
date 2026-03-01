@@ -167,17 +167,14 @@
 
 ;;; packages
 
-(use-package modus-themes
+(use-package doric-themes
+  :ensure t
   :bind
-  ("C-c x b" . modus-themes-toggle)
+  ("C-c x b" . doric-themes-toggle)
   :custom
-  (modus-themes-italic-constructs t)
-  (modus-themes-mixed-fonts t)
-  (modus-themes-bold-constructs t)
-  (modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
+  (doric-themes-to-toggle '(doric-marble doric-obsidian))
   :init
-  (require-theme 'modus-themes)
-  (modus-themes-load-theme (car modus-themes-to-toggle)))
+  (doric-themes-select (car doric-themes-to-toggle)))
 
 (use-package spacious-padding
   :ensure t
