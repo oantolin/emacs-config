@@ -168,17 +168,16 @@
 ;;; packages
 
 (use-package modus-themes
-  :init
-  (require-theme 'modus-themes)
   :bind
   ("C-c x b" . modus-themes-toggle)
   :custom
   (modus-themes-italic-constructs t)
   (modus-themes-mixed-fonts t)
-  (modus-themes-bold-constructs nil)
+  (modus-themes-bold-constructs t)
   (modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
-  :config
-  (modus-themes-load-theme 'modus-operandi-tinted))
+  :init
+  (require-theme 'modus-themes)
+  (modus-themes-load-theme (car modus-themes-to-toggle)))
 
 (use-package spacious-padding
   :ensure t
