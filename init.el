@@ -1419,6 +1419,7 @@ if `org-store-link' is called from the #+TITLE line."
                ("@" . mastodon-notifications-get-mentions))
   (:map mastodon-mode-map
         ("C-:")
+        ("*" . mastodon-toot-pin-toot-toggle)
         ("{" . backward-paragraph)
         ("}" . forward-paragraph))
   :custom
@@ -1429,6 +1430,7 @@ if `org-store-link' is called from the #+TITLE line."
   (mastodon-mode . variable-pitch-mode)
   (mastodon-toot-mode . turn-on-visual-line-mode)
   :config
+  (keymap-unset mastodon-mode-map "i" t) ; I need this to resize images
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top)))
   (define-advice mastodon-tl--propertize-img-str-or-url
