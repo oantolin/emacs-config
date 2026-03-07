@@ -1431,11 +1431,7 @@ if `org-store-link' is called from the #+TITLE line."
   :config
   (keymap-unset mastodon-mode-map "i" t) ; I need this to resize images
   (defun mastodon-recenter-positions ()
-    (setq-local recenter-positions '(bottom middle top)))
-  (define-advice mastodon-tl--propertize-img-str-or-url
-      (:filter-return (str) shr-alt)
-    "Duplicate the `image-description' of STR in the `shr-alt' text property."
-    (propertize str 'shr-alt (get-text-property 0 'image-description str))))
+    (setq-local recenter-positions '(bottom middle top))))
 
 (use-package lem
   :ensure t
