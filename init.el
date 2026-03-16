@@ -179,6 +179,13 @@
   (modus-themes-bold-constructs t)
   (modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)))
 
+(use-package auto-dark
+  :ensure t
+  :custom
+  (auto-dark-themes '((modus-vivendi-tinted) (modus-operandi-tinted)))
+  :init
+  (auto-dark-mode))
+
 (use-package spacious-padding
   :ensure t
   :custom
