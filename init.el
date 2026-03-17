@@ -181,6 +181,7 @@
 
 (use-package auto-dark
   :ensure t
+  :diminish
   :custom
   (auto-dark-themes '((modus-vivendi-tinted) (modus-operandi-tinted)))
   :init
