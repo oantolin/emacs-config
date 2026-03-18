@@ -40,13 +40,21 @@
                :description "the Python program to run"))
  :category "computation")
 
-(gptel-make-preset "translate"
-  :system (concat
-           "Please translate the text; include the name of the "
-           "original language in the format "
-           "'[ORIGINAL_LANGUAGE] TRANSLATION'."))
+(gptel-make-preset 'tr-en
+  :system
+  "Please translate the text; include the name of the original language in
+the format '[ORIGINAL_LANGUAGE] TRANSLATION'.")
 
-(gptel-make-preset "python"
+(gptel-make-preset 'tr-es
+  :system
+  "Por favor, traduzca el texto; incluya el nombre del idioma
+original en el formato '[IDIOMA_ORIGINAL] TRADUCCIÓN'.")
+
+(gptel-make-preset 'msc
+  :system "What MSC2020 (Mathematics Subject Classifications) would you use for a
+talk with the following abstract?")
+           
+(gptel-make-preset 'py
   :system "If necessary, please write and run a Python script to answer this."
   :tools '("run_python_code"))
 
