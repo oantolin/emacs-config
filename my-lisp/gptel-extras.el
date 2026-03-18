@@ -11,7 +11,7 @@
 (defun gptel-extras-define (term)
   "Use an LLM to define a TERM."
   (interactive "sLookup: ")
-  (when (and (string= term "") (null gptel-context--alist))
+  (when (and (string= term "") (null gptel-context))
     (if (use-region-p)
         (setq term (buffer-substring-no-properties
                     (region-beginning) (region-end)))
@@ -42,13 +42,13 @@
 
 (gptel-make-preset 'tr-en
   :system
-  "Please translate the text; include the name of the original language in
-the format '[ORIGINAL_LANGUAGE] TRANSLATION'.")
+  "Please translate the text to English; include the name of the original
+language in the format '[ORIGINAL_LANGUAGE] TRANSLATED_TEXT'.")
 
 (gptel-make-preset 'tr-es
   :system
-  "Por favor, traduzca el texto; incluya el nombre del idioma
-original en el formato '[IDIOMA_ORIGINAL] TRADUCCIÓN'.")
+  "Por favor, traduzca el texto al español; incluya el nombre del idioma
+original en el formato '[IDIOMA_ORIGINAL] TEXTO_TRADUCIDO'.")
 
 (gptel-make-preset 'msc
   :system "What MSC2020 (Mathematics Subject Classifications) would you use for a
