@@ -647,8 +647,6 @@
   (consult-narrow-key "<")
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref)
-  :hook
-  ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
   :config
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
