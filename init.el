@@ -20,10 +20,6 @@
 
 (set-face-attribute 'variable-pitch nil :family "Noto Sans")
 
-(custom-set-faces
- '(Info-quoted ((t :inherit fixed-pitch)))
- '(fringe ((t :background unspecified))))
-
 (set-fontset-font "fontset-default" 'emoji
                   (font-spec :family "Noto Color Emoji"))
 
@@ -174,6 +170,8 @@
   :bind
   ("C-c x b" . modus-themes-toggle)
   :custom
+  (modus-themes-common-palette-overrides
+   '((fringe unspecified)))
   (modus-themes-italic-constructs t)
   (modus-themes-mixed-fonts t)
   (modus-themes-bold-constructs t)
@@ -208,10 +206,13 @@
   :custom (imenu-space-replacement nil))
 
 (use-package info
+  :defer t
   :bind
   (:map Info-mode-map
         ("{" . backward-paragraph)
-        ("}" . forward-paragraph)))
+        ("}" . forward-paragraph))
+  :custom-face
+  (Info-quoted ((t :inherit fixed-pitch))))
 
 (use-package custom
   :hook
@@ -769,8 +770,6 @@
 
 (use-package olivetti
   :ensure t
-  :custom-face
-  (olivetti-fringe ((t :background unspecified)))
   :bind
   ("C-c x o" . olivetti-mode))
 
