@@ -29,8 +29,8 @@
    "arXiv"
    :face 'org-link
    :follow (lambda (path in-emacs)
-             (when-let (((string-match arxiv-regexp path))
-                        (url (format arxiv-url-format (match-string 1 path))))
+             (when-let* (((string-match arxiv-regexp path))
+                         (url (format arxiv-url-format (match-string 1 path))))
                (if in-emacs (eww url) (browse-url url))))
    :export (org-extras--link-exporter
             arxiv-regexp arxiv-url-format "arXiv:%s" "arXiv:%s [%s]")))

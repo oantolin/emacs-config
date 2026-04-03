@@ -32,8 +32,8 @@
 (defun remove-email-from-ecomplete (email)
   "Remove email address from ecomplete's database."
   (interactive (list (ecomplete--read-address)))
-  (when-let ((email (cdr (email--name+address email))) 
-             (entry (ecomplete-get-item 'mail email)))
+  (when-let* ((email (cdr (email--name+address email))) 
+              (entry (ecomplete-get-item 'mail email)))
     (setf (cdr (assq 'mail ecomplete-database))
           (remove entry (cdr (assq 'mail ecomplete-database))))
     (ecomplete-save)))
