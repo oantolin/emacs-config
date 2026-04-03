@@ -469,6 +469,8 @@
   :init
   (marginalia-mode)
   :config
+  (cl-pushnew '(org-goto . org-heading) marginalia-command-categories)
+  (cl-pushnew '(org-refile . org-heading) marginalia-command-categories)
   (defun marginalia--file-owner (attrs) ; Only display UID
     "Return file owner given ATTRS."
     (let ((uid (file-attribute-user-id attrs)))
