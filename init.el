@@ -161,7 +161,7 @@
                (lambda (pkg) (symbol-name (package-desc-name pkg)))))
       (apply fn args))))
 
-;;; packages
+;;; gui packages
 
 (use-package modus-themes
   :init
@@ -200,6 +200,12 @@
 (use-package face-remap
   :defer t
   :diminish buffer-face-mode)
+
+(use-package kkp
+  :ensure t
+  :hook (tty-setup . global-kkp-mode))
+
+;;; packages
 
 (use-package imenu
   :defer t
