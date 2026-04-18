@@ -14,6 +14,8 @@
 (defun show-help ()
   "Show the *Help* buffer."
   (interactive)
-  (display-buffer "*Help*"))
+  (if help-window-select
+      (pop-to-buffer "*Help*")
+    (display-buffer "*Help*")))
 
 (provide 'help-extras)

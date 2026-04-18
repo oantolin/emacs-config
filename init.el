@@ -75,6 +75,7 @@
  truncate-lines t
  history-delete-duplicates t
  kill-do-not-save-duplicates t
+ help-window-select t
  default-input-method "TeX"
  default-transient-input-method "TeX"
  password-cache-expiry 300
