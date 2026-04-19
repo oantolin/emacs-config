@@ -1349,8 +1349,8 @@ if `org-store-link' is called from the #+TITLE line."
   (message-send . message-lint)
   :config
   (defvar-keymap cycle-from-address-repeat-map
-    "e" #'cycle-from-address)
-  (put 'cycle-from-address 'repeat-map 'cycle-from-address-repeat-map))
+    :repeat t
+    "e" #'cycle-from-address))
 
 ;;; applications
 
