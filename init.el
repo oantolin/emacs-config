@@ -587,7 +587,8 @@
                  markdown-insert-italic
                  markdown-insert-bold
                  cdlatex-math-modify
-                 TeX-font))
+                 TeX-font
+                 send-to-comint))
     (push #'embark--mark-target (alist-get cmd embark-around-action-hooks)))
   (push #'embark--xref-push-marker
         (alist-get 'find-file embark-pre-action-hooks))
