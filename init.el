@@ -1059,18 +1059,7 @@
 (use-package smerge-mode
   :defer t
   :custom
-  (smerge-command-prefix "\C-xc")
-  :config
-  (named-let process ((keymap smerge-basic-map))
-    (map-keymap
-     (lambda (_key cmd)
-       (if (keymapp cmd)
-           (process cmd)
-         (when (consp cmd)
-           (setq cmd (cdr cmd)))
-         (when (symbolp cmd)
-           (put cmd 'repeat-map 'smerge-basic-map))))
-     keymap)))
+  (smerge-command-prefix "\C-xc"))
 
 (use-package magit
   :ensure t
@@ -1586,4 +1575,3 @@ if `org-store-link' is called from the #+TITLE line."
 
 (when (executable-find "agda")
   (load-file (shell-command-to-string "agda --emacs-mode locate")))
-
