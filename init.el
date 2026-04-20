@@ -1163,8 +1163,8 @@
                               (?' "'") (?« "(»") (?» ")«"))
              do (modify-syntax-entry ch cl org-mode-syntax-table)))
   (define-advice org-open-at-point-global
-      (:around (fn) when-in-org-do-as-the-organs-do)
-    (if (derived-mode-p 'org-mode) (org-open-at-point) (funcall fn)))
+      (:around (fn &optional arg) when-in-org-do-as-the-organs-do)
+    (if (derived-mode-p 'org-mode) (org-open-at-point arg) (funcall fn arg)))
   (org-link-set-parameters
    "org-title"
    :store (defun store-org-title-link ()
