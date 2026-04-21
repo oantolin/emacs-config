@@ -598,7 +598,13 @@
     (interactive "P")
     (with-current-buffer "*Messages*"
       (goto-char (1- (point-max)))
-      (embark-act arg))))
+      (embark-act arg)))
+  (cl-defun embark--goto-location (&key target &allow-other-keys)
+    "Jump to location of the TARGET."
+    (goto-char (car (consult--get-location target))))
+  (dolist (cmd '(kmacro-end-or-call-macro
+                 kmacro-end-and-call-macro))
+    (push #'embark--goto-location (alist-get cmd embark-pre-action-hooks))))
 
 (use-package embark-consult
   :ensure t
