@@ -35,7 +35,8 @@
 (use-package bind-key
   :bind ("C-h y" . describe-personal-keybindings))
 
-(setopt use-package-vc-prefer-newest t)
+(setopt use-package-vc-prefer-newest t
+        package-install-upgrade-built-in t)
 
 (add-to-list 'load-path "~/.emacs.d/my-lisp/")
 (add-to-list 'load-path "~/.private/")
