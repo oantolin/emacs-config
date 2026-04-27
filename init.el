@@ -450,6 +450,7 @@
         ("C-M-j" . consult-dir-jump-file)
         ("M-q" . vertico-quick-exit))
   (:map vertico-multiform-map
+        ("M-F") ("M-B")                     ; I use these for WORD motions
         ("M-H" . vertico-multiform-flat)    ; H for horizontal
         ("M-P" . vertico-multiform-buffer)) ; P for panoramic
   :custom
@@ -465,9 +466,7 @@
   (vertico-mode)
   :config
   (defalias 'vertico-really-exit-input #'exit-minibuffer)
-  (vertico-multiform-mode) ; I use these for text editing
-  (keymap-unset vertico-multiform-map "M-F")
-  (keymap-unset vertico-multiform-map "M-B"))
+  (vertico-multiform-mode))
 
 (use-package marginalia
   :ensure t
@@ -1429,7 +1428,7 @@ if `org-store-link' is called from the #+TITLE line."
                ("x" . mastodon-views-view-lists)
                ("@" . mastodon-notifications-get-mentions))
   (:map mastodon-mode-map
-        ("C-:")
+        ("C-:") ("i")
         ("*" . mastodon-toot-pin-toot-toggle)
         ("{" . backward-paragraph)
         ("}" . forward-paragraph))
@@ -1442,7 +1441,6 @@ if `org-store-link' is called from the #+TITLE line."
   (mastodon-mode . variable-pitch-mode)
   (mastodon-toot-mode . turn-on-visual-line-mode)
   :config
-  (keymap-unset mastodon-mode-map "i" t) ; I need this to resize images
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top))))
 
