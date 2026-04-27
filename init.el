@@ -33,7 +33,7 @@
 (use-package diminish :ensure t :defer t)
 
 (use-package bind-key
-  :bind ("C-h y" . describe-personal-keybindings))
+  :bind (:map help-map ("y" . describe-personal-keybindings)))
 
 (setopt use-package-vc-prefer-newest t
         package-install-upgrade-built-in t)
@@ -386,7 +386,7 @@
 
 (use-package help-extras
   :bind
-  ("C-h h" . show-help)
+  (:map help-map ("h" . show-help))
   :commands cotd)
 
 (use-package window-extras
@@ -528,10 +528,11 @@
   :bind
   ("C-." . embark-act)
   ("M-." . embark-dwim)
-  ("C-h b" . embark-bindings)
-  ("C-h B" . embark-bindings-at-point)
-  ("C-h M" . embark-bindings-in-keymap)
-  ("C-h E" . embark-on-last-message)
+  (:map help-map
+        ("b" . embark-bindings)
+        ("B" . embark-bindings-at-point)
+        ("M" . embark-bindings-in-keymap)
+        ("E" . embark-on-last-message))
   (:map completion-list-mode-map
         ("." . embark-act))
   (:map embark-collect-mode-map
