@@ -172,8 +172,7 @@
   :bind
   ("C-c x b" . modus-themes-toggle)
   :custom
-  (modus-themes-common-palette-overrides
-   '((fringe unspecified)))
+  (modus-themes-common-palette-overrides '((fringe unspecified)))
   (modus-themes-italic-constructs t)
   (modus-themes-mixed-fonts t)
   (modus-themes-bold-constructs t)
