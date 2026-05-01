@@ -1234,10 +1234,8 @@ if `org-store-link' is called from the #+TITLE line."
   (:map toggle-map
         ("m" . org-modern-mode))
   :custom
-  (org-modern-star 'stars)
   (org-modern-checkbox
    '((?X . "🞕") (?- . "⧄") (?\s . "🞎")))
-  (org-modern-replace-stars "🟋🟉🟄🟀○□▵")
   :custom-face
   (org-modern-label ((t (:inherit fixed-pitch))))
   :config
