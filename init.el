@@ -1237,7 +1237,7 @@ if `org-store-link' is called from the #+TITLE line."
   (org-modern-checkbox
    '((?X . "🞕") (?- . "⧄") (?\s . "🞎")))
   :custom-face
-  (org-modern-label ((t (:inherit fixed-pitch))))
+  (org-modern-label ((t (:height 0.8 :inherit fixed-pitch))))
   :config
   (global-org-modern-mode))
 
