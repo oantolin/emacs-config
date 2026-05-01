@@ -1256,9 +1256,7 @@ if `org-store-link' is called from the #+TITLE line."
   (jinx-languages "en es")
   :bind
   ("M-$" . jinx-correct)
-  ("C-M-$" . jinx-languages)
-  (:map jinx-overlay-map ; I use M-n & M-p for isearch-{next/previous}
-        ("M-n") ("M-p")))
+  ("C-M-$" . jinx-languages))
   
 (use-package try :ensure t :defer t)
 
