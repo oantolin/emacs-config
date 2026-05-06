@@ -517,6 +517,7 @@
   :bind
   ("C-." . embark-act)
   ("M-." . embark-dwim)
+  ("S-SPC" . embark-select)
   (:map help-map
         ("b" . embark-bindings)
         ("B" . embark-bindings-at-point)
@@ -541,7 +542,7 @@
         ("[" . insert-pair-map)
         ("=" . quick-calc))
   (:map embark-heading-map
-        ("@" . outline-mark-subtree) ("C-SPC"))        
+        ("SPC" . outline-mark-subtree) ("C-SPC"))        
   (:map embark-email-map
         ("+" . add-email-to-ecomplete)
         ("\\" . remove-email-from-ecomplete))
@@ -551,7 +552,7 @@
         ("a" . arXiv-map)
         ("m" . mastodon-url-lookup))
   (:map embark-general-map
-        ("@" . mark) ("C-SPC")
+        ("SPC" . mark) ("C-SPC")
         ("D" . gptel-extras-define))
   :custom
   (embark-quit-after-action nil)
