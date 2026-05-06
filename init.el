@@ -1212,15 +1212,15 @@ if `org-store-link' is called from the #+TITLE line."
         ([remap embark-collect])
         :prefix "C-:"
         :prefix-map org-ql-syntax-map
-        ("t" . "todo:")
-        ("C" . "clocked:")
-        ("h" . "heading:")
-        (":" . "tags:")
-        ("s" . "src:")
-        ("T" . "ts:")
-        ("p" . "priority:")
-        ("c" . "category:")
-        ("l" . "level:")))
+        ("t" . (lambda () "todo:" (interactive) (insert "todo:")))
+        ("C" . (lambda () "clocked:" (interactive) (insert "clocked:")))
+        ("h" . (lambda () "heading:" (interactive) (insert "heading:")))
+        (":" . (lambda () "tags:" (interactive) (insert "tags:")))
+        ("s" . (lambda () "src:" (interactive) (insert "src:")))
+        ("T" . (lambda () "ts:" (interactive) (insert "ts:")))
+        ("p" . (lambda () "priority:" (interactive) (insert "priority:")))
+        ("c" . (lambda () "category:" (interactive) (insert "category:")))
+        ("l" . (lambda () "level:" (interactive) (insert "level:")))))
 
 (use-package org-indent
   :bind
