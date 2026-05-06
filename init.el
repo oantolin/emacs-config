@@ -481,13 +481,6 @@
       (when (/= (user-uid) uid)
         (or (user-login-name uid) uid)))))
 
-(use-package corfu
-  :ensure t
-  :bind
-  (:map corfu-map ("SPC" . corfu-insert-separator))
-  :init
-  (global-corfu-mode))
-
 (use-package cape
   :ensure t
   :bind ("C-'" . cape-prefix-map)
@@ -658,6 +651,7 @@
   (:map isearch-mode-map
         ("M-g l" . consult-line))
   :custom
+  (completion-in-region-function #'consult-completion-in-region)
   (register-preview-function #'consult-register-format)
   (consult-narrow-key "<")
   (xref-show-xrefs-function #'consult-xref)
