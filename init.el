@@ -1210,17 +1210,22 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   (:map org-ql-completing-read-map
         ([remap embark-collect])
-        :prefix "C-:"
-        :prefix-map org-ql-syntax-map
-        ("t" . (lambda () "todo:" (interactive) (insert "todo:")))
-        ("C" . (lambda () "clocked:" (interactive) (insert "clocked:")))
-        ("h" . (lambda () "heading:" (interactive) (insert "heading:")))
-        (":" . (lambda () "tags:" (interactive) (insert "tags:")))
-        ("s" . (lambda () "src:" (interactive) (insert "src:")))
-        ("T" . (lambda () "ts:" (interactive) (insert "ts:")))
-        ("p" . (lambda () "priority:" (interactive) (insert "priority:")))
-        ("c" . (lambda () "category:" (interactive) (insert "category:")))
-        ("l" . (lambda () "level:" (interactive) (insert "level:")))))
+        ("C-:" . org-ql-syntax-map))
+  :config
+  (defmacro inserter (string)
+    "Command that inserts given STRING."
+    `(lambda () ,string (interactive) (insert ,string)))
+  (defvar-keymap org-ql-syntax-map
+    "t" (inserter "todo:")
+    "C" (inserter "clocked:")
+    "h" (inserter "heading:")
+    ":" (inserter "tags:")
+    "s" (inserter "src:")
+    "T" (inserter "ts:")
+    "p" (inserter "priority:")
+    "c" (inserter "category:")
+    "l" (inserter "level:"))
+  (fset 'org-ql-syntax-map org-ql-syntax-map))
 
 (use-package org-indent
   :bind
