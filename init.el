@@ -1210,7 +1210,7 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   (:map org-ql-completing-read-map
         ([remap embark-collect])
-        ("C-:" . org-ql-syntax-map))
+        ("C-;" . org-ql-syntax-map))
   :config
   (defmacro inserter (string)
     "Command that inserts given STRING."
