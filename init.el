@@ -622,27 +622,29 @@
   :ensure t
   :bind
   ("M-y" . consult-yank-pop)
-  ("M-g l" . consult-line)
-  ("M-g L" . consult-line-multi)
-  ("M-g i" . consult-imenu)
-  ("M-g o" . consult-outline)
-  ("M-g a" . consult-org-agenda)
-  ("M-g I" . consult-imenu-multi)
-  ("M-g m" . consult-mark)
-  ("M-g k" . consult-global-mark)
-  ("M-s g" . consult-grep)
-  ("M-s G" . consult-git-grep)
-  ("M-s r" . consult-ripgrep)
-  ("M-s i" . consult-info)
-  ("M-g f" . consult-find)
   ("M-X" . consult-mode-command)
   ("C-c b" . consult-buffer)
   ("C-c 4 b" . consult-buffer-other-window)
-  ("M-s K" . consult-keep-lines)
-  ("M-s F" . consult-focus-lines)
   ("C->" . consult-register-store)
   ("C-," . consult-register-load)
   ("C-M-," . consult-register)
+  (:map goto-map
+        ("l" . consult-line)
+        ("L" . consult-line-multi)
+        ("i" . consult-imenu)
+        ("o" . consult-outline)
+        ("a" . consult-org-agenda)
+        ("I" . consult-imenu-multi)
+        ("m" . consult-mark)
+        ("k" . consult-global-mark)
+        ("f" . consult-find))
+  (:map search-map
+        ("g" . consult-grep)
+        ("G" . consult-git-grep)
+        ("r" . consult-ripgrep)
+        ("i" . consult-info)
+        ("K" . consult-keep-lines)
+        ("F" . consult-focus-lines))
   (:map minibuffer-local-map
         ("M-h" . consult-history)
         ("M-r") ("M-s"))
@@ -779,7 +781,8 @@
 (use-package olivetti
   :ensure t
   :bind
-  ("C-c x o" . olivetti-mode))
+  (:map toggle-map
+        ("o" . olivetti-mode)))
 
 (use-package shr
   :bind
@@ -1061,7 +1064,9 @@
 
 (use-package magit
   :ensure t
-  :bind ("C-x v b d" . magit-branch-delete)
+  :bind
+  (:map vc-prefix-map
+        ("b d" . magit-branch-delete))
   :custom (magit-diff-refine-hunk 'all))
 
 (use-package markdown-mode
@@ -1188,15 +1193,17 @@ if `org-store-link' is called from the #+TITLE line."
 (use-package org-ql
   :ensure t
   :bind
-  ("M-s q" . org-ql-find)
-  ("M-s n" . org-ql-find-in-org-directory)
-  ("M-s s" . org-ql-search)
-  ("M-s v" . org-ql-view))
+  (:map search-map
+        ("q" . org-ql-find)
+        ("n" . org-ql-find-in-org-directory)
+        ("s" . org-ql-search)
+        ("v" . org-ql-view)))
 
 (use-package org-ql-usual-files
   :bind
-  ("M-s u" . org-ql-usual-files-find)
-  ("M-s l" . org-ql-usual-files-open-link))
+  (:map search-map
+        ("u" . org-ql-usual-files-find)
+        ("l" . org-ql-usual-files-open-link)))
 
 (use-package org-ql-completing-read
   :defer t
