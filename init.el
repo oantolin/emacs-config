@@ -1443,6 +1443,8 @@ if `org-store-link' is called from the #+TITLE line."
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top))))
 
+(use-package lem-imenu :commands lem-imenu-setup)
+
 (use-package lem
   :ensure t
   :bind
@@ -1452,11 +1454,12 @@ if `org-store-link' is called from the #+TITLE line."
         ("}" . forward-paragraph))
   :hook
   (lem-mode . variable-pitch-mode)
+  (lem-mode . lem-imenu-setup)
   :custom
   (lem-highlight-current-item nil)
   (lem-default-listing-type "Subscribed")
   (lem-compose-autocomplete nil))
-  
+
 (use-package fedi-config :after (:any mastodon lem)) ; private package
 
 ;;; major modes for programming languages
