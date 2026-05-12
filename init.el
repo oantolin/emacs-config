@@ -517,7 +517,6 @@
   :bind
   ("C-." . embark-act)
   ("M-." . embark-dwim)
-  ("S-SPC" . embark-select)
   (:map help-map
         ("b" . embark-bindings)
         ("B" . embark-bindings-at-point)
@@ -552,7 +551,8 @@
         ("a" . arXiv-map)
         ("m" . mastodon-url-lookup))
   (:map embark-general-map
-        ("SPC" . mark) ("C-SPC")
+        ("SPC" . mark)
+        ("C-SPC" . embark-select)
         ("D" . gptel-extras-define))
   :custom
   (embark-quit-after-action nil)
