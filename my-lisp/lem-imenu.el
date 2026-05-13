@@ -1,5 +1,7 @@
 ;; lem-imenu --- imenu support for lem   -*- lexical-binding: t; -*-
 
+(require 'lem)
+
 (defun lem-imenu--line-at-point ()      ; also defined in shr-heading, dedup?
   "Return the current line."
   (buffer-substring-no-properties
