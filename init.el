@@ -88,6 +88,7 @@
  revert-without-query '("")
  recenter-positions '(top middle bottom)
  display-time-default-load-average nil
+ display-time-mail-string ""
  native-comp-async-report-warnings-errors 'silent
  grep-use-headings t)
 
