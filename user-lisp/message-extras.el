@@ -9,6 +9,7 @@
 ;; private configuration package.
 (defvar all-user-mail-addresses)
 
+;;;###autoload
 (defun cycle-from-address ()
   "Cycle between my email addresses."
   (interactive)
@@ -25,6 +26,7 @@
                (elt emails (mod (1+ (seq-position emails from))
                                 (length emails))))))))
 
+;;;###autoload
 (defun set-smtp-server ()
   "Set the stmp server according to the from field.
 Add to `message-send-hook'."
@@ -37,6 +39,7 @@ Add to `message-send-hook'."
           smtpmail-stream-type  (plist-get server :type)
           smtpmail-smtp-service (plist-get server :port))))
 
+;;;###autoload
 (defun message-lint ()
   "Check for missing subject or attachments.
 Add to `message-send-hook'."

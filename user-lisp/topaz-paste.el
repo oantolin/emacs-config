@@ -6,6 +6,7 @@
 ;; Since both Base64 and LZMA are pretty standard this means you don't
 ;; actually need the website to generate a URL!
 
+;;;###autoload
 (defun topaz-paste-region (begin end)
   "Save topaz paste URL for region contents on the kill-ring."
   (interactive "r")
@@ -18,6 +19,7 @@
                                  nil standard-output)))))
   (message "topaz paste url saved"))
 
+;;;###autoload
 (defun topaz-paste-buffer ()
   "Save topaz paste URL for buffer contents on the kill-ring."
   (interactive)

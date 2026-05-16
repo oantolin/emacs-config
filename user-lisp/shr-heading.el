@@ -2,6 +2,7 @@
 
 (require 'text-property-search)
 
+;;;###autoload
 (defun shr-heading-next (&optional arg)
   "Move forward by ARG headings (any h1-h4).
 If ARG is negative move backwards, ARG defaults to 1."
@@ -25,6 +26,7 @@ If ARG is negative move backwards, ARG defaults to 1."
     (beginning-of-line)
     (point)))
 
+;;;###autoload
 (defun shr-heading-previous (&optional arg)
   "Move backward by ARG headings (any h1-h4).
 If ARG is negative move forwards instead, ARG defaults to 1."
@@ -35,6 +37,7 @@ If ARG is negative move forwards instead, ARG defaults to 1."
   "Return the current line."
   (buffer-substring (line-beginning-position) (line-end-position)))
 
+;;;###autoload
 (defun shr-heading-setup-imenu ()
   "Setup imenu for h1-h4 headings in eww buffer.
 Add this function to appropriate major mode hooks such as
@@ -45,12 +48,10 @@ Add this function to appropriate major mode hooks such as
 
 (defvar-keymap shr-heading-repeat-map
   :doc "Keymap used to repeat shr heading key sequences. Used in `repeat-mode'."
+  :repeat t
   "n" #'shr-heading-next
   "C-n" #'shr-heading-next
   "p" #'shr-heading-previous
   "C-p" #'shr-heading-previous)
-
-(put 'shr-heading-next 'repeat-map 'shr-heading-repeat-map)
-(put 'shr-heading-previous 'repeat-map 'shr-heading-repeat-map)
 
 (provide 'shr-heading)

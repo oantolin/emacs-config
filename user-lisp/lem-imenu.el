@@ -13,6 +13,7 @@
     (lem-prev-item)
     (/= pt (point))))
 
+;;;###autoload
 (defun lem-imenu-setup ()
   "Setup imenu in lem buffers.
 Add this function to `lem-mode-hook'."

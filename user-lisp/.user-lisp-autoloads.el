@@ -24,7 +24,28 @@
 
 ;;; Generated autoloads from arXiv.el
 
-(register-definition-prefixes "arXiv" '("arXiv-"))
+(autoload 'arXiv-pdf "arXiv"
+"Open the PDF version of PAPER from the arXiv in Emacs.
+A ragtag bunch of ad hoc formats are recognized for PAPER.
+If EXTERNAL is non-nil use an external browser.
+
+(fn PAPER &optional EXTERNAL)" t)
+(autoload 'arXiv-copy-url "arXiv"
+"Copy PAPER's URL to the kill-ring.
+
+(fn PAPER)" t)
+(autoload 'arXiv-show "arXiv"
+"Popup a buffer with the title, authors and abstract of PAPER.
+A ragtag bunch of ad hoc formats are recognized for PAPER.
+
+(fn PAPER)" t)
+(autoload 'arXiv-capture "arXiv"
+"Capture Org entry for arXiv PAPER at point.
+(This depends on the `org-capture' template \"a\" just inserting
+the kill ring head. 😬)
+
+(fn PAPER)" t)
+(register-definition-prefixes "arXiv" '("arXiv--"))
 
 
 ;;; Generated autoloads from block-undo.el
@@ -59,12 +80,39 @@
 
 ;;; Generated autoloads from ecomplete-extras.el
 
-(register-definition-prefixes "ecomplete-extras" '("add-email-to-ecomplete" "compose-mail-to" "ecomplete--read-address" "email--name+address" "remove-email-from-ecomplete"))
+(autoload 'add-email-to-ecomplete "ecomplete-extras"
+"Add email address to ecomplete's database.
+
+(fn EMAIL)" t)
+(autoload 'remove-email-from-ecomplete "ecomplete-extras"
+"Remove email address from ecomplete's database.
+
+(fn EMAIL)" t)
+(autoload 'compose-mail-to "ecomplete-extras"
+"Compose email to ADDRESS from ecomplete's database.
+
+(fn ADDRESS)" t)
+(register-definition-prefixes "ecomplete-extras" '("ecomplete--read-address" "email--name+address"))
 
 
 ;;; Generated autoloads from eshell-extras.el
 
-(register-definition-prefixes "eshell-extras" '("eshell" "interactive-cd"))
+(autoload 'interactive-cd "eshell-extras"
+"Prompt for a directory and cd to it.
+
+(fn DIR)" t)
+(autoload 'eshell/for-each "eshell-extras"
+"Run command once for each argument.
+
+(fn CMD &rest ARGS)")
+(autoload 'eshell/in-term "eshell-extras"
+"Run shell command in term buffer.
+
+(fn PROG &rest ARGS)")
+(autoload 'eshell-bookmark-jump "eshell-extras"
+"Default bookmark handler for Eshell buffers.
+
+(fn BOOKMARK)")
 
 
 ;;; Generated autoloads from eval-region-advice.el
@@ -84,7 +132,11 @@
 
 ;;; Generated autoloads from help-extras.el
 
-(register-definition-prefixes "help-extras" '("command-of-the-day" "cotd" "show-help"))
+(autoload 'command-of-the-day "help-extras"
+"Show the documentation for a random command." t)
+(defalias 'cotd #'command-of-the-day)
+(autoload 'show-help "help-extras"
+"Show the *Help* buffer." t)
 
 
 ;;; Generated autoloads from isearch-extras.el
@@ -94,7 +146,10 @@
 
 ;;; Generated autoloads from lem-imenu.el
 
-(register-definition-prefixes "lem-imenu" '("lem-imenu-"))
+(autoload 'lem-imenu-setup "lem-imenu"
+"Setup imenu in lem buffers.
+Add this function to `lem-mode-hook'.")
+(register-definition-prefixes "lem-imenu" '("lem-imenu--"))
 
 
 ;;; Generated autoloads from man-help.el
@@ -104,7 +159,14 @@
 
 ;;; Generated autoloads from message-extras.el
 
-(register-definition-prefixes "message-extras" '("cycle-from-address" "message-lint" "set-smtp-server"))
+(autoload 'cycle-from-address "message-extras"
+"Cycle between my email addresses." t)
+(autoload 'set-smtp-server "message-extras"
+"Set the stmp server according to the from field.
+Add to `message-send-hook'.")
+(autoload 'message-lint "message-extras"
+"Check for missing subject or attachments.
+Add to `message-send-hook'.")
 
 
 ;;; Generated autoloads from narrow-extras.el
@@ -139,12 +201,79 @@
 
 ;;; Generated autoloads from shr-heading.el
 
+(autoload 'shr-heading-next "shr-heading"
+"Move forward by ARG headings (any h1-h4).
+If ARG is negative move backwards, ARG defaults to 1.
+
+(fn &optional ARG)" t)
+(autoload 'shr-heading-previous "shr-heading"
+"Move backward by ARG headings (any h1-h4).
+If ARG is negative move forwards instead, ARG defaults to 1.
+
+(fn &optional ARG)" t)
+(autoload 'shr-heading-setup-imenu "shr-heading"
+"Setup imenu for h1-h4 headings in eww buffer.
+Add this function to appropriate major mode hooks such as
+`eww-mode-hook' or `elfeed-show-mode-hook'.")
 (register-definition-prefixes "shr-heading" '("shr-heading-"))
 
 
 ;;; Generated autoloads from text-extras.el
 
-(register-definition-prefixes "text-extras" '("apply-macro-to-lines-of-paragraph" "backward-to-whitespace" "copy-word-from-above" "dabbrev-" "define-" "duplicate-line-kill-word" "echo-area-tooltips" "forward-to-whitespace" "goto-random-line" "kill-inside-sexp" "mark-" "pipe-region" "random-line-map" "text-to-clipboard" "unfill-paragraph" "unwrap-"))
+(autoload 'copy-word-from-above "text-extras"
+"Copy ARG words from the nonblank line above. With a negative
+argument, copy the rest of the line.
+
+(fn ARG)" t)
+(autoload 'duplicate-line-kill-word "text-extras"
+"Duplicate the current line and kill the word at point in the duplicate." t)
+(autoload 'goto-random-line "text-extras"
+"Goto a random line in the buffer." t)
+(autoload 'pipe-region "text-extras"
+"Pipe region through shell command. If the mark is inactive,
+pipe whole buffer.
+
+(fn START END COMMAND)" t)
+(autoload 'forward-to-whitespace "text-extras"
+"Move forward to the end of the next sequence of non-whitespace
+characters. With argument, do this that many times.
+
+(fn ARG)" t)
+(autoload 'backward-to-whitespace "text-extras"
+"Move backward to the beginning of the previous sequence of
+non-whitespace characters. With argument, do this that many
+times.
+
+(fn ARG)" t)
+(autoload 'mark-inside-sexp "text-extras"
+"Mark inside a sexp." t)
+(autoload 'kill-inside-sexp "text-extras"
+"Kill inside a sexp." t)
+(autoload 'unwrap-sexp "text-extras"
+"Unwrap a sexp." t)
+(autoload 'unwrap-mark-sexp "text-extras"
+"Unwrap a sexp and mark the contents." t)
+(autoload 'dabbrev-next "text-extras"
+"Insert the next ARG words from where previous expansion was found.
+
+(fn ARG)" t)
+(autoload 'dabbrev-complete-next "text-extras"
+"Choose a continuation for the previous expansion with completion." t)
+(autoload 'text-to-clipboard "text-extras"
+"Pop up a temporary buffer to collect text to send to the clipboard.
+The pop up buffer is in `markdown-mode' and uses the TeX input
+method.  Use \\<text-to-clipboard-minor-mode-map>\\[text-to-clipboard--done] to send the buffer contents to the clipboard
+and quit the window, killing the buffer.
+
+If the region is active, use the region as the initial contents
+for the pop up buffer." t)
+(autoload 'apply-macro-to-lines-of-paragraph "text-extras"
+"Apply last keyboard macro to each line in the current paragraph.
+If a macro is being recorded, it is ended and then applied to the
+remaining lines of the paragraph." t)
+(autoload 'echo-area-tooltips "text-extras"
+"Show tooltips in the echo area automatically for current buffer.")
+(register-definition-prefixes "text-extras" '("define-" "mark-" "random-line-map" "text-to-clipboard-"))
 
 
 ;;; Generated autoloads from tmp-buffer.el
@@ -154,12 +283,24 @@
 
 ;;; Generated autoloads from topaz-paste.el
 
-(register-definition-prefixes "topaz-paste" '("topaz-paste-"))
+(autoload 'topaz-paste-region "topaz-paste"
+"Save topaz paste URL for region contents on the kill-ring.
+
+(fn BEGIN END)" t)
+(autoload 'topaz-paste-buffer "topaz-paste"
+"Save topaz paste URL for buffer contents on the kill-ring." t)
 
 
 ;;; Generated autoloads from vc-extras.el
 
-(register-definition-prefixes "vc-extras" '("log-view-save-commit-hash" "vc-git-commit"))
+(autoload 'log-view-save-commit-hash "vc-extras"
+"Save commit hash of log entry at point to `kill-ring'." t)
+(autoload 'vc-git-commit "vc-extras"
+"Run git commit -m MESSAGE.
+Interactively MESSAGE is just \"Merge resolving conflicts\", but
+with a prefix argument you are prompted for a message.
+
+(fn MESSAGE)" t)
 
 
 ;;; Generated autoloads from vimgolf.el

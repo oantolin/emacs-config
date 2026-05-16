@@ -2,13 +2,7 @@
 
 ;;; the most miscellaneous commands of all
 
-(defun unfill-paragraph ()
-  "Join a paragraph into a single line."
-  (interactive)
-  (let ((fill-column (point-max))
-        (emacs-lisp-docstring-fill-column t))
-    (fill-paragraph nil t)))
-
+;;;###autoload
 (defun copy-word-from-above (arg)
   "Copy ARG words from the nonblank line above. With a negative
 argument, copy the rest of the line."
@@ -25,6 +19,7 @@ argument, copy the rest of the line."
       (goto-char p)
       (insert (buffer-substring start (min end lim))))))
 
+;;;###autoload
 (defun duplicate-line-kill-word ()
   "Duplicate the current line and kill the word at point in the duplicate."
   (interactive)
@@ -38,6 +33,7 @@ argument, copy the rest of the line."
       (backward-word))
     (kill-word 1)))
 
+;;;###autoload
 (defun goto-random-line ()
   "Goto a random line in the buffer."
   (interactive)
@@ -47,10 +43,10 @@ argument, copy the rest of the line."
 
 (defvar-keymap random-line-map
   :doc "Repeat map for `goto-random-line'"
+  :repeat t
   "r" #'goto-random-line)
 
-(put 'goto-random-line 'repeat-map 'random-line-map)
-
+;;;###autoload
 (defun pipe-region (start end command)
   "Pipe region through shell command. If the mark is inactive,
 pipe whole buffer."
@@ -71,6 +67,7 @@ pipe whole buffer."
          (t
           (message "[%d] %s" exit-status error-msg)))))))
 
+;;;###autoload
 (defun forward-to-whitespace (arg)
   "Move forward to the end of the next sequence of non-whitespace
 characters. With argument, do this that many times."
@@ -83,6 +80,7 @@ characters. With argument, do this that many times."
   (unless (= (point) (if (> arg 0) (point-max) (point-min)))
     (forward-char (if (> arg 0) -1 1))))
 
+;;;###autoload
 (defun backward-to-whitespace (arg)
   "Move backward to the beginning of the previous sequence of
 non-whitespace characters. With argument, do this that many
@@ -157,6 +155,7 @@ the only difference between this command and %s-dwim."
 
 ;;; poor man's paredit
 
+;;;###autoload
 (defun mark-inside-sexp ()
   "Mark inside a sexp."
   (interactive)
@@ -167,12 +166,14 @@ the only difference between this command and %s-dwim."
     (goto-char end))
   (activate-mark))
 
+;;;###autoload
 (defun kill-inside-sexp ()
   "Kill inside a sexp."
   (interactive)
   (mark-inside-sexp)
   (kill-region (mark) (point)))
 
+;;;###autoload
 (defun unwrap-sexp ()
   "Unwrap a sexp."
   (interactive)
@@ -184,6 +185,7 @@ the only difference between this command and %s-dwim."
     (delete-char -1)
     (set-mark end)))
 
+;;;###autoload
 (defun unwrap-mark-sexp ()
   "Unwrap a sexp and mark the contents."
   (interactive)
@@ -192,6 +194,7 @@ the only difference between this command and %s-dwim."
 
 ;;; Continue dabbreving with the greatest of ease
 
+;;;###autoload
 (defun dabbrev-next (arg)
   "Insert the next ARG words from where previous expansion was found."
   (interactive "p")
@@ -200,6 +203,7 @@ the only difference between this command and %s-dwim."
     (dabbrev-expand 1))
   (setq this-command 'dabbrev-expand))
 
+;;;###autoload
 (defun dabbrev-complete-next ()
   "Choose a continuation for the previous expansion with completion."
   (interactive)
@@ -222,6 +226,7 @@ the only difference between this command and %s-dwim."
 (define-minor-mode text-to-clipboard-minor-mode
   "Minor mode binding a key to quit window and copy buffer to clipboard.")
 
+;;;###autoload
 (defun text-to-clipboard ()
   "Pop up a temporary buffer to collect text to send to the clipboard.
 The pop up buffer is in `markdown-mode' and uses the TeX input
@@ -239,6 +244,7 @@ for the pop up buffer."
   (if (fboundp 'markdown-mode) (markdown-mode) (text-mode))
   (text-to-clipboard-minor-mode))
 
+;;;###autoload
 (defun apply-macro-to-lines-of-paragraph ()
   "Apply last keyboard macro to each line in the current paragraph.
 If a macro is being recorded, it is ended and then applied to the
@@ -249,6 +255,7 @@ remaining lines of the paragraph."
      (line-beginning-position skip)
      (save-excursion (end-of-paragraph-text) (point)))))
 
+;;;###autoload
 (defun echo-area-tooltips ()
   "Show tooltips in the echo area automatically for current buffer."
   (setq-local help-at-pt-display-when-idle t

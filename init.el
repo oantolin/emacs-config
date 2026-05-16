@@ -281,7 +281,7 @@
   ("C-M-=" . mark-inside-sexp)
   ("M-U" . unwrap-sexp)
   ("M-S" . unwrap-mark-sexp)
-  ("C-|" . pipe-region)
+  ("C-|" . Gpipe-region)
   ("C-S-f" . forward-to-whitespace)
   ("C-S-b" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
@@ -291,9 +291,8 @@
   ("C-c u" . text-to-clipboard)
   ([remap upcase-word] . upcase-dwiw)
   ([remap downcase-word] . downcase-dwiw)
-  ([remap capitalize-word] . capitalize-dwiw)
-  :commands
-  echo-area-tooltips)
+  ([remap capitalize-word] . capitalize-dwiw))
+  
 
 (use-package placeholder
   :vc (:url "https://github.com/oantolin/placeholder.git")
@@ -301,9 +300,6 @@
   ("M-_" . placeholder-insert)
   ("C-S-n" . placeholder-forward)
   ("C-S-p" . placeholder-backward))
-
-(use-package topaz-paste
-  :commands topaz-paste-region topaz-paste-buffer)
 
 (use-package gptel
   :ensure t
@@ -376,10 +372,7 @@
   :vc (:url "https://github.com/oantolin/math-delimiters.git")
   :bind
   (:map toggle-map
-        ("$" . math-delimiters-toggle))
-  :commands
-  math-delimiters-no-dollars
-  math-delimiters-insert)
+        ("$" . math-delimiters-toggle)))
 
 (use-package block-undo
   :config
@@ -493,13 +486,9 @@
 
 (use-package ecomplete-extras
   :bind
-  ("C-x M" . compose-mail-to)
-  :commands
-  add-email-to-ecomplete
-  remove-email-from-ecomplete)
+  ("C-x M" . compose-mail-to))
 
 (use-package arXiv
-  :commands arXiv-pdf arXiv-show arXiv-capture
   :init
   (defvar-keymap arXiv-map
     "p" #'arXiv-pdf
@@ -971,12 +960,6 @@
 
 (use-package man-help)
 
-(use-package eshell-extras
-  :commands
-  eshell/in-term
-  eshell/for-each
-  interactive-cd)
-
 (use-package eshell
   :bind
   ("C-!" . eshell)
@@ -1022,12 +1005,6 @@
         ("C-c d" . interactive-cd)
         ("M-h" . consult-history)
         ("M-r") ("M-s")))
-
-(use-package vc-extras
-  :commands
-  clear-log-edit-buffer
-  log-view-save-commit-hash
-  vc-git-commit)
 
 (use-package log-edit
   :bind
@@ -1352,7 +1329,6 @@ if `org-store-link' is called from the #+TITLE line."
   :bind
   (:map message-mode-map
         ("C-c x e" . cycle-from-address))
-  :commands (set-smtp-server message-lint)
   :hook
   (message-send . set-smtp-server)
   (message-send . message-lint)
@@ -1445,8 +1421,6 @@ if `org-store-link' is called from the #+TITLE line."
   :config
   (defun mastodon-recenter-positions ()
     (setq-local recenter-positions '(bottom middle top))))
-
-(use-package lem-imenu :commands lem-imenu-setup)
 
 (use-package lem
   :ensure t

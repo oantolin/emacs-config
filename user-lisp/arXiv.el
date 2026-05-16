@@ -12,6 +12,7 @@ A ragtag bunch of ad hoc formats are recognized for PAPER."
            when (string-match (format pattern "\\([0-9v.]+\\)") paper)
            return (match-string 1 paper)))
 
+;;;###autoload
 (defun arXiv-pdf (paper &optional external)
   "Open the PDF version of PAPER from the arXiv in Emacs.
 A ragtag bunch of ad hoc formats are recognized for PAPER.
@@ -24,6 +25,7 @@ If EXTERNAL is non-nil use an external browser."
         (browse-url pdf)
       (eww pdf))))
 
+;;;###autoload
 (defun arXiv-copy-url (paper)
   "Copy PAPER's URL to the kill-ring."
   (interactive "sarXiv paper: ")
@@ -44,14 +46,15 @@ Call FN on an alist with keys `title', `authors', `url', `id' and
      (forward-line 2)
      (let* ((xml (libxml-parse-xml-region (point)))
             (entry (car (dom-by-tag xml 'entry)))
-            (title (dom-text (dom-by-tag entry 'title)))
-            (abstract (dom-text (dom-by-tag entry 'summary)))
-            (authors (mapcar #'dom-texts (dom-by-tag entry 'author)))
-            (url (dom-text (dom-by-tag entry 'id)))
+            (title (dom-inner-text (dom-by-tag entry 'title)))
+            (abstract (dom-inner-text (dom-by-tag entry 'summary)))
+            (authors (mapcar #'dom-inner-text (dom-by-tag entry 'author)))
+            (url (dom-inner-text (dom-by-tag entry 'id)))
             (id (string-remove-prefix "http://arxiv.org/abs/" url)))
        (funcall fn `((title . ,title) (authors . ,authors)
                      (abstract . ,abstract) (url . ,url) (id . ,id)))))))
 
+;;;###autoload
 (defun arXiv-show (paper)
   "Popup a buffer with the title, authors and abstract of PAPER.
 A ragtag bunch of ad hoc formats are recognized for PAPER."
@@ -64,6 +67,7 @@ A ragtag bunch of ad hoc formats are recognized for PAPER."
          (princ (format "%s\nBy: %s\n\n%s\n"
                         .title (string-join .authors ", ") .abstract)))))))
 
+;;;###autoload
 (defun arXiv-capture (paper)
   "Capture Org entry for arXiv PAPER at point.
 (This depends on the `org-capture' template \"a\" just inserting

@@ -15,6 +15,7 @@
   (unless ecomplete-database (ecomplete-setup))
   (completing-read "Email address: " (ecomplete-completion-table 'mail)))
 
+;;;###autoload
 (defun add-email-to-ecomplete (email)
   "Add email address to ecomplete's database."
   (interactive "sEmail address: ")
@@ -29,6 +30,7 @@
              name email))
     (ecomplete-save)))
 
+;;;###autoload
 (defun remove-email-from-ecomplete (email)
   "Remove email address from ecomplete's database."
   (interactive (list (ecomplete--read-address)))
@@ -38,6 +40,7 @@
           (remove entry (cdr (assq 'mail ecomplete-database))))
     (ecomplete-save)))
 
+;;;###autoload
 (defun compose-mail-to (address)
   "Compose email to ADDRESS from ecomplete's database."
   (interactive (list (ecomplete--read-address)))

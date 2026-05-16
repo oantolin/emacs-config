@@ -1,5 +1,8 @@
 ;;; help-extras.el --- Miscellaneous help-related commands    -*- lexical-binding: t; -*-
 
+(defvar help-xref-stack-item)
+
+;;;###autoload
 (defun command-of-the-day ()
   "Show the documentation for a random command."
   (interactive)
@@ -9,8 +12,10 @@
     (with-current-buffer "*Help*"
       (setq help-xref-stack-item '(command-of-the-day)))))
 
+;;;###autoload
 (defalias 'cotd #'command-of-the-day)
 
+;;;###autoload
 (defun show-help ()
   "Show the *Help* buffer."
   (interactive)

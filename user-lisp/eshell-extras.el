@@ -3,6 +3,7 @@
 (require 'term)
 (require 'esh-mode)
 
+;;;###autoload
 (defun interactive-cd (dir)
   "Prompt for a directory and cd to it."
   (interactive "Dcd ")
@@ -13,6 +14,7 @@
     ('eshell-mode (eshell-send-input))
     ('term-mode (term-send-input))))
 
+;;;###autoload
 (defun eshell/for-each (cmd &rest args)
   "Run command once for each argument."
   (let ((fn (intern cmd))
@@ -21,6 +23,7 @@
       (let ((default-directory dir))
         (funcall fn arg)))))
 
+;;;###autoload
 (defun eshell/in-term (prog &rest args)
   "Run shell command in term buffer."
   (switch-to-buffer (apply #'make-term prog prog nil args))
@@ -31,6 +34,7 @@
 
 ;; The built-in version of the following function doesn't ensure you
 ;; get an eshell buffer in the right directory!
+;;;###autoload
 (defun eshell-bookmark-jump (bookmark)
   "Default bookmark handler for Eshell buffers."
   (let ((default-directory (bookmark-prop-get bookmark 'location)))
