@@ -38,7 +38,6 @@
 (setopt use-package-vc-prefer-newest t
         package-install-upgrade-built-in t)
 
-(add-to-list 'load-path "~/.emacs.d/my-lisp/")
 (add-to-list 'load-path "~/.private/")
 
 ;;; misc
@@ -111,6 +110,8 @@
  ("M-s c" . count-matches)
  ("C-;" . comment-dwim)
  ("C-z" . repeat)
+ ("C-<tab>" . tab-next)
+ ("C-<iso-lefttab>" . tab-previous)
  ("C-h p" . describe-package)  ; swap these two
  ("C-h P" . finder-by-keyword)
  ("C-\\" . activate-transient-input-method) ; swap these two, too
