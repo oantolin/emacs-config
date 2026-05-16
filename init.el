@@ -380,8 +380,7 @@
 
 (use-package help-extras
   :bind
-  (:map help-map ("h" . show-help))
-  :commands cotd)
+  (:map help-map ("h" . show-help)))
 
 (use-package window-extras
   :bind
@@ -499,7 +498,6 @@
 
 (use-package scimago
   :vc (:url "https://github.com/oantolin/scimago.git")
-  :commands scimago-copy-quartiles scimago-show-quartiles
   :bind
   ("C-c q" . scimago-copy-quartiles))
 
@@ -786,12 +784,6 @@
   :custom-face
   (shr-text ((t (:inherit variable-pitch))))
   (shr-code ((t (:inherit fixed-pitch)))))
-
-(use-package shr-heading
-  :commands
-  shr-heading-setup-imenu
-  shr-heading-next
-  shr-heading-previous)
 
 (use-package eww
   :bind
