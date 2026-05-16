@@ -1,7 +1,7 @@
 ;;  eshell-extras.el --- Miscellaneous eshell commands   -*- lexical-binding: t; -*-
 
-(require 'term)
-(require 'esh-mode)
+(declare-function 'eshell-send-input "esh-mode")
+(declare-function 'term-send-input "term")
 
 (defun interactive-cd (dir)
   "Prompt for a directory and cd to it."
@@ -26,6 +26,8 @@
   (switch-to-buffer (apply #'make-term prog prog nil args))
   (term-mode)
   (term-char-mode))
+
+(declare-function 'bookmark-prop-get "bookmark")
 
 ;; The built-in version of the following function doesn't ensure you
 ;; get an eshell buffer in the right directory!
