@@ -1,5 +1,8 @@
 ;;  eshell-extras.el --- Miscellaneous eshell commands   -*- lexical-binding: t; -*-
 
+(require 'term)
+(require 'esh-mode)
+
 (defun interactive-cd (dir)
   "Prompt for a directory and cd to it."
   (interactive "Dcd ")

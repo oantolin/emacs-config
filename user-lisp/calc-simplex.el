@@ -23,7 +23,7 @@
 	       (vectorp basis) &optional phase-1)
   "Dictionary for basis variables with indices in `basis'"
   (interactive "p" 4 "dict")
-  (setq basis (actual-basis basis (subscr (mdims A) 2) phase-1))
+  (setq basis ('actual-basis basis (subscr (mdims A) 2) phase-1))
   (message "Actual basis: %s" basis)
   (let* ((big-A (trn (append (trn A) (idn 1 (subscr (mdims A) 1)))))
 	 (n (subscr (mdims big-A) 2))
@@ -75,7 +75,7 @@
   (interactive "p" 2 "latexdict")
   (let ((m (- (vlen dict) 1))
 	(n (- (vlen (mrow dict 1)) 1)))
-    (setq basis (actual-basis basis n phase-1))
+    (setq basis ('actual-basis basis n phase-1))
     (let ((non-basis (vdiff (index (+ m n)) basis)))
       (let ((s (with-output-to-string
 		 (princ "\\[\\begin{array}{*{10}{r}}\n")
@@ -86,18 +86,18 @@
 			(if (= i (+ m 1))
 			    (if phase-1 " w " " z ")
 			  (format "x_%d"
-				  (display-index (subscr basis i) n phase-1)))
-			(format-val (subscr dict i 1))))
+				  ('display-index (subscr basis i) n phase-1)))
+			('format-val (subscr dict i 1))))
 		      (for ((j 1 n))
 			   (unless (and phase-1 (= (subscr non-basis j) n))
 			     (princ
-			      (format-term
+			      ('format-term
 			       (subscr dict i (+ j 1))
-			       (display-index (subscr non-basis j) n phase-1)))))
+			       ('display-index (subscr non-basis j) n phase-1)))))
 		      (when phase-1
 			(let ((j (cl-position n non-basis)))
 			  (when j
-			    (princ (format-term (subscr dict i (+ j 1)) 0)))))
+			    (princ ('format-term (subscr dict i (+ j 1)) 0)))))
 		      (princ "\\\\\n"))
 		 (princ "\\end{array}\\]"))))
 	(kill-new s)
