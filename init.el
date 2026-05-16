@@ -890,7 +890,7 @@
         ("t" . pdf-view-themed-minor-mode)
         ("d" . pdf-view-midnight-minor-mode)
         ("c" . pdf-view-roll-minor-mode)
-        ("s n" . "nsbp")
+        ("s n" . "nsbp")     ; is this my only keyboard macro binding?
         ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
         ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page))
   :init
