@@ -95,6 +95,7 @@
  ("C-d" . delete-forward-char)
  ("M-K" . kill-paragraph)
  ("M-H" . mark-paragraph) ; for REPLs where I use M-h for consult-history  
+ ("M-Q" . unfill-paragraph)
  ("M-Z" . zap-to-char)
  ("C-x k" . kill-current-buffer)
  ("C-x /" . pwd)
@@ -270,7 +271,6 @@
 
 (use-package text-extras
   :bind
-  ("M-Q" . unfill-paragraph)
   ("C-S-o" . copy-word-from-above)
   ("C-S-k" . duplicate-line-kill-word)
   ("M-L" . mark-line)
