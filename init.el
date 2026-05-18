@@ -784,7 +784,37 @@
   (shr-image-animate nil)
   :custom-face
   (shr-text ((t (:inherit variable-pitch))))
-  (shr-code ((t (:inherit fixed-pitch)))))
+  (shr-code ((t (:inherit fixed-pitch))))
+  :config
+  ;; local fix for a bug in shr-outline-search
+  (defun shr-outline-search (&optional bound move backward looking-at)
+    "A function that can be used as `outline-search-function' for rendered html.
+See `outline-search-function' for BOUND, MOVE, BACKWARD and LOOKING-AT."
+    (if looking-at
+        (get-text-property (point) 'outline-level)
+      (let ((heading-found nil)
+	    (bound (or bound
+		       (if backward (point-min) (point-max)))))
+        (save-excursion
+	  (when (get-text-property (point) 'outline-level)
+	    (forward-line (if backward -1 1)))
+	  (if backward
+	      (unless (get-text-property (point) 'outline-level)
+	        (goto-char (or (previous-single-property-change
+			        (point) 'outline-level nil bound)
+			       bound)))
+	    (goto-char (or (text-property-not-all (point) bound 'outline-level nil)
+			   bound)))
+	  (goto-char (pos-bol))
+	  (when (get-text-property (point) 'outline-level)
+	    (setq heading-found (point))))
+        (if heading-found
+	    (progn
+	      (set-match-data (list heading-found heading-found))
+	      (goto-char heading-found))
+	  (when move
+	    (goto-char bound)
+	    nil))))))
 
 (use-package eww
   :bind
