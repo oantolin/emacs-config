@@ -739,7 +739,11 @@
 (use-package outline
   :defer t
   :diminish outline-minor-mode
-  :hook (prog-mode . outline-minor-mode))
+  :custom
+  (outline-minor-mode-cycle t)
+  :hook
+  (prog-mode . outline-minor-mode)
+  (eww-mode . outline-minor-mode))
 
 (use-package emacs-news-view-mode
   :mode "\\`NEWS"
@@ -786,14 +790,11 @@
   :bind
   (:map eww-mode-map
         ("{" . backward-paragraph)
-        ("}" . forward-paragraph)
-        ("C-c C-p" . shr-heading-previous)
-        ("C-c C-n" . shr-heading-next))
+        ("}" . forward-paragraph))
   :custom
   (eww-bookmarks-directory "~/.private/")
   (eww-auto-rename-buffer 'title)
   :hook
-  (eww-mode . shr-heading-setup-imenu)
   (eww-mode . echo-area-tooltips)
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
