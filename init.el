@@ -1016,14 +1016,12 @@
 (use-package vc
   :bind
   (:map vc-prefix-map
-        ("R" . vc-rename-file)
         ("d" . vc-dir-root)
         ("c" . vc-git-commit)))
 
 (use-package vc-dir
   :bind
   (:map vc-dir-mode-map
-        ("r" . vc-revert)
         ("c" . vc-git-commit)))
 
 (use-package smerge-mode
