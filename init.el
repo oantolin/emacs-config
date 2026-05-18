@@ -281,7 +281,7 @@
   ("C-M-=" . mark-inside-sexp)
   ("M-U" . unwrap-sexp)
   ("M-S" . unwrap-mark-sexp)
-  ("C-|" . Gpipe-region)
+  ("C-|" . pipe-region)
   ("C-S-f" . forward-to-whitespace)
   ("C-S-b" . backward-to-whitespace)
   ("M-W" . mark-non-whitespace)
