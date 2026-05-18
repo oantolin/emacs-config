@@ -384,9 +384,6 @@
 
 (use-package window-extras
   :bind
-  (:map ctl-x-4-map
-        ("s" . toggle-window-split)
-        ("t" . transpose-windows))
   (:map ctl-x-5-map
         ("s" . screenshot))
   (:map toggle-map
