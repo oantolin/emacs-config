@@ -28,3 +28,4 @@ request/
 /tree-sitter
 org-social-mentions
 /.cache/
+user-lisp/.user-lisp-autoloads.el
