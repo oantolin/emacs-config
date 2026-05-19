@@ -2,9 +2,6 @@
 
 ;;; Improved directory guessing in eshell buffers:
 
-(require 'ffap)
-(require 'eshell)
-
 (defun guess-directory-from-face ()
   (save-excursion
     (backward-paragraph)
@@ -13,6 +10,8 @@
       (buffer-substring-no-properties
        (point) (next-single-property-change (point) 'face)))))
 
+(declare-function eshell-previous-prompt "em-prompt")
+ 
 (defun guess-directory-from-prompt ()
   (save-excursion
     (eshell-previous-prompt 1)
