@@ -2,20 +2,22 @@
 
 (declare-function org-edit-src-code 'org-src)
 (declare-function org-edit-src-exit 'org-src)
+(declare-function org-narrow-to-block 'org)
+(declare-function org-narrow-to-subtree 'org)
 (declare-function TeX-narrow-to-group 'tex)
 (declare-function LaTeX-narrow-to-environment 'latex)
 
-(defun narrow-or-widen-dwim (p)
+(defun narrow-or-widen-dwim (arg)
   "Widen if buffer is narrowed, narrow-dwim otherwise.
-Dwim means: region, org-src-block, org-subtree, or defun,
-whichever applies first. Narrowing to org-src-block actually
-calls `org-edit-src-code'.
+Dwim means: region, org-src-block, org-subtree, or defun, whichever
+applies first. Narrowing to org-src-block actually calls
+`org-edit-src-code'.
 
-With prefix P, don't widen, just narrow even if buffer is
-already narrowed."
+With prefix ARG, don't widen, just narrow even if buffer is already
+narrowed."
+  (declare (interactive-only t))
   (interactive "P")
-  (declare (interactive-only))
-  (cond ((and (buffer-narrowed-p) (not p)) (widen))
+  (cond ((and (buffer-narrowed-p) (not arg)) (widen))
 	((and (bound-and-true-p org-src-mode) (not p))
 	 (org-edit-src-exit))
 	((region-active-p)
