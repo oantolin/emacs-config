@@ -16,7 +16,4 @@
 (setq org-export-with-smart-quotes t
       org-confirm-babel-evaluate nil)
 
-(add-to-list 'load-path "~/.private/")
-(add-to-list 'load-path "~/.emacs.d/my-lisp")
-
-(require 'org-config)
+(require 'org-config "~/.private/org-config.el")
