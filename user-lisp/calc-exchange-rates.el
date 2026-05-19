@@ -1,5 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
+(require 'json)
+(require 'calc-units)
+
 (defun calc-exchange-rates ()
   "Look up exchange rates online and set them up as calc units."
   (with-current-buffer
