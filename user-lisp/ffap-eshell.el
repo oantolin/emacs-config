@@ -2,7 +2,9 @@
 
 ;;; Improved directory guessing in eshell buffers:
 
-(defun guess-directory-from-face ()
+(require 'ffap)
+
+(defun ffap-eshell-guess-directory-from-face ()
   (save-excursion
     (backward-paragraph)
     (forward-char)
@@ -12,18 +14,20 @@
 
 (declare-function eshell-previous-prompt "em-prompt")
  
-(defun guess-directory-from-prompt ()
+(defun ffap-eshell-guess-directory-from-prompt ()
   (save-excursion
     (eshell-previous-prompt 1)
     (end-of-line)
     (thing-at-point 'filename)))
 
 (defun ffap-eshell-mode (name)
-  (seq-find #'file-exists-p
-            (mapcar (lambda (dir) (expand-file-name name dir))
-                    (delq nil (list default-directory
-                                    (guess-directory-from-face)
-                                    (guess-directory-from-prompt))))))
+  (seq-find
+   #'file-exists-p
+   (mapcar (lambda (dir) (expand-file-name name dir))
+           (delq nil (list default-directory
+                           (ffap-eshell-guess-directory-from-face)
+                           (ffap-eshell-guess-directory-from-prompt))))))
+
 
 (setf (alist-get 'eshell-mode ffap-alist) #'ffap-eshell-mode)
 
