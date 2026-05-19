@@ -736,15 +736,6 @@
   :config
   (modify-syntax-entry ?\" "\"" text-mode-syntax-table))
 
-(use-package outline
-  :defer t
-  :diminish outline-minor-mode
-  :custom
-  (outline-minor-mode-cycle t)
-  :hook
-  (prog-mode . outline-minor-mode)
-  (eww-mode . outline-minor-mode))
-
 (use-package emacs-news-view-mode
   :mode "\\`NEWS"
   :config
