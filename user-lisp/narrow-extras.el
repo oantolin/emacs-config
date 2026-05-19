@@ -18,7 +18,7 @@ narrowed."
   (declare (interactive-only t))
   (interactive "P")
   (cond ((and (buffer-narrowed-p) (not arg)) (widen))
-	((and (bound-and-true-p org-src-mode) (not p))
+	((and (bound-and-true-p org-src-mode) (not arg))
 	 (org-edit-src-exit))
 	((region-active-p)
          (narrow-to-region (region-beginning) (region-end)))
