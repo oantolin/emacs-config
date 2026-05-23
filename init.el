@@ -527,7 +527,8 @@
         ("[" . insert-pair-map)
         ("=" . quick-calc))
   (:map embark-heading-map
-        ("SPC" . outline-mark-subtree) ("C-SPC"))        
+        ("SPC" . outline-mark-subtree)
+        ("C-SPC" . embark-select))        
   (:map embark-email-map
         ("+" . add-email-to-ecomplete)
         ("\\" . remove-email-from-ecomplete))
@@ -595,7 +596,7 @@
   (:map embark-org-heading-map
         ("a" . org-archive-subtree-default)) ; skip confirmation
   (:map embark-org-src-block-map
-        ("@" . org-babel-mark-block) ("C-SPC")
+        ("SPC" . org-babel-mark-block) ("C-SPC")
         ("e" . org-edit-special)))
 
 (use-package consult-dir
