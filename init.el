@@ -1033,11 +1033,6 @@ See `outline-search-function' for BOUND, MOVE, BACKWARD and LOOKING-AT."
       (erase-buffer)))
   (remove-hook 'log-edit-hook #'log-edit-show-files))
 
-(use-package log-view
-  :bind
-  (:map log-view-mode-map
-        ("w" . log-view-save-commit-hash)))
-
 (use-package vc
   :bind
   (:map vc-prefix-map

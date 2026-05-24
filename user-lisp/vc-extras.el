@@ -5,15 +5,6 @@
 (require 'vc-git)
 
 ;;;###autoload
-(defun log-view-save-commit-hash ()
-  "Save commit hash of log entry at point to `kill-ring'."
-  ;; This is Protesilaos' prot-vc-log-kill-hash function
-  (interactive)
-  (let ((commit (cadr (log-view-current-entry (point) t))))
-    (kill-new (format "%s" commit))
-    (message "Copied: %s" commit)))
-
-;;;###autoload
 (defun vc-git-commit (message)
   "Run git commit -m MESSAGE.
 Interactively MESSAGE is just \"Merge resolving conflicts\", but
