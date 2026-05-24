@@ -582,7 +582,8 @@
     (interactive "P")
     (with-current-buffer "*Messages*"
       (goto-char (1- (point-max)))
-      (embark-act arg)))
+      (cl-letf (((symbol-function #'embark--end-of-target) #'ignore))
+        (embark-act arg))))
   (cl-defun embark--goto-location (&key target &allow-other-keys)
     "Jump to location of the TARGET."
     (goto-char (car (consult--get-location target))))
