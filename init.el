@@ -267,6 +267,10 @@
         ("_" . calc-grab-sum-across)
         (" " . delete-whitespace-rectangle)))
 
+(use-package outline
+  :bind
+  ("<backtab>" . outline-cycle-buffer))
+
 (use-package visiting-buffer)
 
 (use-package text-extras
@@ -293,7 +297,6 @@
   ([remap downcase-word] . downcase-dwiw)
   ([remap capitalize-word] . capitalize-dwiw))
   
-
 (use-package placeholder
   :vc (:url "https://github.com/oantolin/placeholder.git")
   :bind
