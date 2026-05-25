@@ -1233,10 +1233,14 @@ if `org-store-link' is called from the #+TITLE line."
   :custom
   (org-modern-checkbox
    '((?X . "🞕") (?- . "⧄") (?\s . "🞎")))
+  (org-modern-priority-faces
+   '((?A :foreground "black" :background "plum")
+     (?B :foreground "black" :background "khaki2")
+     (?C :foreground "black" :background "azure2")))
   :custom-face
   (org-modern-label ((t (:height 0.8 :inherit fixed-pitch))))
-  :config
-  (global-org-modern-mode))
+   :config
+   (global-org-modern-mode))
 
 (use-package ox-rss :ensure t :defer t)
   
