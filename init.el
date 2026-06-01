@@ -723,9 +723,10 @@
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
 (use-package link-hint
-  :ensure t
+  :vc ( :url "https://github.com/pjones/link-hint.el.git"
+        :rev "pjones/fix-avy-action")
   :bind
-  ("C-S-j" . link-hint-open-link))
+  ("C-S-j" . link-hint-avy-act))
 
 (use-package paren
   :custom
