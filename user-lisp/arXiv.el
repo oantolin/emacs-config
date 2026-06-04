@@ -41,7 +41,7 @@ Call FN on an alist with keys `title', `authors', `url', `id' and
 `abstract'."
   (url-retrieve
    (format "http://export.arxiv.org/api/query?id_list=%s" (arXiv--id paper))
-   (lambda (_)
+   (lambda (status)
      (goto-char url-http-end-of-headers)
      (forward-line 2)
      (let* ((xml (libxml-parse-xml-region (point)))
@@ -51,8 +51,10 @@ Call FN on an alist with keys `title', `authors', `url', `id' and
             (authors (mapcar #'dom-inner-text (dom-by-tag entry 'author)))
             (url (dom-inner-text (dom-by-tag entry 'id)))
             (id (string-remove-prefix "http://arxiv.org/abs/" url)))
-       (funcall fn `((title . ,title) (authors . ,authors)
-                     (abstract . ,abstract) (url . ,url) (id . ,id)))))))
+       (if-let* ((err (plist-get status :error))) 
+           (error "arXiv: %s" err)
+         (funcall fn `((title . ,title) (authors . ,authors)
+                       (abstract . ,abstract) (url . ,url) (id . ,id))))))))
 
 ;;;###autoload
 (defun arXiv-show (paper)
