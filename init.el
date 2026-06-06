@@ -144,7 +144,8 @@
            ("w" . whitespace-mode)
            ("v" . variable-pitch-mode)
            ("l" . visual-line-mode)
-           ("r" . visible-mode))
+           ("r" . visible-mode)
+           ("s" . mode-line-invisible-mode))
 
 (bind-keys :prefix-map time-map
            :prefix "C-c t"
@@ -382,9 +383,7 @@
 (use-package window-extras
   :bind
   (:map ctl-x-5-map
-        ("s" . screenshot))
-  (:map toggle-map
-        ("s" . toggle-mode-line)))
+        ("s" . screenshot)))
 
 (use-package minibuffer
   :bind

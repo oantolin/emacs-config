@@ -13,12 +13,4 @@ By default save a PNG, but with a prefix argument, save a an SVG."
     (kill-new filename)
     (message "Saved %s" filename)))
 
-(defun toggle-mode-line ()
-  "Toggle visibility of the mode line."
-  (interactive)
-  (if mode-line-format
-      (setq-local mode-line-format nil)
-    (kill-local-variable 'mode-line-format)
-    (force-mode-line-update)))
-
 (provide 'window-extras)
