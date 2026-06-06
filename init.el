@@ -495,7 +495,7 @@
   ("C-c q" . scimago-copy-quartiles))
 
 (use-package embark
-  :ensure t
+  :load-path "~/code/embark"
   :bind
   ("C-." . embark-act)
   ("M-." . embark-dwim)
@@ -539,13 +539,16 @@
         ("D" . gptel-extras-define))
   :custom
   (embark-quit-after-action nil)
-  (prefix-help-command #'embark-prefix-help-command)
+  ;; (prefix-help-command #'embark-prefix-help-command)
   (embark-indicators '(embark-minimal-indicator
                        embark-highlight-indicator
                        embark-isearch-highlight-indicator))
   (embark-cycle-key ".")
   (embark-help-key "?")
   (embark-confirm-act-all nil)
+  :commands embark-auto-prefix-help-mode
+  :init
+  (embark-auto-prefix-help-mode)
   :config
   ;; want sentence and paragraph targets in more modes
   (embark-define-thingatpt-target sentence
