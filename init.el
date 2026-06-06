@@ -30,8 +30,6 @@
         ("gnu" . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
-(use-package diminish :ensure t :defer t)
-
 (use-package bind-key
   :bind (:map help-map ("y" . describe-personal-keybindings)))
 
@@ -56,6 +54,7 @@
 (put 'suspend-frame 'disabled t)
 
 (setopt
+ mode-line-collapse-minor-modes t
  use-package-enable-imenu-support t
  set-mark-command-repeat-pop t
  tab-always-indent 'complete
@@ -183,7 +182,6 @@
 
 (use-package auto-dark
   :ensure t
-  :diminish
   :custom
   (auto-dark-themes '((modus-vivendi-tinted) (modus-operandi-tinted)))
   :init
@@ -200,10 +198,6 @@
       :right-divider-width 15           ; half the default
       :scroll-bar-width 8))
   :init (spacious-padding-mode))
-
-(use-package face-remap
-  :defer t
-  :diminish buffer-face-mode)
 
 (use-package kkp
   :ensure t
@@ -690,9 +684,7 @@
 
 (use-package beginend
   :ensure t
-  :diminish beginend-global-mode
-  :config
-  (dolist (mode beginend-modes) (diminish (cdr mode)))
+  :init
   (beginend-global-mode))
 
 (use-package avy
@@ -749,8 +741,6 @@
   ;; are the only files I view in outline-mode, but if I find others
   ;; then I might modify the syntax only locally in NEWS files.
   (modify-syntax-entry ?' "\"" emacs-news-view-mode-syntax-table))
-
-(use-package eldoc :defer t :diminish)
 
 (use-package diff-mode
   :bind
@@ -850,8 +840,6 @@
 
 (use-package cdlatex
   :ensure t
-  :diminish
-  :diminish org-cdlatex-mode
   :bind (:map cdlatex-mode-map ("$") ("(") ("[") ("{"))
   :custom
   (cdlatex-math-modify-alist '((?B "\\mathbb" nil t nil nil)
@@ -1217,7 +1205,6 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package jinx
   :ensure t
-  :diminish
   :hook
   (emacs-startup . global-jinx-mode)
   :custom
@@ -1376,7 +1363,6 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package mastodon
   :ensure t
-  :diminish mastodon-async-mode
   :bind
   (:prefix-map global-mastodon-map :prefix "C-c m"
                ("h" . mastodon)

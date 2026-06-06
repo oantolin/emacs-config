@@ -23,7 +23,6 @@
 
 (use-package selected
   :ensure t
-  :diminish selected-minor-mode
   :bind
   (:map selected-keymap
         ("x" . exchange-point-and-mark)
@@ -59,7 +58,6 @@
 (use-package gcmh
   :ensure t
   :demand t
-  :diminish
   :config (gcmh-mode))
 
 (use-package rainbow-delimiters
