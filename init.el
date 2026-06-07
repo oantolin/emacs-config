@@ -597,8 +597,7 @@
   (:map embark-org-heading-map
         ("a" . org-archive-subtree-default)) ; skip confirmation
   (:map embark-org-src-block-map
-        ("SPC" . org-babel-mark-block) ("C-SPC")
-        ("e" . org-edit-special)))
+        ("SPC" . org-babel-mark-block) ("C-SPC")))
 
 (use-package consult-dir
   :ensure t
