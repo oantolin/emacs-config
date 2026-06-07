@@ -586,10 +586,11 @@
     (push #'embark--goto-location (alist-get cmd embark-pre-action-hooks))))
 
 (use-package embark-consult
-  :ensure t
+  :load-path "~/code/embark"
   :defer t)
 
 (use-package embark-org
+  :load-path "~/code/embark"
   :bind
   (:map embark-org-link-map
         ("a" . arXiv-map))
