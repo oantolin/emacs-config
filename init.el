@@ -495,7 +495,7 @@
   ("C-c q" . scimago-copy-quartiles))
 
 (use-package embark
-  :load-path "~/code/embark"
+  :ensure t
   :bind
   ("C-." . embark-act)
   ("M-." . embark-dwim)
@@ -546,7 +546,6 @@
   (embark-cycle-key ".")
   (embark-help-key "?")
   (embark-confirm-act-all nil)
-  :commands embark-auto-prefix-help-mode
   :init
   (embark-auto-prefix-help-mode)
   :config
@@ -586,11 +585,10 @@
     (push #'embark--goto-location (alist-get cmd embark-pre-action-hooks))))
 
 (use-package embark-consult
-  :load-path "~/code/embark"
+  :ensure t
   :defer t)
 
 (use-package embark-org
-  :load-path "~/code/embark"
   :bind
   (:map embark-org-link-map
         ("a" . arXiv-map))
