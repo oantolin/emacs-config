@@ -1410,6 +1410,15 @@ if `org-store-link' is called from the #+TITLE line."
 
 (use-package fedi-config :after (:any mastodon lem)) ; private package
 
+(use-package elpher
+  :ensure t
+  :bind
+  (:map elpher-mode-map
+        ("{" . backward-paragraph)
+        ("}" . forward-paragraph)))
+
+(use-package embark-elpher :after (embark elpher))
+
 ;;; major modes for programming languages
 
 (use-package elisp-mode
