@@ -54,7 +54,7 @@
 (put 'suspend-frame 'disabled t)
 
 (setopt
- mode-line-collapse-minor-modes t
+ mode-line-collapse-minor-modes '(not defining-kbd-macro)
  use-package-enable-imenu-support t
  set-mark-command-repeat-pop t
  tab-always-indent 'complete
