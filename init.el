@@ -126,7 +126,8 @@
  ("C-x M-t" . transpose-paragraphs)
  ([remap apropos-command] . apropos)
  ("C-x t s" . toggle-frame-tab-bar)
- ("C-x x #" . recover-this-file))
+ ("C-x x #" . recover-this-file)
+ ("C-x w =" . compare-windows))
 
 (bind-keys :prefix-map insert-pair-map
            :prefix "M-["
@@ -548,7 +549,7 @@
   (embark-cycle-key ".")
   (embark-help-key "?")
   (embark-confirm-act-all nil)
-  (embark-auto-prefix-help-delay 1.0)
+  (embark-auto-prefix-help-delay 1.5)
   :init
   (embark-auto-prefix-help-mode)
   :config
