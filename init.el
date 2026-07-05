@@ -26,7 +26,8 @@
 ;;; package.el & use-package setup
 
 (setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
+      '(("melpa-snapshots" . "https://snapshots.melpa.org/packages/") 
+        ("melpa-releases" . "https://releases.melpa.org/packages/")
         ("gnu" . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
