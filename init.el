@@ -1009,6 +1009,23 @@
   (:map vc-dir-mode-map
         ("c" . vc-git-commit)))
 
+(use-package project
+  :defer t
+  :config
+  (defcustom project-compile-commands-alist
+    '(("goal" . "go build -tags full ./cmd/goal")
+      ("k" . "make CC=gcc")
+      ("CBQN" . "make CC=gcc o3n"))
+    "Alist associating projects to their default compile commands.")
+  (define-advice project-compile (:around (fn &rest args) default-command)
+    "Look up default compile command in `project-compile-commands-alist'."
+    (let ((compile-command (alist-get (project-name (project-current))
+                                      project-compile-commands-alist
+                                      compile-command
+                                      nil
+                                      #'equal)))
+      (apply fn args))))
+
 (use-package smerge-mode
   :defer t
   :custom
