@@ -6,7 +6,7 @@
 (defcustom webjump-search-engines
   '(("DuckDuckGo" . "https://html.duckduckgo.com/html/?q=")
     ("Google" . "https://google.com/search?q=")
-    ("Wikipedia" . "https://en.wikipedia.org/wiki/")
+    ("Wikipedia" . "https://en.wikipedia.org/w/index.php?title=Special:Search&search=")
     ("DLE RAE" . "https://dle.rae.es/")
     ("IMDb" . "https://www.imdb.com/find?q=")
     ("YouTube" . "https://www.youtube.com/results?search_query=")
