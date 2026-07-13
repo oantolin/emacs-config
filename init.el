@@ -1399,6 +1399,7 @@ if `org-store-link' is called from the #+TITLE line."
   (:map mastodon-mode-map
         ("C-:") ("i")
         ("*" . mastodon-toot-pin-toot-toggle)
+        ("l" . mastodon-views-add-toot-account-at-point-to-list)
         ("{" . backward-paragraph)
         ("}" . forward-paragraph))
   :custom
