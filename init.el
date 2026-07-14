@@ -327,14 +327,14 @@
               llama-3.1-8b-instant
               openai/gpt-oss-120b
               openai/gpt-oss-20b
-              qwen/qwen3-32b
+              qwen/qwen3.6-27b
               groq/compound
               groq/compound-mini
               deepseek-r1-distill-llama-70b
               meta-llama/llama-4-scout-17b-16e-instruct
               meta-llama/llama-4-maverick-17b-128e-instruct
               gemma2-9b-it))
-  (setq gptel-model 'qwen/qwen3-32b
+  (setq gptel-model 'openai/gpt-oss-120b
         gptel-backend (cdr (assoc "Groq" gptel--known-backends))))
 
 (use-package gptel-extras
