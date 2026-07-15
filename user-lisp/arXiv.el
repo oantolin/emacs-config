@@ -65,9 +65,11 @@ A ragtag bunch of ad hoc formats are recognized for PAPER."
    paper
    (lambda (data)
      (let-alist data
-       (with-output-to-temp-buffer (format "*arXiv:%s*" .id)
-         (princ (format "%s\nBy: %s\n\n%s\n"
-                        .title (string-join .authors ", ") .abstract)))))))
+       (let ((temp-buffer-show-hook
+              (cons 'turn-on-visual-line-mode temp-buffer-show-hook)))
+         (with-output-to-temp-buffer (format "*arXiv:%s*" .id)
+           (princ (format "%s\nBy: %s\n\n%s\n"
+                          .title (string-join .authors ", ") .abstract))))))))
 
 ;;;###autoload
 (defun arXiv-capture (paper)
