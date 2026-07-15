@@ -82,7 +82,8 @@ the kill ring head. 😬)"
    (lambda (data)
      (let-alist data
        (kill-new (format "[[%s][%s]]\nBy: %s\n\n%s\n"
-                         .url .title (string-join .authors ", ") .abstract)))
-     (org-capture nil "a"))))
+                         .url .title (string-join .authors ", ") .abstract))
+       (org-capture nil "a")
+       (message "Captured '%s'" .title)))))
 
 (provide 'arXiv)
