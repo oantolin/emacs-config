@@ -4,7 +4,7 @@
 (require 'gptel-transient)
 
 (defun gptel-extras-mini ()
-  "Display the LLM's response to PROMPT in echo area."
+  "Query an LLM from the minibuffer with output to the echo area."
   (interactive)
   (gptel--suffix-send '("m" "e")))
 
