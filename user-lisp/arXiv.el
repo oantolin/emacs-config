@@ -9,7 +9,9 @@ A ragtag bunch of ad hoc formats are recognized for PAPER."
              "^arXiv:%s\\(?:/.*\\)?$"
              "^https?://arxiv.org/\\(?:abs\\|pdf\\)/%s\\(?:\\.pdf\\)?$" 
              "^https://mathstodon.xyz/tags/arXiv.%s$")
-           when (string-match (format pattern "\\([0-9v.]+\\)") paper)
+           when (string-match
+                 (format pattern "\\(\\(?:math/\\)?[0-9v.]+\\)")
+                 paper)
            return (match-string 1 paper)))
 
 ;;;###autoload
