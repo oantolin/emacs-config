@@ -789,7 +789,10 @@
   (eww-mode . echo-area-tooltips)
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
-  (modify-syntax-entry ?\” ")“" eww-mode-syntax-table))
+  (modify-syntax-entry ?\” ")“" eww-mode-syntax-table)
+  (defun acm-doi-straight-to-pdf (url)
+    (replace-regexp-in-string "\\`https://dl.acm.org/doi" "\\&/pdf" url))
+  (add-to-list 'eww-url-transformers #'acm-doi-straight-to-pdf))
 
 (use-package latex
   :ensure auctex
