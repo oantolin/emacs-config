@@ -789,10 +789,7 @@
   (eww-mode . echo-area-tooltips)
   :config
   (modify-syntax-entry ?\“ "(”" eww-mode-syntax-table)
-  (modify-syntax-entry ?\” ")“" eww-mode-syntax-table)
-  (define-advice eww-display-pdf (:around (fn &rest args) pdfs-are-binary)
-    (let ((buffer-file-coding-system 'binary))
-      (apply fn args))))
+  (modify-syntax-entry ?\” ")“" eww-mode-syntax-table))
 
 (use-package latex
   :ensure auctex
