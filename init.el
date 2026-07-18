@@ -669,7 +669,15 @@
     (goto-char (car (consult--get-location target))))
   (dolist (cmd '(kmacro-end-or-call-macro
                  kmacro-end-and-call-macro))
-    (push #'embark--goto-location (alist-get cmd embark-pre-action-hooks))))
+    (push #'embark--goto-location (alist-get cmd embark-pre-action-hooks)))
+  (dolist (cmd '(org-ql-find
+                 org-ql-find-in-org-directory
+                 org-ql-usual-files-find
+                 org-ql-usual-files-open-link))
+    (cl-pushnew 'embark--unmark-target
+                (alist-get cmd embark-pre-action-hooks))
+    (cl-pushnew 'embark--allow-edit
+                (alist-get cmd embark-target-injection-hooks))))
 
 (use-package embark-consult
   :ensure t
