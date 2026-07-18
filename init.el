@@ -168,23 +168,24 @@
 
 ;;; gui packages
 
-(use-package modus-themes
+(use-package ef-themes
+  :ensure t
   :init
-  (require-theme 'modus-themes)
-  (load-theme (car modus-themes-to-toggle))
+  (ef-themes-take-over-modus-themes-mode)
   :bind
   ("C-c x b" . modus-themes-toggle)
   :custom
+  (custom-safe-themes t)
   (modus-themes-common-palette-overrides '((fringe unspecified)))
   (modus-themes-italic-constructs t)
   (modus-themes-mixed-fonts t)
   (modus-themes-bold-constructs t)
-  (modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)))
+  (modus-themes-to-toggle '(ef-bio ef-spring)))
 
 (use-package auto-dark
   :ensure t
   :custom
-  (auto-dark-themes '((modus-vivendi-tinted) (modus-operandi-tinted)))
+  (auto-dark-themes (mapcar #'list modus-themes-to-toggle))
   :init
   (auto-dark-mode))
 
