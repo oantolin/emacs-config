@@ -266,11 +266,6 @@
   :bind
   ("<backtab>" . outline-cycle-buffer))
 
-;; Casual mysteriously lacks a few reasonable autoloads!
-(use-package casual-ediff :commands casual-ediff-revison)
-(use-package casual-image :commands casual-image-tmenu)
-(use-package casual-dired-utils :commands casual-dired-elisp-tmenu)
-
 (use-package casual
   :ensure t
   :bind
@@ -284,6 +279,10 @@
     ("t" . casual-timezone-tmenu)
     ("=" . casual-ediff-revision))
   :init
+  ;; Casual mysteriously lacks autoloads for some commands and transients!
+  (autoload 'casual-ediff-revison "casual-ediff")
+  (autoload 'casual-image-tmenu "casual-image")
+  (autoload 'casual-dired-elisp-tmenu "casual-dired-utils")
   (with-eval-after-load 'org-agenda
     (keymap-set org-agenda-mode-map "C-`" #'casual-agenda-tmenu))
   (with-eval-after-load 'bibtex
