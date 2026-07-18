@@ -266,8 +266,9 @@
   :bind
   ("<backtab>" . outline-cycle-buffer))
 
-(use-package casual-ediff
-  :commands casual-ediff-revison) ; mysteriously lacking an autoload!
+;; Casual mysteriously lacks a few reasonable autoloads!
+(use-package casual-ediff :commands casual-ediff-revison)
+(use-package casual-image :commands casual-image-tmenu)
 
 (use-package casual
   :ensure t
