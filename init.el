@@ -109,7 +109,6 @@
  ("M-s f" . flush-lines)
  ("M-s c" . count-matches)
  ("C-;" . comment-dwim)
- ("C-z" . repeat)
  ("C-<tab>" . tab-next)
  ("C-<iso-lefttab>" . tab-previous)
  ("C-h p" . describe-package)  ; swap these two
@@ -266,6 +265,86 @@
 (use-package outline
   :bind
   ("<backtab>" . outline-cycle-buffer))
+
+(use-package casual-ediff
+  :commands casual-ediff-revison) ; mysteriously lacking an autoload!
+
+(use-package casual
+  :ensure t
+  :bind
+  ("C-`" . casual-editkit-main-tmenu)
+  (:prefix-map casual-prefix-map :prefix "C-z"
+    ("w" . casual-editkit-windows-tmenu)
+    ("r" . casual-editkit-rectangle-tmenu)
+    ("g" . casual-editkit-registers-tmenu)
+    ("p" . casual-editkit-project-tmenu)
+    ("s" . casual-ispell-tmenu)
+    ("t" . casual-timezone-tmenu)
+    ("=" . casual-ediff-revision))
+  :init
+  (with-eval-after-load 'org-agenda
+    (keymap-set org-agenda-mode-map "C-`" #'casual-agenda-tmenu))
+  (with-eval-after-load 'bibtex
+    (keymap-set bibtex-mode-map "M-`" #'casual-bibtex-tmenu))
+  (with-eval-after-load 'bookmark
+    (keymap-set bookmark-bmenu-mode-map "C-`" #'casual-bookmarks-tmenu))
+  (with-eval-after-load 'calc
+    (keymap-set calc-mode-map "C-`" #'casual-calc-tmenu))
+  (with-eval-after-load 'calc-ext
+    (keymap-set calc-alg-map "C-`" #'casual-calc-tmenu))
+  (with-eval-after-load 'calendar
+    (keymap-set calendar-mode-map "C-`" #'casual-calendar))
+  (with-eval-after-load 'compile
+    (keymap-set compilation-mode-map "C-`" #'casual-compile-tmenu))
+  (with-eval-after-load 'grep
+    (keymap-set grep-mode-map "C-`" #'casual-compile-tmenu))
+  (with-eval-after-load 'css-mode
+    (keymap-set css-mode-map "M-`" #'casual-css-tmenu))
+  (with-eval-after-load 'csv-mode
+    (keymap-set csv-mode-map "M-`" #'casual-csv-tmenu))
+  (with-eval-after-load 'dired
+    (keymap-set dired-mode-map "C-`" #'casual-dired-tmenu)
+    (keymap-set dired-mode-map "s" #'casual-dired-sort-by-tmenu)
+    (keymap-set dired-mode-map "/" #'casual-dired-search-replace-tmenu)
+    (keymap-set dired-mode-map "C-z e" #'casual-dired-elisp-tmenu))
+  (with-eval-after-load 'ediff
+    (casual-ediff-install)
+    (defun setup-casual-ediff-binding ()
+      (keymap-set ediff-mode-map "C-`" #'casual-ediff-tmenu))
+    (add-hook 'ediff-keymap-setup-hook #'setup-casual-ediff-binding))
+  (with-eval-after-load 'elisp-mode
+    (keymap-set emacs-lisp-mode-map "M-`" #'casual-elisp-tmenu))
+  (with-eval-after-load 'esh-mode
+    (keymap-set eshell-mode-map "C-`" #'casual-eshell-tmenu))
+  (with-eval-after-load 'eww
+    (keymap-set eww-mode-map "C-`" #'casual-eww-tmenu)
+    (keymap-set eww-bookmark-mode-map "C-`" #'casual-eww-bookmarks-tmenu))
+  (with-eval-after-load 'help
+    (keymap-set help-mode-map "C-`" #'casual-help-tmenu))
+  (with-eval-after-load 'html-mode
+    (keymap-set html-mode-map "M-`" #'casual-html-tmenu)
+    (keymap-set html-mode-map "C-z h" #'casual-html-tags-tmenu))
+  (with-eval-after-load 'ibuffer
+    (keymap-set ibuffer-mode-map "C-`" #'casual-ibuffer-tmenu)
+    (keymap-set ibuffer-mode-map "F" #'casual-ibuffer-filter-tmenu)
+    (keymap-set ibuffer-mode-map "s" #'casual-ibuffer-sortby-tmenu))
+  (with-eval-after-load 'image-mode
+    (keymap-set image-mode-map "C-`" #'casual-image-tmenu))
+  (with-eval-after-load 'info
+    (keymap-set Info-mode-map "C-`" #'casual-info-tmenu))
+  (with-eval-after-load 'isearch
+    (keymap-set isearch-mode-map "C-`" #'casual-isearch-tmenu))
+  (with-eval-after-load 'make-mode
+    (keymap-set makefile-mode-map "M-`" #'casual-make-tmenu))
+  (with-eval-after-load 'man
+    (keymap-set Man-mode-map "C-`" #'casual-man-tmenu))
+  (with-eval-after-load 'org
+    (keymap-set org-mode-map "M-`" #'casual-org-tmenu))
+  (with-eval-after-load 'org-table
+    (keymap-set org-table-fedit-map "M-`" #'casual-org-table-fedit-tmenu))
+  (with-eval-after-load 're-builder
+    (keymap-set reb-mode-map "C-`" #'casual-re-builder-tmenu)
+    (keymap-set reb-lisp-mode-map "C-`" #'casual-re-builder-tmenu)))
 
 (use-package visiting-buffer)
 
