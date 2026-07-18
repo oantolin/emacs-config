@@ -276,11 +276,9 @@
     ("g" . casual-editkit-registers-tmenu)
     ("p" . casual-editkit-project-tmenu)
     ("s" . casual-ispell-tmenu)
-    ("t" . casual-timezone-tmenu)
-    ("=" . casual-ediff-revision))
+    ("t" . casual-timezone-tmenu))
   :init
   ;; Casual mysteriously lacks autoloads for some commands and transients!
-  (autoload 'casual-ediff-revison "casual-ediff")
   (autoload 'casual-image-tmenu "casual-image")
   (autoload 'casual-dired-elisp-tmenu "casual-dired-utils")
   (with-eval-after-load 'org-agenda
@@ -346,6 +344,11 @@
   (with-eval-after-load 're-builder
     (keymap-set reb-mode-map "C-`" #'casual-re-builder-tmenu)
     (keymap-set reb-lisp-mode-map "C-`" #'casual-re-builder-tmenu)))
+
+(use-package casual-ediff-utils
+  :bind
+  (:map casual-prefix-map
+        ("=" . casual-ediff-revision)))
 
 (use-package visiting-buffer)
 
