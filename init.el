@@ -313,7 +313,8 @@
       (keymap-set ediff-mode-map "C-`" #'casual-ediff-tmenu))
     (add-hook 'ediff-keymap-setup-hook #'setup-casual-ediff-binding))
   (with-eval-after-load 'elisp-mode
-    (keymap-set emacs-lisp-mode-map "M-`" #'casual-elisp-tmenu))
+    (keymap-set emacs-lisp-mode-map "M-`" #'casual-elisp-tmenu)
+    (keymap-set lisp-interaction-mode-map "M-`" #'casual-elisp-tmenu))
   (with-eval-after-load 'esh-mode
     (keymap-set eshell-mode-map "C-`" #'casual-eshell-tmenu))
   (with-eval-after-load 'eww
