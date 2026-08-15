@@ -634,7 +634,6 @@
   (embark-cycle-key ".")
   (embark-help-key "?")
   (embark-confirm-act-all nil)
-  (embark-auto-prefix-help-delay 1.5)
   :init
   (embark-auto-prefix-help-mode)
   :config
