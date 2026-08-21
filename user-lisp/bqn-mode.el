@@ -11,7 +11,7 @@
   :group 'bqn-mode)
 
 (defface bqn-face
-  '((t (:family "BQN386 Unicode")))
+  '((t (:family "APL387 Unicode")))
   "Face for BQN source and inferior-process buffers."
   :group 'bqn-mode)
 
