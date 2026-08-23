@@ -600,7 +600,18 @@
     (cl-pushnew 'embark--unmark-target
                 (alist-get cmd embark-pre-action-hooks))
     (cl-pushnew 'embark--allow-edit
-                (alist-get cmd embark-target-injection-hooks))))
+                (alist-get cmd embark-target-injection-hooks)))
+  (defun embark-target-markdown-link-at-point ()
+    "Target prettified markdown link at point."
+    (when (and (derived-mode-p 'markdown-mode)
+               (eq (get-text-property (point) 'face) 'markdown-link-face))
+      `(url ,(get-text-property (point) 'help-echo)
+            ,(previous-single-property-change
+              (min (1+ (point)) (point-max)) 'help-echo nil (point-min))
+            . ,(next-single-property-change
+                (point) 'help-echo nil (point-max)))))
+  (when-let* ((tail (memq 'embark-target-url-at-point embark-target-finders)))
+    (push 'embark-target-markdown-link-at-point (cdr tail))))
 
 (use-package embark-consult
   :ensure t
