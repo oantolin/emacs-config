@@ -1061,22 +1061,14 @@
         ("b d" . magit-branch-delete))
   :custom (magit-diff-refine-hunk 'all))
 
-(use-package markdown-mode
-  :ensure t
+(use-package markdown-ts-mode
   :bind
-  (:map markdown-mode-map
-        ("C-=" . markdown-mode-style-map))
+  (:map markdown-ts-mode-map
+        ("C-=" . markdown-ts-emphasize))
   :hook
-  (markdown-mode . turn-on-visual-line-mode)
+  (markdown-ts-mode . turn-on-visual-line-mode)
   :custom
-  (markdown-hide-markup t)
-  :custom-face
-  (markdown-metadata-key-face ((t (:inherit default))))
-  (markdown-metadata-value-face
-   ((t (:inherit default :foreground unspecified))))
-  :config
-  (fset 'markdown-mode-style-map markdown-mode-style-map)
-  (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table))
+  (markdown-ts-hide-markup t))
 
 (use-package org
   :ensure t
