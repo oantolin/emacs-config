@@ -549,15 +549,13 @@
         ("D" . gptel-extras-define))
   :custom
   (embark-quit-after-action nil)
-  ;; (prefix-help-command #'embark-prefix-help-command)
   (embark-indicators '(embark-minimal-indicator
                        embark-highlight-indicator
                        embark-isearch-highlight-indicator))
   (embark-cycle-key ".")
   (embark-help-key "?")
   (embark-confirm-act-all nil)
-  :init
-  (embark-auto-prefix-help-mode)
+  (prefix-help-command #'embark-prefix-help-command)
   :config
   ;; want sentence and paragraph targets in more modes
   (embark-define-thingatpt-target sentence
