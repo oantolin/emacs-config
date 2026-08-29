@@ -180,7 +180,7 @@
   (modus-themes-italic-constructs t)
   (modus-themes-mixed-fonts t)
   (modus-themes-bold-constructs t)
-  (modus-themes-to-toggle '(ef-cyprus ef-autumn)))
+  (modus-themes-to-toggle '(ef-autumn ef-cyprus)))
 
 (use-package auto-dark
   :ensure t
