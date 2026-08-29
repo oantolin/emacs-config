@@ -2,11 +2,14 @@
 
 (require 'gptel-context)
 (require 'gptel-transient)
+(require 'markdown-ts-mode)
 
 (defun gptel-extras-mini ()
-  "Query an LLM from the minibuffer with output to the echo area."
+  "Query an LLM from the minibuffer with output to a new buffer."
   (interactive)
-  (gptel--suffix-send '("m" "e")))
+  (with-current-buffer (get-buffer-create "*gptel*")
+    (markdown-ts-mode))
+  (gptel--suffix-send '("m" "b*gptel*")))
 
 (defun gptel-extras-define (term)
   "Use an LLM to define a TERM."
