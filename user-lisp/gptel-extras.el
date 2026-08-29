@@ -7,9 +7,9 @@
 (defun gptel-extras-mini ()
   "Query an LLM from the minibuffer with output to a new buffer."
   (interactive)
-  (with-current-buffer (get-buffer-create "*gptel*")
-    (markdown-ts-mode))
-  (gptel--suffix-send '("m" "b*gptel*")))
+  (let ((buffer (generate-new-buffer "*gptel*")))
+    (with-current-buffer buffer (markdown-ts-mode))
+    (gptel--suffix-send `("m" ,(concat "b" (buffer-name buffer))))))
 
 (defun gptel-extras-define (term)
   "Use an LLM to define a TERM."
