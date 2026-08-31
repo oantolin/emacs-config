@@ -2,11 +2,14 @@
 
 (require 'gptel-context)
 (require 'gptel-transient)
+(require 'markdown-ts-mode)
 
 (defun gptel-extras-mini ()
-  "Query an LLM from the minibuffer with output to the echo area."
+  "Query an LLM from the minibuffer with output to a new buffer."
   (interactive)
-  (gptel--suffix-send '("m" "e")))
+  (let ((buffer (generate-new-buffer "*gptel*")))
+    (with-current-buffer buffer (markdown-ts-mode))
+    (gptel--suffix-send `("m" ,(concat "b" (buffer-name buffer))))))
 
 (defun gptel-extras-define (term)
   "Use an LLM to define a TERM."
@@ -29,7 +32,7 @@
              (message "response error: %s" (plist-get info :status))))))))
 
 (gptel-make-tool
- :name "run_python_code"
+ :name "run_python"
  :confirm t
  :function (lambda (code)
              (let ((command (format "python3 -c %S" code)))
@@ -40,14 +43,24 @@
                :description "the Python program to run"))
  :category "computation")
 
-(gptel-make-preset 'tr-en
+(gptel-make-tool
+ :name "eval_elisp"
+ :confirm t
+ :function (lambda (code) (format "%S" (eval (read code))))
+ :description "Evaluate some Emacs Lisp code and get its return value"
+ :args (list '(:name "code"
+               :type string
+               :description "the Emacs Lisp code to evaluate"))
+ :category "computation")
+
+(gptel-make-preset 'en
   :system
-  "Please translate the text to English; include the name of the original
+  "Translate the text to English; include the name of the original
 language in the format '[ORIGINAL_LANGUAGE] TRANSLATED_TEXT'.")
 
-(gptel-make-preset 'tr-es
+(gptel-make-preset 'es
   :system
-  "Por favor, traduzca el texto al español; incluya el nombre del idioma
+  "Traduzca el texto al español; incluya el nombre del idioma
 original en el formato '[IDIOMA_ORIGINAL] TEXTO_TRADUCIDO'.")
 
 (gptel-make-preset 'msc
@@ -55,7 +68,11 @@ original en el formato '[IDIOMA_ORIGINAL] TEXTO_TRADUCIDO'.")
 talk with the following abstract?")
            
 (gptel-make-preset 'py
-  :system "If necessary, please write and run a Python script to answer this."
-  :tools '("run_python_code"))
+  :system "Write and run a Python script to answer this."
+  :tools '("run_python"))
+
+(gptel-make-preset 'el
+  :system "Write and evaluate some Emacs Lisp code to do this."
+  :tools '("eval_elisp"))
 
 (provide 'gptel-extras)

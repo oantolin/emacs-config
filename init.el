@@ -180,7 +180,7 @@
   (modus-themes-italic-constructs t)
   (modus-themes-mixed-fonts t)
   (modus-themes-bold-constructs t)
-  (modus-themes-to-toggle '(ef-bio ef-spring)))
+  (modus-themes-to-toggle '(ef-autumn ef-cyprus)))
 
 (use-package auto-dark
   :ensure t
@@ -549,15 +549,13 @@
         ("D" . gptel-extras-define))
   :custom
   (embark-quit-after-action nil)
-  ;; (prefix-help-command #'embark-prefix-help-command)
   (embark-indicators '(embark-minimal-indicator
                        embark-highlight-indicator
                        embark-isearch-highlight-indicator))
   (embark-cycle-key ".")
   (embark-help-key "?")
   (embark-confirm-act-all nil)
-  :init
-  (embark-auto-prefix-help-mode)
+  (prefix-help-command #'embark-prefix-help-command)
   :config
   ;; want sentence and paragraph targets in more modes
   (embark-define-thingatpt-target sentence
