@@ -1062,6 +1062,7 @@
   :custom (magit-diff-refine-hunk 'all))
 
 (use-package markdown-ts-mode
+  :mode "\\.md\\'"
   :bind
   (:map markdown-ts-mode-map
         ("C-=" . markdown-ts-emphasize))
