@@ -55,12 +55,12 @@
 
 (gptel-make-preset 'en
   :system
-  "Please translate the text to English; include the name of the original
+  "Translate the text to English; include the name of the original
 language in the format '[ORIGINAL_LANGUAGE] TRANSLATED_TEXT'.")
 
 (gptel-make-preset 'es
   :system
-  "Por favor, traduzca el texto al español; incluya el nombre del idioma
+  "Traduzca el texto al español; incluya el nombre del idioma
 original en el formato '[IDIOMA_ORIGINAL] TEXTO_TRADUCIDO'.")
 
 (gptel-make-preset 'msc
@@ -68,11 +68,11 @@ original en el formato '[IDIOMA_ORIGINAL] TEXTO_TRADUCIDO'.")
 talk with the following abstract?")
            
 (gptel-make-preset 'py
-  :system "Please write and run a Python script to answer this."
+  :system "Write and run a Python script to answer this."
   :tools '("run_python"))
 
 (gptel-make-preset 'el
-  :system "Please write and evaluate some Emacs Lisp code to do this."
+  :system "Write and evaluate some Emacs Lisp code to do this."
   :tools '("eval_elisp"))
 
 (provide 'gptel-extras)
