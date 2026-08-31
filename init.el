@@ -601,8 +601,8 @@
                 (alist-get cmd embark-target-injection-hooks)))
   (defun embark-target-markdown-link-at-point ()
     "Target prettified markdown link at point."
-    (when (and (derived-mode-p '(markdown-mode markdown-ts-mode))
-               (eq (get-text-property (point) 'face) 'markdown-link-face))
+    (when (and (derived-mode-p 'markdown-ts-mode)
+               (equal (get-text-property (point) 'face) '(markdown-ts-link)))
       `(url ,(get-text-property (point) 'help-echo)
             ,(previous-single-property-change
               (min (1+ (point)) (point-max)) 'help-echo nil (point-min))
