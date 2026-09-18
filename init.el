@@ -1248,7 +1248,8 @@ if `org-store-link' is called from the #+TITLE line."
   (jinx-languages "en es")
   :bind
   ("M-$" . jinx-correct)
-  ("C-M-$" . jinx-languages))
+  ("C-M-$" . jinx-languages)
+  ("C-c j" . jinx-occur))
   
 (use-package try :ensure t :defer t)
 
