@@ -9,26 +9,6 @@
   (interactive)
   (gptel--suffix-send '("m" "g*gptel*")))
 
-(defun gptel-extras-define (term)
-  "Use an LLM to define a TERM."
-  (interactive "sLookup: ")
-  (when (and (string= term "") (null gptel-context))
-    (if (use-region-p)
-        (setq term (buffer-substring-no-properties
-                    (region-beginning) (region-end)))
-      (user-error "A term to define is required.")))
-  (gptel-request (format "Explain this very briefly: %S" term)
-    :transforms gptel-prompt-transform-functions
-    :callback
-    (lambda (response info &optional _raw)
-      (pcase response
-        ((pred stringp) (message "%s" response))
-        (`(tool-call . ,calls) (gptel--display-tool-calls calls info t))
-        (`(tool-result . ,results) (gptel--display-tool-results results info))
-        (`(reasoning . ,step) (gptel--display-reasoning-stream step info))
-        (_ (when (and (null response) (plist-get info :error))
-             (message "response error: %s" (plist-get info :status))))))))
-
 (gptel-make-tool
  :name "run_python"
  :confirm t

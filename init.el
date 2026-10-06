@@ -323,6 +323,7 @@
   (gptel-prompt-prefix-alist
    '((markdown-mode . "> ") (org-mode . "> ") (text-mode . "> ")))
   (gptel-include-reasoning nil)
+  (gptel-default-mode 'markdown-ts-mode)
   :config
   (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
   (gptel-make-openai "Groq"
@@ -347,8 +348,7 @@
 (use-package gptel-extras
   :bind
   (:map global-gptel-map
-        ("q" . gptel-extras-mini)
-        ("d" . gptel-extras-define)))
+        ("q" . gptel-extras-mini)))
 
 (use-package whisper
   :vc (:url "https://github.com/natrys/whisper.el" :branch "master")
@@ -546,7 +546,7 @@
   (:map embark-general-map
         ("SPC" . mark)
         ("C-SPC" . embark-select)
-        ("D" . gptel-extras-define))
+        ("D" . gptel-extras-mini))
   :custom
   (embark-quit-after-action nil)
   (embark-indicators '(embark-minimal-indicator
