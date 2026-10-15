@@ -4,11 +4,6 @@
 (require 'gptel-transient)
 (require 'markdown-ts-mode)
 
-(defun gptel-extras-mini ()
-  "Query an LLM from the minibuffer with output to a new buffer."
-  (interactive)
-  (gptel--suffix-send '("m" "g*gptel*")))
-
 (gptel-make-tool
  :name "run_python"
  :confirm t
