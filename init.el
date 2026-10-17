@@ -346,10 +346,7 @@
   (setq gptel-model 'openai/gpt-oss-120b
         gptel-backend (cdr (assoc "Groq" gptel--known-backends))))
 
-(use-package gptel-extras
-  :bind
-  (:map global-gptel-map
-        ("q" . gptel-extras-mini)))
+(use-package gptel-extras :after gptel)
 
 (use-package whisper
   :vc (:url "https://github.com/natrys/whisper.el" :branch "master")
@@ -546,8 +543,7 @@
         ("m" . mastodon-url-lookup))
   (:map embark-general-map
         ("SPC" . mark)
-        ("C-SPC" . embark-select)
-        ("D" . gptel-extras-mini))
+        ("C-SPC" . embark-select))
   :custom
   (embark-quit-after-action nil)
   (embark-indicators '(embark-minimal-indicator
