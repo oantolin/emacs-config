@@ -263,4 +263,12 @@ remaining lines of the paragraph."
   (help-at-pt-cancel-timer)
   (help-at-pt-set-timer))
 
+(declare-function org-read-date "org")
+
+;;;###autoload
+(defun todo-txt-date ()
+  "Insert date at point."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d" (org-read-date nil t))))
+
 (provide 'text-extras)
