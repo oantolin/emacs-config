@@ -322,7 +322,7 @@
   :custom
   (gptel-org-branching-context t)
   (gptel-prompt-prefix-alist
-   '((markdown-mode . "> ") (org-mode . "> ") (text-mode . "> ")))
+   '((markdown-ts-mode . "> ") (org-mode . "> ") (text-mode . "> ")))
   (gptel-include-reasoning nil)
   (gptel-default-mode 'markdown-ts-mode)
   :config
