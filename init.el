@@ -323,7 +323,6 @@
   (gptel-org-branching-context t)
   (gptel-prompt-prefix-alist
    '((markdown-ts-mode . "> ") (org-mode . "> ") (text-mode . "> ")))
-  (gptel-include-reasoning nil)
   (gptel-default-mode 'markdown-ts-mode)
   :config
   (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
