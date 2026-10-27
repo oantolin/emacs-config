@@ -155,8 +155,7 @@
            ("c" . calendar)
            ("o" . org-timer-set-timer)
            ("p" . org-timer-pause-or-continue)
-           ("s" . org-timer-stop)
-           ("i" . todo-txt-date))
+           ("s" . org-timer-stop))
 
 (use-package package
   :defer t

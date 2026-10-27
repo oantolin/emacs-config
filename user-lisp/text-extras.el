@@ -263,15 +263,4 @@ remaining lines of the paragraph."
   (help-at-pt-cancel-timer)
   (help-at-pt-set-timer))
 
-(declare-function org-read-date "org")
-
-;;;###autoload
-(defun todo-txt-date (arg)
-  "Insert date at point.
-
-With prefix ARG insert `due:' before the date."
-  (interactive "P")
-  (when (equal arg '(4)) (insert "due:"))
-  (insert (format-time-string "%Y-%m-%d" (org-read-date nil t))))
-
 (provide 'text-extras)
