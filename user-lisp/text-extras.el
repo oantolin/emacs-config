@@ -241,7 +241,10 @@ for the pop up buffer."
                    (region-beginning) (region-end)))))
     (pop-to-buffer (generate-new-buffer "*clipboard*"))
     (when region (insert region)))
-  (if (fboundp 'markdown-mode) (markdown-mode) (text-mode))
+  (cond
+   ((fboundp 'markdown-ts-mode) (markdown-ts-mode))
+   ((fboundp 'markdown-mode) (markdown-mode))
+   (t (text-mode)))
   (text-to-clipboard-minor-mode))
 
 ;;;###autoload
