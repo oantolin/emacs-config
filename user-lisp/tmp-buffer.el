@@ -3,7 +3,7 @@
 (defcustom tmp-buffer-mode-alist
   '((?o . org-mode)
     (?t . text-mode)
-    (?m . markdown-mode)
+    (?m . markdown-ts-mode)
     (?l . lisp-interaction-mode)
     (?x . LaTeX-mode)
     (?f . fundamental-mode)
