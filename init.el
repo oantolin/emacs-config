@@ -1111,7 +1111,7 @@
   :hook
   (org-mode . turn-on-org-cdlatex)
   (org-mode . ediff-with-org-show-all)
-  (org-mode . turn-on-auto-fill)
+  (org-mode . turn-on-visual-line-mode)
   (org-mode . org-tweak-syntax-table)
   (org-mode . add-pretty-entities-hook)
   (org-mode . echo-area-tooltips)
