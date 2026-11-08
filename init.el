@@ -307,45 +307,6 @@
   ("C-S-n" . placeholder-forward)
   ("C-S-p" . placeholder-backward))
 
-(use-package gptel
-  :ensure t
-  :bind
-  (:prefix-map global-gptel-map :prefix "C-c i"
-               ("c" . gptel)
-               ("s" . gptel-send)
-               ("r" . gptel-rewrite)
-               ("a" . gptel-add)
-               ("m" . gptel-mode)
-               ("p" . gptel-menu)
-               ("x" . gptel-context-remove-all))
-  :custom
-  (gptel-org-branching-context t)
-  (gptel-prompt-prefix-alist
-   '((markdown-ts-mode . "> ") (org-mode . "> ") (text-mode . "> ")))
-  (gptel-default-mode 'markdown-ts-mode)
-  :config
-  (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
-  (gptel-make-openai "Groq"
-    :host "api.groq.com"
-    :endpoint "/openai/v1/chat/completions"
-    :stream t
-    :key gptel-api-key
-    :models '(llama-3.3-70b-versatile
-              llama-3.1-8b-instant
-              openai/gpt-oss-120b
-              openai/gpt-oss-20b
-              qwen/qwen3.6-27b
-              groq/compound
-              groq/compound-mini
-              deepseek-r1-distill-llama-70b
-              meta-llama/llama-4-scout-17b-16e-instruct
-              meta-llama/llama-4-maverick-17b-128e-instruct
-              gemma2-9b-it))
-  (setq gptel-model 'openai/gpt-oss-120b
-        gptel-backend (cdr (assoc "Groq" gptel--known-backends))))
-
-(use-package gptel-extras :after gptel)
-
 (use-package whisper
   :vc (:url "https://github.com/natrys/whisper.el" :branch "master")
   :bind
